@@ -1,0 +1,222 @@
+/* ===================================
+   OnlyCampus - Landing Page
+   Main JavaScript
+   =================================== */
+
+(function () {
+  'use strict';
+
+  // Initialize WOW.js for animations
+  if (typeof WOW !== 'undefined') {
+    new WOW().init();
+  }
+
+  // Sticky Header
+  const header = document.querySelector('.ud-header');
+  let lastScroll = 0;
+
+  window.addEventListener('scroll', function () {
+    const currentScroll = window.pageYOffset;
+
+    if (currentScroll > 100) {
+      header.classList.add('sticky');
+    } else {
+      header.classList.remove('sticky');
+    }
+
+    lastScroll = currentScroll;
+  });
+
+  // Smooth Scrolling for Navigation Links
+  const navLinks = document.querySelectorAll('.ud-menu-scroll');
+
+  navLinks.forEach(function (link) {
+    link.addEventListener('click', function (e) {
+      e.preventDefault();
+
+      const targetId = this.getAttribute('href');
+      if (targetId && targetId.startsWith('#')) {
+        const targetSection = document.querySelector(targetId);
+
+        if (targetSection) {
+          const headerHeight = header.offsetHeight;
+          const targetPosition = targetSection.offsetTop - headerHeight;
+
+          window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
+          });
+
+          // Close mobile menu if open
+          const navbarCollapse = document.querySelector('.navbar-collapse');
+          const navbarToggler = document.querySelector('.navbar-toggler');
+          if (navbarCollapse && navbarCollapse.classList.contains('show')) {
+            navbarCollapse.classList.remove('show');
+            if (navbarToggler) {
+              navbarToggler.classList.remove('active');
+            }
+            document.body.style.overflow = '';
+          }
+        }
+      }
+    });
+  });
+
+  // Mobile Menu Toggle
+  const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+  const navbarCollapse = document.querySelector('.navbar-collapse');
+
+  if (mobileMenuToggle && navbarCollapse) {
+    mobileMenuToggle.addEventListener('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      const isOpen = navbarCollapse.classList.contains('show');
+
+      if (isOpen) {
+        mobileMenuToggle.classList.remove('active');
+        navbarCollapse.classList.remove('show');
+        document.body.style.overflow = '';
+      } else {
+        mobileMenuToggle.classList.add('active');
+        navbarCollapse.classList.add('show');
+        document.body.style.overflow = 'hidden';
+      }
+    });
+
+    // Close menu when clicking on a link
+    const mobileLinks = navbarCollapse.querySelectorAll('a');
+    mobileLinks.forEach(function (link) {
+      link.addEventListener('click', function () {
+        setTimeout(function () {
+          mobileMenuToggle.classList.remove('active');
+          navbarCollapse.classList.remove('show');
+          document.body.style.overflow = '';
+        }, 100);
+      });
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', function (e) {
+      if (navbarCollapse.classList.contains('show')) {
+        if (!navbarCollapse.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
+          mobileMenuToggle.classList.remove('active');
+          navbarCollapse.classList.remove('show');
+          document.body.style.overflow = '';
+        }
+      }
+    });
+  }
+
+  // Back to Top Button
+  const backToTop = document.querySelector('.back-to-top');
+
+  if (backToTop) {
+    window.addEventListener('scroll', function () {
+      if (window.pageYOffset > 300) {
+        backToTop.style.display = 'flex';
+      } else {
+        backToTop.style.display = 'none';
+      }
+    });
+
+    backToTop.addEventListener('click', function (e) {
+      e.preventDefault();
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+  }
+
+  // Active Navigation Link on Scroll
+  const sections = document.querySelectorAll('section[id]');
+
+  function setActiveNavLink() {
+    const scrollY = window.pageYOffset;
+    const headerHeight = header ? header.offsetHeight : 0;
+
+    sections.forEach(function (section) {
+      const sectionHeight = section.offsetHeight;
+      const sectionTop = section.offsetTop - headerHeight - 100;
+      const sectionId = section.getAttribute('id');
+
+      if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+        navLinks.forEach(function (link) {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === '#' + sectionId) {
+            link.classList.add('active');
+          }
+        });
+      }
+    });
+  }
+
+  window.addEventListener('scroll', setActiveNavLink);
+
+  // Form Submission Handler
+  const contactForm = document.querySelector('.ud-contact-form');
+
+  if (contactForm) {
+    contactForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      // Get form data
+      const formData = new FormData(this);
+      const name = formData.get('name');
+      const email = formData.get('email');
+      const message = formData.get('message');
+
+      // Basic validation
+      if (!name || !email || !message) {
+        alert('Please fill in all required fields.');
+        return;
+      }
+
+      // Email validation
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        alert('Please enter a valid email address.');
+        return;
+      }
+
+      // Here you would typically send the form data to a server
+      // For now, we'll just show a success message
+      alert('Thank you for your message! We will get back to you soon.');
+      this.reset();
+    });
+  }
+
+  // Add animation on scroll for elements
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+
+  const observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, observerOptions);
+
+  // Observe elements that should animate on scroll
+  const animateElements = document.querySelectorAll('.ud-feature-card, .ud-single-info, .ud-download-btn');
+  animateElements.forEach(function (el) {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    observer.observe(el);
+  });
+
+  // Prevent default behavior for empty hash links
+  document.querySelectorAll('a[href="#"]').forEach(function (link) {
+    link.addEventListener('click', function (e) {
+      e.preventDefault();
+    });
+  });
+
+  console.log('OnlyCampus landing page initialized');
+})();
