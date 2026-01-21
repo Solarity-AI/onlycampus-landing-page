@@ -6,6 +6,112 @@
 (function () {
   'use strict';
 
+  // Language Management
+  let currentLanguage = localStorage.getItem('onlycampus-lang') || 'tr'; // Default to Turkish
+
+  function setLanguage(lang) {
+    currentLanguage = lang;
+    localStorage.setItem('onlycampus-lang', lang);
+    document.documentElement.lang = lang;
+    translatePage();
+    updateLanguageSwitcher();
+  }
+
+  function translatePage() {
+    if (typeof translations === 'undefined') {
+      console.error('Translations not loaded');
+      return;
+    }
+
+    const t = translations[currentLanguage];
+
+    // Helper function to get nested translation
+    function getTranslation(path) {
+      return path.split('.').reduce((obj, key) => obj && obj[key], t);
+    }
+
+    // Translate all elements with data-i18n attribute
+    document.querySelectorAll('[data-i18n]').forEach(function (el) {
+      const key = el.getAttribute('data-i18n');
+      const translation = getTranslation(key);
+      if (translation) {
+        if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+          if (!el.value || el.value === el.getAttribute('placeholder')) {
+            el.placeholder = translation;
+          }
+        } else if (el.tagName === 'LABEL') {
+          // For labels, preserve the required asterisk if it exists
+          const required = el.querySelector('.required');
+          if (required) {
+            el.innerHTML = translation + ' ' + required.outerHTML;
+          } else {
+            el.textContent = translation;
+          }
+        } else {
+          el.textContent = translation;
+        }
+      }
+    });
+
+    // Translate elements with data-i18n-html (for HTML content)
+    document.querySelectorAll('[data-i18n-html]').forEach(function (el) {
+      const key = el.getAttribute('data-i18n-html');
+      const translation = getTranslation(key);
+      if (translation) {
+        el.innerHTML = translation;
+      }
+    });
+
+    // Translate title and meta tags
+    if (t.meta) {
+      document.title = t.meta.title || document.title;
+      const metaDescription = document.querySelector('meta[name="description"]');
+      if (metaDescription && t.meta.description) {
+        metaDescription.setAttribute('content', t.meta.description);
+      }
+    }
+  }
+
+
+  // Language switcher event listeners
+  function initLanguageSwitcher() {
+    // Setup is handled by inline onclick and global toggleLanguage function
+  }
+
+  function updateLanguageSwitcher() {
+    const switcher = document.getElementById('languageSwitcher');
+    if (switcher) {
+      // Show flag and language code for the language that will be switched TO
+      const nextLang = currentLanguage === 'tr' ? 'en' : 'tr';
+      const flag = nextLang === 'tr' ? '🇹🇷' : '🇺🇸';
+      const langCode = nextLang === 'tr' ? 'TR' : 'EN';
+      switcher.textContent = `${flag} ${langCode}`;
+      switcher.setAttribute('data-lang', currentLanguage);
+      switcher.setAttribute('title', currentLanguage === 'tr' ? 'İngilizce\'ye Geç' : 'Switch to Turkish');
+    }
+  }
+
+  // Toggle language function (exposed globally for inline onclick)
+  function toggleLanguage() {
+    const newLang = currentLanguage === 'tr' ? 'en' : 'tr';
+    setLanguage(newLang);
+    updateLanguageSwitcher();
+  }
+
+  // Expose toggle function globally for inline onclick
+  window.toggleLanguage = toggleLanguage;
+
+  // Initialize on DOM ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function () {
+      initLanguageSwitcher();
+      setLanguage(currentLanguage);
+    });
+  } else {
+    initLanguageSwitcher();
+    setLanguage(currentLanguage);
+  }
+
   // Initialize WOW.js for animations
   if (typeof WOW !== 'undefined') {
     new WOW().init();
