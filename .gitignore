@@ -1,127 +1,28 @@
-# ===================================
-# OnlyCampus Landing Page - .gitignore
-# ===================================
+# Angular specific
+/dist/
+/out-tsc/
+/tmp/
+/coverage/
+/e2e/test-output/
+/.angular/
+.angular/
 
-# Operating System Files
-# macOS
-.DS_Store
-.AppleDouble
-.LSOverride
-Icon
-._*
-.DocumentRevisions-V100
-.fseventsd
-.Spotlight-V100
-.TemporaryItems
-.Trashes
-.VolumeIcon.icns
-.com.apple.timemachine.donotpresent
-.AppleDB
-.AppleDesktop
-Network Trash Folder
-Temporary Items
-.apdisk
+# Node modules and dependency files
+/node_modules/
+/package-lock.json
+/yarn.lock
 
-# Windows
-Thumbs.db
-Thumbs.db:encryptable
-ehthumbs.db
-ehthumbs_vista.db
-*.stackdump
-[Dd]esktop.ini
-$RECYCLE.BIN/
-*.cab
-*.msi
-*.msix
-*.msm
-*.msp
-*.lnk
+# Environment files
+/.env
 
-# Linux
-*~
-.fuse_hidden*
-.directory
-.Trash-*
-.nfs*
+# Angular CLI and build artefacts
+/.angular-cli.json
+/.ng/
 
-# Editor/IDE Files
-# Visual Studio Code
-.vscode/
-*.code-workspace
+# TypeScript cache
+*.tsbuildinfo
 
-# JetBrains IDEs (WebStorm, PhpStorm, etc.)
-.idea/
-*.iml
-*.iws
-*.ipr
-out/
-
-# Sublime Text
-*.sublime-project
-*.sublime-workspace
-
-# Vim
-*.swp
-*.swo
-*~
-.netrwhist
-
-# Emacs
-*~
-\#*\#
-/.emacs.desktop
-/.emacs.desktop.lock
-*.elc
-auto-save-list
-tramp
-.\#*
-
-# Atom
-.atom/
-
-# Build & Dependencies
-# Node.js (if using build tools)
-node_modules/
+# Logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-package-lock.json
-yarn.lock
-
-# Build outputs
-dist/
-build/
-.cache/
-
-# Logs
-*.log
-logs/
-*.log.*
-
-# Temporary Files
-*.tmp
-*.temp
-*.bak
-*.backup
-*.swp
-*.swo
-*~
-
-# Environment Variables
-.env
-.env.local
-.env.*.local
-.env.development
-.env.production
-
-# Testing
-coverage/
-.nyc_output/
-*.lcov
-
-# Misc
-*.zip
-*.tar
-*.tar.gz
-*.rar
-*.7z

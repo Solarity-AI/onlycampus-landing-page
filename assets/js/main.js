@@ -1,328 +1,329 @@
-/* ===================================
-   OnlyCampus - Landing Page
-   Main JavaScript
-   =================================== */
-
 (function () {
-  'use strict';
+  "use strict";
 
-  // Language Management
-  let currentLanguage = localStorage.getItem('onlycampus-lang') || 'tr'; // Default to Turkish
-
-  function setLanguage(lang) {
-    currentLanguage = lang;
-    localStorage.setItem('onlycampus-lang', lang);
-    document.documentElement.lang = lang;
-    translatePage();
-    updateLanguageSwitcher();
+  // ======= Sayfa yenilenince scroll konumunu koru (en altta yenileyince de aynı yerde kalsın)
+  var scrollKey = "ud_page_scroll_" + (window.location.pathname || "index");
+  if ("scrollRestoration" in history) {
+    history.scrollRestoration = "manual";
   }
-
-  function translatePage() {
-    if (typeof translations === 'undefined') {
-      console.error('Translations not loaded');
-      return;
-    }
-
-    const t = translations[currentLanguage];
-
-    // Helper function to get nested translation
-    function getTranslation(path) {
-      return path.split('.').reduce((obj, key) => obj && obj[key], t);
-    }
-
-    // Translate all elements with data-i18n attribute
-    document.querySelectorAll('[data-i18n]').forEach(function (el) {
-      const key = el.getAttribute('data-i18n');
-      const translation = getTranslation(key);
-      if (translation) {
-        if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
-          if (!el.value || el.value === el.getAttribute('placeholder')) {
-            el.placeholder = translation;
-          }
-        } else if (el.tagName === 'LABEL') {
-          // For labels, preserve the required asterisk if it exists
-          const required = el.querySelector('.required');
-          if (required) {
-            el.innerHTML = translation + ' ' + required.outerHTML;
-          } else {
-            el.textContent = translation;
-          }
-        } else {
-          el.textContent = translation;
+  function saveScroll() {
+    try {
+      sessionStorage.setItem(scrollKey, String(window.scrollY || 0));
+    } catch (e) {}
+  }
+  window.addEventListener("beforeunload", saveScroll);
+  window.addEventListener("pagehide", saveScroll);
+  (function () {
+    var scrollSaveTimer;
+    window.addEventListener("scroll", function () {
+      clearTimeout(scrollSaveTimer);
+      scrollSaveTimer = setTimeout(saveScroll, 150);
+    }, { passive: true });
+  })();
+  function restoreScroll() {
+    try {
+      var saved = sessionStorage.getItem(scrollKey);
+      if (saved !== null) {
+        var y = parseInt(saved, 10);
+        if (!isNaN(y) && y >= 0) {
+          window.scrollTo(0, y);
+          return y;
         }
       }
-    });
-
-    // Translate elements with data-i18n-html (for HTML content)
-    document.querySelectorAll('[data-i18n-html]').forEach(function (el) {
-      const key = el.getAttribute('data-i18n-html');
-      const translation = getTranslation(key);
-      if (translation) {
-        el.innerHTML = translation;
+    } catch (e) {}
+    return null;
+  }
+  function runRestoreUntilStable() {
+    var targetY = restoreScroll();
+    if (targetY === null) return;
+    var attempts = 0;
+    var maxAttempts = 40;
+    var interval = setInterval(function () {
+      if (window.scrollY !== targetY) {
+        window.scrollTo(0, targetY);
       }
-    });
-
-    // Translate title and meta tags
-    if (t.meta) {
-      document.title = t.meta.title || document.title;
-      const metaDescription = document.querySelector('meta[name="description"]');
-      if (metaDescription && t.meta.description) {
-        metaDescription.setAttribute('content', t.meta.description);
+      attempts++;
+      if (attempts >= maxAttempts) {
+        clearInterval(interval);
       }
-    }
+    }, 50);
   }
-
-
-  // Language switcher event listeners
-  function initLanguageSwitcher() {
-    // Setup is handled by inline onclick and global toggleLanguage function
-  }
-
-  function updateLanguageSwitcher() {
-    const switcher = document.getElementById('languageSwitcher');
-    if (switcher) {
-      // Show flag and language code for the language that will be switched TO
-      const nextLang = currentLanguage === 'tr' ? 'en' : 'tr';
-      const flag = nextLang === 'tr' ? '🇹🇷' : '🇺🇸';
-      const langCode = nextLang === 'tr' ? 'TR' : 'EN';
-      switcher.textContent = `${flag} ${langCode}`;
-      switcher.setAttribute('data-lang', currentLanguage);
-      switcher.setAttribute('title', currentLanguage === 'tr' ? 'İngilizce\'ye Geç' : 'Switch to Turkish');
-    }
-  }
-
-  // Toggle language function (exposed globally for inline onclick)
-  function toggleLanguage() {
-    const newLang = currentLanguage === 'tr' ? 'en' : 'tr';
-    setLanguage(newLang);
-    updateLanguageSwitcher();
-  }
-
-  // Expose toggle function globally for inline onclick
-  window.toggleLanguage = toggleLanguage;
-
-  // Initialize on DOM ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', function () {
-      initLanguageSwitcher();
-      setLanguage(currentLanguage);
+  window.addEventListener("load", function () {
+    restoreScroll();
+    requestAnimationFrame(function () {
+      requestAnimationFrame(restoreScroll);
     });
-  } else {
-    initLanguageSwitcher();
-    setLanguage(currentLanguage);
-  }
+    setTimeout(runRestoreUntilStable, 0);
+    setTimeout(restoreScroll, 300);
+    setTimeout(restoreScroll, 600);
+    setTimeout(restoreScroll, 1000);
+  });
+  window.addEventListener("pageshow", function (e) {
+    if (e.persisted) restoreScroll();
+  });
 
-  // Initialize WOW.js for animations
-  if (typeof WOW !== 'undefined') {
-    new WOW().init();
-  }
+  // ======= Sticky
+  window.onscroll = function () {
+    const ud_header = document.querySelector(".ud-header");
+    const sticky = ud_header.offsetTop;
+    const logo = document.querySelector(".navbar-brand img");
 
-  // Sticky Header
-  const header = document.querySelector('.ud-header');
-  let lastScroll = 0;
-
-  window.addEventListener('scroll', function () {
-    const currentScroll = window.pageYOffset;
-
-    if (currentScroll > 100) {
-      header.classList.add('sticky');
+    if (window.pageYOffset > sticky) {
+      ud_header.classList.add("sticky");
     } else {
-      header.classList.remove('sticky');
+      ud_header.classList.remove("sticky");
     }
 
-    lastScroll = currentScroll;
-  });
+    // === logo change
+    if (ud_header.classList.contains("sticky")) {
+      logo.src = "assets/images/logo/CompanyLogo.png";
+    } else {
+      logo.src = "assets/images/logo/CompanyLogo.png";
+    }
 
-  // Smooth Scrolling for Navigation Links
-  const navLinks = document.querySelectorAll('.ud-menu-scroll');
-
-  navLinks.forEach(function (link) {
-    link.addEventListener('click', function (e) {
-      e.preventDefault();
-
-      const targetId = this.getAttribute('href');
-      if (targetId && targetId.startsWith('#')) {
-        const targetSection = document.querySelector(targetId);
-
-        if (targetSection) {
-          const headerHeight = header.offsetHeight;
-          const targetPosition = targetSection.offsetTop - headerHeight;
-
-          window.scrollTo({
-            top: targetPosition,
-            behavior: 'smooth'
-          });
-
-          // Close mobile menu if open
-          const navbarCollapse = document.querySelector('.navbar-collapse');
-          const navbarToggler = document.querySelector('.navbar-toggler');
-          if (navbarCollapse && navbarCollapse.classList.contains('show')) {
-            navbarCollapse.classList.remove('show');
-            if (navbarToggler) {
-              navbarToggler.classList.remove('active');
-            }
-            document.body.style.overflow = '';
-          }
-        }
-      }
-    });
-  });
-
-  // Mobile Menu Toggle
-  const mobileMenuToggle = document.getElementById('mobileMenuToggle');
-  const navbarCollapse = document.querySelector('.navbar-collapse');
-
-  if (mobileMenuToggle && navbarCollapse) {
-    mobileMenuToggle.addEventListener('click', function (e) {
-      e.preventDefault();
-      e.stopPropagation();
-
-      const isOpen = navbarCollapse.classList.contains('show');
-
-      if (isOpen) {
-        mobileMenuToggle.classList.remove('active');
-        navbarCollapse.classList.remove('show');
-        document.body.style.overflow = '';
-      } else {
-        mobileMenuToggle.classList.add('active');
-        navbarCollapse.classList.add('show');
-        document.body.style.overflow = 'hidden';
-      }
-    });
-
-    // Close menu when clicking on a link
-    const mobileLinks = navbarCollapse.querySelectorAll('a');
-    mobileLinks.forEach(function (link) {
-      link.addEventListener('click', function () {
-        setTimeout(function () {
-          mobileMenuToggle.classList.remove('active');
-          navbarCollapse.classList.remove('show');
-          document.body.style.overflow = '';
-        }, 100);
-      });
-    });
-
-    // Close menu when clicking outside
-    document.addEventListener('click', function (e) {
-      if (navbarCollapse.classList.contains('show')) {
-        if (!navbarCollapse.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
-          mobileMenuToggle.classList.remove('active');
-          navbarCollapse.classList.remove('show');
-          document.body.style.overflow = '';
-        }
-      }
-    });
-  }
-
-  // Back to Top Button
-  const backToTop = document.querySelector('.back-to-top');
-
-  if (backToTop) {
-    window.addEventListener('scroll', function () {
-      if (window.pageYOffset > 300) {
-        backToTop.style.display = 'flex';
-      } else {
-        backToTop.style.display = 'none';
-      }
-    });
-
-    backToTop.addEventListener('click', function (e) {
-      e.preventDefault();
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
-    });
-  }
-
-  // Active Navigation Link on Scroll
-  const sections = document.querySelectorAll('section[id]');
-
-  function setActiveNavLink() {
-    const scrollY = window.pageYOffset;
-    const headerHeight = header ? header.offsetHeight : 0;
-
-    sections.forEach(function (section) {
-      const sectionHeight = section.offsetHeight;
-      const sectionTop = section.offsetTop - headerHeight - 100;
-      const sectionId = section.getAttribute('id');
-
-      if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-        navLinks.forEach(function (link) {
-          link.classList.remove('active');
-          if (link.getAttribute('href') === '#' + sectionId) {
-            link.classList.add('active');
-          }
-        });
-      }
-    });
-  }
-
-  window.addEventListener('scroll', setActiveNavLink);
-
-  // Form Submission Handler
-  const contactForm = document.querySelector('.ud-contact-form');
-
-  if (contactForm) {
-    contactForm.addEventListener('submit', function (e) {
-      e.preventDefault();
-
-      // Get form data
-      const formData = new FormData(this);
-      const name = formData.get('name');
-      const email = formData.get('email');
-      const message = formData.get('message');
-
-      // Basic validation
-      if (!name || !email || !message) {
-        alert('Please fill in all required fields.');
-        return;
-      }
-
-      // Email validation
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(email)) {
-        alert('Please enter a valid email address.');
-        return;
-      }
-
-      // Here you would typically send the form data to a server
-      // For now, we'll just show a success message
-      alert('Thank you for your message! We will get back to you soon.');
-      this.reset();
-    });
-  }
-
-  // Add animation on scroll for elements
-  const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
+    // show or hide the back-top-top button
+    const backToTop = document.querySelector(".back-to-top");
+    if (
+      document.body.scrollTop > 50 ||
+      document.documentElement.scrollTop > 50
+    ) {
+      backToTop.style.display = "flex";
+    } else {
+      backToTop.style.display = "none";
+    }
   };
 
-  const observer = new IntersectionObserver(function (entries) {
-    entries.forEach(function (entry) {
-      if (entry.isIntersecting) {
-        entry.target.style.opacity = '1';
-        entry.target.style.transform = 'translateY(0)';
+  //===== close navbar-collapse when a  clicked
+  let navbarToggler = document.querySelector(".navbar-toggler");
+  const navbarCollapse = document.querySelector(".navbar-collapse");
+
+  document.querySelectorAll(".ud-menu-scroll").forEach((e) =>
+    e.addEventListener("click", () => {
+      navbarToggler.classList.remove("active");
+      navbarCollapse.classList.remove("show");
+    })
+  );
+  navbarToggler.addEventListener("click", function () {
+    navbarToggler.classList.toggle("active");
+    navbarCollapse.classList.toggle("show");
+  });
+
+  // ===== submenu
+  const submenuButton = document.querySelectorAll(".nav-item-has-children");
+  submenuButton.forEach((elem) => {
+    elem.querySelector("a").addEventListener("click", () => {
+      elem.querySelector(".ud-submenu").classList.toggle("show");
+    });
+  });
+
+  // ===== wow js
+  new WOW().init();
+
+  // ====== scroll top js
+  function scrollTo(element, to = 0, duration = 500) {
+    const start = element.scrollTop;
+    const change = to - start;
+    const increment = 20;
+    let currentTime = 0;
+
+    const animateScroll = () => {
+      currentTime += increment;
+
+      const val = Math.easeInOutQuad(currentTime, start, change, duration);
+
+      element.scrollTop = val;
+
+      if (currentTime < duration) {
+        setTimeout(animateScroll, increment);
       }
-    });
-  }, observerOptions);
+    };
 
-  // Observe elements that should animate on scroll
-  const animateElements = document.querySelectorAll('.ud-feature-card, .ud-single-info, .ud-download-btn');
-  animateElements.forEach(function (el) {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(20px)';
-    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-    observer.observe(el);
-  });
+    animateScroll();
+  }
 
-  // Prevent default behavior for empty hash links
-  document.querySelectorAll('a[href="#"]').forEach(function (link) {
-    link.addEventListener('click', function (e) {
-      e.preventDefault();
-    });
-  });
+  Math.easeInOutQuad = function (t, b, c, d) {
+    t /= d / 2;
+    if (t < 1) return (c / 2) * t * t + b;
+    t--;
+    return (-c / 2) * (t * (t - 2) - 1) + b;
+  };
 
-  console.log('OnlyCampus landing page initialized');
+  document.querySelector(".back-to-top").onclick = () => {
+    scrollTo(document.documentElement);
+  };
+
+// ====== Load Testimonials from JSON and init Swiper ======
+    async function loadTestimonials() {
+        try {
+            const res = await fetch("assets/data/testimonials.json");
+            const all = await res.json();
+
+            // Shuffle and select 10
+            const selected = all.sort(() => 0.5 - Math.random()).slice(0, 10);
+
+            const wrapper = document.querySelector("#testimonials .swiper-wrapper");
+            wrapper.innerHTML = "";
+
+            selected.forEach(t => {
+                const slide = document.createElement("div");
+                slide.className = "swiper-slide";
+                slide.innerHTML = `
+        <div class="ud-single-testimonial">
+          <div class="ud-testimonial-ratings">
+            <i class="lni lni-star-filled"></i>
+            <i class="lni lni-star-filled"></i>
+            <i class="lni lni-star-filled"></i>
+            <i class="lni lni-star-filled"></i>
+            <i class="lni lni-star-filled"></i>
+          </div>
+          <div class="ud-testimonial-content">
+            <p>“${t.text}”</p>
+          </div>
+          <div class="ud-testimonial-info">
+            <div class="ud-testimonial-image">
+              <img src="${t.image}" alt="${t.name}" loading="lazy" width="60" height="60" />
+            </div>
+            <div class="ud-testimonial-meta">
+              <h4>${t.name}</h4>
+              <p>${t.role}</p>
+            </div>
+          </div>
+        </div>`;
+                wrapper.appendChild(slide);
+            });
+
+            new Swiper(".ud-testimonials-swiper", {
+                loop: true,
+                // loopedSlides must be bigger than cart number of slides
+                loopedSlides:11,
+                speed: 4000,
+                autoplay: {
+                    delay: 0,
+                    disableOnInteraction: false,
+                    pauseOnMouseEnter: true,
+                },
+                slidesPerView: 1,
+                spaceBetween: 20,
+                grabCursor: true,
+                centeredSlides: false,
+                breakpoints: {
+                    768: { slidesPerView: 2, spaceBetween: 24 },
+                    1200: { slidesPerView: 3, spaceBetween: 30 },
+                },
+                pagination: false,
+                navigation: false,
+            });
+
+
+        } catch (err) {
+            console.error("Testimonials failed to load:", err);
+        }
+    }
+
+    loadTestimonials();
 })();
+
+// Hero animation removed for better performance - using CSS-only animation instead
+
+// === App Preview Popup with Swiper ===
+document.addEventListener("DOMContentLoaded", () => {
+    const trigger = document.getElementById("preview-trigger");
+    const popup = document.getElementById("screen-popup");
+    const closeBtn = document.getElementById("close-popup");
+    let swiperInstance = null;
+
+    if (!trigger || !popup || !closeBtn) return;
+
+    trigger.addEventListener("click", () => {
+        popup.style.display = "flex";
+        document.body.style.overflow = "hidden";
+
+        // Swiper yalnızca bir kez oluşturulsun
+        if (!swiperInstance) {
+            swiperInstance = new Swiper(".popup-swiper", {
+                loop: true,
+                slidesPerView: 1,
+                centeredSlides: true,   // centeralize image
+                spaceBetween: 0,        // prevent space bias
+                speed: 400,
+                watchSlidesProgress: true,
+                navigation: {
+                    nextEl: ".swiper-button-next",
+                    prevEl: ".swiper-button-prev",
+                },
+                pagination: {
+                    el: ".swiper-pagination",
+                    clickable: true,
+                },
+            });
+        }
+    });
+
+    closeBtn.addEventListener("click", () => {
+        popup.style.display = "none";
+        document.body.style.overflow = "auto";
+    });
+
+    popup.addEventListener("click", (e) => {
+        if (e.target === popup) {
+            popup.style.display = "none";
+            document.body.style.overflow = "auto";
+        }
+    });
+});
+
+// === Lazy Load for Promo Video ===
+document.addEventListener("DOMContentLoaded", () => {
+    const video = document.getElementById("promoVideo");
+    if (!video) return; // Video elementi yoksa çık
+
+    if ("IntersectionObserver" in window) {
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    video.load();
+                    observer.unobserve(video);
+                }
+            });
+        });
+        observer.observe(video);
+    } else {
+        video.load();
+    }
+});
+
+// === TikTok scroll fix ===
+// Tiktok embed iframe scroll problem fix we must do that else tiktok will see like scrolling bar
+window.addEventListener("load", () => {
+    // 1. Embed script'in yüklenmesini bekle
+    const fixTikTokScroll = () => {
+        const tiktokFrame = document.querySelector(".tiktok-embed iframe");
+        if (tiktokFrame) {
+            tiktokFrame.setAttribute("scrolling", "no"); // ✅ Scroll tamamen kapatılır
+            tiktokFrame.style.overflow = "hidden";
+            tiktokFrame.style.height = "100%";
+            tiktokFrame.style.maxHeight = "100%";
+            tiktokFrame.style.border = "none";
+        } else {
+            // If not iframe exist yet
+            setTimeout(fixTikTokScroll, 500);
+        }
+    };
+
+    // Try Again
+    setTimeout(fixTikTokScroll, 1200);
+    setTimeout(fixTikTokScroll, 2500);
+    setTimeout(fixTikTokScroll, 4000);
+});
+
+// Instagram loading problem solver
+window.addEventListener("load", () => {
+    // Render it
+    if (window.instgrm && window.instgrm.Embeds) {
+        setTimeout(() => {
+            window.instgrm.Embeds.process();
+        }, 1000);
+    }
+});
+
+

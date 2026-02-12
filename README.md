@@ -1,94 +1,70 @@
-# OnlyCampus Landing Page
+# Product Website Draft
 
-A modern, responsive landing page for the OnlyCampus mobile application. Built with the same color scheme and design language as the SolarityAI landing page.
+This template is designed for fast cloning and content swaps.
 
-## Features
+## Quick start
 
-- **Modern Design**: Clean, professional design with dark theme
-- **Responsive**: Fully responsive layout that works on all devices
-- **Smooth Animations**: WOW.js powered scroll animations
-- **Color Scheme**: Uses the same color palette as SolarityAI landing page
-  - Primary Blue: `#1e40af`
-  - Secondary Green: `#059669`
-  - Purple: `#7c3aed`
-  - Orange: `#c2410c`
-  - Teal: `#0d9488`
-  - Dark Background: `#0f172a`
+1. Duplicate the `chat-therapy-landing-page/` folder.
+2. Update content in `assets/data/site.json`.
+3. Replace images in `assets/images/` if needed.
+4. Update testimonials in `assets/data/testimonials.json`.
+5. Optional: adjust theme colors in `assets/css/override.css`.
 
-## Structure
+## Local preview
+
+`fetch()` requires a local server. From the template folder:
 
 ```
-onlycampus-landing-page/
-├── index.html              # Main HTML file
-├── assets/
-│   ├── css/
-│   │   └── main.css        # Main stylesheet
-│   ├── js/
-│   │   └── main.js         # JavaScript for interactivity
-│   └── images/
-│       └── logo/           # Logo images (to be added)
-└── README.md
+python3 -m http.server 5173
 ```
 
-## Sections
+Open `http://localhost:5173` in your browser.
 
-1. **Hero Section**: Main introduction with call-to-action buttons
-2. **Features Section**: Showcase of app features
-3. **About Section**: Information about OnlyCampus
-4. **Download Section**: App store download links
-5. **Contact Section**: Contact form and information
+## Content map
 
-## Technologies Used
+- Brand + SEO: `assets/data/site.json` (`brand`, `seo`)
+- Navigation: `site.json` (`nav`)
+- Hero: `site.json` (`hero`)
+- Hero media cards: `site.json` (`hero.mediaCards`)
+- Features: `site.json` (`features`)
+- Stats band: `site.json` (`stats`)
+- Brand strip: `site.json` (`brandStrip`)
+- App preview: `site.json` (`appPreview`)
+- Social gallery: `site.json` (`socialGallery`)
+- Testimonials: `assets/data/testimonials.json`
+- Pricing: `site.json` (`pricing`)
+- FAQ: `site.json` (`faq`)
+- Contact: `site.json` (`contact`)
+- Social follow + footer: `site.json` (`socialFollow`, `footer`)
+- Download CTA: `site.json` (`downloadCta`)
+- Download trust chips: `site.json` (`downloadCta.trustItems`)
 
-- HTML5
-- CSS3 (with CSS Variables)
-- JavaScript (Vanilla JS)
-- Bootstrap 5.3.0 (CDN)
-- WOW.js (CDN) for animations
-- LineIcons (CDN) for icons
-- Google Fonts (Inter & Poppins)
+## Notes
 
-## Setup
+- Social embeds rely on external scripts already included in `index.html`.
+- If you remove a section from JSON, the fallback HTML remains visible.
+# Play - Free HTML Template for Startup, Apps and SaaS
 
-1. Open `index.html` in a web browser
-2. For development, use a local server:
-   ```bash
-   # Using Python
-   python -m http.server 8000
-   
-   # Using Node.js (http-server)
-   npx http-server
-   ```
+Play is an open-source and free bootstrap 5 based HTML template created by the UIdeck team. It's a part of our new initiative to give back to the community and create some impactful open source projects.
 
-## Customization
+This template is designed and developed in such a way so, that almost anyone can use it for almost any kind of website or landing pages such as SaaS, Startup, Business, Apps, Software and Agency, etc.
 
-### Colors
+Play comes with all essential sections and elements a complete website needs, additionally, we also created some separate pages including blogs, login, 404, and some other essential pages from homepage sections.
 
-All colors are defined as CSS variables in `assets/css/main.css`. To change the color scheme, modify the `:root` variables:
+### This template crafted using 🥞 [TailGrids](https://tailgrids.com/) UI components (design)
 
-```css
-:root {
-  --color-primary: #1e40af;
-  --color-primary-light: #3b82f6;
-  /* ... */
-}
-```
 
-### Content
+### [🚀 View Demo](https://preview.uideck.com/items/play-bootstrap/)
 
-Edit `index.html` to update:
-- Text content
-- Feature descriptions
-- Contact information
-- App store links
+### [⬇️ Download Now](https://links.uideck.com/play-bootstrap-download)
 
-## Browser Support
+[![playbootstrap-demo](https://uideck.com/wp-content/uploads/2021/09/play-bootstrap.jpg)](https://preview.uideck.com/items/play-bootstrap/)
 
-- Chrome (latest)
-- Firefox (latest)
-- Safari (latest)
-- Edge (latest)
 
-## License
 
-© 2025 OnlyCampus. All rights reserved.
+## 📃 License
+Play is an open-source template, you can use it with your personal or commercial projects without any attribution or backlink.
+
+## 💙 Support
+You can always support this project by [Starring🌟 This Repository](https://github.com/uideck/play-bootstrap) 
+and sharing with friends. Also open an issue if you find bug or feel free to contribute by pull requests after fixing any issue or adding more values.
