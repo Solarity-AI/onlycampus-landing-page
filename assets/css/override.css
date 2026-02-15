@@ -1141,6 +1141,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .ud-footer {
     background: #f8fafc !important;
+    padding-top: 48px !important;
 }
 
 .ud-footer .shape {
@@ -1174,61 +1175,95 @@ h1, h2, h3, h4, h5, h6 {
     gap: 10px;
 }
 
-/* Footer: 4 bölüm (logo + 3 başlık) yatay hizalı, eşit genişlik */
+/* Footer: her sütunda başlık + içerik aynı blokta, minimal boşluk */
 .ud-footer .ud-footer-widgets .container {
     padding-left: 24px !important;
     padding-right: 24px !important;
 }
-.ud-footer .ud-footer-widgets .row {
+.ud-footer .ud-footer-columns {
     display: flex;
     flex-wrap: wrap;
+    gap: 0 24px;
     align-items: flex-start;
 }
-.ud-footer .ud-footer-widgets .row > div {
-    display: flex;
-    flex: 1 1 0%;
+.ud-footer .ud-footer-columns .ud-footer-col {
+    flex: 1 1 0;
     min-width: 0;
     max-width: none;
 }
-/* Legal: sol ve sağ boşluk eşit */
-.ud-footer .ud-footer-widgets .row > div:nth-child(3) {
-    padding-left: 20px !important;
-    padding-right: 20px !important;
+.ud-footer .ud-footer-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 3px;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+/* Logo + 3 başlık aynı yatay hizada: hepsi aynı yükseklikte bant */
+.ud-footer .ud-footer-col .ud-footer-logo,
+.ud-footer .ud-footer-col .ud-widget-title {
+    margin: 0 !important;
+    padding: 0 !important;
+    min-height: 88px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.ud-footer .ud-footer-col .ud-widget {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+.ud-footer .ud-footer-col .ud-widget .ud-widget-desc,
+.ud-footer .ud-footer-col .ud-widget .ud-widget-links,
+.ud-footer .ud-footer-col .ud-widget .ud-widget-socials,
+.ud-footer .ud-footer-col .ud-widget p {
+    margin: 0 !important;
+    padding: 0 !important;
+    text-align: center;
+}
+.ud-footer .ud-footer-col .ud-widget .ud-widget-links {
+    list-style: none;
 }
 
-/* Tüm widget'lar column; sosyal hariç (sosyal ud-styles ve aşağıdaki .ud-widget--social ile) */
+/* Tüm widget'lar: içerik ortada */
 .ud-footer .ud-widget:not(.ud-widget--social) {
     width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    text-align: left !important;
+    align-items: center;
+    text-align: center !important;
 }
-/* Footer sosyal: başlık 4 ikonun üstünde ve ortalarında */
+/* Footer sosyal: ikonlar ortada */
 .ud-footer .ud-widget.ud-widget--social {
     width: 100%;
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
-    gap: 14px;
+    gap: 2px;
     text-align: center !important;
 }
 .ud-footer .ud-widget.ud-widget--social .ud-widget-title {
     margin: 0 !important;
     margin-top: 0 !important;
     margin-bottom: 0 !important;
-    text-align: center !important;
+    text-align: left !important;
 }
 .ud-footer .ud-widget.ud-widget--social .ud-widget-socials {
     margin: 0 !important;
-    margin-top: 12px !important;
+    margin-top: 0 !important;
     margin-left: 0 !important;
     padding-left: 0 !important;
     display: flex !important;
     flex-wrap: nowrap;
     align-items: center !important;
     justify-content: center !important;
-    width: auto !important;
+    width: 100% !important;
     gap: 10px;
 }
 .ud-footer .ud-widget.ud-widget--social .ud-widget-socials li {
@@ -1247,14 +1282,29 @@ h1, h2, h3, h4, h5, h6 {
     line-height: 1 !important;
 }
 
-.ud-footer .ud-widget-title,
-.ud-footer .ud-footer-logo {
-    margin-top: 4px;
+/* Footer sütunları: logo ve başlıklar (üstte aynı hiza) */
+.ud-footer .ud-footer-col .ud-footer-logo {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+}
+.ud-footer .ud-footer-col .ud-footer-logo img {
+    display: block;
+    width: 88px !important;
+    height: 88px !important;
+    object-fit: contain;
+}
+.ud-footer .ud-footer-col .ud-widget-title {
+    margin: 0 !important;
+    font-size: 1.25rem !important;
+    font-weight: 700 !important;
+    color: var(--text-primary) !important;
 }
 
-/* Sosyal ikon listesi: başlık altında ortada; genel footer'da sola hizalı (--social kendi kuralında center ile ezer) */
+/* Sosyal ikon listesi: ortada */
 .ud-footer .ud-widget-socials {
-    justify-content: flex-start;
+    justify-content: center;
 }
 
 .ud-footer .ud-widget-socials li {
@@ -1299,9 +1349,8 @@ h1, h2, h3, h4, h5, h6 {
     .ud-footer .ud-widget-links,
     .ud-footer .ud-widget-links li,
     .ud-footer .ud-widget-desc,
-    .ud-footer-bottom p,
     .ud-footer .ud-footer-logo {
-        text-align: left !important;
+        text-align: center !important;
         margin-left: 0;
         margin-right: 0;
     }
@@ -1322,36 +1371,23 @@ h1, h2, h3, h4, h5, h6 {
         align-items: center !important;
         gap: 10px !important;
     }
-    /* Mobilde sıralama: logo+follow üstte, legal+support altta */
-    .ud-footer .ud-footer-widgets .row > div {
-        flex: 0 0 50%;
-        max-width: 50%;
-    }
-    .ud-footer .ud-footer-widgets .row > div:nth-child(1) {
-        order: 1;
-    }
-    .ud-footer .ud-footer-widgets .row > div:nth-child(2) {
-        order: 2;
-    }
-    .ud-footer .ud-footer-widgets .row > div:nth-child(3) {
-        order: 3;
-    }
-    .ud-footer .ud-footer-widgets .row > div:nth-child(4) {
-        order: 4;
+    /* Mobilde sütunlar 2'li */
+    .ud-footer .ud-footer-columns {
+        gap: 24px 16px;
     }
 
     /* Social icons alignment */
     .ud-footer .ud-widget-socials {
-        justify-content: flex-start !important;
+        justify-content: center !important;
     }
 
-    /* Ensure footer logo is centered */
+    /* Ensure footer logo is centered - header ile aynı (mobilde 72px) */
     .ud-footer .ud-footer-logo img {
         display: block;
         margin-left: 0;
         margin-right: 0;
-        width: 80px !important;
-        height: 80px !important;
+        width: 72px !important;
+        height: 72px !important;
         aspect-ratio: 1 / 1;
         object-fit: contain;
     }
@@ -1385,10 +1421,10 @@ h1, h2, h3, h4, h5, h6 {
     }
 }
 
-/* Footer logo - maintain square aspect ratio */
+/* Footer logo - header ile aynı boyut (88px) */
 .ud-footer .ud-footer-logo img {
-    width: 100px;
-    height: 100px;
+    width: 88px !important;
+    height: 88px !important;
     aspect-ratio: 1 / 1;
     object-fit: contain;
 }
@@ -2341,8 +2377,8 @@ body {
         padding: 24px 16px !important;
     }
     .ud-footer .ud-footer-logo img {
-        width: 80px !important;
-        height: 80px !important;
+        width: 60px !important;
+        height: 60px !important;
     }
 }
 
@@ -2384,3 +2420,4 @@ body {
         box-sizing: border-box !important;
     }
 }
+
