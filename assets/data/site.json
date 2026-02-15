@@ -275,10 +275,11 @@
     ],
     "legalTitle": "Legal",
     "legalLinks": [
-      { "label": "Privacy Policy", "href": "/privacy-policy.html" },
-      { "label": "Data Deletion", "href": "/data-deletion.html" },
-      { "label": "Terms of Service", "href": "/footer-pages/terms.html" },
-      { "label": "Cookies Policy", "href": "/footer-pages/cookies.html" }
+      { "label": "Privacy Policy", "href": "footer-pages/privacy-policy.html" },
+      { "label": "Data Deletion", "href": "footer-pages/data-deletion.html" },
+      { "label": "Terms of Service", "href": "footer-pages/terms.html" },
+      { "label": "Privacy Notice", "href": "footer-pages/privacy-policy.html" },
+      { "label": "Cookies Policy", "href": "footer-pages/cookies.html" }
     ],
     "emergencyTitle": "Support",
     "emergencyText": "For urgent help, contact local services. OnlyCampus is not a crisis support provider.",
