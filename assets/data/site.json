@@ -11,18 +11,18 @@
     "author": "Solarity AI",
     "ogTitle": "OnlyCampus | Transform Your Campus Experience",
     "ogDescription": "A modern platform that brings courses, planning, and community together for better outcomes.",
-    "ogImage": "assets/images/hero/sohbetTerapiScreens.png",
+    "ogImage": "assets/images/hero/screens.png",
     "ogUrl": "https://onlycampus.example.com/",
     "twitterTitle": "OnlyCampus | Campus Success Made Simple",
     "twitterDescription": "Plan smarter, learn better, and stay connected with OnlyCampus.",
-    "twitterImage": "assets/images/hero/sohbetTerapiScreens.png",
+    "twitterImage": "assets/images/hero/screens.png",
     "canonical": "https://onlycampus.example.com/",
     "themeColor": "#3b82f6"
   },
   "nav": [
     { "label": "Home", "href": "#home" },
     { "label": "Features", "href": "#features" },
-    { "label": "Preview", "href": "#brand-strip" },
+    { "label": "Preview", "href": "#app-preview" },
     { "label": "Social", "href": "#social-gallery" },
     { "label": "Testimonials", "href": "#testimonials" },
     { "label": "Pricing", "href": "#pricing" },
@@ -35,7 +35,7 @@
     "headline": "Transform Your Campus Experience",
     "subhead": "The platform students rely on to manage courses, stay on schedule, and connect with campus life in one place.",
     "media": {
-      "image": "assets/images/hero/sohbetTerapiScreens.png",
+      "image": "assets/images/hero/screens.png",
       "alt": "OnlyCampus dashboard preview"
     },
     "mediaCards": [
@@ -103,18 +103,8 @@
       { "value": "10M+", "label": "Active users" }
     ]
   },
-  "brandStrip": {
-    "label": "Trusted by leading campuses",
-    "logos": [
-      { "src": "assets/images/brands/uideck.svg", "alt": "UIdeck" },
-      { "src": "assets/images/brands/lineicons.svg", "alt": "Lineicons" },
-      { "src": "assets/images/brands/graygrids.svg", "alt": "GrayGrids" },
-      { "src": "assets/images/brands/ayroui.svg", "alt": "AyroUI" },
-      { "src": "assets/images/brands/ecommerce-html.svg", "alt": "Ecommerce HTML" }
-    ]
-  },
   "appPreview": {
-    "mainImage": "assets/images/hero/sohbetTerapiScreens.png",
+    "mainImage": "assets/images/hero/screens.png",
     "mainAlt": "OnlyCampus app preview",
     "slides": [
       { "src": "assets/images/hero/screen1.png", "alt": "Preview screen 1" },
@@ -137,7 +127,7 @@
       {
         "type": "tiktok",
         "videoId": "7558508455229705489",
-        "cite": "https://www.tiktok.com/@sohbet_terapi_app/video/7558508455229705489"
+        "cite": "https://www.tiktok.com/@onlycampus/video/7558508455229705489"
       },
       {
         "type": "facebook",

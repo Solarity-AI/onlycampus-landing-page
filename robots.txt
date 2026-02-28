@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://sohbetterapi.solarityai.com/sitemap.xml
+Sitemap: https://onlycampus.example.com/sitemap.xml
 
 # Disallow admin and private areas
 Disallow: /ansible/
