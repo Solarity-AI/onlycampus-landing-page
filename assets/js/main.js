@@ -130,40 +130,57 @@
 
   var udHeader = document.querySelector(".ud-header");
   var backToTop = document.querySelector(".back-to-top");
-  var stickyOffset = 0;
-  var stickyTicking = false;
-  var isSticky = false;
-  var isBackToTopVisible = false;
+  (function setupScrollStateObservers() {
+    if (!udHeader && !backToTop) return;
 
-  function updateStickyState() {
-    var scrollPos = window.scrollY || 0;
-    var nextSticky = scrollPos > stickyOffset;
-    var nextBackToTop = scrollPos > 50;
-
-    if (udHeader && nextSticky !== isSticky) {
-      udHeader.classList.toggle("sticky", nextSticky);
-      isSticky = nextSticky;
+    var sentinel = document.getElementById("scroll-state-sentinel");
+    if (!sentinel) {
+      sentinel = document.createElement("div");
+      sentinel.id = "scroll-state-sentinel";
+      sentinel.setAttribute("aria-hidden", "true");
+      sentinel.style.position = "absolute";
+      sentinel.style.top = "0";
+      sentinel.style.left = "0";
+      sentinel.style.width = "1px";
+      sentinel.style.height = "1px";
+      sentinel.style.pointerEvents = "none";
+      document.body.insertBefore(sentinel, document.body.firstChild);
     }
 
-    if (backToTop && nextBackToTop !== isBackToTopVisible) {
-      backToTop.style.display = nextBackToTop ? "flex" : "none";
-      isBackToTopVisible = nextBackToTop;
-    }
-  }
+    if ("IntersectionObserver" in window) {
+      if (udHeader) {
+        var stickyObserver = new IntersectionObserver(
+          function (entries) {
+            var entry = entries[0];
+            udHeader.classList.toggle("sticky", !entry.isIntersecting);
+          },
+          { rootMargin: "-1px 0px 0px 0px", threshold: 0 }
+        );
+        stickyObserver.observe(sentinel);
+      }
 
-  window.addEventListener(
-    "scroll",
-    function () {
-      if (stickyTicking) return;
-      stickyTicking = true;
-      requestAnimationFrame(function () {
-        updateStickyState();
-        stickyTicking = false;
-      });
-    },
-    { passive: true }
-  );
-  updateStickyState();
+      if (backToTop) {
+        var backToTopObserver = new IntersectionObserver(
+          function (entries) {
+            var entry = entries[0];
+            backToTop.style.display = entry.isIntersecting ? "none" : "flex";
+          },
+          { rootMargin: "-50px 0px 0px 0px", threshold: 0 }
+        );
+        backToTopObserver.observe(sentinel);
+      }
+      return;
+    }
+
+    // Fallback for very old browsers without IntersectionObserver support.
+    function fallbackUpdate() {
+      var scrollPos = window.scrollY || 0;
+      if (udHeader) udHeader.classList.toggle("sticky", scrollPos > 0);
+      if (backToTop) backToTop.style.display = scrollPos > 50 ? "flex" : "none";
+    }
+    window.addEventListener("scroll", fallbackUpdate, { passive: true });
+    fallbackUpdate();
+  })();
 
   var navbarToggler = document.querySelector(".navbar-toggler");
   var navbarCollapse = document.querySelector(".navbar-collapse");
@@ -198,7 +215,7 @@
   }
 
   function scrollToTop(duration) {
-    var start = document.documentElement.scrollTop || window.pageYOffset || 0;
+    var start = window.scrollY || 0;
     var change = -start;
     var startTime = null;
 
