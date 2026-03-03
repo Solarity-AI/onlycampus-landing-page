@@ -1,7 +1,7 @@
 {
   "brand": {
     "name": "OnlyCampus",
-    "logo": "assets/images/logo/CompanyLogo.png",
+    "logo": "assets/images/logo/CompanyLogo.webp",
     "logoAlt": "OnlyCampus Logo"
   },
   "seo": {
@@ -20,15 +20,42 @@
     "themeColor": "#3b82f6"
   },
   "nav": [
-    { "label": "Home", "href": "#home" },
-    { "label": "Features", "href": "#features" },
-    { "label": "Preview", "href": "#brand-strip" },
-    { "label": "Social", "href": "#social-gallery" },
-    { "label": "Testimonials", "href": "#testimonials" },
-    { "label": "Pricing", "href": "#pricing" },
-    { "label": "FAQ", "href": "#faq" },
-    { "label": "Contact", "href": "#contact" },
-    { "label": "Download", "href": "#download" }
+    {
+      "label": "Home",
+      "href": "#home"
+    },
+    {
+      "label": "Features",
+      "href": "#features"
+    },
+    {
+      "label": "Preview",
+      "href": "#brand-strip"
+    },
+    {
+      "label": "Social",
+      "href": "#social-gallery"
+    },
+    {
+      "label": "Testimonials",
+      "href": "#testimonials"
+    },
+    {
+      "label": "Pricing",
+      "href": "#pricing"
+    },
+    {
+      "label": "FAQ",
+      "href": "#faq"
+    },
+    {
+      "label": "Contact",
+      "href": "#contact"
+    },
+    {
+      "label": "Download",
+      "href": "#download"
+    }
   ],
   "hero": {
     "kicker": "The #1 Platform for College Success",
@@ -39,8 +66,14 @@
       "alt": "OnlyCampus dashboard preview"
     },
     "mediaCards": [
-      { "label": "Active Users", "value": "10M+" },
-      { "label": "Success Rate", "value": "98%" }
+      {
+        "label": "Active Users",
+        "value": "10M+"
+      },
+      {
+        "label": "Success Rate",
+        "value": "98%"
+      }
     ],
     "actions": [
       {
@@ -68,7 +101,11 @@
         "href": "#"
       }
     ],
-    "powerwords": ["Planning", "Community", "Success"]
+    "powerwords": [
+      "Planning",
+      "Community",
+      "Success"
+    ]
   },
   "features": {
     "eyebrow": "Features",
@@ -98,27 +135,67 @@
     "description": "Clear outcomes and measurable impact across campus communities.",
     "note": "Join over 1,000,000+ students achieving their goals with OnlyCampus.",
     "items": [
-      { "value": "98%", "label": "Student success rate" },
-      { "value": "5,000+", "label": "Colleges and universities" },
-      { "value": "10M+", "label": "Active users" }
+      {
+        "value": "98%",
+        "label": "Student success rate"
+      },
+      {
+        "value": "5,000+",
+        "label": "Colleges and universities"
+      },
+      {
+        "value": "10M+",
+        "label": "Active users"
+      }
     ]
   },
   "brandStrip": {
     "label": "Trusted by leading campuses",
     "logos": [
-      { "src": "assets/images/brands/uideck.svg", "alt": "UIdeck" },
-      { "src": "assets/images/brands/lineicons.svg", "alt": "Lineicons" },
-      { "src": "assets/images/brands/graygrids.svg", "alt": "GrayGrids" },
-      { "src": "assets/images/brands/ayroui.svg", "alt": "AyroUI" },
-      { "src": "assets/images/brands/ecommerce-html.svg", "alt": "Ecommerce HTML" }
+      {
+        "src": "assets/images/brands/uideck.svg",
+        "alt": "UIdeck",
+        "width": 200,
+        "height": 52
+      },
+      {
+        "src": "assets/images/brands/lineicons.svg",
+        "alt": "Lineicons",
+        "width": 200,
+        "height": 26
+      },
+      {
+        "src": "assets/images/brands/graygrids.svg",
+        "alt": "GrayGrids",
+        "width": 200,
+        "height": 47
+      },
+      {
+        "src": "assets/images/brands/ayroui.svg",
+        "alt": "AyroUI",
+        "width": 200,
+        "height": 52
+      },
+      {
+        "src": "assets/images/brands/ecommerce-html.svg",
+        "alt": "Ecommerce HTML",
+        "width": 200,
+        "height": 52
+      }
     ]
   },
   "appPreview": {
-    "mainImage": "assets/images/hero/sohbetTerapiScreens.png",
+    "mainImage": "assets/images/hero/sohbetTerapiScreens.webp",
     "mainAlt": "OnlyCampus app preview",
     "slides": [
-      { "src": "assets/images/hero/screen1.png", "alt": "Preview screen 1" },
-      { "src": "assets/images/hero/screen2.png", "alt": "Preview screen 2" }
+      {
+        "src": "assets/images/hero/screen1.png",
+        "alt": "Preview screen 1"
+      },
+      {
+        "src": "assets/images/hero/screen2.png",
+        "alt": "Preview screen 2"
+      }
     ]
   },
   "socialGallery": {
@@ -164,8 +241,15 @@
       {
         "name": "Starter",
         "price": "$9 / month",
-        "features": ["Schedule tracking", "Basic reminders", "Student support"],
-        "cta": { "label": "Get Started", "href": "#contact" }
+        "features": [
+          "Schedule tracking",
+          "Basic reminders",
+          "Student support"
+        ],
+        "cta": {
+          "label": "Get Started",
+          "href": "#contact"
+        }
       },
       {
         "name": "Standard",
@@ -176,13 +260,23 @@
           "Priority support",
           "Personalized insights"
         ],
-        "cta": { "label": "Start Free Trial", "href": "#contact" }
+        "cta": {
+          "label": "Start Free Trial",
+          "href": "#contact"
+        }
       },
       {
         "name": "Premium",
         "price": "$29 / month",
-        "features": ["Advanced analytics", "Mentor sessions", "Early access"],
-        "cta": { "label": "Talk to Sales", "href": "#contact" }
+        "features": [
+          "Advanced analytics",
+          "Mentor sessions",
+          "Early access"
+        ],
+        "cta": {
+          "label": "Talk to Sales",
+          "href": "#contact"
+        }
       }
     ]
   },
@@ -224,7 +318,10 @@
     "addressLabel": "Address",
     "address": "Dallas, Texas, USA",
     "emailLabel": "Email",
-    "emails": ["hello@onlycampus.ai", "support@onlycampus.ai"],
+    "emails": [
+      "hello@onlycampus.ai",
+      "support@onlycampus.ai"
+    ],
     "form": {
       "action": "https://formsubmit.co/hello@onlycampus.ai",
       "next": "https://onlycampus.example.com/thanks.html",
@@ -250,36 +347,90 @@
       }
     ],
     "trustItems": [
-      { "value": "4.9★", "label": "App Store" },
-      { "value": "4.8★", "label": "Google Play" },
-      { "value": "100K+", "label": "Downloads" }
+      {
+        "value": "4.9★",
+        "label": "App Store"
+      },
+      {
+        "value": "4.8★",
+        "label": "Google Play"
+      },
+      {
+        "value": "100K+",
+        "label": "Downloads"
+      }
     ]
   },
   "footer": {
     "description": "OnlyCampus brings courses, planning, and community into one student-first platform.",
     "quickTitle": "Quick Links",
     "quickLinks": [
-      { "label": "Home", "href": "#home" },
-      { "label": "Features", "href": "#features" },
-      { "label": "Testimonials", "href": "#testimonials" },
-      { "label": "Pricing", "href": "#pricing" },
-      { "label": "FAQ", "href": "#faq" },
-      { "label": "Contact", "href": "#contact" }
+      {
+        "label": "Home",
+        "href": "#home"
+      },
+      {
+        "label": "Features",
+        "href": "#features"
+      },
+      {
+        "label": "Testimonials",
+        "href": "#testimonials"
+      },
+      {
+        "label": "Pricing",
+        "href": "#pricing"
+      },
+      {
+        "label": "FAQ",
+        "href": "#faq"
+      },
+      {
+        "label": "Contact",
+        "href": "#contact"
+      }
     ],
     "socialTitle": "Follow OnlyCampus",
     "socialLinks": [
-      { "icon": "lni lni-youtube", "href": "https://www.youtube.com/@onlycampus" },
-      { "icon": "lni lni-instagram-filled", "href": "https://www.instagram.com/onlycampus" },
-      { "icon": "lni lni-tiktok", "href": "https://www.tiktok.com/@onlycampus" },
-      { "icon": "lni lni-facebook-filled", "href": "https://www.facebook.com/onlycampus" }
+      {
+        "icon": "lni lni-youtube",
+        "href": "https://www.youtube.com/@onlycampus"
+      },
+      {
+        "icon": "lni lni-instagram-filled",
+        "href": "https://www.instagram.com/onlycampus"
+      },
+      {
+        "icon": "lni lni-tiktok",
+        "href": "https://www.tiktok.com/@onlycampus"
+      },
+      {
+        "icon": "lni lni-facebook-filled",
+        "href": "https://www.facebook.com/onlycampus"
+      }
     ],
     "legalTitle": "Legal",
     "legalLinks": [
-      { "label": "Privacy Policy", "href": "footer-pages/privacy-policy.html" },
-      { "label": "Data Deletion", "href": "footer-pages/data-deletion.html" },
-      { "label": "Terms of Service", "href": "footer-pages/terms.html" },
-      { "label": "Privacy Notice", "href": "footer-pages/privacy-policy.html" },
-      { "label": "Cookies Policy", "href": "footer-pages/cookies.html" }
+      {
+        "label": "Privacy Policy",
+        "href": "footer-pages/privacy-policy.html"
+      },
+      {
+        "label": "Data Deletion",
+        "href": "footer-pages/data-deletion.html"
+      },
+      {
+        "label": "Terms of Service",
+        "href": "footer-pages/terms.html"
+      },
+      {
+        "label": "Privacy Notice",
+        "href": "footer-pages/privacy-policy.html"
+      },
+      {
+        "label": "Cookies Policy",
+        "href": "footer-pages/cookies.html"
+      }
     ],
     "emergencyTitle": "Support",
     "emergencyText": "For urgent help, contact local services. OnlyCampus is not a crisis support provider.",

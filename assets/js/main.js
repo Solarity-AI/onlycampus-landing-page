@@ -76,9 +76,9 @@
 
     // === logo change
     if (ud_header.classList.contains("sticky")) {
-      logo.src = "assets/images/logo/CompanyLogo.png";
+      logo.src = "assets/images/logo/CompanyLogo.webp";
     } else {
-      logo.src = "assets/images/logo/CompanyLogo.png";
+      logo.src = "assets/images/logo/CompanyLogo.webp";
     }
 
     // show or hide the back-top-top button
@@ -184,7 +184,7 @@
               <img src="${t.image}" alt="${t.name}" loading="lazy" width="60" height="60" />
             </div>
             <div class="ud-testimonial-meta">
-              <h4>${t.name}</h4>
+              <h3>${t.name}</h3>
               <p>${t.role}</p>
             </div>
           </div>
