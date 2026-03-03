@@ -552,8 +552,10 @@ function applyFooter(footer) {
       .map(
         (link) => `
         <li>
-          <a href="${link.href || "#"}" target="_blank" rel="noopener">
-            <i class="${link.icon || "lni lni-link"}"></i>
+          <a href="${link.href || "#"}" target="_blank" rel="noopener" aria-label="${resolveSocialLabel(
+            link
+          )}">
+            <i class="${link.icon || "lni lni-link"}" aria-hidden="true"></i>
           </a>
         </li>
       `
@@ -569,6 +571,18 @@ function applyFooter(footer) {
       .map((link) => `<li><a href="${link.href || "#"}">${link.label || ""}</a></li>`)
       .join("");
   }
+}
+
+function resolveSocialLabel(link) {
+  const explicit = typeof link.label === "string" ? link.label.trim() : "";
+  if (explicit) return explicit;
+
+  const href = (link.href || "").toLowerCase();
+  if (href.includes("youtube")) return "OnlyCampus YouTube";
+  if (href.includes("instagram")) return "OnlyCampus Instagram";
+  if (href.includes("tiktok")) return "OnlyCampus TikTok";
+  if (href.includes("facebook")) return "OnlyCampus Facebook";
+  return "OnlyCampus social profile";
 }
 
 function setText(selector, value) {
