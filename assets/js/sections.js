@@ -317,7 +317,7 @@ function applySocialGallery(gallery) {
         const title = item.title || "YouTube video";
         return `
           <div class="social-item yt-facade" data-video-id="${videoId}" data-title="${title}">
-            <img src="https://i.ytimg.com/vi/${videoId}/hqdefault.jpg" alt="${title}" loading="lazy" width="480" height="270" />
+            <img src="assets/images/hero/sohbetTerapiScreens-400w.webp" alt="${title}" loading="lazy" width="480" height="270" />
             <button class="yt-play-btn" aria-label="Play ${title}">&#9654;</button>
           </div>
         `;
