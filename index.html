@@ -16,19 +16,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
     <!-- Resource Hints for Performance -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
     <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
-    
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3SE53Z2S2Z"></script>
+
+    <!-- Google Analytics is loaded on interaction/idle to keep initial render lighter -->
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
 
-      gtag('config', 'G-3SE53Z2S2Z');
+      (function() {
+        var loaded = false;
+        function loadAnalytics() {
+          if (loaded) return;
+          loaded = true;
+          var s = document.createElement('script');
+          s.async = true;
+          s.src = 'https://www.googletagmanager.com/gtag/js?id=G-3SE53Z2S2Z';
+          s.onload = function() {
+            gtag('config', 'G-3SE53Z2S2Z', { transport_type: 'beacon' });
+          };
+          document.head.appendChild(s);
+        }
+
+        ['pointerdown', 'keydown', 'scroll'].forEach(function(evt) {
+          window.addEventListener(evt, loadAnalytics, { once: true, passive: true });
+        });
+
+        if ('requestIdleCallback' in window) {
+          requestIdleCallback(loadAnalytics, { timeout: 5000 });
+        } else {
+          window.addEventListener('load', function() {
+            setTimeout(loadAnalytics, 3000);
+          }, { once: true });
+        }
+      })();
     </script>
     
       <!-- Primary Title -->
@@ -149,31 +171,6 @@
           }
           </script>
 
-          <!-- Swiper CSS -->
-          <link
-                  rel="stylesheet"
-                  href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
-                  media="print"
-                  onload="this.media='all'"
-          />
-          <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" /></noscript>
-
-          <!-- Google Fonts: Poppins - loaded after page paint, non-blocking -->
-          <noscript>
-            <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
-          </noscript>
-          <script>
-          window.addEventListener('load', function() {
-            var l = document.createElement('link');
-            l.rel = 'stylesheet';
-            l.href = 'https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap';
-            document.head.appendChild(l);
-          });
-          </script>
-
-  </head>
-
-
     <!-- ===== All CSS files ===== -->
       <link rel="preload" href="assets/css/bootstrap.min.css" as="style" />
       <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
@@ -181,10 +178,9 @@
       <link rel="stylesheet" href="assets/css/ud-styles.css" />
       <link rel="preload" href="assets/css/override.css" as="style" />
       <link rel="stylesheet" href="assets/css/override.css" />
-      <link rel="stylesheet" href="assets/css/animate.css" media="print" onload="this.media='all'" />
-      <noscript><link rel="stylesheet" href="assets/css/animate.css" /></noscript>
       <link rel="preload" href="assets/css/lineicons.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
       <noscript><link rel="stylesheet" href="assets/css/lineicons.css" /></noscript>
+  </head>
   <body>
     <!-- ====== Header Start ====== -->
     <header class="ud-header">
@@ -193,7 +189,7 @@
           <div class="col-lg-12">
             <nav class="navbar navbar-expand-lg">
               <a class="navbar-brand" href="index.html">
-                <img src="assets/images/logo/CompanyLogo-106w.webp" srcset="assets/images/logo/CompanyLogo-106w.webp 1x, assets/images/logo/CompanyLogo-200w.webp 2x" alt="OnlyCampus Logo" loading="eager" width="53" height="60" data-site="brand-logo" />
+                <img src="assets/images/logo/CompanyLogo-106w.webp" srcset="assets/images/logo/CompanyLogo-106w.webp 1x, assets/images/logo/CompanyLogo-160w.webp 2x" alt="OnlyCampus Logo" loading="eager" fetchpriority="high" width="53" height="60" data-site="brand-logo" />
               </a>
               <button class="navbar-toggler" aria-label="Toggle navigation" aria-expanded="false">
                 <span class="toggler-icon"> </span>
@@ -273,7 +269,7 @@
       <div class="container">
         <div class="row align-items-start">
           <div class="col-lg-6">
-            <div class="ud-hero-content wow fadeInUp" data-wow-delay=".2s">
+            <div class="ud-hero-content">
                 <span class="ud-hero-kicker" data-site="hero-kicker">The #1 Platform for College Success</span>
                 <h1 class="ud-hero-title" data-site="hero-title">
                   Transform Your Campus Experience
@@ -304,7 +300,7 @@
               </div>
           </div>
           <div class="col-lg-6">
-              <div class="ud-hero-media wow fadeInUp" data-wow-delay=".25s" data-site="hero-media">
+              <div class="ud-hero-media" data-site="hero-media">
                   <img
                           src="assets/images/hero/sohbetTerapiScreens-800w.webp"
                           srcset="assets/images/hero/sohbetTerapiScreens-400w.webp 400w, assets/images/hero/sohbetTerapiScreens-800w.webp 800w"
@@ -349,7 +345,7 @@
             </div>
             <div class="row" data-site-list="features">
                 <div class="col-xl-3 col-lg-3 col-sm-6">
-                    <div class="ud-single-feature wow fadeInUp" data-wow-delay=".1s">
+                    <div class="ud-single-feature">
                         <div class="ud-feature-icon">
                             <i class="lni lni-heart"></i>
                         </div>
@@ -363,7 +359,7 @@
                 </div>
 
                 <div class="col-xl-3 col-lg-3 col-sm-6">
-                    <div class="ud-single-feature wow fadeInUp" data-wow-delay=".15s">
+                    <div class="ud-single-feature">
                         <div class="ud-feature-icon">
                             <i class="lni lni-lock"></i>
                         </div>
@@ -377,7 +373,7 @@
                 </div>
 
                 <div class="col-xl-3 col-lg-3 col-sm-6">
-                    <div class="ud-single-feature wow fadeInUp" data-wow-delay=".2s">
+                    <div class="ud-single-feature">
                         <div class="ud-feature-icon">
                             <i class="lni lni-timer"></i>
                         </div>
@@ -391,7 +387,7 @@
                 </div>
 
                 <div class="col-xl-3 col-lg-3 col-sm-6">
-                    <div class="ud-single-feature wow fadeInUp" data-wow-delay=".25s">
+                    <div class="ud-single-feature">
                         <div class="ud-feature-icon">
                             <i class="lni lni-users"></i>
                         </div>
@@ -427,7 +423,7 @@
             </div>
             <div class="row justify-content-center" data-site-list="stats">
                 <div class="col-lg-4 col-md-6 col-sm-10">
-                    <div class="ud-stat-card wow fadeInUp" data-wow-delay=".1s">
+                    <div class="ud-stat-card">
                         <div class="ud-stat-value">98%</div>
                         <div class="ud-stat-label">Student success rate</div>
                     </div>
@@ -719,7 +715,7 @@
             <div class="row g-0 align-items-center justify-content-center" data-site-list="pricing-plans">
                 <!-- Starter Plan -->
                 <div class="col-lg-4 col-md-6 col-sm-10">
-                    <div class="ud-single-pricing first-item wow fadeInUp" data-wow-delay=".15s">
+                    <div class="ud-single-pricing first-item">
                         <div class="ud-pricing-header">
                             <h3>Starter</h3>
                             <h4>$9/month</h4>
@@ -742,7 +738,7 @@
 
                 <!-- Standard Plan -->
                 <div class="col-lg-4 col-md-6 col-sm-10">
-                    <div class="ud-single-pricing active wow fadeInUp" data-wow-delay=".1s">
+                    <div class="ud-single-pricing active">
                         <span class="ud-popular-tag">MOST POPULAR</span>
                         <div class="ud-pricing-header">
                             <h3>Standard</h3>
@@ -766,7 +762,7 @@
 
                 <!-- Premium Plan -->
                 <div class="col-lg-4 col-md-6 col-sm-10">
-                    <div class="ud-single-pricing last-item wow fadeInUp" data-wow-delay=".15s">
+                    <div class="ud-single-pricing last-item">
                         <div class="ud-pricing-header">
                             <h3>Premium</h3>
                             <h4>$29/month</h4>
@@ -811,7 +807,7 @@
             <div class="row">
                 <div class="col-lg-6" data-site="faq-col-left">
                     <!-- Soru 1 -->
-                    <div class="ud-single-faq wow fadeInUp" data-wow-delay=".1s">
+                    <div class="ud-single-faq">
                         <div class="accordion">
                             <button
                                     class="ud-faq-btn collapsed"
@@ -832,7 +828,7 @@
                     </div>
 
                     <!-- Soru 2 -->
-                    <div class="ud-single-faq wow fadeInUp" data-wow-delay=".15s">
+                    <div class="ud-single-faq">
                         <div class="accordion">
                             <button
                                     class="ud-faq-btn collapsed"
@@ -853,7 +849,7 @@
                     </div>
 
                     <!-- Soru 3 -->
-                    <div class="ud-single-faq wow fadeInUp" data-wow-delay=".2s">
+                    <div class="ud-single-faq">
                         <div class="accordion">
                             <button
                                     class="ud-faq-btn collapsed"
@@ -876,7 +872,7 @@
 
                 <div class="col-lg-6" data-site="faq-col-right">
                     <!-- Soru 4 -->
-                    <div class="ud-single-faq wow fadeInUp" data-wow-delay=".1s">
+                    <div class="ud-single-faq">
                         <div class="accordion">
                             <button
                                     class="ud-faq-btn collapsed"
@@ -897,7 +893,7 @@
                     </div>
 
                     <!-- Soru 5 -->
-                    <div class="ud-single-faq wow fadeInUp" data-wow-delay=".15s">
+                    <div class="ud-single-faq">
                         <div class="accordion">
                             <button
                                     class="ud-faq-btn collapsed"
@@ -918,7 +914,7 @@
                     </div>
 
                     <!-- Soru 6 -->
-                    <div class="ud-single-faq wow fadeInUp" data-wow-delay=".2s">
+                    <div class="ud-single-faq">
                         <div class="accordion">
                             <button
                                     class="ud-faq-btn collapsed"
@@ -991,7 +987,7 @@
 
                 <!-- Contact Form (Right Side) -->
                 <div class="col-xl-4 col-lg-5">
-                    <div class="ud-contact-form-wrapper wow fadeInUp" data-wow-delay=".2s">
+                    <div class="ud-contact-form-wrapper">
                         <h3 class="ud-contact-form-title" data-site="contact-form-title">Send a Message</h3>
 
                         <!-- FormSubmit.co Contact Form -->
@@ -1078,14 +1074,14 @@
 
     </main>
     <!-- ====== Footer Start ====== -->
-    <footer class="ud-footer wow fadeInUp" data-wow-delay=".15s">
+    <footer class="ud-footer">
         <div class="ud-footer-widgets">
             <div class="container">
                 <div class="row ud-footer-columns">
                     <!-- Sütun 1: Logo + Açıklama -->
                     <div class="col-xl-3 col-lg-3 col-md-6 ud-footer-col">
                         <a href="index.html" class="ud-footer-logo">
-                            <img src="assets/images/logo/CompanyLogo-106w.webp" srcset="assets/images/logo/CompanyLogo-106w.webp 1x, assets/images/logo/CompanyLogo-200w.webp 2x" alt="OnlyCampus" loading="lazy" width="53" height="60" data-site="brand-logo" />
+                            <img src="assets/images/logo/CompanyLogo-106w.webp" srcset="assets/images/logo/CompanyLogo-106w.webp 1x, assets/images/logo/CompanyLogo-160w.webp 2x" alt="OnlyCampus" loading="lazy" width="53" height="60" data-site="brand-logo" />
                         </a>
                         <div class="ud-widget">
                             <p class="ud-widget-desc" data-site="footer-desc">OnlyCampus brings courses, planning, and community into one student-first platform.</p>
@@ -1150,8 +1146,6 @@
 
     <!-- ====== All Javascript Files ====== -->
     <script src="assets/js/bootstrap.bundle.min.js" defer></script>
-    <script src="assets/js/wow.min.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
     <script src="assets/js/sections.js" defer></script>
     <script src="assets/js/main.js" defer></script>
     <script>

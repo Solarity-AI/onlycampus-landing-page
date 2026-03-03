@@ -207,13 +207,10 @@ function applyFeatures(features) {
   const items = Array.isArray(features.items) ? features.items : [];
   if (!container || items.length === 0) return;
   container.innerHTML = items
-    .map((feature, index) => {
-      const delay = 0.1 + index * 0.05;
+    .map((feature) => {
       return `
         <div class="col-xl-4 col-lg-4 col-sm-6">
-          <div class="ud-single-feature wow fadeInUp" data-wow-delay=".${Math.round(
-            delay * 100
-          )}s">
+          <div class="ud-single-feature">
             <div class="ud-feature-icon">
               <i class="${feature.icon || "lni lni-star"}"></i>
             </div>
@@ -237,13 +234,10 @@ function applyStats(stats) {
     return;
   }
   container.innerHTML = stats.items
-    .map((item, index) => {
-      const delay = 0.1 + index * 0.05;
+    .map((item) => {
       return `
         <div class="col-lg-4 col-md-6 col-sm-10">
-          <div class="ud-stat-card wow fadeInUp" data-wow-delay=".${Math.round(
-            delay * 100
-          )}s">
+          <div class="ud-stat-card">
             <div class="ud-stat-value">${item.value || ""}</div>
             <div class="ud-stat-label">${item.label || ""}</div>
           </div>
@@ -377,7 +371,6 @@ function applyPricing(pricing) {
   container.innerHTML = pricing.plans
     .map((plan, index) => {
       const isPopular = Boolean(plan.popular);
-      const delay = 0.1 + index * 0.05;
       const tag = isPopular
         ? '<span class="ud-popular-tag">POPULAR</span>'
         : "";
@@ -389,9 +382,7 @@ function applyPricing(pricing) {
 
       return `
         <div class="col-lg-4 col-md-6 col-sm-10">
-          <div class="ud-single-pricing ${
-            isPopular ? "active" : ""
-          } wow fadeInUp" data-wow-delay=".${Math.round(delay * 100)}s">
+          <div class="ud-single-pricing ${isPopular ? "active" : ""}">
             ${tag}
             <div class="ud-pricing-header">
               <h3>${plan.name || ""}</h3>
@@ -439,11 +430,8 @@ function applyFaq(faq) {
 
 function renderFaqItem(item, index) {
   const collapseId = `collapse-${index + 1}`;
-  const delay = 0.1 + index * 0.05;
   return `
-    <div class="ud-single-faq wow fadeInUp" data-wow-delay=".${Math.round(
-      delay * 100
-    )}s">
+    <div class="ud-single-faq">
       <div class="accordion">
         <button
           class="ud-faq-btn collapsed"
