@@ -130,7 +130,7 @@
 
   var udHeader = document.querySelector(".ud-header");
   var backToTop = document.querySelector(".back-to-top");
-  var stickyOffset = udHeader ? udHeader.offsetTop : 0;
+  var stickyOffset = 0;
   var stickyTicking = false;
 
   function updateStickyState() {
