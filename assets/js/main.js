@@ -132,20 +132,22 @@
   var backToTop = document.querySelector(".back-to-top");
   var stickyOffset = 0;
   var stickyTicking = false;
+  var isSticky = false;
+  var isBackToTopVisible = false;
 
   function updateStickyState() {
-    var scrollPos =
-      window.pageYOffset ||
-      document.documentElement.scrollTop ||
-      document.body.scrollTop ||
-      0;
+    var scrollPos = window.scrollY || 0;
+    var nextSticky = scrollPos > stickyOffset;
+    var nextBackToTop = scrollPos > 50;
 
-    if (udHeader) {
-      udHeader.classList.toggle("sticky", scrollPos > stickyOffset);
+    if (udHeader && nextSticky !== isSticky) {
+      udHeader.classList.toggle("sticky", nextSticky);
+      isSticky = nextSticky;
     }
 
-    if (backToTop) {
-      backToTop.style.display = scrollPos > 50 ? "flex" : "none";
+    if (backToTop && nextBackToTop !== isBackToTopVisible) {
+      backToTop.style.display = nextBackToTop ? "flex" : "none";
+      isBackToTopVisible = nextBackToTop;
     }
   }
 
