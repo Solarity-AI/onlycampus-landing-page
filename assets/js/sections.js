@@ -319,16 +319,12 @@ function applySocialGallery(gallery) {
         `;
       }
       if (item.type === "youtube") {
+        const videoId = item.videoId || "";
+        const title = item.title || "YouTube video";
         return `
-          <div class="social-item">
-            <iframe
-              width="100%"
-              height="500"
-              src="https://www.youtube.com/embed/${item.videoId || ""}"
-              title="${item.title || "YouTube video"}"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowfullscreen
-            ></iframe>
+          <div class="social-item yt-facade" data-video-id="${videoId}" data-title="${title}">
+            <img src="https://i.ytimg.com/vi/${videoId}/hqdefault.jpg" alt="${title}" loading="lazy" width="480" height="270" />
+            <button class="yt-play-btn" aria-label="Play ${title}">&#9654;</button>
           </div>
         `;
       }
