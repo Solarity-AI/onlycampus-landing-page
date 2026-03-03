@@ -1265,64 +1265,37 @@ p{font-size:16px;font-weight:400;line-height:26px;margin:0}
           });
         });
 
-        // section menu active - based on section start positions
-        let ticking = false;
-        let sectionMap = [];
-
-        function computeSections() {
-          const links = Array.from(document.querySelectorAll(".ud-menu-scroll"));
-          sectionMap = links
+        // section menu active - IntersectionObserver (no forced reflow)
+        if ("IntersectionObserver" in window) {
+          const navLinks = Array.from(document.querySelectorAll(".ud-menu-scroll"));
+          const sectionEntries = navLinks
             .map((link) => {
-              const val = link.getAttribute("href");
-              if (!val || !val.startsWith("#")) return null;
-              const target = document.querySelector(val);
+              const href = link.getAttribute("href");
+              if (!href || !href.startsWith("#")) return null;
+              const target = document.querySelector(href);
               if (!target) return null;
-              const styles = window.getComputedStyle(target);
-              const marginTop = parseFloat(styles.scrollMarginTop) || 0;
-              const rectTop = target.getBoundingClientRect().top + window.pageYOffset;
-              return { link, target, top: rectTop - marginTop };
+              return { link, target };
             })
-            .filter(Boolean)
-            .sort((a, b) => a.top - b.top);
+            .filter(Boolean);
+
+          let currentActive = null;
+
+          const sectionObserver = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (!entry.isIntersecting) return;
+                const found = sectionEntries.find((s) => s.target === entry.target);
+                if (!found) return;
+                if (currentActive) currentActive.classList.remove("active");
+                currentActive = found.link;
+                currentActive.classList.add("active");
+              });
+            },
+            { rootMargin: "-40% 0px -55% 0px", threshold: 0 }
+          );
+
+          sectionEntries.forEach(({ target }) => sectionObserver.observe(target));
         }
-
-        function onScroll() {
-          if (!ticking) {
-            window.requestAnimationFrame(() => {
-              const scrollPos =
-                window.pageYOffset ||
-                document.documentElement.scrollTop ||
-                document.body.scrollTop;
-              const scrollTopMinus = scrollPos + 2;
-
-              let activeLink = null;
-              for (let i = 0; i < sectionMap.length; i++) {
-                const current = sectionMap[i];
-                const next = sectionMap[i + 1];
-                const start = current.top;
-                const end = next ? next.top : Number.POSITIVE_INFINITY;
-                if (scrollTopMinus >= start && scrollTopMinus < end) {
-                  activeLink = current.link;
-                  break;
-                }
-              }
-
-              document
-                .querySelectorAll(".ud-menu-scroll")
-                .forEach((link) => link.classList.remove("active"));
-              if (activeLink) {
-                activeLink.classList.add("active");
-              }
-
-              ticking = false;
-            });
-            ticking = true;
-          }
-        }
-
-        requestAnimationFrame(computeSections);
-        window.addEventListener("resize", function() { requestAnimationFrame(computeSections); });
-        window.addEventListener("scroll", onScroll, { passive: true });
       });
     </script>
   </body>
