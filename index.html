@@ -94,7 +94,7 @@
             "name": "Solarity AI LLC",
             "legalName": "Solarity AI LLC",
             "url": "https://onlycampus.example.com",
-            "logo": "assets/images/logo/CompanyLogo.png",
+            "logo": "assets/images/logo/CompanyLogo.webp",
             "description": "OnlyCampus brings courses, planning, and community into one student-first platform.",
             "foundingDate": "2024",
             "contactPoint": {
@@ -184,7 +184,8 @@
       <link rel="stylesheet" href="assets/css/override.css" />
       <link rel="stylesheet" href="assets/css/animate.css" media="print" onload="this.media='all'" />
       <noscript><link rel="stylesheet" href="assets/css/animate.css" /></noscript>
-      <link rel="stylesheet" href="assets/css/lineicons.css" />
+      <link rel="preload" href="assets/css/lineicons.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+      <noscript><link rel="stylesheet" href="assets/css/lineicons.css" /></noscript>
   <body>
     <!-- ====== Header Start ====== -->
     <header class="ud-header">
@@ -193,9 +194,9 @@
           <div class="col-lg-12">
             <nav class="navbar navbar-expand-lg">
               <a class="navbar-brand" href="index.html">
-                <img src="assets/images/logo/CompanyLogo.png" alt="OnlyCampus Logo" loading="eager" data-site="brand-logo" />
+                <img src="assets/images/logo/CompanyLogo.webp" alt="OnlyCampus Logo" loading="eager" width="53" height="60" data-site="brand-logo" />
               </a>
-              <button class="navbar-toggler">
+              <button class="navbar-toggler" aria-label="Toggle navigation" aria-expanded="false">
                 <span class="toggler-icon"> </span>
                 <span class="toggler-icon"> </span>
                 <span class="toggler-icon"> </span>
@@ -267,6 +268,7 @@
     </header>
     <!-- ====== Header End ====== -->
 
+    <main id="top">
     <!-- ====== Hero Start ====== -->
     <section class="ud-hero" id="home">
       <div class="container">
@@ -305,11 +307,13 @@
           <div class="col-lg-6">
               <div class="ud-hero-media wow fadeInUp" data-wow-delay=".25s" data-site="hero-media">
                   <img
-                          src="assets/images/hero/sohbetTerapiScreens.png"
+                          src="assets/images/hero/sohbetTerapiScreens.webp"
                           alt="OnlyCampus dashboard preview"
                           class="img-fluid"
-                          loading="lazy"
+                          fetchpriority="high"
                           decoding="async"
+                          width="1920"
+                          height="1440"
                           data-site="hero-media-image"
                   />
                   <div class="ud-hero-media-cards" data-site-list="hero-media-cards">
@@ -438,11 +442,11 @@
             <div class="ud-brand-strip-inner">
                 <span class="ud-brand-strip-label" data-site="brand-strip-label">Trusted by leading campuses</span>
                 <div class="ud-brand-strip-logos" data-site-list="brand-logos">
-                    <img src="assets/images/brands/uideck.svg" alt="UIdeck" loading="lazy" />
-                    <img src="assets/images/brands/lineicons.svg" alt="Lineicons" loading="lazy" />
-                    <img src="assets/images/brands/graygrids.svg" alt="GrayGrids" loading="lazy" />
-                    <img src="assets/images/brands/ayroui.svg" alt="AyroUI" loading="lazy" />
-                    <img src="assets/images/brands/ecommerce-html.svg" alt="Ecommerce HTML" loading="lazy" />
+                    <img src="assets/images/brands/uideck.svg" alt="UIdeck" loading="lazy" width="200" height="52" />
+                    <img src="assets/images/brands/lineicons.svg" alt="Lineicons" loading="lazy" width="200" height="26" />
+                    <img src="assets/images/brands/graygrids.svg" alt="GrayGrids" loading="lazy" width="200" height="47" />
+                    <img src="assets/images/brands/ayroui.svg" alt="AyroUI" loading="lazy" width="200" height="52" />
+                    <img src="assets/images/brands/ecommerce-html.svg" alt="Ecommerce HTML" loading="lazy" width="200" height="52" />
                 </div>
             </div>
         </div>
@@ -454,7 +458,7 @@
         <div class="container">
             <div class="preview-wrapper">
                 <img
-                        src="assets/images/hero/sohbetTerapiScreens.png"
+                        src="assets/images/hero/sohbetTerapiScreens.webp"
                         alt="App Screens"
                         id="preview-trigger"
                         class="img-fluid preview-main"
@@ -544,24 +548,84 @@
             </div>
         </div>
 
-        <!-- Platform embed scripts -->
-        <script async src="//www.instagram.com/embed.js"></script>
-        <script async src="https://www.tiktok.com/embed.js"></script>
-        <script
-                async
-                defer
-                crossorigin="anonymous"
-                src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v19.0"
-        ></script>
-
-        <!-- Stabilization Script -->
+        <!-- Social embed scripts are loaded lazily when section enters viewport -->
         <script>
-            window.addEventListener("load", () => {
-                setTimeout(() => {
-                    window.instgrm?.Embeds?.process();
-                    window.FB?.XFBML?.parse();
-                }, 1000);
-            });
+        (function () {
+            var loaded = { instagram: false, tiktok: false, facebook: false };
+
+            function addIframeTitles() {
+                document.querySelectorAll(".instagram-media iframe:not([title])").forEach(function (f) {
+                    f.setAttribute("title", "Instagram post");
+                });
+                document.querySelectorAll(".tiktok-embed iframe:not([title])").forEach(function (f) {
+                    f.setAttribute("title", "TikTok video");
+                });
+            }
+
+            function loadInstagram() {
+                if (loaded.instagram) return;
+                loaded.instagram = true;
+                var s = document.createElement("script");
+                s.async = true;
+                s.src = "https://www.instagram.com/embed.js";
+                s.onload = function () {
+                    setTimeout(function () {
+                        window.instgrm && window.instgrm.Embeds && window.instgrm.Embeds.process();
+                        setTimeout(addIframeTitles, 2000);
+                    }, 500);
+                };
+                document.body.appendChild(s);
+            }
+
+            function loadTikTok() {
+                if (loaded.tiktok) return;
+                loaded.tiktok = true;
+                var s = document.createElement("script");
+                s.async = true;
+                s.src = "https://www.tiktok.com/embed.js";
+                s.onload = function () {
+                    setTimeout(addIframeTitles, 2000);
+                };
+                document.body.appendChild(s);
+            }
+
+            function loadFacebook() {
+                if (loaded.facebook) return;
+                loaded.facebook = true;
+                var s = document.createElement("script");
+                s.async = true;
+                s.defer = true;
+                s.crossOrigin = "anonymous";
+                s.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v19.0";
+                s.onload = function () {
+                    setTimeout(function () {
+                        window.FB && window.FB.XFBML && window.FB.XFBML.parse();
+                    }, 500);
+                };
+                document.body.appendChild(s);
+            }
+
+            var gallery = document.getElementById("social-gallery");
+            if (!gallery) return;
+
+            if ("IntersectionObserver" in window) {
+                var observer = new IntersectionObserver(function (entries) {
+                    entries.forEach(function (entry) {
+                        if (entry.isIntersecting) {
+                            loadInstagram();
+                            loadTikTok();
+                            loadFacebook();
+                            observer.unobserve(gallery);
+                        }
+                    });
+                }, { rootMargin: "200px" });
+                observer.observe(gallery);
+            } else {
+                loadInstagram();
+                loadTikTok();
+                loadFacebook();
+            }
+        })();
         </script>
     </section>
     <!-- ====== Social Media Gallery End ====== -->
@@ -652,7 +716,7 @@
                             </ul>
                         </div>
                         <div class="ud-pricing-footer">
-                            <a href="javascript:void(0)" class="ud-main-btn ud-border-btn">
+                            <a href="#contact" class="ud-main-btn ud-border-btn">
                                 Get Started
                             </a>
                         </div>
@@ -676,7 +740,7 @@
                             </ul>
                         </div>
                         <div class="ud-pricing-footer">
-                            <a href="javascript:void(0)" class="ud-main-btn ud-white-btn">
+                            <a href="#contact" class="ud-main-btn ud-white-btn">
                                 Start Free Trial
                             </a>
                         </div>
@@ -699,7 +763,7 @@
                             </ul>
                         </div>
                         <div class="ud-pricing-footer">
-                            <a href="javascript:void(0)" class="ud-main-btn ud-border-btn">
+                            <a href="#contact" class="ud-main-btn ud-border-btn">
                                 Talk to Sales
                             </a>
                         </div>
@@ -885,7 +949,7 @@
                                     <i class="lni lni-map-marker"></i>
                                 </div>
                                 <div class="ud-info-meta">
-                                    <h5 data-site="contact-address-label">Address</h5>
+                                    <h3 class="ud-info-label" data-site="contact-address-label">Address</h3>
                                     <p data-site="contact-address">Dallas, Texas, USA</p>
                                 </div>
                             </div>
@@ -896,7 +960,7 @@
                                     <i class="lni lni-envelope"></i>
                                 </div>
                                 <div class="ud-info-meta">
-                                    <h5 data-site="contact-email-label">Email</h5>
+                                    <h3 class="ud-info-label" data-site="contact-email-label">Email</h3>
                                     <div data-site="contact-emails">
                                         <p>hello@onlycampus.ai</p>
                                         <p>support@onlycampus.ai</p>
@@ -995,6 +1059,7 @@
     <!-- ====== Download CTA End ====== -->
 
 
+    </main>
     <!-- ====== Footer Start ====== -->
     <footer class="ud-footer wow fadeInUp" data-wow-delay=".15s">
         <div class="ud-footer-widgets">
@@ -1003,7 +1068,7 @@
                     <!-- Sütun 1: Logo + Açıklama -->
                     <div class="col-xl-3 col-lg-3 col-md-6 ud-footer-col">
                         <a href="index.html" class="ud-footer-logo">
-                            <img src="assets/images/logo/CompanyLogo.png" alt="OnlyCampus" loading="lazy" data-site="brand-logo" />
+                            <img src="assets/images/logo/CompanyLogo.webp" alt="OnlyCampus" loading="lazy" width="53" height="60" data-site="brand-logo" />
                         </a>
                         <div class="ud-widget">
                             <p class="ud-widget-desc" data-site="footer-desc">OnlyCampus brings courses, planning, and community into one student-first platform.</p>
@@ -1011,7 +1076,7 @@
                     </div>
                     <!-- Sütun 2: Follow Us + İkonlar -->
                     <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 ud-footer-col">
-                        <h5 class="ud-widget-title" data-site="footer-social-title">Follow Us</h5>
+                        <h3 class="ud-widget-title" data-site="footer-social-title">Follow Us</h3>
                         <div class="ud-widget ud-widget--social">
                             <ul class="ud-widget-socials" data-site-list="footer-social-links">
                                 <li><a href="https://www.youtube.com/@sohbet_terapi_app" target="_blank" rel="noopener"><i class="lni lni-youtube"></i></a></li>
@@ -1023,7 +1088,7 @@
                     </div>
                     <!-- Sütun 3: Legal + Linkler -->
                     <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 ud-footer-col">
-                        <h5 class="ud-widget-title" data-site="footer-legal-title">Legal</h5>
+                        <h3 class="ud-widget-title" data-site="footer-legal-title">Legal</h3>
                         <div class="ud-widget">
                             <ul class="ud-widget-links" data-site-list="footer-legal-links">
                                 <li><a href="footer-pages/privacy-policy.html">Privacy Policy</a></li>
@@ -1036,7 +1101,7 @@
                     </div>
                     <!-- Sütun 4: Support + Metin -->
                     <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 ud-footer-col">
-                        <h5 class="ud-widget-title" data-site="footer-emergency-title">Support</h5>
+                        <h3 class="ud-widget-title" data-site="footer-emergency-title">Support</h3>
                         <div class="ud-widget">
                             <p data-site="footer-emergency-text">For urgent help, contact local services. OnlyCampus is not a crisis support provider.</p>
                         </div>
@@ -1061,7 +1126,7 @@
 
 
     <!-- ====== Back To Top Start ====== -->
-    <a href="javascript:void(0)" class="back-to-top">
+    <a href="#top" class="back-to-top" aria-label="Back to top">
       <i class="lni lni-chevron-up"> </i>
     </a>
     <!-- ====== Back To Top End ====== -->
@@ -1069,7 +1134,7 @@
     <!-- ====== All Javascript Files ====== -->
     <script src="assets/js/bootstrap.bundle.min.js" defer></script>
     <script src="assets/js/wow.min.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@8.4.7/swiper-bundle.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
     <script src="assets/js/sections.js" defer></script>
     <script src="assets/js/main.js" defer></script>
     <script>

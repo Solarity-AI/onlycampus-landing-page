@@ -259,8 +259,11 @@ function applyBrandStrip(brandStrip) {
   if (!container || !Array.isArray(brandStrip.logos)) return;
   container.innerHTML = brandStrip.logos
     .map(
-      (logo) =>
-        `<img src="${logo.src || ""}" alt="${logo.alt || "Brand"}" loading="lazy" />`
+      (logo) => {
+        const w = logo.width ? ` width="${logo.width}"` : '';
+        const h = logo.height ? ` height="${logo.height}"` : '';
+        return `<img src="${logo.src || ""}" alt="${logo.alt || "Brand"}" loading="lazy"${w}${h} />`;
+      }
     )
     .join("");
 }
