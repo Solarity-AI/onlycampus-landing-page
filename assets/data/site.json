@@ -1,7 +1,7 @@
 {
   "brand": {
     "name": "OnlyCampus",
-    "logo": "assets/images/logo/CompanyLogo.webp",
+    "logo": "assets/images/logo/CompanyLogo-200w.webp",
     "logoAlt": "OnlyCampus Logo"
   },
   "seo": {
@@ -62,7 +62,7 @@
     "headline": "Transform Your Campus Experience",
     "subhead": "The platform students rely on to manage courses, stay on schedule, and connect with campus life in one place.",
     "media": {
-      "image": "assets/images/hero/sohbetTerapiScreens.png",
+      "image": "assets/images/hero/sohbetTerapiScreens-800w.webp",
       "alt": "OnlyCampus dashboard preview"
     },
     "mediaCards": [
@@ -185,7 +185,7 @@
     ]
   },
   "appPreview": {
-    "mainImage": "assets/images/hero/sohbetTerapiScreens.webp",
+    "mainImage": "assets/images/hero/sohbetTerapiScreens-800w.webp",
     "mainAlt": "OnlyCampus app preview",
     "slides": [
       {

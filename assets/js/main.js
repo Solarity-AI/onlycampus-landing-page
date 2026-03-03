@@ -76,9 +76,9 @@
 
     // === logo change
     if (ud_header.classList.contains("sticky")) {
-      logo.src = "assets/images/logo/CompanyLogo.webp";
+      logo.src = "assets/images/logo/CompanyLogo-200w.webp";
     } else {
-      logo.src = "assets/images/logo/CompanyLogo.webp";
+      logo.src = "assets/images/logo/CompanyLogo-200w.webp";
     }
 
     // show or hide the back-top-top button
