@@ -19,7 +19,7 @@
     <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
     <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
 
-    <!-- Google Analytics is loaded on interaction/idle to keep initial render lighter -->
+    <!-- Google Analytics is loaded after user interaction to keep initial render lighter -->
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
@@ -39,17 +39,9 @@
           document.head.appendChild(s);
         }
 
-        ['pointerdown', 'keydown', 'scroll'].forEach(function(evt) {
+        ['pointerdown', 'keydown', 'touchstart'].forEach(function(evt) {
           window.addEventListener(evt, loadAnalytics, { once: true, passive: true });
         });
-
-        if ('requestIdleCallback' in window) {
-          requestIdleCallback(loadAnalytics, { timeout: 5000 });
-        } else {
-          window.addEventListener('load', function() {
-            setTimeout(loadAnalytics, 3000);
-          }, { once: true });
-        }
       })();
     </script>
     
