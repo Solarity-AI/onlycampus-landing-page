@@ -283,7 +283,7 @@ function applyAppPreview(appPreview) {
         <div class="swiper-slide">
           <img loading="lazy" src="${slide.src || ""}" alt="${
           slide.alt || "Preview"
-        }" class="popup-img" width="400" height="800" decoding="async" />
+        }" class="popup-img" width="1036" height="2016" decoding="async" />
         </div>
       `
       )
