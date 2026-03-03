@@ -7,12 +7,13 @@
   'use strict';
 
   // Language Management
-  let currentLanguage = localStorage.getItem('onlycampus-lang') || 'tr'; // Default to Turkish
+  let currentLanguage = localStorage.getItem('onlycampus-lang') || document.documentElement.lang || 'en';
 
   function setLanguage(lang) {
-    currentLanguage = lang;
-    localStorage.setItem('onlycampus-lang', lang);
-    document.documentElement.lang = lang;
+    const hasLanguage = typeof translations !== 'undefined' && translations[lang];
+    currentLanguage = hasLanguage ? lang : 'en';
+    localStorage.setItem('onlycampus-lang', currentLanguage);
+    document.documentElement.lang = currentLanguage;
     translatePage();
     updateLanguageSwitcher();
   }
@@ -23,7 +24,10 @@
       return;
     }
 
-    const t = translations[currentLanguage];
+    const t = translations[currentLanguage] || translations.en;
+    if (!t) {
+      return;
+    }
 
     // Helper function to get nested translation
     function getTranslation(path) {
@@ -73,9 +77,15 @@
   }
 
 
-  // Language switcher event listeners
   function initLanguageSwitcher() {
-    // Setup is handled by inline onclick and global toggleLanguage function
+    const switcher = document.getElementById('languageSwitcher');
+    if (!switcher) {
+      return;
+    }
+
+    switcher.addEventListener('click', function () {
+      toggleLanguage();
+    });
   }
 
   function updateLanguageSwitcher() {
@@ -91,15 +101,10 @@
     }
   }
 
-  // Toggle language function (exposed globally for inline onclick)
   function toggleLanguage() {
     const newLang = currentLanguage === 'tr' ? 'en' : 'tr';
     setLanguage(newLang);
-    updateLanguageSwitcher();
   }
-
-  // Expose toggle function globally for inline onclick
-  window.toggleLanguage = toggleLanguage;
 
   // Initialize on DOM ready
   if (document.readyState === 'loading') {
@@ -112,26 +117,7 @@
     setLanguage(currentLanguage);
   }
 
-  // Initialize WOW.js for animations
-  if (typeof WOW !== 'undefined') {
-    new WOW().init();
-  }
-
-  // Sticky Header
   const header = document.querySelector('.ud-header');
-  let lastScroll = 0;
-
-  window.addEventListener('scroll', function () {
-    const currentScroll = window.pageYOffset;
-
-    if (currentScroll > 100) {
-      header.classList.add('sticky');
-    } else {
-      header.classList.remove('sticky');
-    }
-
-    lastScroll = currentScroll;
-  });
 
   // Smooth Scrolling for Navigation Links
   const navLinks = document.querySelectorAll('.ud-menu-scroll');
@@ -145,7 +131,7 @@
         const targetSection = document.querySelector(targetId);
 
         if (targetSection) {
-          const headerHeight = header.offsetHeight;
+          const headerHeight = header ? header.offsetHeight : 0;
           const targetPosition = targetSection.offsetTop - headerHeight;
 
           window.scrollTo({
@@ -218,14 +204,6 @@
   const backToTop = document.querySelector('.back-to-top');
 
   if (backToTop) {
-    window.addEventListener('scroll', function () {
-      if (window.pageYOffset > 300) {
-        backToTop.style.display = 'flex';
-      } else {
-        backToTop.style.display = 'none';
-      }
-    });
-
     backToTop.addEventListener('click', function (e) {
       e.preventDefault();
       window.scrollTo({
@@ -258,7 +236,39 @@
     });
   }
 
-  window.addEventListener('scroll', setActiveNavLink);
+  function updateScrollState() {
+    const currentScroll = window.pageYOffset || document.documentElement.scrollTop || 0;
+
+    if (header) {
+      if (currentScroll > 100) {
+        header.classList.add('sticky');
+      } else {
+        header.classList.remove('sticky');
+      }
+    }
+
+    if (backToTop) {
+      backToTop.style.display = currentScroll > 300 ? 'flex' : 'none';
+    }
+
+    setActiveNavLink();
+  }
+
+  let isScrollTicking = false;
+  function onScroll() {
+    if (isScrollTicking) {
+      return;
+    }
+
+    isScrollTicking = true;
+    window.requestAnimationFrame(function () {
+      updateScrollState();
+      isScrollTicking = false;
+    });
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  updateScrollState();
 
   // Form Submission Handler
   const contactForm = document.querySelector('.ud-contact-form');
@@ -324,5 +334,4 @@
     });
   });
 
-  console.log('OnlyCampus landing page initialized');
 })();
