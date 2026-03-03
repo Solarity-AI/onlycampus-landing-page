@@ -1,25 +1,75 @@
 (function () {
   "use strict";
 
-  // ======= Sayfa yenilenince scroll konumunu koru (en altta yenileyince de aynı yerde kalsın)
+  var SWIPER_CSS_URL =
+    "https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css";
+  var SWIPER_JS_URL =
+    "https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js";
+  var swiperAssetPromise = null;
+
+  function loadSwiperAssets() {
+    if (swiperAssetPromise) {
+      return swiperAssetPromise;
+    }
+
+    swiperAssetPromise = new Promise(function (resolve, reject) {
+      var pending = 0;
+      var failed = false;
+
+      function done() {
+        pending -= 1;
+        if (pending <= 0 && !failed) {
+          resolve();
+        }
+      }
+
+      function fail() {
+        failed = true;
+        reject(new Error("Swiper assets failed to load."));
+      }
+
+      var hasSwiperCss = document.querySelector('link[data-swiper-css="1"]');
+      if (!hasSwiperCss) {
+        pending += 1;
+        var css = document.createElement("link");
+        css.rel = "stylesheet";
+        css.href = SWIPER_CSS_URL;
+        css.setAttribute("data-swiper-css", "1");
+        css.onload = done;
+        css.onerror = fail;
+        document.head.appendChild(css);
+      }
+
+      if (!window.Swiper) {
+        pending += 1;
+        var script = document.createElement("script");
+        script.src = SWIPER_JS_URL;
+        script.defer = true;
+        script.onload = done;
+        script.onerror = fail;
+        document.head.appendChild(script);
+      }
+
+      if (pending === 0) {
+        resolve();
+      }
+    });
+
+    return swiperAssetPromise;
+  }
+
+  // Keep scroll position across refresh/navigation on this page.
   var scrollKey = "ud_page_scroll_" + (window.location.pathname || "index");
   if ("scrollRestoration" in history) {
     history.scrollRestoration = "manual";
   }
+
   function saveScroll() {
     try {
       sessionStorage.setItem(scrollKey, String(window.scrollY || 0));
     } catch (e) {}
   }
-  window.addEventListener("beforeunload", saveScroll);
-  window.addEventListener("pagehide", saveScroll);
-  (function () {
-    var scrollSaveTimer;
-    window.addEventListener("scroll", function () {
-      clearTimeout(scrollSaveTimer);
-      scrollSaveTimer = setTimeout(saveScroll, 150);
-    }, { passive: true });
-  })();
+
   function restoreScroll() {
     try {
       var saved = sessionStorage.getItem(scrollKey);
@@ -33,6 +83,7 @@
     } catch (e) {}
     return null;
   }
+
   function runRestoreUntilStable() {
     var targetY = restoreScroll();
     if (targetY === null) return;
@@ -42,12 +93,27 @@
       if (window.scrollY !== targetY) {
         window.scrollTo(0, targetY);
       }
-      attempts++;
+      attempts += 1;
       if (attempts >= maxAttempts) {
         clearInterval(interval);
       }
     }, 50);
   }
+
+  window.addEventListener("beforeunload", saveScroll);
+  window.addEventListener("pagehide", saveScroll);
+  (function () {
+    var scrollSaveTimer;
+    window.addEventListener(
+      "scroll",
+      function () {
+        clearTimeout(scrollSaveTimer);
+        scrollSaveTimer = setTimeout(saveScroll, 150);
+      },
+      { passive: true }
+    );
+  })();
+
   window.addEventListener("load", function () {
     restoreScroll();
     requestAnimationFrame(function () {
@@ -58,272 +124,288 @@
     setTimeout(restoreScroll, 600);
     setTimeout(restoreScroll, 1000);
   });
-  window.addEventListener("pageshow", function (e) {
-    if (e.persisted) restoreScroll();
+  window.addEventListener("pageshow", function (event) {
+    if (event.persisted) restoreScroll();
   });
 
-  // ======= Sticky
-  window.onscroll = function () {
-    const ud_header = document.querySelector(".ud-header");
-    const sticky = ud_header.offsetTop;
-    const logo = document.querySelector(".navbar-brand img");
+  var udHeader = document.querySelector(".ud-header");
+  var backToTop = document.querySelector(".back-to-top");
+  var stickyOffset = udHeader ? udHeader.offsetTop : 0;
+  var stickyTicking = false;
 
-    if (window.pageYOffset > sticky) {
-      ud_header.classList.add("sticky");
-    } else {
-      ud_header.classList.remove("sticky");
+  function updateStickyState() {
+    var scrollPos =
+      window.pageYOffset ||
+      document.documentElement.scrollTop ||
+      document.body.scrollTop ||
+      0;
+
+    if (udHeader) {
+      udHeader.classList.toggle("sticky", scrollPos > stickyOffset);
     }
 
-    // === logo change
-    if (ud_header.classList.contains("sticky")) {
-      logo.src = "assets/images/logo/CompanyLogo-106w.webp";
-    } else {
-      logo.src = "assets/images/logo/CompanyLogo-106w.webp";
+    if (backToTop) {
+      backToTop.style.display = scrollPos > 50 ? "flex" : "none";
     }
+  }
 
-    // show or hide the back-top-top button
-    const backToTop = document.querySelector(".back-to-top");
-    if (
-      document.body.scrollTop > 50 ||
-      document.documentElement.scrollTop > 50
-    ) {
-      backToTop.style.display = "flex";
-    } else {
-      backToTop.style.display = "none";
-    }
-  };
-
-  //===== close navbar-collapse when a  clicked
-  let navbarToggler = document.querySelector(".navbar-toggler");
-  const navbarCollapse = document.querySelector(".navbar-collapse");
-
-  document.querySelectorAll(".ud-menu-scroll").forEach((e) =>
-    e.addEventListener("click", () => {
-      navbarToggler.classList.remove("active");
-      navbarCollapse.classList.remove("show");
-    })
+  window.addEventListener(
+    "scroll",
+    function () {
+      if (stickyTicking) return;
+      stickyTicking = true;
+      requestAnimationFrame(function () {
+        updateStickyState();
+        stickyTicking = false;
+      });
+    },
+    { passive: true }
   );
-  navbarToggler.addEventListener("click", function () {
-    navbarToggler.classList.toggle("active");
-    navbarCollapse.classList.toggle("show");
-  });
+  updateStickyState();
 
-  // ===== submenu
-  const submenuButton = document.querySelectorAll(".nav-item-has-children");
-  submenuButton.forEach((elem) => {
-    elem.querySelector("a").addEventListener("click", () => {
-      elem.querySelector(".ud-submenu").classList.toggle("show");
+  var navbarToggler = document.querySelector(".navbar-toggler");
+  var navbarCollapse = document.querySelector(".navbar-collapse");
+  if (navbarToggler && navbarCollapse) {
+    document.querySelectorAll(".ud-menu-scroll").forEach(function (link) {
+      link.addEventListener("click", function () {
+        navbarToggler.classList.remove("active");
+        navbarCollapse.classList.remove("show");
+      });
+    });
+    navbarToggler.addEventListener("click", function () {
+      navbarToggler.classList.toggle("active");
+      navbarCollapse.classList.toggle("show");
+    });
+  }
+
+  var submenuButtons = document.querySelectorAll(".nav-item-has-children");
+  submenuButtons.forEach(function (item) {
+    var anchor = item.querySelector("a");
+    var submenu = item.querySelector(".ud-submenu");
+    if (!anchor || !submenu) return;
+    anchor.addEventListener("click", function () {
+      submenu.classList.toggle("show");
     });
   });
 
-  // ===== wow js
-  new WOW().init();
-
-  // ====== scroll top js
-  function scrollTo(element, to = 0, duration = 500) {
-    const start = element.scrollTop;
-    const change = to - start;
-    const increment = 20;
-    let currentTime = 0;
-
-    const animateScroll = () => {
-      currentTime += increment;
-
-      const val = Math.easeInOutQuad(currentTime, start, change, duration);
-
-      element.scrollTop = val;
-
-      if (currentTime < duration) {
-        setTimeout(animateScroll, increment);
-      }
-    };
-
-    animateScroll();
+  function easeInOutQuad(t, b, c, d) {
+    var x = t / (d / 2);
+    if (x < 1) return (c / 2) * x * x + b;
+    x -= 1;
+    return (-c / 2) * (x * (x - 2) - 1) + b;
   }
 
-  Math.easeInOutQuad = function (t, b, c, d) {
-    t /= d / 2;
-    if (t < 1) return (c / 2) * t * t + b;
-    t--;
-    return (-c / 2) * (t * (t - 2) - 1) + b;
-  };
+  function scrollToTop(duration) {
+    var start = document.documentElement.scrollTop || window.pageYOffset || 0;
+    var change = -start;
+    var startTime = null;
 
-  document.querySelector(".back-to-top").onclick = () => {
-    scrollTo(document.documentElement);
-  };
+    function animate(timestamp) {
+      if (!startTime) startTime = timestamp;
+      var elapsed = timestamp - startTime;
+      var next = easeInOutQuad(elapsed, start, change, duration);
+      window.scrollTo(0, next);
 
-// ====== Load Testimonials from JSON and init Swiper ======
-    async function loadTestimonials() {
-        try {
-            const res = await fetch("assets/data/testimonials.json");
-            const all = await res.json();
-
-            // Shuffle and select 10
-            const selected = all.sort(() => 0.5 - Math.random()).slice(0, 10);
-
-            const wrapper = document.querySelector("#testimonials .swiper-wrapper");
-            wrapper.innerHTML = "";
-
-            selected.forEach(t => {
-                const slide = document.createElement("div");
-                slide.className = "swiper-slide";
-                slide.innerHTML = `
-        <div class="ud-single-testimonial">
-          <div class="ud-testimonial-ratings">
-            <i class="lni lni-star-filled"></i>
-            <i class="lni lni-star-filled"></i>
-            <i class="lni lni-star-filled"></i>
-            <i class="lni lni-star-filled"></i>
-            <i class="lni lni-star-filled"></i>
-          </div>
-          <div class="ud-testimonial-content">
-            <p>“${t.text}”</p>
-          </div>
-          <div class="ud-testimonial-info">
-            <div class="ud-testimonial-image">
-              <img src="${t.image}" alt="${t.name}" loading="lazy" width="60" height="60" />
-            </div>
-            <div class="ud-testimonial-meta">
-              <h3>${t.name}</h3>
-              <p>${t.role}</p>
-            </div>
-          </div>
-        </div>`;
-                wrapper.appendChild(slide);
-            });
-
-            new Swiper(".ud-testimonials-swiper", {
-                loop: true,
-                // loopedSlides must be bigger than cart number of slides
-                loopedSlides:11,
-                speed: 4000,
-                autoplay: {
-                    delay: 0,
-                    disableOnInteraction: false,
-                    pauseOnMouseEnter: true,
-                },
-                slidesPerView: 1,
-                spaceBetween: 20,
-                grabCursor: true,
-                centeredSlides: false,
-                breakpoints: {
-                    768: { slidesPerView: 2, spaceBetween: 24 },
-                    1200: { slidesPerView: 3, spaceBetween: 30 },
-                },
-                pagination: false,
-                navigation: false,
-            });
-
-
-        } catch (err) {
-            console.error("Testimonials failed to load:", err);
-        }
+      if (elapsed < duration) {
+        requestAnimationFrame(animate);
+      } else {
+        window.scrollTo(0, 0);
+      }
     }
 
-    loadTestimonials();
-})();
+    requestAnimationFrame(animate);
+  }
 
-// Hero animation removed for better performance - using CSS-only animation instead
+  if (backToTop) {
+    backToTop.addEventListener("click", function (event) {
+      event.preventDefault();
+      scrollToTop(500);
+    });
+  }
 
-// === App Preview Popup with Swiper ===
-document.addEventListener("DOMContentLoaded", () => {
-    const trigger = document.getElementById("preview-trigger");
-    const popup = document.getElementById("screen-popup");
-    const closeBtn = document.getElementById("close-popup");
-    let swiperInstance = null;
+  var testimonialsBootstrapped = false;
+  async function loadTestimonials() {
+    if (testimonialsBootstrapped) return;
+    testimonialsBootstrapped = true;
 
-    if (!trigger || !popup || !closeBtn) return;
+    try {
+      await loadSwiperAssets();
 
-    trigger.addEventListener("click", () => {
+      var res = await fetch("assets/data/testimonials.json");
+      if (!res.ok) {
+        throw new Error("Testimonials fetch failed: " + res.status);
+      }
+      var all = await res.json();
+      var selected = all.sort(function () {
+        return 0.5 - Math.random();
+      }).slice(0, 10);
+
+      var wrapper = document.querySelector("#testimonials .swiper-wrapper");
+      if (!wrapper) return;
+      wrapper.innerHTML = "";
+
+      selected.forEach(function (item) {
+        var slide = document.createElement("div");
+        slide.className = "swiper-slide";
+        slide.innerHTML =
+          '<div class="ud-single-testimonial">' +
+          '<div class="ud-testimonial-ratings">' +
+          '<i class="lni lni-star-filled"></i><i class="lni lni-star-filled"></i>' +
+          '<i class="lni lni-star-filled"></i><i class="lni lni-star-filled"></i>' +
+          '<i class="lni lni-star-filled"></i></div>' +
+          '<div class="ud-testimonial-content"><p>\u201c' +
+          item.text +
+          "\u201d</p></div>" +
+          '<div class="ud-testimonial-info">' +
+          '<div class="ud-testimonial-image">' +
+          '<img src="' +
+          item.image +
+          '" alt="' +
+          item.name +
+          '" loading="lazy" width="60" height="60" />' +
+          "</div>" +
+          '<div class="ud-testimonial-meta"><h3>' +
+          item.name +
+          "</h3><p>" +
+          item.role +
+          "</p></div></div></div>";
+        wrapper.appendChild(slide);
+      });
+
+      new Swiper(".ud-testimonials-swiper", {
+        loop: true,
+        loopedSlides: 11,
+        speed: 4000,
+        autoplay: {
+          delay: 0,
+          disableOnInteraction: false,
+          pauseOnMouseEnter: true,
+        },
+        slidesPerView: 1,
+        spaceBetween: 20,
+        grabCursor: true,
+        centeredSlides: false,
+        breakpoints: {
+          768: { slidesPerView: 2, spaceBetween: 24 },
+          1200: { slidesPerView: 3, spaceBetween: 30 },
+        },
+        pagination: false,
+        navigation: false,
+      });
+    } catch (err) {
+      console.error("Testimonials failed to load:", err);
+    }
+  }
+
+  var testimonialsSection = document.getElementById("testimonials");
+  if (testimonialsSection) {
+    if ("IntersectionObserver" in window) {
+      var observer = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              loadTestimonials();
+              observer.disconnect();
+            }
+          });
+        },
+        { rootMargin: "250px" }
+      );
+      observer.observe(testimonialsSection);
+    } else {
+      loadTestimonials();
+    }
+  }
+
+  var popupSwiper = null;
+  document.addEventListener("DOMContentLoaded", function () {
+    var trigger = document.getElementById("preview-trigger");
+    var popup = document.getElementById("screen-popup");
+    var closeBtn = document.getElementById("close-popup");
+
+    if (trigger && popup && closeBtn) {
+      trigger.addEventListener("click", function () {
         popup.style.display = "flex";
         document.body.style.overflow = "hidden";
 
-        // Swiper yalnızca bir kez oluşturulsun
-        if (!swiperInstance) {
-            swiperInstance = new Swiper(".popup-swiper", {
+        if (!popupSwiper) {
+          loadSwiperAssets()
+            .then(function () {
+              if (popupSwiper) return;
+              popupSwiper = new Swiper(".popup-swiper", {
                 loop: true,
                 slidesPerView: 1,
-                centeredSlides: true,   // centeralize image
-                spaceBetween: 0,        // prevent space bias
+                centeredSlides: true,
+                spaceBetween: 0,
                 speed: 400,
                 watchSlidesProgress: true,
                 navigation: {
-                    nextEl: ".swiper-button-next",
-                    prevEl: ".swiper-button-prev",
+                  nextEl: ".swiper-button-next",
+                  prevEl: ".swiper-button-prev",
                 },
                 pagination: {
-                    el: ".swiper-pagination",
-                    clickable: true,
+                  el: ".swiper-pagination",
+                  clickable: true,
                 },
+              });
+            })
+            .catch(function (err) {
+              console.error("Popup Swiper failed to load:", err);
             });
         }
-    });
+      });
 
-    closeBtn.addEventListener("click", () => {
+      closeBtn.addEventListener("click", function () {
         popup.style.display = "none";
         document.body.style.overflow = "auto";
-    });
+      });
 
-    popup.addEventListener("click", (e) => {
-        if (e.target === popup) {
-            popup.style.display = "none";
-            document.body.style.overflow = "auto";
+      popup.addEventListener("click", function (event) {
+        if (event.target === popup) {
+          popup.style.display = "none";
+          document.body.style.overflow = "auto";
         }
-    });
-});
-
-// === Lazy Load for Promo Video ===
-document.addEventListener("DOMContentLoaded", () => {
-    const video = document.getElementById("promoVideo");
-    if (!video) return; // Video elementi yoksa çık
-
-    if ("IntersectionObserver" in window) {
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    video.load();
-                    observer.unobserve(video);
-                }
-            });
-        });
-        observer.observe(video);
-    } else {
-        video.load();
+      });
     }
-});
 
-// === TikTok scroll fix ===
-// Tiktok embed iframe scroll problem fix we must do that else tiktok will see like scrolling bar
-window.addEventListener("load", () => {
-    // 1. Embed script'in yüklenmesini bekle
-    const fixTikTokScroll = () => {
-        const tiktokFrame = document.querySelector(".tiktok-embed iframe");
-        if (tiktokFrame) {
-            tiktokFrame.setAttribute("scrolling", "no"); // ✅ Scroll tamamen kapatılır
-            tiktokFrame.style.overflow = "hidden";
-            tiktokFrame.style.height = "100%";
-            tiktokFrame.style.maxHeight = "100%";
-            tiktokFrame.style.border = "none";
-        } else {
-            // If not iframe exist yet
-            setTimeout(fixTikTokScroll, 500);
-        }
-    };
+    var video = document.getElementById("promoVideo");
+    if (video) {
+      if ("IntersectionObserver" in window) {
+        var videoObserver = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              video.load();
+              videoObserver.disconnect();
+            }
+          });
+        });
+        videoObserver.observe(video);
+      } else {
+        video.load();
+      }
+    }
+  });
 
-    // Try Again
+  window.addEventListener("load", function () {
+    function fixTikTokScroll() {
+      var tiktokFrame = document.querySelector(".tiktok-embed iframe");
+      if (tiktokFrame) {
+        tiktokFrame.setAttribute("scrolling", "no");
+        tiktokFrame.style.overflow = "hidden";
+        tiktokFrame.style.height = "100%";
+        tiktokFrame.style.maxHeight = "100%";
+        tiktokFrame.style.border = "none";
+      }
+    }
+
     setTimeout(fixTikTokScroll, 1200);
     setTimeout(fixTikTokScroll, 2500);
     setTimeout(fixTikTokScroll, 4000);
-});
 
-// Instagram loading problem solver
-window.addEventListener("load", () => {
-    // Render it
     if (window.instgrm && window.instgrm.Embeds) {
-        setTimeout(() => {
-            window.instgrm.Embeds.process();
-        }, 1000);
+      setTimeout(function () {
+        window.instgrm.Embeds.process();
+      }, 1000);
     }
-});
-
-
+  });
+})();
