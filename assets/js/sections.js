@@ -1,6 +1,13 @@
 document.addEventListener("DOMContentLoaded", () => {
   bindLanguageToggle();
-  fetch("assets/data/site.json", { cache: "no-store" })
+  // Use inlined data (window.__SITE_DATA__) when available to apply DOM updates
+  // synchronously before first paint, eliminating CLS caused by async fetch.
+  if (window.__SITE_DATA__) {
+    applySiteData(window.__SITE_DATA__);
+    return;
+  }
+  // Fallback: fetch from disk (e.g. when __SITE_DATA__ is not yet inlined).
+  fetch("assets/data/site.json")
     .then((res) => {
       if (!res.ok) {
         throw new Error(`Site data load failed: ${res.status}`);
