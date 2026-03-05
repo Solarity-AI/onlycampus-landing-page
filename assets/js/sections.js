@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Use inlined data (window.__SITE_DATA__) when available to apply DOM updates
   // synchronously before first paint, eliminating CLS caused by async fetch.
   if (window.__SITE_DATA__) {
-    applySiteData(window.__SITE_DATA__);
+    applySiteData(window.__SITE_DATA__, true);
     return;
   }
   // Fallback: fetch from disk (e.g. when __SITE_DATA__ is not yet inlined).
@@ -22,15 +22,24 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-function applySiteData(data) {
+// When preloaded=true (data came from window.__SITE_DATA__), static HTML is
+// already correctly populated so innerHTML replacements are skipped to avoid
+// CLS from DOM changes after incremental renders.
+function setList(container, html, preloaded) {
+  if (!container) return;
+  if (preloaded && container.children.length > 0) return;
+  container.innerHTML = html;
+}
+
+function applySiteData(data, preloaded) {
   applySeo(data.seo || {}, data.brand || {});
   applyBrand(data.brand || {});
-  applyNav(data.nav || []);
-  applyHero(data.hero || {});
-  applyFeatures(data.features || {});
-  applyStats(data.stats || {});
-  applyBrandStrip(data.brandStrip || {});
-  applyAppPreview(data.appPreview || {});
+  applyNav(data.nav || [], preloaded);
+  applyHero(data.hero || {}, preloaded);
+  applyFeatures(data.features || {}, preloaded);
+  applyStats(data.stats || {}, preloaded);
+  applyBrandStrip(data.brandStrip || {}, preloaded);
+  applyAppPreview(data.appPreview || {}, preloaded);
   applySocialGallery(data.socialGallery || {});
   applyTestimonials(data.testimonials || {});
   applyPricing(data.pricing || {});
@@ -81,20 +90,20 @@ function applyBrand(brand) {
   setText('[data-site="brand-name"]', brand.name);
 }
 
-function applyNav(navItems) {
+function applyNav(navItems, preloaded) {
   const nav = document.getElementById("nav");
   if (!nav || !Array.isArray(navItems) || navItems.length === 0) return;
-  nav.innerHTML = navItems
+  setList(nav, navItems
     .map((item) => {
       const label = item.label || "";
       const href = item.href || "#";
       return `<li class="nav-item"><a class="ud-menu-scroll" href="${href}">${label}</a></li>`;
     })
-    .join("");
+    .join(""), preloaded);
   bindNavHandlers();
 }
 
-function applyHero(hero) {
+function applyHero(hero, preloaded) {
   setText('[data-site="hero-kicker"]', hero.kicker);
   setText('[data-site="hero-title"]', hero.headline);
   setText('[data-site="hero-desc"]', hero.subhead);
@@ -107,7 +116,7 @@ function applyHero(hero) {
     const badges = Array.isArray(hero.badges) ? hero.badges : [];
     const list = actions.length > 0 ? actions : badges;
 
-    actionsContainer.innerHTML = list
+    setList(actionsContainer, list
       .map((action) => {
         if (action.type === "badge") {
           return renderBadgeAction(action);
@@ -121,14 +130,14 @@ function applyHero(hero) {
         }
         return renderTextAction(action);
       })
-      .join("");
+      .join(""), preloaded);
   }
 
   const powerwords = document.querySelector(
     '[data-site-list="hero-powerwords"]'
   );
   if (powerwords && Array.isArray(hero.powerwords)) {
-    powerwords.innerHTML = hero.powerwords
+    setList(powerwords, hero.powerwords
       .map((word, index) => {
         const item = `<span class="pw-item pw-${index + 1}">${word}</span>`;
         const separator =
@@ -137,7 +146,7 @@ function applyHero(hero) {
             : "";
         return `${item}${separator}`;
       })
-      .join("");
+      .join(""), preloaded);
   }
 
   const heroMedia = document.querySelector('[data-site="hero-media-image"]');
@@ -154,7 +163,7 @@ function applyHero(hero) {
     '[data-site-list="hero-media-cards"]'
   );
   if (mediaCards && Array.isArray(hero.mediaCards)) {
-    mediaCards.innerHTML = hero.mediaCards
+    setList(mediaCards, hero.mediaCards
       .map(
         (card) => `
         <div class="ud-hero-card">
@@ -163,7 +172,7 @@ function applyHero(hero) {
         </div>
       `
       )
-      .join("");
+      .join(""), preloaded);
   }
 }
 
@@ -206,14 +215,14 @@ function bindNavHandlers() {
   });
 }
 
-function applyFeatures(features) {
+function applyFeatures(features, preloaded) {
   setText('[data-site="features-title"]', features.title);
   setText('[data-site="features-desc"]', features.description);
 
   const container = document.querySelector('[data-site-list="features"]');
   const items = Array.isArray(features.items) ? features.items : [];
   if (!container || items.length === 0) return;
-  container.innerHTML = items
+  setList(container, items
     .map((feature) => {
       return `
         <div class="col-xl-4 col-lg-4 col-sm-6">
@@ -229,10 +238,10 @@ function applyFeatures(features) {
         </div>
       `;
     })
-    .join("");
+    .join(""), preloaded);
 }
 
-function applyStats(stats) {
+function applyStats(stats, preloaded) {
   setText('[data-site="stats-title"]', stats.title);
   setText('[data-site="stats-desc"]', stats.description);
   setText('[data-site="stats-note"]', stats.note);
@@ -240,7 +249,7 @@ function applyStats(stats) {
   if (!container || !Array.isArray(stats.items) || stats.items.length === 0) {
     return;
   }
-  container.innerHTML = stats.items
+  setList(container, stats.items
     .map((item) => {
       return `
         <div class="col-lg-4 col-md-6 col-sm-10">
@@ -251,14 +260,14 @@ function applyStats(stats) {
         </div>
       `;
     })
-    .join("");
+    .join(""), preloaded);
 }
 
-function applyBrandStrip(brandStrip) {
+function applyBrandStrip(brandStrip, preloaded) {
   setText('[data-site="brand-strip-label"]', brandStrip.label);
   const container = document.querySelector('[data-site-list="brand-logos"]');
   if (!container || !Array.isArray(brandStrip.logos)) return;
-  container.innerHTML = brandStrip.logos
+  setList(container, brandStrip.logos
     .map(
       (logo) => {
         const w = logo.width ? ` width="${logo.width}"` : '';
@@ -266,10 +275,10 @@ function applyBrandStrip(brandStrip) {
         return `<img src="${logo.src || ""}" alt="${logo.alt || "Brand"}" loading="lazy"${w}${h} />`;
       }
     )
-    .join("");
+    .join(""), preloaded);
 }
 
-function applyAppPreview(appPreview) {
+function applyAppPreview(appPreview, preloaded) {
   const preview = document.querySelector('[data-site="app-preview-image"]');
   if (preview) {
     if (appPreview.mainImage) preview.setAttribute("src", appPreview.mainImage);
@@ -284,7 +293,7 @@ function applyAppPreview(appPreview) {
     Array.isArray(appPreview.slides) &&
     appPreview.slides.length > 0
   ) {
-    slideContainer.innerHTML = appPreview.slides
+    setList(slideContainer, appPreview.slides
       .map(
         (slide) => `
         <div class="swiper-slide">
@@ -294,7 +303,7 @@ function applyAppPreview(appPreview) {
         </div>
       `
       )
-      .join("");
+      .join(""), preloaded);
   }
 }
 
