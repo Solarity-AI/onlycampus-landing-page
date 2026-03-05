@@ -81,10 +81,10 @@ function applyBrand(brand) {
   const logos = document.querySelectorAll('[data-site="brand-logo"]');
   logos.forEach((logo) => {
     if (brand.logo) {
-      logo.setAttribute("src", brand.logo);
+      setNodeAttr(logo, "src", brand.logo);
     }
     if (brand.logoAlt) {
-      logo.setAttribute("alt", brand.logoAlt);
+      setNodeAttr(logo, "alt", brand.logoAlt);
     }
   });
   setText('[data-site="brand-name"]', brand.name);
@@ -152,10 +152,10 @@ function applyHero(hero, preloaded) {
   const heroMedia = document.querySelector('[data-site="hero-media-image"]');
   if (heroMedia && hero.media) {
     if (hero.media.image) {
-      heroMedia.setAttribute("src", hero.media.image);
+      setNodeAttr(heroMedia, "src", hero.media.image);
     }
     if (hero.media.alt) {
-      heroMedia.setAttribute("alt", hero.media.alt);
+      setNodeAttr(heroMedia, "alt", hero.media.alt);
     }
   }
 
@@ -602,10 +602,13 @@ function resolveSocialLabel(link) {
 }
 
 function setText(selector, value) {
-  if (!value) return;
+  if (value === undefined || value === null) return;
   const el = typeof selector === "string" ? document.querySelector(selector) : selector;
   if (el) {
-    el.textContent = value;
+    const next = String(value);
+    const current = el.textContent || "";
+    if (normalizeText(current) === normalizeText(next)) return;
+    el.textContent = next;
   }
 }
 
@@ -621,7 +624,7 @@ function setAttr(selector, attr, value) {
   if (!value) return;
   const el = document.querySelector(selector);
   if (el) {
-    el.setAttribute(attr, value);
+    setNodeAttr(el, attr, value);
   }
 }
 
@@ -629,6 +632,18 @@ function setMeta(selector, value) {
   if (!value) return;
   const el = document.querySelector(selector);
   if (el) {
+    if (el.getAttribute("content") === value) return;
     el.setAttribute("content", value);
   }
+}
+
+function setNodeAttr(el, attr, value) {
+  if (!el || value === undefined || value === null) return;
+  const next = String(value);
+  if (el.getAttribute(attr) === next) return;
+  el.setAttribute(attr, next);
+}
+
+function normalizeText(text) {
+  return String(text).replace(/\s+/g, " ").trim();
 }
