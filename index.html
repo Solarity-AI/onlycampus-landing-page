@@ -222,7 +222,7 @@ p{font-size:16px;font-weight:400;line-height:26px;margin:0}
 .ud-header:not(.sticky) .ud-lang-btn.is-active{background:rgba(255,255,255,.95);color:#0f172a}
 .ud-hero{background:linear-gradient(135deg,#0f3a75 0%,#1c57b7 45%,#3b82f6 100%)!important;padding:200px 0 140px!important;position:relative;overflow:hidden}
 .ud-hero::before{content:"";position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(circle at 20% 50%,rgba(59,130,246,.2)0,transparent 50%),radial-gradient(circle at 80% 80%,rgba(14,116,144,.2)0,transparent 50%);pointer-events:none}
-.ud-hero-content{position:relative;z-index:1}
+.ud-hero-content{max-width:780px;margin:auto;margin-bottom:30px;position:relative;z-index:1}
 .ud-hero-kicker{display:inline-block;font-size:.95rem;font-weight:600;color:#dbeafe;letter-spacing:.04em;text-transform:uppercase;margin-bottom:12px}
 .ud-hero-content .ud-hero-title{color:#fff!important;font-weight:700!important;font-size:3.2rem!important;line-height:1.2!important;letter-spacing:-.02em!important;margin-bottom:1.5rem!important;text-align:left;max-width:560px;text-shadow:0 2px 20px rgba(0,0,0,.3)}
 .ud-hero-content .ud-hero-desc{color:rgba(255,255,255,.95)!important;font-size:1.15rem!important;line-height:1.7!important;font-weight:400!important;max-width:520px;margin:0 0 1.5rem;opacity:1!important}
@@ -240,6 +240,7 @@ p{font-size:16px;font-weight:400;line-height:26px;margin:0}
 .ud-hero-card-label{font-size:.75rem;text-transform:uppercase;letter-spacing:.08em;color:#64748b}
 .ud-hero-card-value{font-size:1.3rem;color:#0f172a;font-weight:700}
 .ud-hero-powerwords{position:relative;width:100vw;left:50%;right:50%;margin-left:-50vw;margin-right:-50vw;margin-top:3rem;padding:20px 0;display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:18px;text-align:center;font-size:1.1rem;font-weight:500;color:rgba(255,255,255,.9)!important;background:rgba(255,255,255,.1);border-top:1px solid rgba(255,255,255,.2);border-bottom:1px solid rgba(255,255,255,.2)}
+.ud-hero-powerwords{letter-spacing:.5px}
 .ud-hero-powerwords .pw-item{color:rgba(255,255,255,.95)!important}
 .ud-hero-powerwords .pw-separator{color:rgba(255,255,255,.6)!important}
 .ud-brand-strip-logos img{height:28px;width:auto;display:inline-block}
@@ -269,6 +270,7 @@ p{font-size:16px;font-weight:400;line-height:26px;margin:0}
   .ud-hero-card{width:100%;min-width:0;max-width:100%;padding:12px 14px}
 }
 @media (max-width:575px){.ud-header .navbar-brand img{height:60px!important;width:60px!important;max-width:60px!important}}
+@media (max-width:425px){.ud-hero-media .ud-hero-media-cards[data-site-list=hero-media-cards]{position:static!important;display:flex!important;flex-direction:column!important;align-items:flex-start!important;justify-content:flex-start!important;width:100%!important;padding-left:0!important}.ud-hero-media .ud-hero-media-cards[data-site-list=hero-media-cards] .ud-hero-card{position:static!important;width:100%!important;max-width:100%!important;min-width:0!important;align-self:flex-start!important;margin-left:-10px!important}}
 @media (max-width:360px){.ud-hero-content .ud-hero-title{font-size:1.75rem!important}.ud-hero-content .ud-hero-desc{font-size:.95rem!important}}
 /* === Utility classes (prevents shift when bootstrap-lite.css loads) === */
 .text-center{text-align:center}
