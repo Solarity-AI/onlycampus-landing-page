@@ -337,13 +337,62 @@
   }
 
   var popupSwiper = null;
+  function hydratePopupImages(root) {
+    if (!root) return;
+    root.querySelectorAll("img.popup-img[data-src]").forEach(function (img) {
+      var src = img.getAttribute("data-src");
+      if (!src) return;
+      if (img.getAttribute("src") !== src) {
+        img.setAttribute("src", src);
+      }
+      img.removeAttribute("data-src");
+    });
+  }
+
+  function syncFaqButtons(root) {
+    root.querySelectorAll(".ud-faq-btn[data-bs-target]").forEach(function (btn) {
+      var targetSelector = btn.getAttribute("data-bs-target");
+      if (!targetSelector) return;
+      var panel = document.querySelector(targetSelector);
+      if (!panel) return;
+      var isOpen = panel.classList.contains("show");
+      btn.classList.toggle("collapsed", !isOpen);
+      btn.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    });
+  }
+
+  function bindFaqToggle() {
+    if (document.documentElement.hasAttribute("data-faq-toggle-bound")) return;
+    document.documentElement.setAttribute("data-faq-toggle-bound", "1");
+
+    document.addEventListener("click", function (event) {
+      var btn = event.target.closest(".ud-faq-btn[data-bs-target]");
+      if (!btn) return;
+
+      var targetSelector = btn.getAttribute("data-bs-target");
+      if (!targetSelector) return;
+
+      var panel = document.querySelector(targetSelector);
+      if (!panel) return;
+
+      event.preventDefault();
+      var willOpen = !panel.classList.contains("show");
+      panel.classList.toggle("show", willOpen);
+      btn.classList.toggle("collapsed", !willOpen);
+      btn.setAttribute("aria-expanded", willOpen ? "true" : "false");
+    });
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     var trigger = document.getElementById("preview-trigger");
     var popup = document.getElementById("screen-popup");
     var closeBtn = document.getElementById("close-popup");
+    bindFaqToggle();
+    syncFaqButtons(document);
 
     if (trigger && popup && closeBtn) {
       trigger.addEventListener("click", function () {
+        hydratePopupImages(popup);
         popup.style.display = "flex";
         document.body.style.overflow = "hidden";
 

@@ -297,7 +297,7 @@ function applyAppPreview(appPreview, preloaded) {
       .map(
         (slide) => `
         <div class="swiper-slide">
-          <img loading="lazy" src="${slide.src || ""}" alt="${
+          <img loading="lazy" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="${slide.src || ""}" alt="${
           slide.alt || "Preview"
         }" class="popup-img" width="1036" height="2016" decoding="async" />
         </div>
