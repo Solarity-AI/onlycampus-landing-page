@@ -3,7 +3,7 @@ steps:
   - name: build-image
     image: plugins/docker
     settings:
-      repo: ghcr.io/solarity-ai/static-landing
+      repo: ghcr.io/solarity-ai/static-onlycampus
       registry: ghcr.io
       username:
         from_secret: ghcr_username
@@ -23,8 +23,8 @@ steps:
       - mkdir -p ~/.kube
       - echo "$KUBECONFIG_DATA" > ~/.kube/config
       - chmod 600 ~/.kube/config
-      - kubectl set image deployment/static-landing nginx=ghcr.io/solarity-ai/static-landing:${CI_COMMIT_SHA:0:7} -n production
-      - kubectl rollout status deployment/static-landing -n production --timeout=120s
+      - kubectl set image deployment/static-onlycampus nginx=ghcr.io/solarity-ai/static-onlycampus:${CI_COMMIT_SHA:0:7} -n production
+      - kubectl rollout status deployment/static-onlycampus -n production --timeout=120s
     environment:
       KUBECONFIG_DATA:
         from_secret: kubeconfig
