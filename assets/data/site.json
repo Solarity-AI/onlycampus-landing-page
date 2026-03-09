@@ -12,11 +12,11 @@
     "ogTitle": "OnlyCampus | Transform Your Campus Experience",
     "ogDescription": "A modern platform that brings courses, planning, and community together for better outcomes.",
     "ogImage": "assets/images/hero/sohbetTerapiScreens.png",
-    "ogUrl": "https://onlycampus.example.com/",
+    "ogUrl": "https://sohbetterapi.solarityai.com/",
     "twitterTitle": "OnlyCampus | Campus Success Made Simple",
     "twitterDescription": "Plan smarter, learn better, and stay connected with OnlyCampus.",
     "twitterImage": "assets/images/hero/sohbetTerapiScreens.png",
-    "canonical": "https://onlycampus.example.com/",
+    "canonical": "https://sohbetterapi.solarityai.com/",
     "themeColor": "#3b82f6"
   },
   "nav": [
@@ -324,8 +324,8 @@
     ],
     "form": {
       "action": "https://formsubmit.co/hello@onlycampus.ai",
-      "next": "https://onlycampus.example.com/thanks.html",
-      "error": "https://onlycampus.example.com/error.html",
+      "next": "https://sohbetterapi.solarityai.com/form-pages/thanks.html",
+      "error": "https://sohbetterapi.solarityai.com/form-pages/error.html",
       "subject": "New message - OnlyCampus",
       "submitLabel": "Send Message"
     }

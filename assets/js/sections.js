@@ -22,6 +22,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
+const PLACEHOLDER_SITE_ORIGIN = "https://onlycampus.example.com";
+const CANONICAL_SITE_ORIGIN = "https://sohbetterapi.solarityai.com";
+
 // When preloaded=true (data came from window.__SITE_DATA__), static HTML is
 // already correctly populated so innerHTML replacements are skipped to avoid
 // CLS from DOM changes after incremental renders.
@@ -50,29 +53,31 @@ function applySiteData(data, preloaded) {
 }
 
 function applySeo(seo, brand) {
-  if (seo.title) {
-    document.title = seo.title;
+  const normalizedSeo = normalizeSeo(seo);
+
+  if (normalizedSeo.title) {
+    document.title = normalizedSeo.title;
   }
 
-  setMeta('meta[name="title"]', seo.title);
-  setMeta('meta[name="description"]', seo.description);
-  setMeta('meta[name="keywords"]', seo.keywords);
-  setMeta('meta[name="author"]', seo.author || brand.name);
-  setMeta('meta[property="og:title"]', seo.ogTitle || seo.title);
-  setMeta('meta[property="og:description"]', seo.ogDescription || seo.description);
-  setMeta('meta[property="og:image"]', seo.ogImage);
-  setMeta('meta[property="og:url"]', seo.ogUrl || seo.canonical);
-  setMeta('meta[property="twitter:title"]', seo.twitterTitle || seo.title);
+  setMeta('meta[name="title"]', normalizedSeo.title);
+  setMeta('meta[name="description"]', normalizedSeo.description);
+  setMeta('meta[name="keywords"]', normalizedSeo.keywords);
+  setMeta('meta[name="author"]', normalizedSeo.author || brand.name);
+  setMeta('meta[property="og:title"]', normalizedSeo.ogTitle || normalizedSeo.title);
+  setMeta('meta[property="og:description"]', normalizedSeo.ogDescription || normalizedSeo.description);
+  setMeta('meta[property="og:image"]', normalizedSeo.ogImage);
+  setMeta('meta[property="og:url"]', normalizedSeo.ogUrl || normalizedSeo.canonical);
+  setMeta('meta[property="twitter:title"]', normalizedSeo.twitterTitle || normalizedSeo.title);
   setMeta(
     'meta[property="twitter:description"]',
-    seo.twitterDescription || seo.description
+    normalizedSeo.twitterDescription || normalizedSeo.description
   );
-  setMeta('meta[property="twitter:image"]', seo.twitterImage || seo.ogImage);
-  setMeta('meta[name="theme-color"]', seo.themeColor);
+  setMeta('meta[property="twitter:image"]', normalizedSeo.twitterImage || normalizedSeo.ogImage);
+  setMeta('meta[name="theme-color"]', normalizedSeo.themeColor);
 
   const canonical = document.querySelector('link[rel="canonical"]');
-  if (canonical && seo.canonical) {
-    canonical.setAttribute("href", seo.canonical);
+  if (canonical && normalizedSeo.canonical) {
+    canonical.setAttribute("href", normalizedSeo.canonical);
   }
 }
 
@@ -470,6 +475,8 @@ function renderFaqItem(item, index) {
 }
 
 function applyContact(contact) {
+  const normalizedForm = normalizeContactForm(contact.form || {});
+
   setText('[data-site="contact-title"]', contact.title);
   setText('[data-site="contact-desc"]', contact.description);
   setText('[data-site="contact-address-label"]', contact.addressLabel);
@@ -483,16 +490,64 @@ function applyContact(contact) {
       .join("");
   }
 
-  setText('[data-site="contact-form-title"]', contact.form?.title);
-  setText('[data-site="contact-submit-label"]', contact.form?.submitLabel);
+  setText('[data-site="contact-form-title"]', normalizedForm.title);
+  setText('[data-site="contact-submit-label"]', normalizedForm.submitLabel);
 
   const form = document.querySelector('[data-site="contact-form"]');
-  if (form && contact.form?.action) {
-    form.setAttribute("action", contact.form.action);
+  if (form && normalizedForm.action) {
+    form.setAttribute("action", normalizedForm.action);
   }
-  setAttr('[data-site="contact-form-next"]', "value", contact.form?.next);
-  setAttr('[data-site="contact-form-error"]', "value", contact.form?.error);
-  setAttr('[data-site="contact-form-subject"]', "value", contact.form?.subject);
+  setAttr('[data-site="contact-form-next"]', "value", normalizedForm.next);
+  setAttr('[data-site="contact-form-error"]', "value", normalizedForm.error);
+  setAttr('[data-site="contact-form-subject"]', "value", normalizedForm.subject);
+}
+
+function normalizeSeo(seo) {
+  if (!seo || typeof seo !== "object") return {};
+
+  return {
+    ...seo,
+    canonical: normalizeSiteUrl(seo.canonical),
+    ogUrl: normalizeSiteUrl(seo.ogUrl),
+    ogImage: normalizeSiteUrl(seo.ogImage),
+    twitterImage: normalizeSiteUrl(seo.twitterImage)
+  };
+}
+
+function normalizeContactForm(form) {
+  if (!form || typeof form !== "object") return {};
+
+  return {
+    ...form,
+    next: normalizeFormRedirect(form.next, "/form-pages/thanks.html"),
+    error: normalizeFormRedirect(form.error, "/form-pages/error.html")
+  };
+}
+
+function normalizeFormRedirect(url, fallbackPath) {
+  const normalizedUrl = normalizeSiteUrl(url);
+  if (!normalizedUrl) return normalizedUrl;
+  if (
+    normalizedUrl === `${CANONICAL_SITE_ORIGIN}/thanks.html` ||
+    normalizedUrl === `${CANONICAL_SITE_ORIGIN}/error.html`
+  ) {
+    return `${CANONICAL_SITE_ORIGIN}${fallbackPath}`;
+  }
+  return normalizedUrl;
+}
+
+function normalizeSiteUrl(url) {
+  if (typeof url !== "string" || url.length === 0) return url;
+  if (url.startsWith("http://") || url.startsWith("https://")) {
+    return url.replace(PLACEHOLDER_SITE_ORIGIN, CANONICAL_SITE_ORIGIN);
+  }
+  if (url.startsWith("/")) {
+    return `${CANONICAL_SITE_ORIGIN}${url}`;
+  }
+  if (url.startsWith("assets/")) {
+    return `${CANONICAL_SITE_ORIGIN}/${url}`;
+  }
+  return url;
 }
 
 function applyDownloadCta(downloadCta) {
