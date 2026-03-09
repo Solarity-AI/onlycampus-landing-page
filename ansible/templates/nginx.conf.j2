@@ -56,6 +56,18 @@ server {
         image/svg+xml
         image/x-icon;
 
+    location = /robots.txt {
+        try_files $uri =404;
+        default_type text/plain;
+        access_log off;
+    }
+
+    location = /sitemap.xml {
+        try_files $uri =404;
+        default_type application/xml;
+        access_log off;
+    }
+
     # HTML files - compress and cache
     location ~* \.html$ {
         expires 1h;
@@ -81,4 +93,3 @@ server {
         add_header Content-Type text/plain;
     }
 }
-
