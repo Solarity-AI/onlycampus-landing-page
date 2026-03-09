@@ -4,4 +4,4 @@ Disallow: /ansible/
 Disallow: /.git/
 Disallow: /backup-pages/
 Disallow: /form-pages/
-Sitemap: https://sohbetterapi.solarityai.com/sitemap.xml
+Sitemap: https://onlycampus.solarityai.com/sitemap.xml

@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 const PLACEHOLDER_SITE_ORIGIN = "https://onlycampus.example.com";
-const CANONICAL_SITE_ORIGIN = "https://sohbetterapi.solarityai.com";
+const CANONICAL_SITE_ORIGIN = "https://onlycampus.solarityai.com";
 
 // When preloaded=true (data came from window.__SITE_DATA__), static HTML is
 // already correctly populated so innerHTML replacements are skipped to avoid
