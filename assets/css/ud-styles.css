@@ -41,8 +41,8 @@ a,
 button,
 input,
 textarea {
-  -webkit-transition: all 0.3s ease-out 0s;
-  transition: all 0.3s ease-out 0s;
+  -webkit-transition: color 0.3s ease-out 0s, background-color 0.3s ease-out 0s, border-color 0.3s ease-out 0s, opacity 0.3s ease-out 0s, transform 0.3s ease-out 0s, box-shadow 0.3s ease-out 0s;
+  transition: color 0.3s ease-out 0s, background-color 0.3s ease-out 0s, border-color 0.3s ease-out 0s, opacity 0.3s ease-out 0s, transform 0.3s ease-out 0s, box-shadow 0.3s ease-out 0s;
 }
 
 a,
