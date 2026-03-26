@@ -71,6 +71,7 @@
   }
 
   function restoreScroll() {
+    if (window.location.hash) return null;
     try {
       var saved = sessionStorage.getItem(scrollKey);
       if (saved !== null) {
@@ -84,34 +85,58 @@
     return null;
   }
 
+  var _restoreActive = false;
+  var _restoreTimer = null;
+
+  function cancelRestore() {
+    _restoreActive = false;
+    if (_restoreTimer) {
+      clearInterval(_restoreTimer);
+      _restoreTimer = null;
+    }
+  }
+
   function runRestoreUntilStable() {
     var targetY = restoreScroll();
     if (targetY === null) return;
+    _restoreActive = true;
     var attempts = 0;
-    var maxAttempts = 40;
-    var interval = setInterval(function () {
+    var maxAttempts = 15;
+    _restoreTimer = setInterval(function () {
+      if (!_restoreActive) { clearInterval(_restoreTimer); _restoreTimer = null; return; }
       if (window.scrollY !== targetY) {
         window.scrollTo(0, targetY);
       }
       attempts += 1;
       if (attempts >= maxAttempts) {
-        clearInterval(interval);
+        cancelRestore();
       }
-    }, 50);
+    }, 60);
   }
 
   window.addEventListener("beforeunload", saveScroll);
   window.addEventListener("pagehide", saveScroll);
   (function () {
     var scrollSaveTimer;
+    var userScrolled = false;
     window.addEventListener(
       "scroll",
       function () {
+        if (_restoreActive && !userScrolled) {
+          userScrolled = true;
+          setTimeout(function () {
+            if (_restoreActive) cancelRestore();
+            userScrolled = false;
+          }, 120);
+        }
         clearTimeout(scrollSaveTimer);
         scrollSaveTimer = setTimeout(saveScroll, 150);
       },
       { passive: true }
     );
+    ["wheel", "touchmove", "pointerdown"].forEach(function (evt) {
+      window.addEventListener(evt, cancelRestore, { passive: true, once: true });
+    });
   })();
 
   window.addEventListener("load", function () {
@@ -120,9 +145,6 @@
       requestAnimationFrame(restoreScroll);
     });
     setTimeout(runRestoreUntilStable, 0);
-    setTimeout(restoreScroll, 300);
-    setTimeout(restoreScroll, 600);
-    setTimeout(restoreScroll, 1000);
   });
   window.addEventListener("pageshow", function (event) {
     if (event.persisted) restoreScroll();
@@ -206,6 +228,122 @@
       submenu.classList.toggle("show");
     });
   });
+
+  function normalizeLegalLanguage(lang) {
+    return lang === "tr" ? "tr" : "en";
+  }
+
+  function readStoredLegalLanguage() {
+    try {
+      return normalizeLegalLanguage(window.localStorage.getItem("onlycampus_legal_lang"));
+    } catch (e) {
+      return "en";
+    }
+  }
+
+  function readQueryLegalLanguage() {
+    try {
+      var params = new URLSearchParams(window.location.search);
+      if (!params.has("lang")) return null;
+      return normalizeLegalLanguage(params.get("lang"));
+    } catch (e) {
+      return null;
+    }
+  }
+
+  function persistLegalLanguage(lang) {
+    try {
+      window.localStorage.setItem("onlycampus_legal_lang", normalizeLegalLanguage(lang));
+    } catch (e) {}
+  }
+
+  function syncLegalLanguageQuery(lang) {
+    try {
+      var normalized = normalizeLegalLanguage(lang);
+      var url = new URL(window.location.href);
+      if (normalized === "tr") {
+        url.searchParams.set("lang", "tr");
+      } else {
+        url.searchParams.delete("lang");
+      }
+      window.history.replaceState({}, "", url.pathname + url.search + url.hash);
+    } catch (e) {}
+  }
+
+  function syncLegalLanguageButtons(lang) {
+    document.querySelectorAll(".ud-lang-btn").forEach(function (btn) {
+      var isActive = normalizeLegalLanguage(btn.getAttribute("data-lang")) === lang;
+      btn.classList.toggle("is-active", isActive);
+      btn.setAttribute("aria-pressed", isActive ? "true" : "false");
+    });
+  }
+
+  function isLocalDocumentHref(href) {
+    return (
+      typeof href === "string" &&
+      href.length > 0 &&
+      href.indexOf(".html") !== -1 &&
+      !/^([a-z]+:|\/\/)/i.test(href) &&
+      href.charAt(0) !== "#"
+    );
+  }
+
+  function withLanguageQuery(href, lang) {
+    if (!isLocalDocumentHref(href)) return href;
+
+    var hashIndex = href.indexOf("#");
+    var hash = hashIndex >= 0 ? href.slice(hashIndex) : "";
+    var withoutHash = hashIndex >= 0 ? href.slice(0, hashIndex) : href;
+    var queryIndex = withoutHash.indexOf("?");
+    var path = queryIndex >= 0 ? withoutHash.slice(0, queryIndex) : withoutHash;
+    var query = queryIndex >= 0 ? withoutHash.slice(queryIndex + 1) : "";
+    var params = new URLSearchParams(query);
+
+    if (normalizeLegalLanguage(lang) === "tr") {
+      params.set("lang", "tr");
+    } else {
+      params.delete("lang");
+    }
+
+    var nextQuery = params.toString();
+    return path + (nextQuery ? "?" + nextQuery : "") + hash;
+  }
+
+  function syncLocalizedPageLinks(lang) {
+    document.querySelectorAll("a[href]").forEach(function (link) {
+      var currentHref = link.getAttribute("href");
+      var nextHref = withLanguageQuery(currentHref, lang);
+      if (nextHref !== currentHref) {
+        link.setAttribute("href", nextHref);
+      }
+    });
+  }
+
+  function applyLegalLanguage(lang) {
+    var normalized = normalizeLegalLanguage(lang);
+    document.documentElement.setAttribute("data-lang", normalized);
+    document.documentElement.lang = normalized;
+    syncLegalLanguageQuery(normalized);
+    syncLocalizedPageLinks(normalized);
+    syncLegalLanguageButtons(normalized);
+  }
+
+  (function initLegalLanguageToggle() {
+    var buttons = document.querySelectorAll(".ud-lang-btn");
+    if (!buttons.length) return;
+
+    var initialLang = readQueryLegalLanguage() || readStoredLegalLanguage();
+    applyLegalLanguage(initialLang);
+    persistLegalLanguage(initialLang);
+
+    buttons.forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var nextLang = normalizeLegalLanguage(btn.getAttribute("data-lang"));
+        applyLegalLanguage(nextLang);
+        persistLegalLanguage(nextLang);
+      });
+    });
+  })();
 
   function easeInOutQuad(t, b, c, d) {
     var x = t / (d / 2);
@@ -393,8 +531,10 @@
     if (trigger && popup && closeBtn) {
       trigger.addEventListener("click", function () {
         hydratePopupImages(popup);
+        var scrollbarW = window.innerWidth - document.documentElement.clientWidth;
         popup.style.display = "flex";
         document.body.style.overflow = "hidden";
+        if (scrollbarW > 0) document.body.style.paddingRight = scrollbarW + "px";
 
         if (!popupSwiper) {
           loadSwiperAssets()
@@ -425,13 +565,15 @@
 
       closeBtn.addEventListener("click", function () {
         popup.style.display = "none";
-        document.body.style.overflow = "auto";
+        document.body.style.overflow = "";
+        document.body.style.paddingRight = "";
       });
 
       popup.addEventListener("click", function (event) {
         if (event.target === popup) {
           popup.style.display = "none";
-          document.body.style.overflow = "auto";
+          document.body.style.overflow = "";
+        document.body.style.paddingRight = "";
         }
       });
     }
@@ -455,20 +597,35 @@
   });
 
   window.addEventListener("load", function () {
-    function fixTikTokScroll() {
-      var tiktokFrame = document.querySelector(".tiktok-embed iframe");
-      if (tiktokFrame) {
-        tiktokFrame.setAttribute("scrolling", "no");
-        tiktokFrame.style.overflow = "hidden";
-        tiktokFrame.style.height = "100%";
-        tiktokFrame.style.maxHeight = "100%";
-        tiktokFrame.style.border = "none";
-      }
+    function fixTikTokScroll(frame) {
+      frame.setAttribute("scrolling", "no");
+      frame.style.overflow = "hidden";
+      frame.style.height = "100%";
+      frame.style.maxHeight = "100%";
+      frame.style.border = "none";
     }
 
-    setTimeout(fixTikTokScroll, 1200);
-    setTimeout(fixTikTokScroll, 2500);
-    setTimeout(fixTikTokScroll, 4000);
+    var tiktokEmbed = document.querySelector(".tiktok-embed");
+    if (tiktokEmbed) {
+      var existing = tiktokEmbed.querySelector("iframe");
+      if (existing) {
+        fixTikTokScroll(existing);
+      } else if ("MutationObserver" in window) {
+        var mo = new MutationObserver(function (mutations) {
+          for (var i = 0; i < mutations.length; i++) {
+            for (var j = 0; j < mutations[i].addedNodes.length; j++) {
+              var node = mutations[i].addedNodes[j];
+              if (node.nodeName === "IFRAME") {
+                fixTikTokScroll(node);
+                mo.disconnect();
+                return;
+              }
+            }
+          }
+        });
+        mo.observe(tiktokEmbed, { childList: true, subtree: true });
+      }
+    }
 
     if (window.instgrm && window.instgrm.Embeds) {
       setTimeout(function () {

@@ -1,9 +1,229 @@
+const PLACEHOLDER_SITE_ORIGIN = "https://onlycampus.example.com";
+const CANONICAL_SITE_ORIGIN = "https://onlycampus.solarityai.com";
+const SITE_LANGUAGE_STORAGE_KEY = "onlycampus_legal_lang";
+const SITE_TRANSLATIONS = {
+  tr: {
+    seo: {
+      title: "OnlyCampus | Kampüs Başarısı için Hepsi Bir Arada Platform",
+      description:
+        "OnlyCampus, öğrencilerin derslerini, programlarını, etkinliklerini ve destek ihtiyaçlarını tek merkezden yönetmesine yardımcı olur.",
+      keywords: "kampüs başarısı, öğrenci platformu, ders planlayıcı, üniversite uygulaması",
+      ogTitle: "OnlyCampus | Kampüs Deneyimini Dönüştür",
+      ogDescription:
+        "Dersleri, planlamayı ve topluluğu daha iyi sonuçlar için bir araya getiren modern platform.",
+      twitterTitle: "OnlyCampus | Kampüs Başarısı Artık Daha Kolay",
+      twitterDescription: "OnlyCampus ile daha iyi plan yap, daha iyi öğren ve bağlantıda kal."
+    },
+    brand: {
+      logoAlt: "OnlyCampus logosu"
+    },
+    nav: [
+      { label: "Ana Sayfa" },
+      { label: "Özellikler" },
+      { label: "Önizleme" },
+      { label: "Sosyal" },
+      { label: "Yorumlar" },
+      { label: "Fiyatlandırma" },
+      { label: "SSS" },
+      { label: "İletişim" },
+      { label: "İndir" }
+    ],
+    hero: {
+      kicker: "Kampüs Başarısı için 1 Numaralı Platform",
+      headline: "Kampüs Deneyimini Dönüştür",
+      subhead:
+        "Öğrencilerin derslerini yönetmek, programlarını takip etmek ve kampüs yaşamıyla bağlantıda kalmak için güvendiği platform.",
+      media: {
+        alt: "OnlyCampus panel önizlemesi"
+      },
+      mediaCards: [{ label: "Aktif Kullanıcılar" }, { label: "Başarı Oranı" }],
+      actions: [{ label: "Başlayın" }, { label: "Demoyu İzle" }],
+      badges: [{ alt: "App Store'dan indirin" }, { alt: "Google Play'den indirin" }],
+      powerwords: ["Planlama", "Topluluk", "Başarı"]
+    },
+    features: {
+      title: "Kampüste Başarılı Olmak İçin İhtiyacın Olan Her Şey",
+      description: "Planlamayı, öğrenmeyi ve öğrenci hayatını kolaylaştıran araçlar.",
+      items: [
+        {
+          title: "Kapsamlı Dersler",
+          text: "Öne çıkan dersleri incele, ilerlemeni takip et ve iş yükünü düzenli tut."
+        },
+        {
+          title: "Çalışma Araçları ve Kaynaklar",
+          text: "Planlayıcılar, hatırlatıcılar ve seçilmiş çalışma materyalleriyle hazır ol."
+        },
+        {
+          title: "Kampüs Topluluğu",
+          text: "Akranlarınla bağlantı kur, etkinlikleri keşfet ve öğrenci gruplarına katıl."
+        }
+      ]
+    },
+    stats: {
+      title: "Her Yerde Öğrencilerin Güvendiği Platform",
+      description: "Kampüs toplulukları genelinde net sonuçlar ve ölçülebilir etki.",
+      note: "OnlyCampus ile hedeflerine ulaşan 1.000.000+'dan fazla öğrenciye katıl.",
+      items: [
+        { label: "Öğrenci başarı oranı" },
+        { label: "Kolej ve üniversite" },
+        { label: "Aktif kullanıcı" }
+      ]
+    },
+    brandStrip: {
+      label: "Önde gelen kampüslerin güvendiği platform"
+    },
+    appPreview: {
+      mainAlt: "OnlyCampus uygulama önizlemesi",
+      slides: [{ alt: "Önizleme ekranı 1" }, { alt: "Önizleme ekranı 2" }]
+    },
+    socialGallery: {
+      title: "Kampüs Öne Çıkanları",
+      description: "OnlyCampus topluluğundan sosyal platformlarda paylaşılan anlar.",
+      items: [{}, { title: "OnlyCampus Kısa Videolar" }]
+    },
+    testimonials: {
+      title: "Gerçek Öğrencilerden Gerçek Sonuçlar",
+      description:
+        "Öğrenciler, OnlyCampus'un daha düzenli ve kendinden emin kalmalarına nasıl yardımcı olduğunu anlatıyor.",
+      featured: {
+        text: "OnlyCampus üniversite deneyimimi tamamen değiştirdi. Her hafta odaklı ve düzenli kalmamı sağlıyor.",
+        role: "Texas Üniversitesi"
+      }
+    },
+    pricing: {
+      title: "Kampüs Hayatına Uyan Planlar",
+      description: "Takvimine uyan planı seç ve ihtiyacın olan araçların kilidini aç.",
+      popularLabel: "EN POPÜLER",
+      plans: [
+        {
+          name: "Başlangıç",
+          features: ["Takvim takibi", "Temel hatırlatıcılar", "Öğrenci desteği"],
+          cta: { label: "Başlayın" }
+        },
+        {
+          name: "Standart",
+          features: ["Sınırsız planlayıcı", "Öncelikli destek", "Kişiselleştirilmiş içgörüler"],
+          cta: { label: "Ücretsiz Denemeyi Başlat" }
+        },
+        {
+          name: "Premium",
+          features: ["Gelişmiş analitikler", "Mentorluk görüşmeleri", "Erken erişim"],
+          cta: { label: "Satışla Görüş" }
+        }
+      ]
+    },
+    faq: {
+      title: "Öğrencilerin En Sık Sorduğu Sorular",
+      description: "OnlyCampus deneyimi hakkında hızlı yanıtlar.",
+      items: [
+        {
+          question: "OnlyCampus her üniversite için mevcut mu?",
+          answer: "Çoğu kampüsü destekliyoruz ve her dönem yeni partnerler ekliyoruz."
+        },
+        {
+          question: "Ders programımı senkronize edebilir miyim?",
+          answer: "Evet, programlarını içe aktarabilir ve her şeyi tek yerde tutabilirsin."
+        },
+        {
+          question: "Takım veya kampüs planları sunuyor musunuz?",
+          answer: "Bölümler ve öğrenci toplulukları için kampüs çapında planlar sunuyoruz."
+        },
+        {
+          question: "Ücretsiz deneme var mı?",
+          answer: "Her plan, platformu keşfedebilmen için ücretsiz deneme içerir."
+        },
+        {
+          question: "Verilerim nasıl korunuyor?",
+          answer: "Sektör standardı güvenlik ve gizlilik uygulamalarını takip ediyoruz."
+        },
+        {
+          question: "Yardım için kiminle iletişime geçebilirim?",
+          answer: "Destek ekibimize iletişim formu üzerinden 7/24 ulaşabilirsin."
+        }
+      ]
+    },
+    contact: {
+      title: "OnlyCampus Ekibiyle İletişime Geçin",
+      description: "Sorularınız, iş birlikleri veya geri bildirimleriniz mi var? Sizden haber almak isteriz.",
+      addressLabel: "Adres",
+      emailLabel: "E-posta",
+      form: {
+        title: "Mesaj Gönder",
+        submitLabel: "Mesaj Gönder"
+      }
+    },
+    downloadCta: {
+      title: "Hazır mısın?",
+      description:
+        "Takvimini, kampüs güncellemelerini ve çalışma araçlarını tek yerde toplamak için OnlyCampus'u indir.",
+      badges: [{ alt: "App Store'dan indirin" }, { alt: "Google Play'den indirin" }],
+      trustItems: [{ label: "App Store" }, { label: "Google Play" }, { label: "İndirme" }]
+    },
+    footer: {
+      description:
+        "OnlyCampus, dersleri, planlamayı ve topluluğu tek bir öğrenci odaklı platformda bir araya getirir.",
+      socialTitle: "Bizi Takip Edin",
+      socialLinks: [
+        { label: "OnlyCampus YouTube" },
+        { label: "OnlyCampus Instagram" },
+        { label: "OnlyCampus TikTok" },
+        { label: "OnlyCampus Facebook" }
+      ],
+      legalTitle: "Yasal",
+      legalLinks: [{ label: "Veri Silme" }, { label: "Kullanım Şartları" }, { label: "Çerez Politikası" }],
+      emergencyTitle: "Destek",
+      emergencyText:
+        "Acil durumlarda yerel hizmetlerle iletişime geçin. OnlyCampus bir kriz destek sağlayıcısı değildir.",
+      bottomText: "© 2026 OnlyCampus. Tüm hakları saklıdır."
+    }
+  }
+};
+const SITE_UI_TRANSLATIONS = {
+  en: {
+    languageMeta: "English",
+    form: {
+      nameLabel: "Full Name*",
+      namePlaceholder: "Enter your name",
+      emailLabel: "Email*",
+      emailPlaceholder: "you@example.com",
+      messageLabel: "Your Message*",
+      messagePlaceholder: "Tell us what you need..."
+    },
+    modal: {
+      title: "Coming Soon!",
+      body: "Our app will be available soon on the App Store and Google Play.",
+      button: "Got it",
+      closeLabel: "Close"
+    }
+  },
+  tr: {
+    languageMeta: "Turkish",
+    form: {
+      nameLabel: "Ad Soyad*",
+      namePlaceholder: "Adınızı girin",
+      emailLabel: "E-posta*",
+      emailPlaceholder: "ornek@eposta.com",
+      messageLabel: "Mesajınız*",
+      messagePlaceholder: "Nasıl yardımcı olabileceğimizi yazın..."
+    },
+    modal: {
+      title: "Çok Yakında!",
+      body: "Uygulamamız yakında App Store ve Google Play'de yayında olacak.",
+      button: "Anladım",
+      closeLabel: "Kapat"
+    }
+  }
+};
+
+let siteDataSource = null;
+
 document.addEventListener("DOMContentLoaded", () => {
   bindLanguageToggle();
   // Use inlined data (window.__SITE_DATA__) when available to apply DOM updates
   // synchronously before first paint, eliminating CLS caused by async fetch.
   if (window.__SITE_DATA__) {
-    applySiteData(window.__SITE_DATA__, true);
+    siteDataSource = window.__SITE_DATA__;
+    applyLocalizedSiteData(true);
     return;
   }
   // Fallback: fetch from disk (e.g. when __SITE_DATA__ is not yet inlined).
@@ -15,15 +235,13 @@ document.addEventListener("DOMContentLoaded", () => {
       return res.json();
     })
     .then((data) => {
-      applySiteData(data || {});
+      siteDataSource = data || {};
+      applyLocalizedSiteData(false);
     })
     .catch((err) => {
       console.error("Site data load failed:", err);
     });
 });
-
-const PLACEHOLDER_SITE_ORIGIN = "https://onlycampus.example.com";
-const CANONICAL_SITE_ORIGIN = "https://onlycampus.solarityai.com";
 
 // When preloaded=true (data came from window.__SITE_DATA__), static HTML is
 // already correctly populated so innerHTML replacements are skipped to avoid
@@ -32,6 +250,121 @@ function setList(container, html, preloaded) {
   if (!container) return;
   if (preloaded && container.children.length > 0) return;
   container.innerHTML = html;
+}
+
+function normalizeSiteLanguage(lang) {
+  return lang === "tr" ? "tr" : "en";
+}
+
+function readSiteLanguageFromQuery() {
+  try {
+    const params = new URLSearchParams(window.location.search);
+    if (!params.has("lang")) return null;
+    return normalizeSiteLanguage(params.get("lang"));
+  } catch (error) {
+    return null;
+  }
+}
+
+function readStoredSiteLanguage() {
+  try {
+    return normalizeSiteLanguage(window.localStorage.getItem(SITE_LANGUAGE_STORAGE_KEY));
+  } catch (error) {
+    return "en";
+  }
+}
+
+function getCurrentSiteLanguage() {
+  return readSiteLanguageFromQuery() || readStoredSiteLanguage();
+}
+
+function persistSiteLanguage(lang) {
+  try {
+    window.localStorage.setItem(SITE_LANGUAGE_STORAGE_KEY, normalizeSiteLanguage(lang));
+  } catch (error) {}
+}
+
+function syncSiteLanguageQuery(lang) {
+  try {
+    const normalized = normalizeSiteLanguage(lang);
+    const url = new URL(window.location.href);
+    if (normalized === "tr") {
+      url.searchParams.set("lang", "tr");
+    } else {
+      url.searchParams.delete("lang");
+    }
+    window.history.replaceState({}, "", `${url.pathname}${url.search}${url.hash}`);
+  } catch (error) {}
+}
+
+function syncLanguageButtons(lang) {
+  document.querySelectorAll(".ud-lang-btn").forEach((btn) => {
+    const isActive = normalizeSiteLanguage(btn.getAttribute("data-lang")) === lang;
+    btn.classList.toggle("is-active", isActive);
+    btn.setAttribute("aria-pressed", isActive ? "true" : "false");
+  });
+}
+
+function mergeLocalizedData(base, overlay) {
+  if (overlay === undefined) return base;
+  if (overlay === null || typeof overlay !== "object") return overlay;
+
+  if (Array.isArray(overlay)) {
+    const baseArray = Array.isArray(base) ? base : [];
+    const maxLength = Math.max(baseArray.length, overlay.length);
+    const merged = [];
+    for (let i = 0; i < maxLength; i += 1) {
+      if (overlay[i] === undefined) {
+        merged.push(baseArray[i]);
+        continue;
+      }
+      merged.push(mergeLocalizedData(baseArray[i], overlay[i]));
+    }
+    return merged;
+  }
+
+  const result = { ...(base && typeof base === "object" ? base : {}) };
+  Object.keys(overlay).forEach((key) => {
+    result[key] = mergeLocalizedData(result[key], overlay[key]);
+  });
+  return result;
+}
+
+function getLocalizedSiteData(data) {
+  const lang = getCurrentSiteLanguage();
+  if (lang === "en") return data;
+  return mergeLocalizedData(data, SITE_TRANSLATIONS[lang] || {});
+}
+
+function applyLocalizedSiteData(preloaded) {
+  if (!siteDataSource) {
+    applyStaticUiTranslations(getCurrentSiteLanguage());
+    return;
+  }
+  const currentLang = getCurrentSiteLanguage();
+  applySiteData(getLocalizedSiteData(siteDataSource), preloaded && currentLang === "en");
+  applyStaticUiTranslations(currentLang);
+}
+
+function applyStaticUiTranslations(lang) {
+  const ui = SITE_UI_TRANSLATIONS[normalizeSiteLanguage(lang)] || SITE_UI_TRANSLATIONS.en;
+  if (!ui) return;
+
+  document.documentElement.setAttribute("data-lang", normalizeSiteLanguage(lang));
+  document.documentElement.lang = normalizeSiteLanguage(lang);
+  syncLanguageButtons(normalizeSiteLanguage(lang));
+
+  setMeta('meta[name="language"]', ui.languageMeta);
+  setText('label[for="name"]', ui.form.nameLabel);
+  setAttr('input[name="name"]', "placeholder", ui.form.namePlaceholder);
+  setText('label[for="email"]', ui.form.emailLabel);
+  setAttr('input[name="user_email"]', "placeholder", ui.form.emailPlaceholder);
+  setText('label[for="message"]', ui.form.messageLabel);
+  setAttr('textarea[name="message"]', "placeholder", ui.form.messagePlaceholder);
+  setText("#comingSoonModalLabel", ui.modal.title);
+  setText("#comingSoonModal .modal-body p", ui.modal.body);
+  setText('#comingSoonModal .modal-footer button[data-bs-dismiss="modal"]', ui.modal.button);
+  setAttr("#comingSoonModal .btn-close", "aria-label", ui.modal.closeLabel);
 }
 
 function applySiteData(data, preloaded) {
@@ -319,6 +652,7 @@ function applySocialGallery(gallery) {
     '[data-site-list="social-gallery-items"]'
   );
   if (!container || !Array.isArray(gallery.items)) return;
+  if (container.children.length > 0) return;
 
   container.innerHTML = gallery.items
     .map((item) => {
@@ -388,12 +722,13 @@ function applyPricing(pricing) {
   setText('[data-site="pricing-desc"]', pricing.description);
   const container = document.querySelector('[data-site-list="pricing-plans"]');
   if (!container || !Array.isArray(pricing.plans)) return;
+  const popularLabel = pricing.popularLabel || "POPULAR";
 
   container.innerHTML = pricing.plans
     .map((plan, index) => {
       const isPopular = Boolean(plan.popular);
       const tag = isPopular
-        ? '<span class="ud-popular-tag">POPULAR</span>'
+        ? `<span class="ud-popular-tag">${popularLabel}</span>`
         : "";
       const buttonClass = isPopular ? "ud-main-btn ud-white-btn" : "ud-main-btn ud-border-btn";
       const features = Array.isArray(plan.features)
@@ -519,6 +854,8 @@ function normalizeContactForm(form) {
 
   return {
     ...form,
+    title: form.title || "Send a Message",
+    submitLabel: form.submitLabel || "Send Message",
     next: normalizeFormRedirect(form.next, "/form-pages/thanks.html"),
     error: normalizeFormRedirect(form.error, "/form-pages/error.html")
   };
@@ -582,17 +919,17 @@ function applyDownloadCta(downloadCta) {
 function bindLanguageToggle() {
   const buttons = document.querySelectorAll(".ud-lang-btn");
   if (!buttons.length) return;
+  syncLanguageButtons(getCurrentSiteLanguage());
 
   buttons.forEach((btn) => {
     btn.addEventListener("click", () => {
-      buttons.forEach((el) => {
-        el.classList.remove("is-active");
-        el.setAttribute("aria-pressed", "false");
-      });
-      btn.classList.add("is-active");
-      btn.setAttribute("aria-pressed", "true");
-      const lang = btn.getAttribute("data-lang") || "en";
+      const lang = normalizeSiteLanguage(btn.getAttribute("data-lang"));
+      persistSiteLanguage(lang);
+      syncSiteLanguageQuery(lang);
       document.documentElement.setAttribute("data-lang", lang);
+      document.documentElement.lang = lang;
+      syncLanguageButtons(lang);
+      applyLocalizedSiteData(false);
     });
   });
 }
