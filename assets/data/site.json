@@ -319,13 +319,12 @@
     "address": "Dallas, Texas, USA",
     "emailLabel": "Email",
     "emails": [
-      "hello@onlycampus.ai",
       "ata.turhan@solarityai.com"
     ],
     "form": {
-      "action": "https://formsubmit.co/hello@onlycampus.ai",
-      "next": "https://sohbetterapi.solarityai.com/form-pages/thanks.html",
-      "error": "https://sohbetterapi.solarityai.com/form-pages/error.html",
+      "action": "https://formsubmit.co/ata.turhan@solarityai.com",
+      "next": "https://onlycampus.solarityai.com/form-pages/thanks.html",
+      "error": "https://onlycampus.solarityai.com/form-pages/error.html",
       "subject": "New message - OnlyCampus",
       "submitLabel": "Send Message"
     }
@@ -425,7 +424,7 @@
       }
     ],
     "emergencyTitle": "Support",
-    "emergencyText": "For urgent help, contact local services. OnlyCampus is not a crisis support provider.",
+    "emergencyText": "Need help? Reach us at ata.turhan@solarityai.com or use the contact form above.",
     "bottomText": "© 2026 OnlyCampus. All rights reserved."
   }
 }
