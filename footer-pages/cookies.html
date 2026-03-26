@@ -4,11 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cookies Policy | OnlyCampus</title>
+    <script>
+        (function () {
+            try {
+                var params = new URLSearchParams(window.location.search);
+                var lang = params.get("lang") || localStorage.getItem("onlycampus_legal_lang");
+                if (lang === "tr") {
+                    document.documentElement.setAttribute("data-lang", "tr");
+                    document.documentElement.lang = "tr";
+                }
+            } catch (error) {}
+        })();
+    </script>
     <link rel="stylesheet" href="../assets/css/bootstrap.min.css" />
     <link rel="stylesheet" href="../assets/css/animate.css" />
     <link rel="stylesheet" href="../assets/css/lineicons.css" />
     <link rel="stylesheet" href="../assets/css/ud-styles.css" />
     <link rel="stylesheet" href="../assets/css/override.css" />
+    <style>
+        .ud-lang-switch{display:inline-flex;border-radius:999px;gap:4px;padding:2px;border:1px solid rgba(148,163,184,.2);background:rgba(148,163,184,.1)}
+        .ud-lang-btn{display:inline-flex;border:0;background:transparent;font-size:1.65rem;font-weight:600;padding:12px 16px;line-height:1;height:50px;align-items:center;justify-content:center;color:#0f172a;cursor:pointer;border-radius:999px}
+        .ud-lang-btn.is-active{background:#fff;color:#0f172a;box-shadow:0 8px 20px rgba(15,23,42,.15)}
+        .lang-tr{display:none}
+        [data-lang="tr"] .lang-tr{display:block}
+        [data-lang="tr"] span.lang-tr{display:inline}
+        [data-lang="tr"] .lang-en{display:none}
+    </style>
 </head>
 <body style="background-color: #f3f4fe; min-height: 100vh;">
     <section class="ud-faq" style="padding: 80px 0; background-color: #f3f4fe;">
@@ -16,12 +37,35 @@
             <div class="row">
                 <div class="col-lg-10 col-md-12 mx-auto">
                     <div class="text-center mb-5">
-                        <h1 class="mb-3">Cookies Policy</h1>
-                        <p class="mb-2"><strong>Effective Date:</strong> February 2026</p>
-                        <p class="mb-2"><strong>Last Updated:</strong> March 2026</p>
-                        <p class="mb-2"><strong>Owner:</strong> OnlyCampus</p>
-                        <p class="mb-4">This Cookies Policy explains how OnlyCampus uses cookies and similar technologies on our website. For broader privacy practices, see our <a href="privacy-policy.html">Privacy Policy</a>.</p>
-                        <p><a href="../index.html" class="ud-main-btn ud-border-btn">← Back to OnlyCampus</a></p>
+                        <div class="ud-lang-switch mb-4" role="group" aria-label="Language selector">
+                            <button type="button" class="ud-lang-btn is-active" data-lang="en" aria-pressed="true">🇺🇸</button>
+                            <button type="button" class="ud-lang-btn" data-lang="tr" aria-pressed="false">🇹🇷</button>
+                        </div>
+                        <h1 class="mb-3">
+                            <span class="lang-en">Cookies Policy</span>
+                            <span class="lang-tr">Çerez Politikası</span>
+                        </h1>
+                        <p class="mb-2">
+                            <strong><span class="lang-en">Effective Date:</span><span class="lang-tr">Yürürlük Tarihi:</span></strong>
+                            <span class="lang-en">February 2026</span><span class="lang-tr">Şubat 2026</span>
+                        </p>
+                        <p class="mb-2">
+                            <strong><span class="lang-en">Last Updated:</span><span class="lang-tr">Son Güncelleme:</span></strong>
+                            <span class="lang-en">March 2026</span><span class="lang-tr">Mart 2026</span>
+                        </p>
+                        <p class="mb-2">
+                            <strong><span class="lang-en">Owner:</span><span class="lang-tr">Sahip:</span></strong> OnlyCampus
+                        </p>
+                        <div class="mb-4">
+                            <p class="lang-en">This Cookies Policy explains how OnlyCampus uses cookies and similar technologies on our website. For broader privacy practices, see our <a href="privacy-policy.html">Privacy Policy</a>.</p>
+                            <p class="lang-tr">Bu Çerez Politikası, OnlyCampus'un web sitesinde çerezleri ve benzer teknolojileri nasıl kullandığını açıklar. Daha geniş gizlilik uygulamaları için <a href="privacy-policy.html">Gizlilik Politikamıza</a> bakınız.</p>
+                        </div>
+                        <p>
+                            <a href="../index.html" class="ud-main-btn ud-border-btn">
+                                <span class="lang-en">&larr; Back to OnlyCampus</span>
+                                <span class="lang-tr">&larr; OnlyCampus'a Dön</span>
+                            </a>
+                        </p>
                     </div>
 
                     <div class="row">
@@ -30,11 +74,19 @@
                                 <div class="accordion">
                                     <button class="ud-faq-btn collapsed" data-bs-toggle="collapse" data-bs-target="#collapseCookiesOne">
                                         <span class="icon flex-shrink-0"><i class="lni lni-chevron-down"></i></span>
-                                        <span>1. What Are Cookies?</span>
+                                        <span>
+                                            <span class="lang-en">1. What Are Cookies?</span>
+                                            <span class="lang-tr">1. Çerezler Nedir?</span>
+                                        </span>
                                     </button>
                                     <div id="collapseCookiesOne" class="accordion-collapse collapse">
                                         <div class="ud-faq-body">
-                                            <p class="mb-2">Cookies are small text files that a website stores on your device (computer, tablet, or phone) when you visit. They help the site remember your preferences, keep you signed in, and understand how the site is used so we can improve it.</p>
+                                            <div class="lang-en">
+                                                <p class="mb-2">Cookies are small text files that a website stores on your device (computer, tablet, or phone) when you visit. They help the site remember your preferences, keep you signed in, and understand how the site is used so we can improve it.</p>
+                                            </div>
+                                            <div class="lang-tr">
+                                                <p class="mb-2">Çerezler, bir web sitesinin ziyaretiniz sırasında cihazınızda (bilgisayar, tablet veya telefon) sakladığı küçük metin dosyalarıdır. Tercihlerinizi hatırlamaya, oturumu açık tutmaya ve siteyi nasıl kullandığınızı anlamamıza yardımcı olarak deneyimi geliştirmemizi sağlar.</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -44,16 +96,29 @@
                                 <div class="accordion">
                                     <button class="ud-faq-btn collapsed" data-bs-toggle="collapse" data-bs-target="#collapseCookiesTwo">
                                         <span class="icon flex-shrink-0"><i class="lni lni-chevron-down"></i></span>
-                                        <span>2. How We Use Cookies</span>
+                                        <span>
+                                            <span class="lang-en">2. How We Use Cookies</span>
+                                            <span class="lang-tr">2. Çerezleri Nasıl Kullanıyoruz</span>
+                                        </span>
                                     </button>
                                     <div id="collapseCookiesTwo" class="accordion-collapse collapse">
                                         <div class="ud-faq-body">
-                                            <p class="mb-2">We use cookies and similar technologies for:</p>
-                                            <ul style="list-style-type: disc; padding-left: 20px; margin-bottom: 20px;">
-                                                <li><strong>Essential operation</strong> – Keeping the site working (e.g. security, load balancing, session management)</li>
-                                                <li><strong>Preferences</strong> – Remembering settings such as language or region</li>
-                                                <li><strong>Analytics</strong> – Understanding how visitors use our website so we can improve the experience</li>
-                                            </ul>
+                                            <div class="lang-en">
+                                                <p class="mb-2">We use cookies and similar technologies for:</p>
+                                                <ul style="list-style-type: disc; padding-left: 20px; margin-bottom: 20px;">
+                                                    <li><strong>Essential operation</strong> - Keeping the site working (e.g. security, load balancing, session management)</li>
+                                                    <li><strong>Preferences</strong> - Remembering settings such as language or region</li>
+                                                    <li><strong>Analytics</strong> - Understanding how visitors use our website so we can improve the experience</li>
+                                                </ul>
+                                            </div>
+                                            <div class="lang-tr">
+                                                <p class="mb-2">Çerezleri ve benzer teknolojileri şu amaçlarla kullanıyoruz:</p>
+                                                <ul style="list-style-type: disc; padding-left: 20px; margin-bottom: 20px;">
+                                                    <li><strong>Temel işleyiş</strong> - Sitenin çalışmasını sağlamak (örn. güvenlik, yük dengeleme, oturum yönetimi)</li>
+                                                    <li><strong>Tercihler</strong> - Dil veya bölge gibi ayarları hatırlamak</li>
+                                                    <li><strong>Analitik</strong> - Ziyaretçilerin web sitemizi nasıl kullandığını anlayarak deneyimi iyileştirmek</li>
+                                                </ul>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -63,16 +128,29 @@
                                 <div class="accordion">
                                     <button class="ud-faq-btn collapsed" data-bs-toggle="collapse" data-bs-target="#collapseCookiesThree">
                                         <span class="icon flex-shrink-0"><i class="lni lni-chevron-down"></i></span>
-                                        <span>3. Types of Cookies We Use</span>
+                                        <span>
+                                            <span class="lang-en">3. Types of Cookies We Use</span>
+                                            <span class="lang-tr">3. Kullandığımız Çerez Türleri</span>
+                                        </span>
                                     </button>
                                     <div id="collapseCookiesThree" class="accordion-collapse collapse">
                                         <div class="ud-faq-body">
-                                            <p class="mb-3">Summary of the main types:</p>
-                                            <ul style="list-style-type: disc; padding-left: 20px; margin-bottom: 20px;">
-                                                <li><strong>Strictly necessary</strong> – Required for the website to function (e.g. security, basic routing). Session or short-term.</li>
-                                                <li><strong>Preference</strong> – Remember your choices (e.g. language). Up to 1 year.</li>
-                                                <li><strong>Analytics</strong> – Help us see how the site is used so we can improve it. As per our analytics provider.</li>
-                                            </ul>
+                                            <div class="lang-en">
+                                                <p class="mb-3">Summary of the main types:</p>
+                                                <ul style="list-style-type: disc; padding-left: 20px; margin-bottom: 20px;">
+                                                    <li><strong>Strictly necessary</strong> - Required for the website to function (e.g. security, basic routing). Session or short-term.</li>
+                                                    <li><strong>Preference</strong> - Remember your choices (e.g. language). Up to 1 year.</li>
+                                                    <li><strong>Analytics</strong> - Help us see how the site is used so we can improve it. As per our analytics provider.</li>
+                                                </ul>
+                                            </div>
+                                            <div class="lang-tr">
+                                                <p class="mb-3">Başlıca türlerin özeti:</p>
+                                                <ul style="list-style-type: disc; padding-left: 20px; margin-bottom: 20px;">
+                                                    <li><strong>Kesinlikle gerekli</strong> - Web sitesinin çalışması için zorunludur (örn. güvenlik, temel yönlendirme). Oturumluk veya kısa süreli.</li>
+                                                    <li><strong>Tercih</strong> - Seçimlerinizi hatırlar (örn. dil). 1 yıla kadar.</li>
+                                                    <li><strong>Analitik</strong> - Sitenin nasıl kullanıldığını görmemize yardım eder ve böylece iyileştirme yapabiliriz. Analitik sağlayıcımızın politikalarına tabidir.</li>
+                                                </ul>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -82,12 +160,21 @@
                                 <div class="accordion">
                                     <button class="ud-faq-btn collapsed" data-bs-toggle="collapse" data-bs-target="#collapseCookiesFour">
                                         <span class="icon flex-shrink-0"><i class="lni lni-chevron-down"></i></span>
-                                        <span>4. Managing Cookies</span>
+                                        <span>
+                                            <span class="lang-en">4. Managing Cookies</span>
+                                            <span class="lang-tr">4. Çerezleri Yönetme</span>
+                                        </span>
                                     </button>
                                     <div id="collapseCookiesFour" class="accordion-collapse collapse">
                                         <div class="ud-faq-body">
-                                            <p class="mb-2">You can control or delete cookies through your browser settings. Most browsers let you block or allow cookies for specific sites. Note that blocking certain cookies may affect how the website works (for example, you may need to log in again or some features may not work as intended).</p>
-                                            <p class="mb-2">To learn how to manage cookies in your browser, use the “Help” or “Settings” section of your browser, or search for “cookies” in your browser’s help pages.</p>
+                                            <div class="lang-en">
+                                                <p class="mb-2">You can control or delete cookies through your browser settings. Most browsers let you block or allow cookies for specific sites. Note that blocking certain cookies may affect how the website works (for example, you may need to log in again or some features may not work as intended).</p>
+                                                <p class="mb-2">To learn how to manage cookies in your browser, use the "Help" or "Settings" section of your browser, or search for "cookies" in your browser's help pages.</p>
+                                            </div>
+                                            <div class="lang-tr">
+                                                <p class="mb-2">Çerezleri tarayıcı ayarlarınız üzerinden kontrol edebilir veya silebilirsiniz. Çoğu tarayıcı, belirli siteler için çerezleri engellemenize veya izin vermenize olanak tanır. Bazı çerezleri engellemenin web sitesinin çalışma biçimini etkileyebileceğini unutmayın (örneğin yeniden giriş yapmanız gerekebilir veya bazı özellikler beklendiği gibi çalışmayabilir).</p>
+                                                <p class="mb-2">Tarayıcınızda çerezleri nasıl yöneteceğinizi öğrenmek için tarayıcınızın "Yardım" veya "Ayarlar" bölümünü kullanın ya da yardım sayfalarında "çerezler" kelimesini arayın.</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -97,11 +184,19 @@
                                 <div class="accordion">
                                     <button class="ud-faq-btn collapsed" data-bs-toggle="collapse" data-bs-target="#collapseCookiesFive">
                                         <span class="icon flex-shrink-0"><i class="lni lni-chevron-down"></i></span>
-                                        <span>5. Other Technologies</span>
+                                        <span>
+                                            <span class="lang-en">5. Other Technologies</span>
+                                            <span class="lang-tr">5. Diğer Teknolojiler</span>
+                                        </span>
                                     </button>
                                     <div id="collapseCookiesFive" class="accordion-collapse collapse">
                                         <div class="ud-faq-body">
-                                            <p class="mb-2">We may use similar technologies such as local storage or session storage for preferences and essential functionality. Our use of these is consistent with the purposes described above and our <a href="privacy-policy.html">Privacy Policy</a>.</p>
+                                            <div class="lang-en">
+                                                <p class="mb-2">We may use similar technologies such as local storage or session storage for preferences and essential functionality. Our use of these is consistent with the purposes described above and our <a href="privacy-policy.html">Privacy Policy</a>.</p>
+                                            </div>
+                                            <div class="lang-tr">
+                                                <p class="mb-2">Tercihler ve temel işlevler için local storage veya session storage gibi benzer teknolojiler kullanabiliriz. Bunların kullanımı yukarıda açıklanan amaçlarla ve <a href="privacy-policy.html">Gizlilik Politikamızla</a> uyumludur.</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -111,11 +206,19 @@
                                 <div class="accordion">
                                     <button class="ud-faq-btn collapsed" data-bs-toggle="collapse" data-bs-target="#collapseCookiesSix">
                                         <span class="icon flex-shrink-0"><i class="lni lni-chevron-down"></i></span>
-                                        <span>6. Updates</span>
+                                        <span>
+                                            <span class="lang-en">6. Updates</span>
+                                            <span class="lang-tr">6. Güncellemeler</span>
+                                        </span>
                                     </button>
                                     <div id="collapseCookiesSix" class="accordion-collapse collapse">
                                         <div class="ud-faq-body">
-                                            <p class="mb-2">We may update this Cookies Policy from time to time. The “Last updated” date at the top of this page will change when we do. We encourage you to review this page occasionally.</p>
+                                            <div class="lang-en">
+                                                <p class="mb-2">We may update this Cookies Policy from time to time. The "Last updated" date at the top of this page will change when we do. We encourage you to review this page occasionally.</p>
+                                            </div>
+                                            <div class="lang-tr">
+                                                <p class="mb-2">Bu Çerez Politikasını zaman zaman güncelleyebiliriz. Bunu yaptığımızda sayfanın üst kısmındaki "Son Güncelleme" tarihi değişecektir. Bu sayfayı ara sıra gözden geçirmenizi öneririz.</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -125,11 +228,19 @@
                                 <div class="accordion">
                                     <button class="ud-faq-btn collapsed" data-bs-toggle="collapse" data-bs-target="#collapseCookiesSeven">
                                         <span class="icon flex-shrink-0"><i class="lni lni-chevron-down"></i></span>
-                                        <span>7. Contact</span>
+                                        <span>
+                                            <span class="lang-en">7. Contact</span>
+                                            <span class="lang-tr">7. İletişim</span>
+                                        </span>
                                     </button>
                                     <div id="collapseCookiesSeven" class="accordion-collapse collapse">
                                         <div class="ud-faq-body">
-                                            <p class="mb-2">If you have questions about our use of cookies, contact us at <a href="mailto:support@onlycampus.ai">support@onlycampus.ai</a> or see our <a href="contact.html">Contact &amp; Support</a> page.</p>
+                                            <div class="lang-en">
+                                                <p class="mb-2">If you have questions about our use of cookies, contact us at <a href="mailto:support@onlycampus.ai">support@onlycampus.ai</a> or see our <a href="contact.html">Contact &amp; Support</a> page.</p>
+                                            </div>
+                                            <div class="lang-tr">
+                                                <p class="mb-2">Çerez kullanımımızla ilgili sorularınız varsa <a href="mailto:support@onlycampus.ai">support@onlycampus.ai</a> adresinden bize ulaşabilir veya <a href="contact.html">İletişim ve Destek</a> sayfamıza bakabilirsiniz.</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

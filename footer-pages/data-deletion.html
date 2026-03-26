@@ -4,111 +4,175 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Data Deletion | OnlyCampus</title>
-    
+    <script>
+        (function () {
+            try {
+                var params = new URLSearchParams(window.location.search);
+                var lang = params.get("lang") || localStorage.getItem("onlycampus_legal_lang");
+                if (lang === "tr") {
+                    document.documentElement.setAttribute("data-lang", "tr");
+                    document.documentElement.lang = "tr";
+                }
+            } catch (error) {}
+        })();
+    </script>
+
     <!-- ===== All CSS files ===== -->
     <link rel="stylesheet" href="../assets/css/bootstrap.min.css" />
     <link rel="stylesheet" href="../assets/css/animate.css" />
     <link rel="stylesheet" href="../assets/css/lineicons.css" />
     <link rel="stylesheet" href="../assets/css/ud-styles.css" />
     <link rel="stylesheet" href="../assets/css/override.css" />
+    <style>
+        .ud-lang-switch{display:inline-flex;border-radius:999px;gap:4px;padding:2px;border:1px solid rgba(148,163,184,.2);background:rgba(148,163,184,.1)}
+        .ud-lang-btn{display:inline-flex;border:0;background:transparent;font-size:1.65rem;font-weight:600;padding:12px 16px;line-height:1;height:50px;align-items:center;justify-content:center;color:#0f172a;cursor:pointer;border-radius:999px}
+        .ud-lang-btn.is-active{background:#fff;color:#0f172a;box-shadow:0 8px 20px rgba(15,23,42,.15)}
+        .lang-tr{display:none}
+        [data-lang="tr"] .lang-tr{display:block}
+        [data-lang="tr"] span.lang-tr{display:inline}
+        [data-lang="tr"] .lang-en{display:none}
+    </style>
 </head>
 <body style="background-color: #f3f4fe; min-height: 100vh;">
     <section class="ud-faq" style="padding: 80px 0; background-color: #f3f4fe;">
         <div class="container">
             <div class="row">
                 <div class="col-lg-10 col-md-12 mx-auto">
-                    <!-- Header -->
                     <div class="text-center mb-5">
-                        <h1 class="mb-3">Account &amp; Data Deletion</h1>
-                        <p class="mb-2"><strong>Effective Date:</strong> February 2026</p>
-                        <p class="mb-2"><strong>Owner:</strong> OnlyCampus</p>
-                        <p class="mb-4">You can delete your account and all associated personal data at any time. Below we describe how to do it and how long the process takes. This information is required for app store compliance (e.g. Google Play) and for your control over your data.</p>
-                        <p><a href="../index.html" class="ud-main-btn ud-border-btn">← Back to OnlyCampus</a></p>
+                        <div class="ud-lang-switch mb-4" role="group" aria-label="Language selector">
+                            <button type="button" class="ud-lang-btn is-active" data-lang="en" aria-pressed="true">🇺🇸</button>
+                            <button type="button" class="ud-lang-btn" data-lang="tr" aria-pressed="false">🇹🇷</button>
+                        </div>
+                        <h1 class="mb-3">
+                            <span class="lang-en">Account &amp; Data Deletion</span>
+                            <span class="lang-tr">Hesap ve Veri Silme</span>
+                        </h1>
+                        <p class="mb-2">
+                            <strong><span class="lang-en">Effective Date:</span><span class="lang-tr">Yürürlük Tarihi:</span></strong>
+                            <span class="lang-en">February 2026</span><span class="lang-tr">Şubat 2026</span>
+                        </p>
+                        <p class="mb-2">
+                            <strong><span class="lang-en">Owner:</span><span class="lang-tr">Sahip:</span></strong> OnlyCampus
+                        </p>
+                        <div class="mb-4">
+                            <p class="lang-en">You can delete your account and all associated personal data at any time. Below we describe how to do it and how long the process takes. This information is required for app store compliance (e.g. Google Play) and for your control over your data.</p>
+                            <p class="lang-tr">Hesabınızı ve ilişkili tüm kişisel verilerinizi istediğiniz zaman silebilirsiniz. Aşağıda bu işlemi nasıl yapabileceğinizi ve sürecin ne kadar sürdüğünü açıklıyoruz. Bu bilgi; uygulama mağazası uyumluluğu (örneğin Google Play) ve verileriniz üzerindeki kontrolünüz için gereklidir.</p>
+                        </div>
+                        <p>
+                            <a href="../index.html" class="ud-main-btn ud-border-btn">
+                                <span class="lang-en">&larr; Back to OnlyCampus</span>
+                                <span class="lang-tr">&larr; OnlyCampus'a Dön</span>
+                            </a>
+                        </p>
                     </div>
 
-                    <!-- Accordion Items -->
                     <div class="row">
                         <div class="col-lg-12">
-                            <!-- Section 1: Account Deletion -->
                             <div class="ud-single-faq wow fadeInUp" data-wow-delay=".1s">
                                 <div class="accordion">
-                                    <button
-                                            class="ud-faq-btn collapsed"
-                                            data-bs-toggle="collapse"
-                                            data-bs-target="#collapseDeletionOne"
-                                    >
-                                        <span class="icon flex-shrink-0">
-                                            <i class="lni lni-chevron-down"></i>
+                                    <button class="ud-faq-btn collapsed" data-bs-toggle="collapse" data-bs-target="#collapseDeletionOne">
+                                        <span class="icon flex-shrink-0"><i class="lni lni-chevron-down"></i></span>
+                                        <span>
+                                            <span class="lang-en">How to delete your account and data</span>
+                                            <span class="lang-tr">Hesabınızı ve verilerinizi nasıl silebilirsiniz</span>
                                         </span>
-                                        <span>How to delete your account and data</span>
                                     </button>
                                     <div id="collapseDeletionOne" class="accordion-collapse collapse">
                                         <div class="ud-faq-body">
-                                            <p class="mb-3">You can delete your account and all associated data in one of the following ways:</p>
-                                            <p class="mb-2"><strong>Option 1 – In the app:</strong></p>
-                                            <ol style="padding-left: 20px; margin-bottom: 20px;">
-                                                <li>Open OnlyCampus and go to <strong>Settings</strong> (or Profile).</li>
-                                                <li>Select <strong>Account</strong> (or similar).</li>
-                                                <li>Tap <strong>Delete account</strong> (or “Delete my data”) and confirm.</li>
-                                            </ol>
-                                            <p class="mb-2"><strong>Option 2 – By email (support):</strong></p>
-                                            <ol style="padding-left: 20px; margin-bottom: 20px;">
-                                                <li>Send an email to <a href="mailto:support@onlycampus.ai">support@onlycampus.ai</a>.</li>
-                                                <li>Use the subject line “Account deletion” or “Data deletion request”.</li>
-                                                <li>Include the <strong>email address or phone number</strong> linked to your account so we can identify you.</li>
-                                                <li>We will confirm receipt and process your request within <strong>30 days</strong>. After that, your account and personal data will be permanently deleted from our systems (except where we must retain data by law).</li>
-                                            </ol>
-                                            <p class="mb-0">For general support or questions, see our <a href="contact.html">Contact &amp; Support</a> page.</p>
+                                            <div class="lang-en">
+                                                <p class="mb-3">You can delete your account and all associated data in one of the following ways:</p>
+                                                <p class="mb-2"><strong>Option 1 - In the app:</strong></p>
+                                                <ol style="padding-left: 20px; margin-bottom: 20px;">
+                                                    <li>Open OnlyCampus and go to <strong>Settings</strong> (or Profile).</li>
+                                                    <li>Select <strong>Account</strong> (or similar).</li>
+                                                    <li>Tap <strong>Delete account</strong> (or "Delete my data") and confirm.</li>
+                                                </ol>
+                                                <p class="mb-2"><strong>Option 2 - By email (support):</strong></p>
+                                                <ol style="padding-left: 20px; margin-bottom: 20px;">
+                                                    <li>Send an email to <a href="mailto:support@onlycampus.ai">support@onlycampus.ai</a>.</li>
+                                                    <li>Use the subject line "Account deletion" or "Data deletion request".</li>
+                                                    <li>Include the <strong>email address or phone number</strong> linked to your account so we can identify you.</li>
+                                                    <li>We will confirm receipt and process your request within <strong>30 days</strong>. After that, your account and personal data will be permanently deleted from our systems (except where we must retain data by law).</li>
+                                                </ol>
+                                                <p class="mb-0">For general support or questions, see our <a href="contact.html">Contact &amp; Support</a> page.</p>
+                                            </div>
+                                            <div class="lang-tr">
+                                                <p class="mb-3">Hesabınızı ve ilişkili tüm verilerinizi aşağıdaki yollardan biriyle silebilirsiniz:</p>
+                                                <p class="mb-2"><strong>Seçenek 1 - Uygulama içinden:</strong></p>
+                                                <ol style="padding-left: 20px; margin-bottom: 20px;">
+                                                    <li>OnlyCampus'u açın ve <strong>Ayarlar</strong> (veya Profil) kısmına gidin.</li>
+                                                    <li><strong>Hesap</strong> bölümünü (veya benzerini) seçin.</li>
+                                                    <li><strong>Hesabı sil</strong> (veya "Verilerimi sil") seçeneğine dokunun ve onaylayın.</li>
+                                                </ol>
+                                                <p class="mb-2"><strong>Seçenek 2 - E-posta ile (destek):</strong></p>
+                                                <ol style="padding-left: 20px; margin-bottom: 20px;">
+                                                    <li><a href="mailto:support@onlycampus.ai">support@onlycampus.ai</a> adresine e-posta gönderin.</li>
+                                                    <li>Konu satırında "Hesap silme" veya "Veri silme talebi" yazın.</li>
+                                                    <li>Sizi doğrulayabilmemiz için hesabınıza bağlı <strong>e-posta adresini veya telefon numarasını</strong> ekleyin.</li>
+                                                    <li>Talebinizi aldığımızı onaylayacak ve <strong>30 gün</strong> içinde işleyeceğiz. Bunun ardından hesabınız ve kişisel verileriniz sistemlerimizden kalıcı olarak silinecektir (yasa gereği saklamamız gereken veriler hariç).</li>
+                                                </ol>
+                                                <p class="mb-0">Genel destek veya sorular için <a href="contact.html">İletişim ve Destek</a> sayfamıza bakın.</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Section 2: Processing time and scope -->
                             <div class="ud-single-faq wow fadeInUp" data-wow-delay=".15s">
                                 <div class="accordion">
-                                    <button
-                                            class="ud-faq-btn collapsed"
-                                            data-bs-toggle="collapse"
-                                            data-bs-target="#collapseDeletionTwo"
-                                    >
-                                        <span class="icon flex-shrink-0">
-                                            <i class="lni lni-chevron-down"></i>
+                                    <button class="ud-faq-btn collapsed" data-bs-toggle="collapse" data-bs-target="#collapseDeletionTwo">
+                                        <span class="icon flex-shrink-0"><i class="lni lni-chevron-down"></i></span>
+                                        <span>
+                                            <span class="lang-en">Processing time and scope</span>
+                                            <span class="lang-tr">İşlem süresi ve kapsam</span>
                                         </span>
-                                        <span>Processing time and scope</span>
                                     </button>
                                     <div id="collapseDeletionTwo" class="accordion-collapse collapse">
                                         <div class="ud-faq-body">
-                                            <p class="mb-2"><strong>Processing time:</strong> We will process deletion requests within <strong>30 days</strong>. You may receive a confirmation email once the process is complete.</p>
-                                            <p class="mb-2"><strong>Scope:</strong> Deletion covers your account and the personal data we hold about you (e.g. profile, usage data, stored content). We do not retain this data longer than necessary unless we are required to do so by law.</p>
-                                            <p class="mb-2">Some data may be retained if required by law or for legitimate business purposes (e.g. fraud prevention, accounting, legal defence). In such cases, we keep only what is necessary and for the minimum period required.</p>
-                                            <p class="mb-0">In Türkiye we comply with the Law on Protection of Personal Data (KVKK). If you are in the EEA/UK, your rights are also covered by applicable data protection laws (e.g. GDPR).</p>
+                                            <div class="lang-en">
+                                                <p class="mb-2"><strong>Processing time:</strong> We will process deletion requests within <strong>30 days</strong>. You may receive a confirmation email once the process is complete.</p>
+                                                <p class="mb-2"><strong>Scope:</strong> Deletion covers your account and the personal data we hold about you (e.g. profile, usage data, stored content). We do not retain this data longer than necessary unless we are required to do so by law.</p>
+                                                <p class="mb-2">Some data may be retained if required by law or for legitimate business purposes (e.g. fraud prevention, accounting, legal defence). In such cases, we keep only what is necessary and for the minimum period required.</p>
+                                                <p class="mb-0">In Turkiye we comply with the Law on Protection of Personal Data (KVKK). If you are in the EEA/UK, your rights are also covered by applicable data protection laws (e.g. GDPR).</p>
+                                            </div>
+                                            <div class="lang-tr">
+                                                <p class="mb-2"><strong>İşlem süresi:</strong> Silme taleplerini <strong>30 gün</strong> içinde sonuçlandırırız. İşlem tamamlandığında size bir onay e-postası gönderilebilir.</p>
+                                                <p class="mb-2"><strong>Kapsam:</strong> Silme işlemi; hesabınızı ve hakkınızda tuttuğumuz kişisel verileri (örn. profil, kullanım verileri, saklanan içerikler) kapsar. Yasa gerektirmedikçe bu verileri gerektiğinden uzun süre tutmayız.</p>
+                                                <p class="mb-2">Bazı veriler; yasal zorunluluklar veya meşru ticari amaçlar (örn. dolandırıcılığı önleme, muhasebe, hukuki savunma) nedeniyle saklanabilir. Bu durumlarda yalnızca gerekli veriyi ve gerekli en kısa süre boyunca saklarız.</p>
+                                                <p class="mb-0">Türkiye'de Kişisel Verilerin Korunması Kanunu'na (KVKK) uyarız. AEA/Birleşik Krallık bölgesindeyseniz haklarınız ilgili veri koruma mevzuatı (örn. GDPR) kapsamında da korunur.</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Section 3: Device-Level Controls -->
                             <div class="ud-single-faq wow fadeInUp" data-wow-delay=".2s">
                                 <div class="accordion">
-                                    <button
-                                            class="ud-faq-btn collapsed"
-                                            data-bs-toggle="collapse"
-                                            data-bs-target="#collapseDeletionThree"
-                                    >
-                                        <span class="icon flex-shrink-0">
-                                            <i class="lni lni-chevron-down"></i>
+                                    <button class="ud-faq-btn collapsed" data-bs-toggle="collapse" data-bs-target="#collapseDeletionThree">
+                                        <span class="icon flex-shrink-0"><i class="lni lni-chevron-down"></i></span>
+                                        <span>
+                                            <span class="lang-en">Device-Level Controls</span>
+                                            <span class="lang-tr">Cihaz Düzeyinde Kontroller</span>
                                         </span>
-                                        <span>Device-Level Controls</span>
                                     </button>
                                     <div id="collapseDeletionThree" class="accordion-collapse collapse">
                                         <div class="ud-faq-body">
-                                            <p class="mb-2">Users may also revoke permissions or delete locally stored data by:</p>
-                                            <ul style="list-style-type: disc; padding-left: 20px; margin-bottom: 20px;">
-                                                <li>Removing the service from their device</li>
-                                                <li>Resetting permissions through device settings</li>
-                                            </ul>
-                                            <p>Once deletion is complete, all associated personal information, usage data, and stored content are removed from our systems unless required by law to retain.</p>
+                                            <div class="lang-en">
+                                                <p class="mb-2">Users may also revoke permissions or delete locally stored data by:</p>
+                                                <ul style="list-style-type: disc; padding-left: 20px; margin-bottom: 20px;">
+                                                    <li>Removing the service from their device</li>
+                                                    <li>Resetting permissions through device settings</li>
+                                                </ul>
+                                                <p>Once deletion is complete, all associated personal information, usage data, and stored content are removed from our systems unless required by law to retain.</p>
+                                            </div>
+                                            <div class="lang-tr">
+                                                <p class="mb-2">Kullanıcılar ayrıca şu yollarla izinleri geri alabilir veya cihazda yerel olarak saklanan verileri silebilir:</p>
+                                                <ul style="list-style-type: disc; padding-left: 20px; margin-bottom: 20px;">
+                                                    <li>Hizmeti cihazlarından kaldırarak</li>
+                                                    <li>Cihaz ayarları üzerinden izinleri sıfırlayarak</li>
+                                                </ul>
+                                                <p>Silme işlemi tamamlandığında, yasanın saklamamızı gerektirdiği durumlar hariç, ilişkili tüm kişisel bilgiler, kullanım verileri ve saklanan içerikler sistemlerimizden kaldırılır.</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -119,10 +183,9 @@
             </div>
         </div>
     </section>
-    
+
     <script src="../assets/js/bootstrap.bundle.min.js"></script>
     <script src="../assets/js/wow.min.js"></script>
     <script src="../assets/js/main.js"></script>
 </body>
 </html>
-

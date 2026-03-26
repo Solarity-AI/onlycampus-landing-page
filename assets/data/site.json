@@ -320,7 +320,7 @@
     "emailLabel": "Email",
     "emails": [
       "hello@onlycampus.ai",
-      "support@onlycampus.ai"
+      "ata.turhan@solarityai.com"
     ],
     "form": {
       "action": "https://formsubmit.co/hello@onlycampus.ai",
@@ -411,10 +411,6 @@
     ],
     "legalTitle": "Legal",
     "legalLinks": [
-      {
-        "label": "Privacy Policy",
-        "href": "footer-pages/privacy-policy.html"
-      },
       {
         "label": "Data Deletion",
         "href": "footer-pages/data-deletion.html"
