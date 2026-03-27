@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
-
+Disallow: /ansible/
+Disallow: /.git/
+Disallow: /backup-pages/
+Disallow: /form-pages/
 Sitemap: https://onlycampus.solarityai.com/sitemap.xml

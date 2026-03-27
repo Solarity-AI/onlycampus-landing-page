@@ -1,0 +1,74 @@
+[
+  {
+    "name": "Ava M.",
+    "role": "Student",
+    "text": "OnlyCampus keeps my schedule and assignments in one place. It saves me every week.",
+    "image": "assets/images/testimonials/author-02.webp"
+  },
+  {
+    "name": "Noah T.",
+    "role": "Student Athlete",
+    "text": "Between practice and classes, the reminders help me stay on track.",
+    "image": "assets/images/testimonials/author-03.webp"
+  },
+  {
+    "name": "Mia R.",
+    "role": "First-Year Student",
+    "text": "The campus events feed helped me find my people quickly.",
+    "image": "assets/images/testimonials/author-04.webp"
+  },
+  {
+    "name": "Leo K.",
+    "role": "Graduate Student",
+    "text": "I like seeing all deadlines and study blocks in one dashboard.",
+    "image": "assets/images/testimonials/author-02.webp"
+  },
+  {
+    "name": "Sofia L.",
+    "role": "Resident Assistant",
+    "text": "OnlyCampus makes it easy to share updates with residents.",
+    "image": "assets/images/testimonials/author-03.webp"
+  },
+  {
+    "name": "Ethan P.",
+    "role": "Computer Science",
+    "text": "The progress insights keep me motivated during busy weeks.",
+    "image": "assets/images/testimonials/author-04.webp"
+  },
+  {
+    "name": "Lily H.",
+    "role": "Business Major",
+    "text": "The planning tools feel simple but powerful. Exactly what I needed.",
+    "image": "assets/images/testimonials/author-02.webp"
+  },
+  {
+    "name": "Jack D.",
+    "role": "Student",
+    "text": "I can sync my classes and never worry about missing deadlines.",
+    "image": "assets/images/testimonials/author-03.webp"
+  },
+  {
+    "name": "Emma S.",
+    "role": "Exchange Student",
+    "text": "It helped me understand campus life and find events quickly.",
+    "image": "assets/images/testimonials/author-04.webp"
+  },
+  {
+    "name": "Lucas V.",
+    "role": "Engineering Student",
+    "text": "OnlyCampus keeps me focused on the tasks that matter most.",
+    "image": "assets/images/testimonials/author-02.webp"
+  },
+  {
+    "name": "Chloe N.",
+    "role": "Student Leader",
+    "text": "We use it to organize group meetings and campus activities.",
+    "image": "assets/images/testimonials/author-03.webp"
+  },
+  {
+    "name": "Mason B.",
+    "role": "Pre-Med Student",
+    "text": "The reminders and study tools make exam weeks less stressful.",
+    "image": "assets/images/testimonials/author-04.webp"
+  }
+]

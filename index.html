@@ -1,611 +1,1324 @@
+<!-- =========
+
+	Template Name: Play
+	Author: UIdeck
+	Author URI: https://uideck.com/
+	Support: https://uideck.com/support/
+	Version: 1.1
+
+========== -->
+
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <!-- Primary Meta Tags -->
-  <title>OnlyCampus - Connect with Your University Community</title>
-  <meta name="title" content="OnlyCampus - Connect with Your University Community">
-  <meta name="description"
-    content="OnlyCampus is the ultimate social platform for university students. Connect with classmates, find roommates, discover events, join forums, and build your campus community.">
-  <meta name="keywords"
-    content="university app, campus social network, student community, roommate finder, campus events, university forum">
-  <meta name="author" content="OnlyCampus">
-  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
-  <meta name="language" content="English">
-  <meta name="revisit-after" content="7 days">
-
-  <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://onlycampus.solarityai.com/">
-  <meta property="og:title" content="OnlyCampus - Connect with Your University Community">
-  <meta property="og:description"
-    content="The ultimate social platform for university students. Connect, discover, and thrive on campus.">
-  <meta property="og:image" content="https://onlycampus.solarityai.com/assets/images/logo/logo.webp">
-
-  <!-- Twitter -->
-  <meta property="twitter:card" content="summary_large_image">
-  <meta property="twitter:url" content="https://onlycampus.solarityai.com/">
-  <meta property="twitter:title" content="OnlyCampus - Connect with Your University Community">
-  <meta property="twitter:description"
-    content="The ultimate social platform for university students. Connect, discover, and thrive on campus.">
-  <meta property="twitter:image" content="https://onlycampus.solarityai.com/assets/images/logo/logo.webp">
-
-  <!-- Favicons -->
-  <link rel="icon" type="image/webp" href="assets/images/logo/logo.webp" />
-  <link rel="shortcut icon" href="assets/images/logo/logo.webp" />
-  <link rel="apple-touch-icon" href="assets/images/logo/logo.webp" />
-  <meta name="apple-mobile-web-app-title" content="OnlyCampus" />
-  <meta name="theme-color" content="#1e40af" />
-
-  <!-- Canonical URL -->
-  <link rel="canonical" href="https://onlycampus.solarityai.com/" />
-
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-  <link rel="preload" as="style"
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;family=Poppins:wght@400;500;600;700;800&amp;display=swap"
-    onload="this.onload=null;this.rel='stylesheet'">
-  <noscript>
-    <link rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;family=Poppins:wght@400;500;600;700;800&amp;display=swap">
-  </noscript>
-
-  <!-- CSS Files -->
-  <link rel="preload" as="style" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-    onload="this.onload=null;this.rel='stylesheet'" crossorigin="anonymous">
-  <noscript>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-  </noscript>
-  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    onload="this.onload=null;this.rel='stylesheet'" crossorigin="anonymous">
-  <noscript>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  </noscript>
-  <link rel="preload" as="style" href="assets/css/main.css" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript>
-    <link rel="stylesheet" href="assets/css/main.css">
-  </noscript>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
-    <!-- Language Switcher Styles -->
+    <!-- Resource Hints for Performance -->
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+    <!-- Preload icon font to prevent CLS from icon placeholders -->
+    <link rel="preload" href="assets/fonts/LineIcons.woff2" as="font" type="font/woff2" crossorigin />
+
+    <!-- Google Analytics is loaded after user interaction to keep initial render lighter -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      (function() {
+        var loaded = false;
+        function loadAnalytics() {
+          if (loaded) return;
+          loaded = true;
+          var s = document.createElement('script');
+          s.async = true;
+          s.src = 'https://www.googletagmanager.com/gtag/js?id=G-3SE53Z2S2Z';
+          s.onload = function() {
+            gtag('config', 'G-3SE53Z2S2Z', { transport_type: 'beacon' });
+          };
+          document.head.appendChild(s);
+        }
+
+        ['pointerdown', 'keydown', 'touchstart'].forEach(function(evt) {
+          window.addEventListener(evt, loadAnalytics, { once: true, passive: true });
+        });
+      })();
+    </script>
+    
+      <!-- Primary Title -->
+          <title>OnlyCampus | All-in-One Campus Success Platform</title>
+          <meta name="title" content="OnlyCampus | All-in-One Campus Success Platform">
+          <meta name="description" content="OnlyCampus helps students stay organized, connected, and on track with a single hub for courses, schedules, events, and support.">
+          <meta name="keywords" content="campus success, student platform, course planner, university app, student productivity">
+          <meta name="author" content="Solarity AI LLC">
+          <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+          <meta name="language" content="English">
+          <meta name="revisit-after" content="7 days">
+
+          <!-- Open Graph / Facebook -->
+          <meta property="og:type" content="website">
+          <meta property="og:url" content="https://onlycampus.solarityai.com/">
+          <meta property="og:title" content="OnlyCampus | Transform Your Campus Experience">
+          <meta property="og:description" content="A modern platform that brings courses, planning, and community together for better outcomes.">
+          <meta property="og:image" content="https://onlycampus.solarityai.com/assets/images/hero/sohbetTerapiScreens.png">
+
+          <!-- Twitter -->
+          <meta property="twitter:card" content="summary_large_image">
+          <meta property="twitter:url" content="https://onlycampus.solarityai.com/">
+          <meta property="twitter:title" content="OnlyCampus | Campus Success Made Simple">
+          <meta property="twitter:description" content="Plan smarter, learn better, and stay connected with OnlyCampus.">
+          <meta property="twitter:image" content="https://onlycampus.solarityai.com/assets/images/hero/sohbetTerapiScreens.png">
+          <script>
+            (function () {
+              try {
+                var params = new URLSearchParams(window.location.search);
+                var lang = params.get("lang") || localStorage.getItem("onlycampus_legal_lang");
+                if (lang === "tr") {
+                  document.documentElement.setAttribute("data-lang", "tr");
+                  document.documentElement.lang = "tr";
+                }
+              } catch (error) {}
+            })();
+          </script>
+
+          <!-- Favicons -->
+          <link rel="icon" type="image/png" href="assets/images/favicon/favicon-96x96.png" sizes="96x96" />
+          <link rel="icon" type="image/svg+xml" href="assets/images/favicon/favicon.svg" />
+          <link rel="shortcut icon" href="assets/images/favicon/favicon.ico" />
+          <link rel="apple-touch-icon" sizes="180x180" href="assets/images/favicon/apple-touch-icon.png" />
+          <meta name="apple-mobile-web-app-title" content="OnlyCampus" />
+          <link rel="manifest" href="assets/images/favicon/site.webmanifest" />
+
+          <!-- Theme Color -->
+          <meta name="theme-color" content="#3b82f6" />
+
+          <!-- Canonical URL -->
+          <link rel="canonical" href="https://onlycampus.solarityai.com/" />
+
+          <!-- Sitemap -->
+          <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+
+          <!-- Structured Data (JSON-LD) -->
+          <script type="application/ld+json">
+          {
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "name": "OnlyCampus",
+            "url": "https://onlycampus.solarityai.com/",
+            "description": "OnlyCampus helps students stay organized, connected, and on track with a single hub for courses, schedules, events, and support."
+          }
+          </script>
+          <script type="application/ld+json">
+          {
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "Solarity AI LLC",
+            "legalName": "Solarity AI LLC",
+            "url": "https://onlycampus.solarityai.com/",
+            "logo": "https://onlycampus.solarityai.com/assets/images/logo/CompanyLogo-106w.webp",
+            "description": "OnlyCampus brings courses, planning, and community into one student-first platform.",
+            "foundingDate": "2024",
+            "contactPoint": {
+              "@type": "ContactPoint",
+              "contactType": "Customer Service",
+              "email": "ata.turhan@solarityai.com",
+              "availableLanguage": ["English"]
+            },
+            "sameAs": [
+              "https://www.linkedin.com/company/solarity-ai-llc"
+            ],
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Dallas",
+              "addressRegion": "Texas",
+              "addressCountry": "US"
+            }
+          }
+          </script>
+          <script type="application/ld+json">
+          {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://onlycampus.solarityai.com/"
+              }
+            ]
+          }
+          </script>
+          <script type="application/ld+json">
+          {
+            "@context": "https://schema.org",
+            "@type": "SoftwareApplication",
+            "name": "OnlyCampus",
+            "url": "https://onlycampus.solarityai.com/",
+            "applicationCategory": "EducationApplication",
+            "operatingSystem": "iOS, Android",
+            "offers": {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "USD"
+            },
+            "description": "A student success app that unifies planning, learning, and campus life.",
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": 5,
+              "ratingCount": 100
+            }
+          }
+          </script>
+
+    <!-- ===== Critical CSS (inline, above-the-fold) ===== -->
     <style>
-      @font-face {
-        font-family: "Font Awesome 6 Free";
-        font-style: normal;
-        font-weight: 900;
-        font-display: swap;
-        src: url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/webfonts/fa-solid-900.woff2")
-          format("woff2");
-      }
-
-      @font-face {
-        font-family: "Font Awesome 6 Brands";
-        font-style: normal;
-        font-weight: 400;
-        font-display: swap;
-        src: url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/webfonts/fa-brands-400.woff2")
-          format("woff2");
-      }
-
-      .language-switcher {
-        position: absolute;
-        top: 50%;
-        right: 1rem;
-        transform: translateY(-50%);
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 0.25rem;
-        padding: 0.5rem 1rem;
-        min-width: 65px;
-        background: rgba(255, 255, 255, 0.1);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        border-radius: 8px;
-        color: var(--color-text-primary);
-        font-weight: 600;
-        font-size: 0.875rem;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-        z-index: 1000;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-      }
-
-      .language-switcher:hover {
-        background: rgba(255, 255, 255, 0.2);
-        border-color: var(--color-primary-light);
-        color: var(--color-primary-light);
-        transform: translateY(-50%) translateY(-2px);
-        box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
-      }
-      
-      .language-switcher:active {
-        transform: translateY(-50%) translateY(0);
-      }
-      
-      @media (max-width: 991px) {
-        .language-switcher {
-          position: relative;
-          top: auto;
-          right: auto;
-          transform: none;
-          margin-top: 1rem;
-          width: auto;
-          align-self: center;
-        }
-        
-        .language-switcher:hover {
-          transform: translateY(-2px);
-        }
-        
-        .language-switcher:active {
-          transform: translateY(0);
-        }
-      }
+:root{--bs-primary:#2f6bff;--bs-secondary:#1e4fbf;--text-primary:#0f172a;--text-secondary:#475569;--text-tertiary:#64748b;--surface-1:#fff;--shadow-strong:0 24px 60px rgba(15,23,42,.18)}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:100px}
+body,html{overflow-x:hidden;margin:0;padding:0}
+body{max-width:100%;width:100%;font-family:"Poppins",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif!important;color:#475569;line-height:1.6;-webkit-font-smoothing:antialiased;font-size:100%}
+img,video{max-width:100%;height:auto;vertical-align:middle}
+h1,h2,h3,h4,h5,h6{font-weight:700;color:#0f172a;margin:0}
+a,button,input,select,textarea,[role="button"]{touch-action:manipulation}
+a{display:inline-block;text-decoration:none;color:inherit}
+i,span{display:inline-block}
+ul,ol{margin:0;padding:0;list-style:none}
+p{font-size:16px;font-weight:400;line-height:26px;margin:0}
+.container{width:100%;padding-right:12px;padding-left:12px;margin-right:auto;margin-left:auto}
+@media (min-width:576px){.container{max-width:540px}}
+@media (min-width:768px){.container{max-width:720px}}
+@media (min-width:992px){.container{max-width:960px}}
+@media (min-width:1200px){.container{max-width:1140px}}
+@media (min-width:1400px){.container{max-width:1320px}}
+.row{display:flex;flex-wrap:wrap;margin-right:-12px;margin-left:-12px}
+.row>*{width:100%;max-width:100%;padding-right:12px;padding-left:12px}
+.col-lg-6,.col-lg-12{flex:0 0 auto}
+.col-lg-12{width:100%}
+@media (min-width:992px){.col-lg-6{width:50%}.col-lg-12{width:100%}}
+.align-items-start{align-items:flex-start}
+.align-items-center{align-items:center}
+.mx-auto{margin-right:auto;margin-left:auto}
+.mt-4{margin-top:1.5rem}
+.img-fluid{max-width:100%;height:auto}
+.navbar{position:relative;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;padding:0;border-radius:5px}
+.navbar-brand{display:inline-block;padding:0}
+.navbar-collapse{flex-basis:100%;flex-grow:1;align-items:center}
+.navbar-nav{display:flex;flex-direction:column;padding-left:0;margin-bottom:0;list-style:none}
+@media (min-width:992px){
+  .navbar-expand-lg{flex-wrap:nowrap;justify-content:flex-start}
+  .navbar-expand-lg .navbar-collapse{display:flex!important;flex-basis:auto}
+  .navbar-expand-lg .navbar-nav{flex-direction:row}
+  .navbar-expand-lg .navbar-toggler{display:none}
+}
+.navbar-toggler{padding:0;border:0;background:transparent;cursor:pointer;display:flex;flex-direction:column;justify-content:center}
+.navbar-toggler .toggler-icon{width:30px;height:2px;background-color:#f8fafc;display:block;margin:5px 0;position:relative}
+.navbar-nav .nav-item{position:relative;padding:0 20px}
+.navbar-nav .nav-item>a{font-size:16px;font-weight:400;color:#fff;padding:25px 8px;display:inline-block}
+.ud-header{position:absolute;top:0;left:0;width:100%;z-index:99;background:transparent!important;transition:background .2s ease,box-shadow .2s ease}
+.ud-header.sticky{position:fixed;background:rgba(255,255,255,.86)!important;backdrop-filter:blur(12px);box-shadow:0 16px 40px rgba(15,23,42,.12)}
+.ud-header .navbar-brand{padding:10px 0!important;display:flex;align-items:center}
+.ud-header .navbar-brand img{height:88px!important;width:88px!important;max-width:88px!important;object-fit:contain;aspect-ratio:1/1}
+.ud-header:not(.sticky) .navbar-nav .nav-item a{color:#f8fafc!important}
+.ud-header:not(.sticky) .navbar-toggler .toggler-icon{background:#f8fafc!important}
+.ud-header .navbar-nav .nav-item a{font-weight:500!important;font-size:1rem!important;color:#0f172a!important}
+.ud-nav-right{margin-left:auto;display:flex;align-items:center}
+.ud-lang-switch{display:inline-flex;border-radius:999px;gap:4px;padding:2px;border:1px solid rgba(148,163,184,.2);background:rgba(148,163,184,.1)}
+.ud-lang-btn{display:inline-flex;border:0;background:transparent;font-size:1.65rem;font-weight:600;padding:12px 16px;line-height:1;height:50px;align-items:center;justify-content:center;color:#0f172a;cursor:pointer;border-radius:999px}
+.ud-lang-btn.is-active{background:#fff;color:#0f172a;box-shadow:0 8px 20px rgba(15,23,42,.15)}
+.ud-header:not(.sticky) .ud-lang-switch{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.25)}
+.ud-header:not(.sticky) .ud-lang-btn{color:#f8fafc}
+.ud-header:not(.sticky) .ud-lang-btn.is-active{background:rgba(255,255,255,.95);color:#0f172a}
+.ud-hero{background:linear-gradient(135deg,#0f3a75 0%,#1c57b7 45%,#3b82f6 100%)!important;padding:200px 0 140px!important;position:relative;overflow:hidden}
+.ud-hero::before{content:"";position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(circle at 20% 50%,rgba(59,130,246,.2)0,transparent 50%),radial-gradient(circle at 80% 80%,rgba(14,116,144,.2)0,transparent 50%);pointer-events:none}
+.ud-hero-content{max-width:780px;margin:auto;margin-bottom:30px;position:relative;z-index:1}
+.ud-hero-kicker{display:inline-block;font-size:.95rem;font-weight:600;color:#dbeafe;letter-spacing:.04em;text-transform:uppercase;margin-bottom:12px}
+.ud-hero-content .ud-hero-title{color:#fff!important;font-weight:700!important;font-size:3.2rem!important;line-height:1.2!important;letter-spacing:-.02em!important;margin-bottom:1.5rem!important;text-align:left;max-width:560px;text-shadow:0 2px 20px rgba(0,0,0,.3)}
+.ud-hero-content .ud-hero-desc{color:rgba(255,255,255,.95)!important;font-size:1.15rem!important;line-height:1.7!important;font-weight:400!important;max-width:520px;margin:0 0 1.5rem;opacity:1!important;letter-spacing:.3px;text-shadow:0 1px 10px rgba(0,0,0,.2)}
+.ud-hero-buttons{display:flex;gap:12px;justify-content:flex-start;flex-wrap:wrap;list-style:none;padding:0;margin:0}
+.ud-main-btn{background:linear-gradient(135deg,#2563eb 0,#3b82f6 100%)!important;border:0!important;color:#fff!important;font-weight:600!important;font-size:1rem!important;padding:12px 28px!important;border-radius:999px!important;letter-spacing:.01em;text-decoration:none;display:inline-block;cursor:pointer;text-align:center;white-space:nowrap;vertical-align:middle}
+.ud-white-btn{background-color:#fff!important;color:#1e3a8a!important;border:1px solid rgba(148,163,184,.6)!important}
+.ud-main-btn.ud-border-btn{background:transparent!important;border:1px solid rgba(37,99,235,.45)!important;color:#2563eb!important}
+.ud-hero .ud-main-btn.ud-border-btn{border-color:rgba(255,255,255,.35)!important;color:#fff!important;background:transparent!important}
+.ud-hero-media{position:relative;z-index:1;display:flex;justify-content:center;align-items:center;padding:18px;border-radius:26px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2)}
+.ud-hero-media img{max-width:520px;width:100%;border-radius:18px}
+.ud-hero-media-cards{position:absolute;inset:0;pointer-events:none}
+.ud-hero-card{position:absolute;background:#fff;border-radius:16px;padding:12px 16px;display:flex;flex-direction:column;gap:2px;min-width:140px}
+.ud-hero-card:nth-child(1){top:14%;right:-12%}
+.ud-hero-card:nth-child(2){bottom:12%;left:-10%}
+.ud-hero-card-label{font-size:.75rem;text-transform:uppercase;letter-spacing:.08em;color:#64748b}
+.ud-hero-card-value{font-size:1.3rem;color:#0f172a;font-weight:700}
+.ud-hero-powerwords{position:relative;width:100vw;left:50%;right:50%;margin-left:-50vw;margin-right:-50vw;margin-top:3rem;padding:20px 0;display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:18px;text-align:center;font-size:1.1rem;font-weight:500;color:rgba(255,255,255,.9)!important;background:rgba(255,255,255,.1);backdrop-filter:blur(10px);border-top:1px solid rgba(255,255,255,.2);border-bottom:1px solid rgba(255,255,255,.2)}
+.ud-hero-powerwords{letter-spacing:.5px}
+.ud-hero-powerwords .pw-item{color:rgba(255,255,255,.95)!important;text-shadow:0 1px 3px rgba(0,0,0,.2)}
+.ud-hero-powerwords .pw-separator{color:rgba(255,255,255,.6)!important}
+.ud-brand-strip-logos img{height:28px;width:auto;display:inline-block}
+@media (max-width:1199px) and (min-width:992px){.ud-header .navbar-brand img{height:56px!important;width:56px!important;max-width:56px!important}}
+@media (max-width:1024px){.ud-hero{padding:130px 0 80px!important}}
+@media (max-width:991px){
+  .ud-header .navbar-collapse{position:absolute;top:100%;right:0;max-width:300px;width:100%;background-color:#fff;z-index:9;box-shadow:0 15px 20px rgba(0,0,0,.1);padding:0;display:none;border-radius:5px}
+  .ud-header .navbar-collapse.show{display:block}
+  .ud-header .navbar-brand img{height:72px!important;width:72px!important;max-width:72px!important}
+  .ud-header .navbar{display:flex!important;align-items:center!important;flex-wrap:nowrap}
+  .ud-header .navbar-toggler{order:2;margin-left:auto;flex-direction:column!important;justify-content:center!important}
+  .ud-header .ud-nav-right{order:3;margin-left:8px}
+  .ud-header .navbar-collapse{order:4;width:100%;flex-basis:100%}
+  .ud-nav-right{margin-left:0}
+  .ud-hero-media{margin-top:32px}
+  .ud-hero-card{position:static}
+  .ud-hero-media-cards{position:static;display:flex;justify-content:center;gap:12px;margin-top:16px}
+}
+@media (max-width:768px){
+  .ud-hero{padding:130px 0 80px!important}
+  .ud-hero::before{display:none}
+  .ud-hero-media{backdrop-filter:none}
+  .ud-hero-content .ud-hero-title{font-size:2.5rem!important;line-height:1.3!important;text-align:center;margin-left:auto;margin-right:auto}
+  .ud-hero-content .ud-hero-desc{font-size:1.125rem!important;line-height:1.6!important;text-align:center}
+  .ud-hero-buttons{justify-content:center}
+  .ud-hero-media-cards{flex-direction:column;align-items:stretch;width:100%}
+  .ud-hero-card{width:100%;min-width:0;max-width:100%;padding:12px 14px}
+}
+@media (max-width:575px){
+  .container,.row,.row>[class*=col-],.ud-header,.ud-hero,header,main,section{max-width:100%!important}
+  .container{width:100%!important;padding-left:15px!important;padding-right:15px!important;box-sizing:border-box!important}
+  .row{margin-left:0!important;margin-right:0!important}
+  .row>[class*=col-]{padding-left:8px!important;padding-right:8px!important;min-width:0!important}
+  .ud-header{left:0;right:0}
+  .ud-header .navbar{min-width:0!important;flex-wrap:wrap}
+  .ud-header .navbar-brand img{height:60px!important;width:60px!important;max-width:60px!important;max-height:60px!important}
+  .ud-hero-content .ud-hero-title{font-size:2rem!important;line-height:1.2!important}
+  .ud-hero-content .ud-hero-desc{font-size:1rem!important;line-height:1.5!important}
+  .ud-main-btn,.ud-white-btn{padding:8px 24px!important;font-size:.95rem!important;min-width:100px!important}
+}
+@media (max-width:480px){.container{padding-left:14px!important;padding-right:14px!important;max-width:100%!important}}
+@media (max-width:425px){.ud-hero-media .ud-hero-media-cards[data-site-list=hero-media-cards]{position:static!important;display:flex!important;flex-direction:column!important;align-items:flex-start!important;justify-content:flex-start!important;width:100%!important;padding-left:0!important}.ud-hero-media .ud-hero-media-cards[data-site-list=hero-media-cards] .ud-hero-card{position:static!important;width:100%!important;max-width:100%!important;min-width:0!important;align-self:flex-start!important;margin-left:-10px!important}}
+@media (max-width:360px){.ud-hero-content .ud-hero-title{font-size:1.75rem!important}.ud-hero-content .ud-hero-desc{font-size:.95rem!important}}
+/* === Utility classes (prevents shift when bootstrap-lite.css loads) === */
+.text-center{text-align:center}
+.justify-content-center{justify-content:center}
+/* === Grid columns for features/stats (prevents layout shift when bootstrap-lite.css loads) === */
+.col-xl-4,.col-lg-4,.col-md-6,.col-sm-6,.col-sm-10,.col-lg-3,.col-xl-3{flex:0 0 auto}
+@media (min-width:576px){.col-sm-6{width:50%}.col-sm-10{width:83.333333%}}
+@media (min-width:768px){.col-md-6{width:50%}}
+@media (min-width:992px){.col-lg-4{width:33.333333%}.col-lg-3{width:25%}}
+@media (min-width:1200px){.col-xl-4{width:33.333333%}.col-xl-3{width:25%}}
+/* === Features section (prevents layout shift when ud-styles.css / override.css load) === */
+.ud-features{padding-top:120px;padding-bottom:90px}
+.ud-section-title{max-width:620px;margin-bottom:70px}
+.ud-section-title h2{font-size:2.5rem!important;line-height:1.3!important;font-weight:700!important;color:#0f172a!important}
+.ud-section-title p{font-size:1.125rem!important;line-height:1.7!important;color:#475569!important}
+.ud-single-feature{margin-bottom:40px;padding:24px 22px;border-radius:16px;border:1px solid rgba(148,163,184,.12)}
+.ud-feature-icon{width:70px;height:70px;border-radius:16px;background:#2f6bff!important;color:#fff!important;display:flex;align-items:center;justify-content:center;margin-bottom:1rem;font-size:1.5rem}
+.ud-feature-title{font-size:1.15rem!important;font-weight:600!important;color:#0f172a!important;margin-bottom:.5rem}
+.ud-feature-desc{font-size:1rem!important;line-height:1.7!important;color:#475569!important}
+@media (max-width:767px){.ud-features{padding-top:80px;padding-bottom:40px}}
+/* === Stats section === */
+.ud-stat-card{background:#fff;border-radius:16px;padding:28px 24px;border:1px solid rgba(148,163,184,.15);text-align:center;margin-bottom:30px}
+.ud-stat-value{font-size:2rem;font-weight:700;color:#0f172a;margin-bottom:6px}
+.ud-stat-label{color:#475569;font-size:1rem}
     </style>
-</head>
-
-<body id="top">
-  <!-- ====== Header Start ====== -->
-  <header class="ud-header">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-          <nav class="navbar navbar-expand-lg">
-            <a class="navbar-brand" href="index.html">
-              <span class="logo-text">OnlyCampus</span>
-            </a>
-            <button class="navbar-toggler" type="button" aria-label="Toggle navigation" id="mobileMenuToggle">
-              <span class="toggler-icon"></span>
-              <span class="toggler-icon"></span>
-              <span class="toggler-icon"></span>
-            </button>
-
-            <button id="languageSwitcher" class="language-switcher" type="button" aria-label="Switch language">🇹🇷 TR</button>
-
-            <div class="navbar-collapse">
-              <ul id="nav" class="navbar-nav mx-auto">
-                <li class="nav-item"><a class="ud-menu-scroll" href="#features" data-i18n="nav.features">Features</a></li>
-                <li class="nav-item"><a class="ud-menu-scroll" href="#about" data-i18n="nav.about">About</a></li>
-                <li class="nav-item"><a class="ud-menu-scroll" href="#download" data-i18n="nav.download">Download</a></li>
-                <li class="nav-item"><a class="ud-menu-scroll" href="#contact" data-i18n="nav.contact">Contact</a></li>
-              </ul>
-            </div>
-          </nav>
-        </div>
-      </div>
-    </div>
-  </header>
-  <!-- ====== Header End ====== -->
-
-  <main id="main-content">
-  <!-- ====== Hero Section Start ====== -->
-  <section id="home" class="ud-hero">
-    <div class="container">
-      <div class="row align-items-center">
-        <div class="col-lg-6">
-          <div class="ud-hero-content wow fadeInUp" data-wow-delay=".1s">
-            <h1 class="ud-hero-title">
-              <span data-i18n="hero.title">Connect with Your</span> <span class="text-gradient" data-i18n="hero.titleHighlight">University Community</span>
-            </h1>
-            <p class="ud-hero-description" data-i18n="hero.description">
-              OnlyCampus is the ultimate social platform for university students. Connect with classmates, find
-              roommates, discover events, join forums, and build your campus community.
-            </p>
-            <div class="ud-hero-buttons">
-              <a href="#download" class="ud-main-btn" data-i18n="hero.downloadNow">Download Now</a>
-              <a href="#features" class="ud-secondary-btn" data-i18n="hero.learnMore">Learn More</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-6">
-          <div class="ud-hero-image wow fadeInUp" data-wow-delay=".2s">
-            <div class="phone-mockup">
-              <div class="phone-screen">
-                <div class="app-preview">
-                  <div class="app-header">
-                    <div class="app-status-bar">
-                      <span>9:41</span>
-                      <div class="status-icons">
-                        <span></span><span></span><span></span>
-                      </div>
-                    </div>
-                    <div class="app-nav">
-                      <p class="app-nav-title">OnlyCampus</p>
-                      <div class="nav-icon"></div>
-                    </div>
-                  </div>
-                  <div class="app-content">
-                    <div class="app-card">
-                      <div class="card-header">
-                        <div class="avatar"></div>
-                        <div class="card-info">
-                          <div class="card-title"></div>
-                          <div class="card-subtitle"></div>
-                        </div>
-                      </div>
-                      <div class="card-image"></div>
-                      <div class="card-footer">
-                        <div class="card-actions">
-                          <span></span>
-                          <span></span>
-                          <span></span>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="app-card">
-                      <div class="card-header">
-                        <div class="avatar"></div>
-                        <div class="card-info">
-                          <div class="card-title"></div>
-                          <div class="card-subtitle"></div>
-                        </div>
-                      </div>
-                      <div class="card-image"></div>
-                      <div class="card-footer">
-                        <div class="card-actions">
-                          <span></span>
-                          <span></span>
-                          <span></span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="app-bottom-nav">
-                    <div class="nav-item active">
-                      <i class="fas fa-home"></i>
-                      <span data-i18n="app.home">Home</span>
-                    </div>
-                    <div class="nav-item">
-                      <i class="fas fa-search"></i>
-                      <span data-i18n="app.search">Search</span>
-                    </div>
-                    <div class="nav-item">
-                      <i class="fas fa-comments"></i>
-                      <span data-i18n="app.messages">Messages</span>
-                    </div>
-                    <div class="nav-item">
-                      <i class="fas fa-comments-alt"></i>
-                      <span data-i18n="app.forum">Forum</span>
-                    </div>
-                    <div class="nav-item">
-                      <i class="fas fa-user"></i>
-                      <span data-i18n="app.profile">Profile</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- ====== Hero Section End ====== -->
-
-  <!-- ====== Features Section Start ====== -->
-  <section id="features" class="ud-features">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="ud-section-title mx-auto text-center wow fadeInUp" data-wow-delay=".1s">
-            <span data-i18n="features.title">Features</span>
-            <h2 data-i18n="features.subtitle">Everything You Need for Campus Life</h2>
-            <p data-i18n="features.description">Discover all the features that make OnlyCampus the perfect companion for your university journey</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="row mt-4">
-        <div class="col-lg-12">
-          <div class="ud-features-grid">
-            <div class="ud-feature-card" data-color="blue">
-              <div class="ud-feature-icon">
-                <i class="fas fa-users"></i>
-              </div>
-              <p class="ud-feature-title" data-i18n="features.connectStudents.title">Connect with Students</p>
-              <p data-i18n="features.connectStudents.description">Build your network by connecting with students from your university. Find study partners, make friends,
-                and expand your social circle.</p>
-            </div>
-            <div class="ud-feature-card" data-color="green">
-              <div class="ud-feature-icon">
-                <i class="fas fa-home"></i>
-              </div>
-              <p class="ud-feature-title" data-i18n="features.findRoommates.title">Find Roommates</p>
-              <p data-i18n="features.findRoommates.description">Search and connect with potential roommates who share your preferences, lifestyle, and interests. Make
-                finding housing easier.</p>
-            </div>
-            <div class="ud-feature-card" data-color="purple">
-              <div class="ud-feature-icon">
-                <i class="fas fa-calendar-alt"></i>
-              </div>
-              <p class="ud-feature-title" data-i18n="features.discoverEvents.title">Discover Events</p>
-              <p data-i18n="features.discoverEvents.description">Stay updated with campus events, workshops, parties, and activities. Never miss out on what's happening
-                around you.</p>
-            </div>
-            <div class="ud-feature-card" data-color="orange">
-              <div class="ud-feature-icon">
-                <i class="fas fa-comments"></i>
-              </div>
-              <p class="ud-feature-title" data-i18n="features.joinForums.title">Join Forums</p>
-              <p data-i18n="features.joinForums.description">Participate in discussions, ask questions, share knowledge, and engage with your campus community
-                through forums.</p>
-            </div>
-            <div class="ud-feature-card" data-color="teal">
-              <div class="ud-feature-icon">
-                <i class="fas fa-store"></i>
-              </div>
-              <p class="ud-feature-title" data-i18n="features.marketplace.title">Marketplace</p>
-              <p data-i18n="features.marketplace.description">Buy and sell textbooks, furniture, electronics, and more within your campus community. Safe and
-                convenient transactions.</p>
-            </div>
-            <div class="ud-feature-card" data-color="blue">
-              <div class="ud-feature-icon">
-                <i class="fas fa-bell"></i>
-              </div>
-              <p class="ud-feature-title" data-i18n="features.stayUpdated.title">Stay Updated</p>
-              <p data-i18n="features.stayUpdated.description">Get real-time notifications about events, messages, forum updates, and important campus announcements.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- ====== Features Section End ====== -->
-
-  <!-- ====== About Section Start ====== -->
-  <section id="about" class="ud-about">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="ud-section-title mx-auto text-center wow fadeInUp" data-wow-delay=".1s">
-            <span data-i18n="about.title">About OnlyCampus</span>
-            <h2 data-i18n="about.subtitle">Your Campus, Your Community</h2>
-            <p data-i18n="about.description">OnlyCampus was created to bring university students together and make campus life more connected,
-              engaging, and enjoyable.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="row mt-5">
-        <div class="col-lg-6">
-          <div class="ud-about-content wow fadeInUp" data-wow-delay=".2s">
-            <h3 data-i18n="about.whyTitle">Why OnlyCampus?</h3>
-            <p class="ud-about-text" data-i18n="about.whyText1">
-              University life is about more than just classes and exams. It's about building relationships, discovering
-              opportunities, and creating memories. OnlyCampus provides a dedicated platform where students can connect,
-              share, and grow together.
-            </p>
-            <p class="ud-about-text" data-i18n="about.whyText2">
-              Whether you're looking for a roommate, want to join a study group, need to sell your textbooks, or simply
-              want to stay informed about campus events, OnlyCampus has you covered.
-            </p>
-            <ul class="ud-about-list">
-              <li><i class="fas fa-check-circle"></i> <span data-i18n="about.listItem1">Secure and verified student community</span></li>
-              <li><i class="fas fa-check-circle"></i> <span data-i18n="about.listItem2">Easy-to-use interface designed for students</span></li>
-              <li><i class="fas fa-check-circle"></i> <span data-i18n="about.listItem3">Real-time updates and notifications</span></li>
-              <li><i class="fas fa-check-circle"></i> <span data-i18n="about.listItem4">Available on iOS and Android</span></li>
-            </ul>
-          </div>
-        </div>
-        <div class="col-lg-6">
-          <div class="ud-about-image wow fadeInUp" data-wow-delay=".3s">
-            <div class="about-visual">
-              <div class="visual-card" data-color="blue">
-                <div class="visual-card-content">
-                  <i class="fas fa-users"></i>
-                  <p class="visual-card-title" data-i18n="about.connectBuild.title">Connect &amp; Build</p>
-                  <p data-i18n="about.connectBuild.description">Build meaningful relationships with your campus community</p>
-                </div>
-              </div>
-              <div class="visual-card" data-color="green">
-                <div class="visual-card-content">
-                  <i class="fas fa-lightbulb"></i>
-                  <p class="visual-card-title" data-i18n="about.discoverOpportunities.title">Discover Opportunities</p>
-                  <p data-i18n="about.discoverOpportunities.description">Find study groups, events, and campus activities</p>
-                </div>
-              </div>
-              <div class="visual-card" data-color="purple">
-                <div class="visual-card-content">
-                  <i class="fas fa-heart"></i>
-                  <p class="visual-card-title" data-i18n="about.createMemories.title">Create Memories</p>
-                  <p data-i18n="about.createMemories.description">Share experiences and make your university journey memorable</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- ====== About Section End ====== -->
-
-  <!-- ====== Download Section Start ====== -->
-  <section id="download" class="ud-download">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="ud-section-title mx-auto text-center wow fadeInUp" data-wow-delay=".1s">
-            <span data-i18n="download.title">Download</span>
-            <h2 data-i18n="download.subtitle">Get OnlyCampus Today</h2>
-            <p data-i18n="download.description">Join thousands of students already using OnlyCampus to enhance their university experience</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="row mt-5">
-        <div class="col-lg-12">
-          <div class="ud-download-buttons text-center wow fadeInUp" data-wow-delay=".2s">
-            <a href="https://apps.apple.com/app/onlycampus" class="ud-download-btn" target="_blank"
-              rel="noopener noreferrer">
-              <i class="fab fa-apple"></i>
-              <div>
-                <span data-i18n="download.downloadOnAppStore">Download on the</span>
-                <strong>App Store</strong>
-              </div>
-            </a>
-            <a href="https://play.google.com/store/apps/details?id=com.solarityai.onlycampus" class="ud-download-btn"
-              target="_blank" rel="noopener noreferrer">
-              <i class="fab fa-google-play"></i>
-              <div>
-                <span data-i18n="download.getItOnGooglePlay">Get it on</span>
-                <strong>Google Play</strong>
-              </div>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- ====== Download Section End ====== -->
-
-  <!-- ====== Contact Section Start ====== -->
-  <section id="contact" class="ud-contact">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="ud-section-title mx-auto text-center wow fadeInUp" data-wow-delay=".1s">
-            <span data-i18n="contact.title">Contact Us</span>
-            <h2 data-i18n="contact.subtitle">Have Questions?</h2>
-            <p data-i18n="contact.description">We're here to help! Reach out to us with any questions or feedback</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="row mt-5">
-        <div class="col-lg-6">
-          <div class="ud-contact-info wow fadeInUp" data-wow-delay=".2s">
-            <div class="ud-single-info">
-              <div class="ud-info-icon">
-                <i class="fas fa-envelope"></i>
-              </div>
-              <div class="ud-info-meta">
-                <p class="ud-info-title" data-i18n="contact.emailUs">Email Us</p>
-                <p><a href="mailto:info@solarityai.com">info@solarityai.com</a></p>
-              </div>
-            </div>
-            <div class="ud-single-info">
-              <div class="ud-info-icon">
-                <i class="fas fa-question-circle"></i>
-              </div>
-              <div class="ud-info-meta">
-                <p class="ud-info-title" data-i18n="contact.support">Support</p>
-                <p data-i18n="contact.supportText">Need help? Check out our FAQ or contact our support team</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-6">
-          <div class="ud-contact-form-wrapper wow fadeInUp" data-wow-delay=".3s">
-            <h3 class="ud-contact-form-title" data-i18n="contact.sendMessage">Send Us a Message</h3>
-            <form action="#" method="POST" class="ud-contact-form">
-              <div class="ud-form-group">
-                <label for="name"><span data-i18n="contact.fullName">Full Name</span> <span class="required" data-i18n="contact.required">*</span></label>
-                <input type="text" name="name" id="name" data-i18n="contact.enterName" placeholder="Enter your name" required />
-              </div>
-              <div class="ud-form-group">
-                <label for="email"><span data-i18n="contact.email">Email</span> <span class="required" data-i18n="contact.required">*</span></label>
-                <input type="email" name="email" id="email" data-i18n="contact.enterEmail" placeholder="example@mail.com" required>
-              </div>
-              <div class="ud-form-group">
-                <label for="message"><span data-i18n="contact.message">Your Message</span> <span class="required" data-i18n="contact.required">*</span></label>
-                <textarea name="message" id="message" rows="5" data-i18n="contact.enterMessage" placeholder="Tell us how we can help..."
-                  required></textarea>
-              </div>
-              <div class="ud-form-group mb-0">
-                <button type="submit" class="ud-main-btn" data-i18n="contact.sendButton">Send Message</button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- ====== Contact Section End ====== -->
-  </main>
-
-  <!-- ====== Footer Start ====== -->
-  <footer class="ud-footer wow fadeInUp" data-wow-delay=".15s">
-    <div class="ud-footer-widgets">
+    <!-- ===== All CSS files (async, non-blocking) ===== -->
+      <link rel="preload" href="assets/css/bootstrap-lite.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+      <noscript><link rel="stylesheet" href="assets/css/bootstrap-lite.css" /></noscript>
+      <link rel="preload" href="assets/css/ud-styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+      <noscript><link rel="stylesheet" href="assets/css/ud-styles.css" /></noscript>
+      <link rel="preload" href="assets/css/override.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+      <noscript><link rel="stylesheet" href="assets/css/override.css" /></noscript>
+      <link rel="preload" href="assets/css/lineicons.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+      <noscript><link rel="stylesheet" href="assets/css/lineicons.css" /></noscript>
+    <!-- Site data inlined to avoid async fetch causing CLS. Keep in sync with assets/data/site.json -->
+    <script>window.__SITE_DATA__={"brand":{"name":"OnlyCampus","logo":"assets/images/logo/CompanyLogo-106w.webp","logoAlt":"OnlyCampus Logo"},"seo":{"title":"OnlyCampus | All-in-One Campus Success Platform","description":"OnlyCampus helps students stay organized, connected, and on track with a single hub for courses, schedules, events, and support.","keywords":"campus success, student platform, course planner, university app","author":"Solarity AI","ogTitle":"OnlyCampus | Transform Your Campus Experience","ogDescription":"A modern platform that brings courses, planning, and community together for better outcomes.","ogImage":"assets/images/hero/sohbetTerapiScreens.png","ogUrl":"https://onlycampus.solarityai.com/","twitterTitle":"OnlyCampus | Campus Success Made Simple","twitterDescription":"Plan smarter, learn better, and stay connected with OnlyCampus.","twitterImage":"assets/images/hero/sohbetTerapiScreens.png","canonical":"https://onlycampus.solarityai.com/","themeColor":"#3b82f6"},"nav":[{"label":"Home","href":"#home"},{"label":"Features","href":"#features"},{"label":"Preview","href":"#brand-strip"},{"label":"Social","href":"#social-gallery"},{"label":"Testimonials","href":"#testimonials"},{"label":"Pricing","href":"#pricing"},{"label":"FAQ","href":"#faq"},{"label":"Contact","href":"#contact"},{"label":"Download","href":"#download"}],"hero":{"kicker":"The #1 Platform for College Success","headline":"Transform Your Campus Experience","subhead":"The platform students rely on to manage courses, stay on schedule, and connect with campus life in one place.","media":{"image":"assets/images/hero/sohbetTerapiScreens-800w.webp","alt":"OnlyCampus dashboard preview"},"mediaCards":[{"label":"Active Users","value":"10M+"},{"label":"Success Rate","value":"98%"}],"actions":[{"type":"primary","label":"Get Started","href":"#pricing","className":"ud-main-btn ud-white-btn"},{"type":"secondary","label":"Watch Demo","href":"#app-preview","className":"ud-main-btn ud-border-btn"}],"badges":[{"image":"assets/images/badge/appstore-badge.png","alt":"Download on the App Store","href":"#"},{"image":"assets/images/badge/googleplay-badge.png","alt":"Get it on Google Play","href":"#"}],"powerwords":["Planning","Community","Success"]},"features":{"eyebrow":"Features","title":"Everything You Need to Thrive on Campus","description":"Tools designed to simplify planning, learning, and student life.","items":[{"icon":"lni lni-graduation","title":"Comprehensive Courses","text":"Browse top classes, track progress, and keep your workload organized."},{"icon":"lni lni-notepad","title":"Study Tools and Resources","text":"Stay prepared with planners, reminders, and curated study materials."},{"icon":"lni lni-users","title":"Campus Community","text":"Connect with peers, discover events, and join student groups."}]},"stats":{"eyebrow":"Proven Results","title":"Trusted by Students Everywhere","description":"Clear outcomes and measurable impact across campus communities.","note":"Join over 1,000,000+ students achieving their goals with OnlyCampus.","items":[{"value":"98%","label":"Student success rate"},{"value":"5,000+","label":"Colleges and universities"},{"value":"10M+","label":"Active users"}]},"brandStrip":{"label":"Trusted by leading campuses","logos":[{"src":"assets/images/brands/uideck.svg","alt":"UIdeck","width":200,"height":52},{"src":"assets/images/brands/lineicons.svg","alt":"Lineicons","width":200,"height":26},{"src":"assets/images/brands/graygrids.svg","alt":"GrayGrids","width":200,"height":47},{"src":"assets/images/brands/ayroui.svg","alt":"AyroUI","width":200,"height":52},{"src":"assets/images/brands/ecommerce-html.svg","alt":"Ecommerce HTML","width":200,"height":52}]},"appPreview":{"mainImage":"assets/images/hero/sohbetTerapiScreens-800w.webp","mainAlt":"OnlyCampus app preview","slides":[{"src":"assets/images/hero/screen1.png","alt":"Preview screen 1"},{"src":"assets/images/hero/screen2.png","alt":"Preview screen 2"}]},"socialGallery":{"title":"Campus Highlights","description":"Snapshots from the OnlyCampus community across social platforms.","items":[{"type":"instagram","permalink":"https://www.instagram.com/p/DL7nkNatuVp/"},{"type":"youtube","videoId":"9Me9KvEz7L4","title":"OnlyCampus Shorts"},{"type":"tiktok","videoId":"7558508455229705489","cite":"https://www.tiktok.com/@sohbet_terapi_app/video/7558508455229705489"},{"type":"facebook","href":"https://www.facebook.com/reel/1150872453572160","width":350}]},"testimonials":{"eyebrow":"Testimonials","title":"Real Results from Real Students","description":"Students share how OnlyCampus helped them stay organized and confident.","featured":{"text":"OnlyCampus completely transformed my college experience. It keeps me on track and focused every week.","name":"Sarah M.","role":"University of Texas"}},"pricing":{"eyebrow":"Pricing","title":"Plans That Fit Your Campus Life","description":"Choose a plan that fits your schedule and unlocks the tools you need.","plans":[{"name":"Starter","price":"$9 / month","features":["Schedule tracking","Basic reminders","Student support"],"cta":{"label":"Get Started","href":"#contact"}},{"name":"Standard","price":"$19 / month","popular":true,"features":["Unlimited planners","Priority support","Personalized insights"],"cta":{"label":"Start Free Trial","href":"#contact"}},{"name":"Premium","price":"$29 / month","features":["Advanced analytics","Mentor sessions","Early access"],"cta":{"label":"Talk to Sales","href":"#contact"}}]},"faq":{"eyebrow":"FAQ","title":"Questions Students Ask Most","description":"Quick answers about the OnlyCampus experience.","items":[{"question":"Is OnlyCampus available for every university?","answer":"We support most campuses and add new partners each semester."},{"question":"Can I sync my course schedule?","answer":"Yes, you can import schedules and keep everything in one place."},{"question":"Do you offer team or campus plans?","answer":"Campus-wide plans are available for departments and student groups."},{"question":"Is there a free trial?","answer":"Every plan includes a free trial so you can explore the platform."},{"question":"How is my data protected?","answer":"We follow industry-standard security and privacy practices."},{"question":"Who can I contact for help?","answer":"Our support team is available 24/7 through the contact form."}]},"contact":{"eyebrow":"Contact","title":"Talk with the OnlyCampus Team","description":"Questions, partnerships, or feedback? We would love to hear from you.","addressLabel":"Address","address":"Dallas, Texas, USA","emailLabel":"Email","emails":["ata.turhan@solarityai.com"],"form":{"action":"https://formsubmit.co/ata.turhan@solarityai.com","next":"https://onlycampus.solarityai.com/form-pages/thanks.html","error":"https://onlycampus.solarityai.com/form-pages/error.html","subject":"New message - OnlyCampus","submitLabel":"Send Message"}},"downloadCta":{"eyebrow":"Get the App","title":"Ready to get started?","description":"Download OnlyCampus to keep your schedule, campus updates, and study tools in one place.","badges":[{"image":"assets/images/badge/appstore-badge.png","alt":"Download on the App Store","href":"#"},{"image":"assets/images/badge/googleplay-badge.png","alt":"Get it on Google Play","href":"#"}],"trustItems":[{"value":"4.9★","label":"App Store"},{"value":"4.8★","label":"Google Play"},{"value":"100K+","label":"Downloads"}]},"footer":{"description":"OnlyCampus brings courses, planning, and community into one student-first platform.","quickTitle":"Quick Links","quickLinks":[{"label":"Home","href":"#home"},{"label":"Features","href":"#features"},{"label":"Testimonials","href":"#testimonials"},{"label":"Pricing","href":"#pricing"},{"label":"FAQ","href":"#faq"},{"label":"Contact","href":"#contact"}],"socialTitle":"Follow OnlyCampus","socialLinks":[{"icon":"lni lni-youtube","href":"https://www.youtube.com/@onlycampus"},{"icon":"lni lni-instagram-filled","href":"https://www.instagram.com/onlycampus"},{"icon":"lni lni-tiktok","href":"https://www.tiktok.com/@onlycampus"},{"icon":"lni lni-facebook-filled","href":"https://www.facebook.com/onlycampus"}],"legalTitle":"Legal","legalLinks":[{"label":"Data Deletion","href":"footer-pages/data-deletion.html"},{"label":"Terms of Service","href":"footer-pages/terms.html"},{"label":"Cookies Policy","href":"footer-pages/cookies.html"}],"emergencyTitle":"Support","emergencyText":"Need help? Reach us at ata.turhan@solarityai.com or use the contact form above.","bottomText":"© 2026 OnlyCampus. All rights reserved."}};</script>
+  </head>
+  <body>
+    <!-- ====== Header Start ====== -->
+    <header class="ud-header">
       <div class="container">
         <div class="row">
-          <div class="col-xl-4 col-lg-4 col-md-6">
-            <div class="ud-widget">
-              <a href="index.html" class="ud-footer-logo">
-                <span class="logo-text">OnlyCampus</span>
+          <div class="col-lg-12">
+            <nav class="navbar navbar-expand-lg">
+              <a class="navbar-brand" href="index.html">
+                <img src="assets/images/logo/CompanyLogo-106w.webp" srcset="assets/images/logo/CompanyLogo-106w.webp 1x, assets/images/logo/CompanyLogo-160w.webp 2x" alt="OnlyCampus Logo" loading="eager" fetchpriority="high" width="53" height="60" data-site="brand-logo" />
               </a>
-              <p class="ud-widget-desc" data-i18n="footer.description">
-                The ultimate social platform for university students. Connect, discover, and thrive on campus.
-              </p>
-            </div>
-          </div>
-          <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6">
-            <div class="ud-widget">
-              <p class="ud-widget-title" data-i18n="footer.quickLinks">Quick Links</p>
-              <ul class="ud-widget-links">
-                <li><a href="#features" data-i18n="nav.features">Features</a></li>
-                <li><a href="#about" data-i18n="nav.about">About</a></li>
-                <li><a href="#download" data-i18n="nav.download">Download</a></li>
-                <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
-            <div class="ud-widget">
-              <p class="ud-widget-title" data-i18n="footer.contact">Contact</p>
-              <ul class="ud-widget-links">
-                <li>
-                  <i class="fas fa-envelope" style="margin-right: 0.5rem;"></i>
-                  <a href="mailto:info@solarityai.com">info@solarityai.com</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
-            <div class="ud-widget">
-              <p class="ud-widget-title" data-i18n="footer.download">Download</p>
-              <ul class="ud-widget-links">
-                <li><a href="https://apps.apple.com/app/onlycampus" target="_blank" rel="noopener noreferrer" data-i18n="footer.iosApp">iOS
-                    App</a></li>
-                <li><a href="https://play.google.com/store/apps/details?id=com.solarityai.onlycampus" target="_blank"
-                    rel="noopener noreferrer" data-i18n="footer.androidApp">Android App</a></li>
-              </ul>
-            </div>
+              <button class="navbar-toggler" aria-label="Toggle navigation" aria-expanded="false">
+                <span class="toggler-icon"> </span>
+                <span class="toggler-icon"> </span>
+                <span class="toggler-icon"> </span>
+              </button>
+
+	              <div class="navbar-collapse">
+	                  <ul id="nav" class="navbar-nav mx-auto">
+                      <li class="nav-item"><a class="ud-menu-scroll" href="#home">Home</a></li>
+                      <li class="nav-item"><a class="ud-menu-scroll" href="#features">Features</a></li>
+                      <li class="nav-item"><a class="ud-menu-scroll" href="#app-preview">Preview</a></li>
+                      <li class="nav-item"><a class="ud-menu-scroll" href="#social-gallery">Social</a></li>
+                      <li class="nav-item"><a class="ud-menu-scroll" href="#testimonials">Testimonials</a></li>
+                      <li class="nav-item"><a class="ud-menu-scroll" href="#pricing">Pricing</a></li>
+                      <li class="nav-item"><a class="ud-menu-scroll" href="#faq">FAQ</a></li>
+                      <li class="nav-item"><a class="ud-menu-scroll" href="#contact">Contact</a></li>
+                      <li class="nav-item"><a class="ud-menu-scroll" href="#download">Download</a></li>
+                  </ul>
+                  <!--                  <li class="nav-item">-->
+<!--                    <a class="ud-menu-scroll" href="#team">Team</a>-->
+<!--                  </li>-->
+<!--                  <li class="nav-item nav-item-has-children">-->
+<!--                    <a href="javascript:void(0)"> Pages </a>-->
+<!--                    <ul class="ud-submenu">-->
+<!--                      <li class="ud-submenu-item">-->
+<!--                        <a href="about.html" class="ud-submenu-link">-->
+<!--                          About Page-->
+<!--                        </a>-->
+<!--                      </li>-->
+<!--                      <li class="ud-submenu-item">-->
+<!--                        <a href="pricing.html" class="ud-submenu-link">-->
+<!--                          Pricing Page-->
+<!--                        </a>-->
+<!--                      </li>-->
+<!--                      <li class="ud-submenu-item">-->
+<!--                        <a href="contact.html" class="ud-submenu-link">-->
+<!--                          Contact Page-->
+<!--                        </a>-->
+<!--                      </li>-->
+<!--                      <li class="ud-submenu-item">-->
+<!--                        <a href="blog.html" class="ud-submenu-link">-->
+<!--                          Blog Grid Page-->
+<!--                        </a>-->
+<!--                      </li>-->
+<!--                      <li class="ud-submenu-item">-->
+<!--                        <a href="blog-details.html" class="ud-submenu-link">-->
+<!--                          Blog Details Page-->
+<!--                        </a>-->
+<!--                      </li>-->
+<!--                      <li class="ud-submenu-item">-->
+<!--                        <a href="login.html" class="ud-submenu-link">-->
+<!--                          Sign In Page-->
+<!--                        </a>-->
+<!--                      </li>-->
+<!--                      <li class="ud-submenu-item">-->
+<!--                        <a href="404.html" class="ud-submenu-link">404 Page</a>-->
+<!--                      </li>-->
+<!--                    </ul>-->
+<!--                  </li>-->
+	              </div>
+	              <div class="ud-nav-right">
+	                  <div class="ud-lang-switch" role="group" aria-label="Language selector">
+	                      <button type="button" class="ud-lang-btn is-active" data-lang="en" aria-pressed="true">🇺🇸</button>
+	                      <button type="button" class="ud-lang-btn" data-lang="tr" aria-pressed="false">🇹🇷</button>
+	                  </div>
+	              </div>
+	            </nav>
           </div>
         </div>
       </div>
-    </div>
+    </header>
+    <!-- ====== Header End ====== -->
 
-    <div class="ud-footer-bottom">
+    <main id="top">
+    <!-- ====== Hero Start ====== -->
+    <section class="ud-hero" id="home">
       <div class="container">
-        <div class="row">
-          <div class="col-md-12 text-center">
-            <p class="ud-footer-bottom-right" data-i18n="footer.copyright">
-              © 2025 OnlyCampus. All rights reserved.
-            </p>
+        <div class="row align-items-start">
+          <div class="col-lg-6">
+            <div class="ud-hero-content">
+                <span class="ud-hero-kicker" data-site="hero-kicker">The #1 Platform for College Success</span>
+                <h1 class="ud-hero-title" data-site="hero-title">
+                  Transform Your Campus Experience
+              </h1>
+                <p class="ud-hero-desc" data-site="hero-desc">
+                    The platform students rely on to manage courses, stay on schedule, and connect with campus life in one place.
+                </p>
+<!--                    They can Be add engagement sentences-->
+<!--                “Peki ya, seni yargılamadan dinleyecek bir yer olsaydı?”-->
+<!--                “Sadece seni anlamak için tasarlanmış bir dost?”-->
+
+                <ul class="ud-hero-buttons" data-site-list="hero-actions">
+                    <li>
+                        <a href="#pricing" class="ud-main-btn ud-white-btn">Get Started</a>
+                    </li>
+                    <li>
+                        <a href="#app-preview" class="ud-main-btn ud-border-btn">Watch Demo</a>
+                    </li>
+                </ul>
+            </div>
+              <!-- 3 features at below of App Store and Play Store download buttons-->
+              <div class="ud-hero-powerwords mt-4" data-site-list="hero-powerwords">
+                  <span class="pw-item pw-1">Planning</span>
+                  <span class="pw-separator">•</span>
+                  <span class="pw-item pw-2">Community</span>
+                  <span class="pw-separator">•</span>
+                  <span class="pw-item pw-3">Success</span>
+              </div>
+          </div>
+          <div class="col-lg-6">
+              <div class="ud-hero-media" data-site="hero-media">
+                  <img
+                          src="assets/images/hero/sohbetTerapiScreens-800w.webp"
+                          srcset="assets/images/hero/sohbetTerapiScreens-400w.webp 400w, assets/images/hero/sohbetTerapiScreens-800w.webp 800w"
+                          sizes="(max-width: 576px) 100vw, 50vw"
+                          alt="OnlyCampus dashboard preview"
+                          class="img-fluid"
+                          fetchpriority="high"
+                          decoding="async"
+                          width="800"
+                          height="600"
+                          data-site="hero-media-image"
+                  />
+                  <div class="ud-hero-media-cards" data-site-list="hero-media-cards">
+                      <div class="ud-hero-card">
+                          <span class="ud-hero-card-label">Active Users</span>
+                          <strong class="ud-hero-card-value">10M+</strong>
+                      </div>
+                      <div class="ud-hero-card">
+                          <span class="ud-hero-card-label">Success Rate</span>
+                          <strong class="ud-hero-card-value">98%</strong>
+                      </div>
+                  </div>
+              </div>
           </div>
         </div>
       </div>
+    </section>
+    <!-- ====== Hero End ====== -->
+
+    <!-- ====== Features Start ====== -->
+    <section id="features" class="ud-features">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ud-section-title mx-auto text-center">
+                        <h2 data-site="features-title">Everything You Need to Thrive on Campus</h2>
+                        <p data-site="features-desc">
+                            Tools designed to simplify planning, learning, and student life.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row" data-site-list="features">
+                <div class="col-xl-4 col-lg-4 col-sm-6">
+                    <div class="ud-single-feature">
+                        <div class="ud-feature-icon">
+                            <i class="lni lni-graduation"></i>
+                        </div>
+                        <div class="ud-feature-content">
+                            <h3 class="ud-feature-title">Comprehensive Courses</h3>
+                            <p class="ud-feature-desc">Browse top classes, track progress, and keep your workload organized.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-sm-6">
+                    <div class="ud-single-feature">
+                        <div class="ud-feature-icon">
+                            <i class="lni lni-notepad"></i>
+                        </div>
+                        <div class="ud-feature-content">
+                            <h3 class="ud-feature-title">Study Tools and Resources</h3>
+                            <p class="ud-feature-desc">Stay prepared with planners, reminders, and curated study materials.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-sm-6">
+                    <div class="ud-single-feature">
+                        <div class="ud-feature-icon">
+                            <i class="lni lni-users"></i>
+                        </div>
+                        <div class="ud-feature-content">
+                            <h3 class="ud-feature-title">Campus Community</h3>
+                            <p class="ud-feature-desc">Connect with peers, discover events, and join student groups.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ====== Features End ====== -->
+
+    <!-- ====== Stats Start ====== -->
+    <section id="stats" class="ud-stats">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ud-section-title mx-auto text-center">
+                        <h2 data-site="stats-title">Trusted by Students Everywhere</h2>
+                        <p data-site="stats-desc">
+                            Clear outcomes and measurable impact across campus communities.
+                        </p>
+                        <p class="ud-stats-note" data-site="stats-note">
+                            Join over 1,000,000+ students achieving their goals with OnlyCampus.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center" data-site-list="stats">
+                <div class="col-lg-4 col-md-6 col-sm-10">
+                    <div class="ud-stat-card">
+                        <div class="ud-stat-value">98%</div>
+                        <div class="ud-stat-label">Student success rate</div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-10">
+                    <div class="ud-stat-card">
+                        <div class="ud-stat-value">5,000+</div>
+                        <div class="ud-stat-label">Colleges and universities</div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-10">
+                    <div class="ud-stat-card">
+                        <div class="ud-stat-value">10M+</div>
+                        <div class="ud-stat-label">Active users</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ====== Stats End ====== -->
+
+    <!-- ====== Brand Strip Start ====== -->
+    <section class="ud-brand-strip" id="brand-strip">
+        <div class="container">
+            <div class="ud-brand-strip-inner">
+                <span class="ud-brand-strip-label" data-site="brand-strip-label">Trusted by leading campuses</span>
+                <div class="ud-brand-strip-logos" data-site-list="brand-logos">
+                    <img src="assets/images/brands/uideck.svg" alt="UIdeck" loading="lazy" width="200" height="52" />
+                    <img src="assets/images/brands/lineicons.svg" alt="Lineicons" loading="lazy" width="200" height="26" />
+                    <img src="assets/images/brands/graygrids.svg" alt="GrayGrids" loading="lazy" width="200" height="47" />
+                    <img src="assets/images/brands/ayroui.svg" alt="AyroUI" loading="lazy" width="200" height="52" />
+                    <img src="assets/images/brands/ecommerce-html.svg" alt="Ecommerce HTML" loading="lazy" width="200" height="52" />
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ====== Brand Strip End ====== -->
+
+    <!-- ====== Screenshots Start ====== -->
+    <section id="app-preview" class="ud-app-preview text-center my-5">
+        <div class="container">
+            <div class="preview-wrapper">
+                <img
+                        src="assets/images/hero/sohbetTerapiScreens-800w.webp"
+                        srcset="assets/images/hero/sohbetTerapiScreens-400w.webp 400w, assets/images/hero/sohbetTerapiScreens-800w.webp 800w"
+                        sizes="(max-width: 576px) 100vw, 60vw"
+                        alt="App Screens"
+                        id="preview-trigger"
+                        class="img-fluid preview-main"
+                        width="800"
+                        height="600"
+                        loading="lazy"
+                        decoding="async"
+                        data-site="app-preview-image"
+                />
+            </div>
+        </div>
+
+        <!-- Pop-up (Swiper içinde) -->
+        <div id="screen-popup" class="popup-overlay">
+            <div class="popup-content">
+                <span id="close-popup" class="popup-close">&times;</span>
+
+                <div class="swiper popup-swiper">
+                    <div class="swiper-wrapper" data-site-list="app-preview-slides">
+                        <div class="swiper-slide">
+                            <img loading="lazy" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="assets/images/hero/screen1.png" alt="Screen 1" class="popup-img" width="1036" height="2016" decoding="async" />
+                        </div>
+                        <div class="swiper-slide">
+                            <img loading="lazy" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="assets/images/hero/screen2.png" alt="Screen 2" class="popup-img" width="1036" height="2016" decoding="async" />
+                        </div>
+                        <!-- İstersen daha fazla ekran ekle -->
+                    </div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== Screenshots End ====== -->
+
+    <!-- ====== Social Media Gallery Start ====== -->
+    <section id="social-gallery" class="ud-social-gallery text-center my-5">
+        <div class="container">
+            <h2 class="mb-4" data-site="social-gallery-title">Campus Highlights</h2>
+            <p class="gallery-desc mb-5" data-site="social-gallery-desc">
+                Snapshots from the OnlyCampus community across social platforms.
+            </p>
+
+            <div class="social-grid" data-site-list="social-gallery-items">
+                <!-- Instagram -->
+                <div class="social-item">
+                    <blockquote
+                            class="instagram-media"
+                            data-instgrm-permalink="https://www.instagram.com/p/DL7nkNatuVp/"
+                            data-instgrm-version="14"
+                    ></blockquote>
+                </div>
+
+                <!-- YouTube Shorts (facade - loads on click) -->
+                <div class="social-item yt-facade" data-video-id="9Me9KvEz7L4" data-title="OnlyCampus YouTube Shorts">
+                    <img src="assets/images/hero/sohbetTerapiScreens-400w.webp" alt="OnlyCampus YouTube Shorts" loading="lazy" width="480" height="270" />
+                    <button class="yt-play-btn" aria-label="Play OnlyCampus YouTube Shorts">&#9654;</button>
+                </div>
+
+                <!-- TikTok -->
+                <div class="social-item">
+                    <blockquote
+                            class="tiktok-embed"
+                            cite="https://www.tiktok.com/@sohbet_terapi_app/video/7558508455229705489"
+                            data-video-id="7558508455229705489"
+                    >
+                        <section></section>
+                    </blockquote>
+                </div>
+
+                <!-- Facebook -->
+                <div class="social-item">
+                    <div
+                            class="fb-post"
+                            data-href="https://www.facebook.com/reel/1150872453572160"
+                            data-width="350"
+                    ></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- YouTube facade: replace thumbnail with iframe on click -->
+        <script>
+        document.getElementById("social-gallery").addEventListener("click", function (e) {
+            var btn = e.target.closest(".yt-facade");
+            if (!btn) return;
+            var videoId = btn.getAttribute("data-video-id");
+            var title = btn.getAttribute("data-title") || "YouTube video";
+            if (!videoId) return;
+            var iframe = document.createElement("iframe");
+            iframe.width = "100%";
+            iframe.height = "500";
+            iframe.src = "https://www.youtube.com/embed/" + videoId + "?autoplay=1";
+            iframe.title = title;
+            iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+            iframe.allowFullscreen = true;
+            iframe.style.border = "0";
+            btn.replaceWith(iframe);
+        });
+        </script>
+
+        <!-- Social embed scripts are loaded lazily when section enters viewport -->
+        <script>
+        (function () {
+            var loaded = { instagram: false, tiktok: false, facebook: false };
+
+            function addIframeTitles() {
+                document.querySelectorAll(".instagram-media iframe:not([title])").forEach(function (f) {
+                    f.setAttribute("title", "Instagram post");
+                });
+                document.querySelectorAll(".tiktok-embed iframe:not([title])").forEach(function (f) {
+                    f.setAttribute("title", "TikTok video");
+                });
+            }
+
+            function loadInstagram() {
+                if (loaded.instagram) return;
+                loaded.instagram = true;
+                var s = document.createElement("script");
+                s.async = true;
+                s.src = "https://www.instagram.com/embed.js";
+                s.onload = function () {
+                    setTimeout(function () {
+                        window.instgrm && window.instgrm.Embeds && window.instgrm.Embeds.process();
+                        setTimeout(addIframeTitles, 2000);
+                    }, 500);
+                };
+                document.body.appendChild(s);
+            }
+
+            function loadTikTok() {
+                if (loaded.tiktok) return;
+                loaded.tiktok = true;
+                var s = document.createElement("script");
+                s.async = true;
+                s.src = "https://www.tiktok.com/embed.js";
+                s.onload = function () {
+                    setTimeout(addIframeTitles, 2000);
+                };
+                document.body.appendChild(s);
+            }
+
+            function loadFacebook() {
+                if (loaded.facebook) return;
+                loaded.facebook = true;
+                var s = document.createElement("script");
+                s.async = true;
+                s.defer = true;
+                s.crossOrigin = "anonymous";
+                s.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v19.0";
+                s.onload = function () {
+                    setTimeout(function () {
+                        window.FB && window.FB.XFBML && window.FB.XFBML.parse();
+                    }, 500);
+                };
+                document.body.appendChild(s);
+            }
+
+            var gallery = document.getElementById("social-gallery");
+            if (!gallery) return;
+
+            if ("IntersectionObserver" in window) {
+                var observer = new IntersectionObserver(function (entries) {
+                    entries.forEach(function (entry) {
+                        if (entry.isIntersecting) {
+                            loadInstagram();
+                            loadTikTok();
+                            loadFacebook();
+                            observer.unobserve(gallery);
+                        }
+                    });
+                }, { rootMargin: "200px" });
+                observer.observe(gallery);
+            } else {
+                loadInstagram();
+                loadTikTok();
+                loadFacebook();
+            }
+        })();
+        </script>
+    </section>
+    <!-- ====== Social Media Gallery End ====== -->
+
+
+    <!-- ====== Testimonials Start ====== -->
+    <section id="testimonials" class="ud-testimonials">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ud-section-title mx-auto text-center">
+                        <h2 data-site="testimonials-title">Real Results from Real Students</h2>
+                        <p data-site="testimonials-desc">
+                            Students share how OnlyCampus helped them stay organized and confident.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ud-testimonial-highlight" data-site="testimonial-highlight">
+                <p class="ud-testimonial-quote" data-site="testimonial-highlight-text">
+                    “OnlyCampus completely transformed my college experience. It keeps me on track and focused every week.”
+                </p>
+                <div class="ud-testimonial-author">
+                    <span class="ud-testimonial-name" data-site="testimonial-highlight-name">Sarah M.</span>
+                    <span class="ud-testimonial-role" data-site="testimonial-highlight-role">University of Texas</span>
+                </div>
+            </div>
+
+            <!-- Swiper Container -->
+            <div class="swiper ud-testimonials-swiper">
+                <div class="swiper-wrapper">
+                    <!-- JS will add fetched by JSON  10 slide -->
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ====== Testimonials End ====== -->
+
+
+    <!-- Coming Soon Modal -->
+    <div class="modal fade" id="comingSoonModal" tabindex="-1" aria-labelledby="comingSoonModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content text-center p-4">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title w-100" id="comingSoonModalLabel">Coming Soon!</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Our app will be available soon on the App Store and Google Play.</p>
+                </div>
+                <div class="modal-footer border-0">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Got it</button>
+                </div>
+            </div>
+        </div>
     </div>
-  </footer>
-  <!-- ====== Footer End ====== -->
 
-  <!-- ====== Back To Top Start ====== -->
-  <a href="#top" class="back-to-top" aria-label="Back to top">
-    <i class="fas fa-chevron-up"></i>
-  </a>
-  <!-- ====== Back To Top End ====== -->
 
-  <!-- ====== All Javascript Files ====== -->
-  <script src="assets/js/translations.js" defer></script>
-  <script src="assets/js/main.js" defer></script>
-</body>
+    <!-- ====== Pricing Start ====== -->
+    <section id="pricing" class="ud-pricing">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ud-section-title mx-auto text-center">
+                        <h2 data-site="pricing-title">Plans That Fit Your Campus Life</h2>
+                        <p data-site="pricing-desc">
+                            Choose a plan that fits your schedule and unlocks the tools you need.
+                        </p>
+                    </div>
+                </div>
+            </div>
 
+            <div class="row g-0 align-items-center justify-content-center" data-site-list="pricing-plans">
+                <!-- Starter Plan -->
+                <div class="col-lg-4 col-md-6 col-sm-10">
+                    <div class="ud-single-pricing first-item">
+                        <div class="ud-pricing-header">
+                            <h3>Starter</h3>
+                            <h4>$9/month</h4>
+                        </div>
+                        <div class="ud-pricing-body">
+                            <ul>
+                                <li>Schedule tracking</li>
+                                <li>Basic reminders</li>
+                                <li>Mobile and web access</li>
+                                <li>Student support</li>
+                            </ul>
+                        </div>
+                        <div class="ud-pricing-footer">
+                            <a href="#contact" class="ud-main-btn ud-border-btn">
+                                Get Started
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Standard Plan -->
+                <div class="col-lg-4 col-md-6 col-sm-10">
+                    <div class="ud-single-pricing active">
+                        <span class="ud-popular-tag">MOST POPULAR</span>
+                        <div class="ud-pricing-header">
+                            <h3>Standard</h3>
+                            <h4>$19/month</h4>
+                        </div>
+                        <div class="ud-pricing-body">
+                            <ul>
+                                <li>Unlimited planners</li>
+                                <li>Full feature access</li>
+                                <li>Priority support</li>
+                                <li>Personalized insights</li>
+                            </ul>
+                        </div>
+                        <div class="ud-pricing-footer">
+                            <a href="#contact" class="ud-main-btn ud-white-btn">
+                                Start Free Trial
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Premium Plan -->
+                <div class="col-lg-4 col-md-6 col-sm-10">
+                    <div class="ud-single-pricing last-item">
+                        <div class="ud-pricing-header">
+                            <h3>Premium</h3>
+                            <h4>$29/month</h4>
+                        </div>
+                        <div class="ud-pricing-body">
+                            <ul>
+                                <li>Advanced analytics</li>
+                                <li>Mentor sessions</li>
+                                <li>1:1 support</li>
+                                <li>Early access to new features</li>
+                            </ul>
+                        </div>
+                        <div class="ud-pricing-footer">
+                            <a href="#contact" class="ud-main-btn ud-border-btn">
+                                Talk to Sales
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ====== Pricing End ====== -->
+
+    <!-- ====== FAQ Start ====== -->
+    <section id="faq" class="ud-faq">
+        <div class="shape">
+            <img src="assets/images/faq/shape.svg" alt="shape" loading="lazy" aria-hidden="true" />
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ud-section-title text-center mx-auto">
+                        <h2 data-site="faq-title">Questions Students Ask Most</h2>
+                        <p data-site="faq-desc">
+                            Quick answers about the OnlyCampus experience.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-6" data-site="faq-col-left">
+                    <!-- Soru 1 -->
+                    <div class="ud-single-faq">
+                        <div class="accordion">
+                            <button
+                                    class="ud-faq-btn collapsed"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#collapseOne"
+                            >
+              <span class="icon flex-shrink-0">
+                <i class="lni lni-chevron-down"></i>
+              </span>
+                                <span>Is OnlyCampus available for every university?</span>
+                            </button>
+                            <div id="collapseOne" class="accordion-collapse collapse">
+                                <div class="ud-faq-body">
+                                    We support most campuses and add new partners each semester.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Soru 2 -->
+                    <div class="ud-single-faq">
+                        <div class="accordion">
+                            <button
+                                    class="ud-faq-btn collapsed"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#collapseTwo"
+                            >
+              <span class="icon flex-shrink-0">
+                <i class="lni lni-chevron-down"></i>
+              </span>
+                                <span>Can I sync my course schedule?</span>
+                            </button>
+                            <div id="collapseTwo" class="accordion-collapse collapse">
+                                <div class="ud-faq-body">
+                                    Yes, you can import schedules and keep everything in one place.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Soru 3 -->
+                    <div class="ud-single-faq">
+                        <div class="accordion">
+                            <button
+                                    class="ud-faq-btn collapsed"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#collapseThree"
+                            >
+              <span class="icon flex-shrink-0">
+                <i class="lni lni-chevron-down"></i>
+              </span>
+                                <span>Do you offer team or campus plans?</span>
+                            </button>
+                            <div id="collapseThree" class="accordion-collapse collapse">
+                                <div class="ud-faq-body">
+                                    Campus-wide plans are available for departments and student groups.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6" data-site="faq-col-right">
+                    <!-- Soru 4 -->
+                    <div class="ud-single-faq">
+                        <div class="accordion">
+                            <button
+                                    class="ud-faq-btn collapsed"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#collapseFour"
+                            >
+              <span class="icon flex-shrink-0">
+                <i class="lni lni-chevron-down"></i>
+              </span>
+                                <span>Is there a free trial?</span>
+                            </button>
+                            <div id="collapseFour" class="accordion-collapse collapse">
+                                <div class="ud-faq-body">
+                                    Every plan includes a free trial so you can explore the platform.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Soru 5 -->
+                    <div class="ud-single-faq">
+                        <div class="accordion">
+                            <button
+                                    class="ud-faq-btn collapsed"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#collapseFive"
+                            >
+              <span class="icon flex-shrink-0">
+                <i class="lni lni-chevron-down"></i>
+              </span>
+                                <span>How is my data protected?</span>
+                            </button>
+                            <div id="collapseFive" class="accordion-collapse collapse">
+                                <div class="ud-faq-body">
+                                    We follow industry-standard security and privacy practices.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Soru 6 -->
+                    <div class="ud-single-faq">
+                        <div class="accordion">
+                            <button
+                                    class="ud-faq-btn collapsed"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#collapseSix"
+                            >
+              <span class="icon flex-shrink-0">
+                <i class="lni lni-chevron-down"></i>
+              </span>
+                                <span>Who can I contact for help?</span>
+                            </button>
+                            <div id="collapseSix" class="accordion-collapse collapse">
+                                <div class="ud-faq-body">
+                                    Our support team is available 24/7 through the contact form.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ====== FAQ End ====== -->
+
+    <!-- ====== Contact Start ====== -->
+    <section id="contact" class="ud-contact">
+        <div class="container">
+            <div class="row align-items-center">
+                <!-- Contact Info (Left Side) -->
+                <div class="col-xl-8 col-lg-7">
+                    <div class="ud-contact-content-wrapper">
+                        <div class="ud-contact-title">
+                            <h2 data-site="contact-title">
+                                Talk with the OnlyCampus Team
+                            </h2>
+                            <p class="mt-3" style="font-size: 1.1rem; color: var(--text-secondary);" data-site="contact-desc">
+                                Questions, partnerships, or feedback? We would love to hear from you.
+                            </p>
+                        </div>
+                        <div class="ud-contact-info-wrapper">
+
+                            <!-- Location info -->
+                            <div class="ud-single-info">
+                                <div class="ud-info-icon">
+                                    <i class="lni lni-map-marker"></i>
+                                </div>
+                                <div class="ud-info-meta">
+                                    <h3 class="ud-info-label" data-site="contact-address-label">Address</h3>
+                                    <p data-site="contact-address">Dallas, Texas, USA</p>
+                                </div>
+                            </div>
+
+                            <!-- Email info -->
+                            <div class="ud-single-info">
+                                <div class="ud-info-icon">
+                                    <i class="lni lni-envelope"></i>
+                                </div>
+                                <div class="ud-info-meta">
+                                    <h3 class="ud-info-label" data-site="contact-email-label">Email</h3>
+                                    <div data-site="contact-emails">
+                                        <p>ata.turhan@solarityai.com</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form (Right Side) -->
+                <div class="col-xl-4 col-lg-5">
+                    <div class="ud-contact-form-wrapper">
+                        <h3 class="ud-contact-form-title" data-site="contact-form-title">Send a Message</h3>
+
+                        <!-- FormSubmit.co Contact Form -->
+                        <form action="https://formsubmit.co/ata.turhan@solarityai.com" method="POST" class="ud-contact-form" data-site="contact-form">
+
+                            <!-- Optional Settings -->
+                            <input type="hidden" name="_captcha" value="false">
+
+                            <!-- Redirect From "formsubmit.co" we will add exact path to here for redirecting -->
+                            <input type="hidden" name="_next" value="https://onlycampus.solarityai.com/form-pages/thanks.html" data-site="contact-form-next">
+                            <input type="hidden" name="_error" value="https://onlycampus.solarityai.com/form-pages/error.html" data-site="contact-form-error">
+                            <input type="hidden" name="_subject" value="New message - OnlyCampus" data-site="contact-form-subject">
+
+                            <!-- Full Name -->
+                            <div class="ud-form-group">
+                                <label for="name">Full Name*</label>
+                                <input type="text" name="name" placeholder="Enter your name" required />
+                            </div>
+
+                            <!-- Email -->
+                            <div class="ud-form-group">
+                                <label for="email">Email*</label>
+                                <!-- Make this field "user_email" from "email" for avoiding formsubmit to send email to your email regardless email verification user can send invalid email our priority is feedback -->
+                                <input type="email" name="user_email" placeholder="you@example.com" required>
+                            </div>
+
+                            <!-- Message -->
+                            <div class="ud-form-group">
+                                <label for="message">Your Message*</label>
+                                <textarea name="message" rows="3" placeholder="Tell us what you need..." required></textarea>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <div class="ud-form-group mb-0">
+                                <button type="submit" class="ud-main-btn" data-site="contact-submit-label">Send Message</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </section>
+    <!-- ====== Contact End ====== -->
+
+    <!-- ====== Download CTA Start ====== -->
+    <section class="ud-download-cta" id="download">
+        <div class="container">
+            <div class="ud-download-card">
+                <div class="ud-download-content">
+                    <h2 data-site="download-title">Ready to get started?</h2>
+                    <p class="ud-download-desc" data-site="download-desc">
+                        Download OnlyCampus to keep your schedule, campus updates, and study tools in one place.
+                    </p>
+                </div>
+                <div class="ud-download-actions" data-site-list="download-badges">
+                    <a href="#" class="store-badge">
+                        <img src="assets/images/badge/appstore-badge.png" alt="Download on the App Store" width="140" height="46" loading="lazy" />
+                    </a>
+                    <a href="#" class="store-badge">
+                        <img src="assets/images/badge/googleplay-badge.png" alt="Get it on Google Play" width="140" height="46" loading="lazy" />
+                    </a>
+                </div>
+                <div class="ud-download-trust" data-site-list="download-trust">
+                    <div class="ud-download-trust-item">
+                        <span class="ud-download-trust-value">4.9★</span>
+                        <span class="ud-download-trust-label">App Store</span>
+                    </div>
+                    <div class="ud-download-trust-item">
+                        <span class="ud-download-trust-value">4.8★</span>
+                        <span class="ud-download-trust-label">Google Play</span>
+                    </div>
+                    <div class="ud-download-trust-item">
+                        <span class="ud-download-trust-value">100K+</span>
+                        <span class="ud-download-trust-label">Downloads</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ====== Download CTA End ====== -->
+
+
+    </main>
+    <!-- ====== Footer Start ====== -->
+    <footer class="ud-footer">
+        <div class="ud-footer-widgets">
+            <div class="container">
+                <div class="row ud-footer-columns">
+                    <!-- Sütun 1: Logo + Açıklama -->
+                    <div class="col-xl-3 col-lg-3 col-md-6 ud-footer-col">
+                        <a href="index.html" class="ud-footer-logo">
+                            <img src="assets/images/logo/CompanyLogo-106w.webp" srcset="assets/images/logo/CompanyLogo-106w.webp 1x, assets/images/logo/CompanyLogo-160w.webp 2x" alt="OnlyCampus" loading="lazy" width="53" height="60" data-site="brand-logo" />
+                        </a>
+                        <div class="ud-widget">
+                            <p class="ud-widget-desc" data-site="footer-desc">OnlyCampus brings courses, planning, and community into one student-first platform.</p>
+                        </div>
+                    </div>
+                    <!-- Sütun 2: Follow Us + İkonlar -->
+                    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 ud-footer-col">
+                        <h3 class="ud-widget-title" data-site="footer-social-title">Follow Us</h3>
+                        <div class="ud-widget ud-widget--social">
+                            <ul class="ud-widget-socials" data-site-list="footer-social-links">
+                                <li><a href="https://www.youtube.com/@sohbet_terapi_app" target="_blank" rel="noopener" aria-label="OnlyCampus YouTube"><i class="lni lni-youtube" aria-hidden="true"></i></a></li>
+                                <li><a href="https://www.instagram.com/sohbet_terapi_app" target="_blank" rel="noopener" aria-label="OnlyCampus Instagram"><i class="lni lni-instagram-filled" aria-hidden="true"></i></a></li>
+                                <li><a href="https://www.tiktok.com/@sohbet_terapi_app" target="_blank" rel="noopener" aria-label="OnlyCampus TikTok"><i class="lni lni-tiktok" aria-hidden="true"></i></a></li>
+                                <li><a href="https://www.facebook.com/share/1BFGePd8Kc" target="_blank" rel="noopener" aria-label="OnlyCampus Facebook"><i class="lni lni-facebook-filled" aria-hidden="true"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Sütun 3: Legal + Linkler -->
+                    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 ud-footer-col">
+                        <h3 class="ud-widget-title" data-site="footer-legal-title">Legal</h3>
+                        <div class="ud-widget">
+                            <ul class="ud-widget-links" data-site-list="footer-legal-links">
+                                <li><a href="footer-pages/data-deletion.html">Data Deletion</a></li>
+                                <li><a href="footer-pages/terms.html">Terms of Service</a></li>
+                                <li><a href="footer-pages/cookies.html">Cookies Policy</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Sütun 4: Support + Metin -->
+                    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 ud-footer-col">
+                        <h3 class="ud-widget-title" data-site="footer-emergency-title">Support</h3>
+                        <div class="ud-widget">
+                            <p data-site="footer-emergency-text">Need help? Reach us at ata.turhan@solarityai.com or use the contact form above.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="ud-footer-bottom">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <p class="ud-footer-bottom-right" data-site="footer-bottom-text">
+                            © 2026 OnlyCampus. All rights reserved.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- ====== Footer End ====== -->
+
+
+    <!-- ====== Back To Top Start ====== -->
+    <a href="#top" class="back-to-top" aria-label="Back to top">
+      <i class="lni lni-chevron-up"> </i>
+    </a>
+    <!-- ====== Back To Top End ====== -->
+
+    <!-- ====== All Javascript Files ====== -->
+    <script src="assets/js/sections.js" defer></script>
+    <script src="assets/js/main.js" defer></script>
+    <script>
+      // ==== for menu scroll - optimized
+      document.addEventListener("DOMContentLoaded", function() {
+        // section menu active - IntersectionObserver (no forced reflow)
+        if ("IntersectionObserver" in window) {
+          const navLinks = Array.from(document.querySelectorAll(".ud-menu-scroll"));
+          const sectionEntries = navLinks
+            .map((link) => {
+              const href = link.getAttribute("href");
+              if (!href || !href.startsWith("#")) return null;
+              const target = document.querySelector(href);
+              if (!target) return null;
+              return { link, target };
+            })
+            .filter(Boolean);
+
+          let currentActive = null;
+
+          const sectionObserver = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (!entry.isIntersecting) return;
+                const found = sectionEntries.find((s) => s.target === entry.target);
+                if (!found) return;
+                if (currentActive) currentActive.classList.remove("active");
+                currentActive = found.link;
+                currentActive.classList.add("active");
+              });
+            },
+            { rootMargin: "-40% 0px -55% 0px", threshold: 0 }
+          );
+
+          sectionEntries.forEach(({ target }) => sectionObserver.observe(target));
+        }
+      });
+    </script>
+  </body>
 </html>

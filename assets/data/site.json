@@ -1,0 +1,430 @@
+{
+  "brand": {
+    "name": "OnlyCampus",
+    "logo": "assets/images/logo/CompanyLogo-106w.webp",
+    "logoAlt": "OnlyCampus Logo"
+  },
+  "seo": {
+    "title": "OnlyCampus | All-in-One Campus Success Platform",
+    "description": "OnlyCampus helps students stay organized, connected, and on track with a single hub for courses, schedules, events, and support.",
+    "keywords": "campus success, student platform, course planner, university app",
+    "author": "Solarity AI",
+    "ogTitle": "OnlyCampus | Transform Your Campus Experience",
+    "ogDescription": "A modern platform that brings courses, planning, and community together for better outcomes.",
+    "ogImage": "assets/images/hero/sohbetTerapiScreens.png",
+    "ogUrl": "https://sohbetterapi.solarityai.com/",
+    "twitterTitle": "OnlyCampus | Campus Success Made Simple",
+    "twitterDescription": "Plan smarter, learn better, and stay connected with OnlyCampus.",
+    "twitterImage": "assets/images/hero/sohbetTerapiScreens.png",
+    "canonical": "https://sohbetterapi.solarityai.com/",
+    "themeColor": "#3b82f6"
+  },
+  "nav": [
+    {
+      "label": "Home",
+      "href": "#home"
+    },
+    {
+      "label": "Features",
+      "href": "#features"
+    },
+    {
+      "label": "Preview",
+      "href": "#brand-strip"
+    },
+    {
+      "label": "Social",
+      "href": "#social-gallery"
+    },
+    {
+      "label": "Testimonials",
+      "href": "#testimonials"
+    },
+    {
+      "label": "Pricing",
+      "href": "#pricing"
+    },
+    {
+      "label": "FAQ",
+      "href": "#faq"
+    },
+    {
+      "label": "Contact",
+      "href": "#contact"
+    },
+    {
+      "label": "Download",
+      "href": "#download"
+    }
+  ],
+  "hero": {
+    "kicker": "The #1 Platform for College Success",
+    "headline": "Transform Your Campus Experience",
+    "subhead": "The platform students rely on to manage courses, stay on schedule, and connect with campus life in one place.",
+    "media": {
+      "image": "assets/images/hero/sohbetTerapiScreens-800w.webp",
+      "alt": "OnlyCampus dashboard preview"
+    },
+    "mediaCards": [
+      {
+        "label": "Active Users",
+        "value": "10M+"
+      },
+      {
+        "label": "Success Rate",
+        "value": "98%"
+      }
+    ],
+    "actions": [
+      {
+        "type": "primary",
+        "label": "Get Started",
+        "href": "#pricing",
+        "className": "ud-main-btn ud-white-btn"
+      },
+      {
+        "type": "secondary",
+        "label": "Watch Demo",
+        "href": "#app-preview",
+        "className": "ud-main-btn ud-border-btn"
+      }
+    ],
+    "badges": [
+      {
+        "image": "assets/images/badge/appstore-badge.png",
+        "alt": "Download on the App Store",
+        "href": "#"
+      },
+      {
+        "image": "assets/images/badge/googleplay-badge.png",
+        "alt": "Get it on Google Play",
+        "href": "#"
+      }
+    ],
+    "powerwords": [
+      "Planning",
+      "Community",
+      "Success"
+    ]
+  },
+  "features": {
+    "eyebrow": "Features",
+    "title": "Everything You Need to Thrive on Campus",
+    "description": "Tools designed to simplify planning, learning, and student life.",
+    "items": [
+      {
+        "icon": "lni lni-graduation",
+        "title": "Comprehensive Courses",
+        "text": "Browse top classes, track progress, and keep your workload organized."
+      },
+      {
+        "icon": "lni lni-notepad",
+        "title": "Study Tools and Resources",
+        "text": "Stay prepared with planners, reminders, and curated study materials."
+      },
+      {
+        "icon": "lni lni-users",
+        "title": "Campus Community",
+        "text": "Connect with peers, discover events, and join student groups."
+      }
+    ]
+  },
+  "stats": {
+    "eyebrow": "Proven Results",
+    "title": "Trusted by Students Everywhere",
+    "description": "Clear outcomes and measurable impact across campus communities.",
+    "note": "Join over 1,000,000+ students achieving their goals with OnlyCampus.",
+    "items": [
+      {
+        "value": "98%",
+        "label": "Student success rate"
+      },
+      {
+        "value": "5,000+",
+        "label": "Colleges and universities"
+      },
+      {
+        "value": "10M+",
+        "label": "Active users"
+      }
+    ]
+  },
+  "brandStrip": {
+    "label": "Trusted by leading campuses",
+    "logos": [
+      {
+        "src": "assets/images/brands/uideck.svg",
+        "alt": "UIdeck",
+        "width": 200,
+        "height": 52
+      },
+      {
+        "src": "assets/images/brands/lineicons.svg",
+        "alt": "Lineicons",
+        "width": 200,
+        "height": 26
+      },
+      {
+        "src": "assets/images/brands/graygrids.svg",
+        "alt": "GrayGrids",
+        "width": 200,
+        "height": 47
+      },
+      {
+        "src": "assets/images/brands/ayroui.svg",
+        "alt": "AyroUI",
+        "width": 200,
+        "height": 52
+      },
+      {
+        "src": "assets/images/brands/ecommerce-html.svg",
+        "alt": "Ecommerce HTML",
+        "width": 200,
+        "height": 52
+      }
+    ]
+  },
+  "appPreview": {
+    "mainImage": "assets/images/hero/sohbetTerapiScreens-800w.webp",
+    "mainAlt": "OnlyCampus app preview",
+    "slides": [
+      {
+        "src": "assets/images/hero/screen1.png",
+        "alt": "Preview screen 1"
+      },
+      {
+        "src": "assets/images/hero/screen2.png",
+        "alt": "Preview screen 2"
+      }
+    ]
+  },
+  "socialGallery": {
+    "title": "Campus Highlights",
+    "description": "Snapshots from the OnlyCampus community across social platforms.",
+    "items": [
+      {
+        "type": "instagram",
+        "permalink": "https://www.instagram.com/p/DL7nkNatuVp/"
+      },
+      {
+        "type": "youtube",
+        "videoId": "9Me9KvEz7L4",
+        "title": "OnlyCampus Shorts"
+      },
+      {
+        "type": "tiktok",
+        "videoId": "7558508455229705489",
+        "cite": "https://www.tiktok.com/@sohbet_terapi_app/video/7558508455229705489"
+      },
+      {
+        "type": "facebook",
+        "href": "https://www.facebook.com/reel/1150872453572160",
+        "width": 350
+      }
+    ]
+  },
+  "testimonials": {
+    "eyebrow": "Testimonials",
+    "title": "Real Results from Real Students",
+    "description": "Students share how OnlyCampus helped them stay organized and confident.",
+    "featured": {
+      "text": "OnlyCampus completely transformed my college experience. It keeps me on track and focused every week.",
+      "name": "Sarah M.",
+      "role": "University of Texas"
+    }
+  },
+  "pricing": {
+    "eyebrow": "Pricing",
+    "title": "Plans That Fit Your Campus Life",
+    "description": "Choose a plan that fits your schedule and unlocks the tools you need.",
+    "plans": [
+      {
+        "name": "Starter",
+        "price": "$9 / month",
+        "features": [
+          "Schedule tracking",
+          "Basic reminders",
+          "Student support"
+        ],
+        "cta": {
+          "label": "Get Started",
+          "href": "#contact"
+        }
+      },
+      {
+        "name": "Standard",
+        "price": "$19 / month",
+        "popular": true,
+        "features": [
+          "Unlimited planners",
+          "Priority support",
+          "Personalized insights"
+        ],
+        "cta": {
+          "label": "Start Free Trial",
+          "href": "#contact"
+        }
+      },
+      {
+        "name": "Premium",
+        "price": "$29 / month",
+        "features": [
+          "Advanced analytics",
+          "Mentor sessions",
+          "Early access"
+        ],
+        "cta": {
+          "label": "Talk to Sales",
+          "href": "#contact"
+        }
+      }
+    ]
+  },
+  "faq": {
+    "eyebrow": "FAQ",
+    "title": "Questions Students Ask Most",
+    "description": "Quick answers about the OnlyCampus experience.",
+    "items": [
+      {
+        "question": "Is OnlyCampus available for every university?",
+        "answer": "We support most campuses and add new partners each semester."
+      },
+      {
+        "question": "Can I sync my course schedule?",
+        "answer": "Yes, you can import schedules and keep everything in one place."
+      },
+      {
+        "question": "Do you offer team or campus plans?",
+        "answer": "Campus-wide plans are available for departments and student groups."
+      },
+      {
+        "question": "Is there a free trial?",
+        "answer": "Every plan includes a free trial so you can explore the platform."
+      },
+      {
+        "question": "How is my data protected?",
+        "answer": "We follow industry-standard security and privacy practices."
+      },
+      {
+        "question": "Who can I contact for help?",
+        "answer": "Our support team is available 24/7 through the contact form."
+      }
+    ]
+  },
+  "contact": {
+    "eyebrow": "Contact",
+    "title": "Talk with the OnlyCampus Team",
+    "description": "Questions, partnerships, or feedback? We would love to hear from you.",
+    "addressLabel": "Address",
+    "address": "Dallas, Texas, USA",
+    "emailLabel": "Email",
+    "emails": [
+      "ata.turhan@solarityai.com"
+    ],
+    "form": {
+      "action": "https://formsubmit.co/ata.turhan@solarityai.com",
+      "next": "https://onlycampus.solarityai.com/form-pages/thanks.html",
+      "error": "https://onlycampus.solarityai.com/form-pages/error.html",
+      "subject": "New message - OnlyCampus",
+      "submitLabel": "Send Message"
+    }
+  },
+  "downloadCta": {
+    "eyebrow": "Get the App",
+    "title": "Ready to get started?",
+    "description": "Download OnlyCampus to keep your schedule, campus updates, and study tools in one place.",
+    "badges": [
+      {
+        "image": "assets/images/badge/appstore-badge.png",
+        "alt": "Download on the App Store",
+        "href": "#"
+      },
+      {
+        "image": "assets/images/badge/googleplay-badge.png",
+        "alt": "Get it on Google Play",
+        "href": "#"
+      }
+    ],
+    "trustItems": [
+      {
+        "value": "4.9★",
+        "label": "App Store"
+      },
+      {
+        "value": "4.8★",
+        "label": "Google Play"
+      },
+      {
+        "value": "100K+",
+        "label": "Downloads"
+      }
+    ]
+  },
+  "footer": {
+    "description": "OnlyCampus brings courses, planning, and community into one student-first platform.",
+    "quickTitle": "Quick Links",
+    "quickLinks": [
+      {
+        "label": "Home",
+        "href": "#home"
+      },
+      {
+        "label": "Features",
+        "href": "#features"
+      },
+      {
+        "label": "Testimonials",
+        "href": "#testimonials"
+      },
+      {
+        "label": "Pricing",
+        "href": "#pricing"
+      },
+      {
+        "label": "FAQ",
+        "href": "#faq"
+      },
+      {
+        "label": "Contact",
+        "href": "#contact"
+      }
+    ],
+    "socialTitle": "Follow OnlyCampus",
+    "socialLinks": [
+      {
+        "icon": "lni lni-youtube",
+        "href": "https://www.youtube.com/@onlycampus"
+      },
+      {
+        "icon": "lni lni-instagram-filled",
+        "href": "https://www.instagram.com/onlycampus"
+      },
+      {
+        "icon": "lni lni-tiktok",
+        "href": "https://www.tiktok.com/@onlycampus"
+      },
+      {
+        "icon": "lni lni-facebook-filled",
+        "href": "https://www.facebook.com/onlycampus"
+      }
+    ],
+    "legalTitle": "Legal",
+    "legalLinks": [
+      {
+        "label": "Data Deletion",
+        "href": "footer-pages/data-deletion.html"
+      },
+      {
+        "label": "Terms of Service",
+        "href": "footer-pages/terms.html"
+      },
+      {
+        "label": "Cookies Policy",
+        "href": "footer-pages/cookies.html"
+      }
+    ],
+    "emergencyTitle": "Support",
+    "emergencyText": "Need help? Reach us at ata.turhan@solarityai.com or use the contact form above.",
+    "bottomText": "© 2026 OnlyCampus. All rights reserved."
+  }
+}
