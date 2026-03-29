@@ -1,6 +1,10 @@
 .git/
 .gitignore
+.github/
+.claude/
+.woodpecker.yml
 README.md
 LICENCE
 ansible/
 backup-pages/
+docs/
