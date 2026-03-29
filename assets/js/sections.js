@@ -170,7 +170,7 @@ const SITE_TRANSLATIONS = {
         { label: "OnlyCampus Facebook" }
       ],
       legalTitle: "Yasal",
-      legalLinks: [{ label: "Veri Silme" }, { label: "Kullanım Şartları" }, { label: "Çerez Politikası" }],
+      legalLinks: [{ label: "Veri Silme" }, { label: "Gizlilik Politikası" }, { label: "Kullanım Şartları" }, { label: "Çerez Politikası" }],
       emergencyTitle: "Destek",
       emergencyText:
         "Acil durumlarda yerel hizmetlerle iletişime geçin. OnlyCampus bir kriz destek sağlayıcısı değildir.",
