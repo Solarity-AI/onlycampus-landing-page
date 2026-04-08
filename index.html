@@ -1,1325 +1,695 @@
-<!-- =========
-
-	Template Name: Play
-	Author: UIdeck
-	Author URI: https://uideck.com/
-	Support: https://uideck.com/support/
-	Version: 1.1
-
-========== -->
-
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
-    <!-- Resource Hints for Performance -->
-    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
-    <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
-    <!-- Preload icon font to prevent CLS from icon placeholders -->
-    <link rel="preload" href="assets/fonts/LineIcons.woff2" as="font" type="font/woff2" crossorigin />
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Google Analytics is loaded after user interaction to keep initial render lighter -->
-    <script>
+  <!-- Populated by config.js -->
+  <title>Loading...</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <meta name="author" content="Solarity AI LLC">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="">
+  <meta property="og:title" content="">
+  <meta property="og:description" content="">
+  <meta property="og:image" content="">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="">
+  <meta property="twitter:title" content="">
+  <meta property="twitter:description" content="">
+  <meta property="twitter:image" content="">
+
+  <!-- Theme Color -->
+  <meta name="theme-color" content="#3b82f6">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="assets/images/favicon/favicon.ico">
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon/favicon.svg">
+  <link rel="icon" type="image/png" sizes="96x96" href="assets/images/favicon/favicon-96x96.png">
+  <link rel="apple-touch-icon" href="assets/images/favicon/apple-touch-icon.png">
+  <link rel="manifest" href="assets/images/favicon/site.webmanifest">
+
+  <link rel="canonical" href="https://onlycampus.solarityai.com/">
+
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Load config BEFORE body renders -->
+  <script src="config.js"></script>
+  <script>
+    // Apply SEO meta from config immediately
+    (function() {
+      var C = window.PRODUCT_CONFIG;
+      if (!C) return;
+      document.title = C.meta.title;
+      document.querySelector('meta[name="description"]').content = C.meta.description;
+      document.querySelector('meta[name="keywords"]').content = C.meta.keywords;
+      document.querySelector('meta[property="og:url"]').content = C.url;
+      document.querySelector('meta[property="og:title"]').content = C.meta.title;
+      document.querySelector('meta[property="og:description"]').content = C.meta.description;
+      document.querySelector('meta[property="og:image"]').content = C.meta.ogImage;
+      document.querySelector('meta[property="twitter:url"]').content = C.url;
+      document.querySelector('meta[property="twitter:title"]').content = C.meta.title;
+      document.querySelector('meta[property="twitter:description"]').content = C.meta.description;
+      document.querySelector('meta[property="twitter:image"]').content = C.meta.ogImage;
+      if (C.theme && C.theme.themeColor) {
+        document.querySelector('meta[name="theme-color"]').content = C.theme.themeColor;
+      }
+      // Apply theme colors as CSS variables
+      if (C.theme) {
+        var r = document.documentElement.style;
+        if (C.theme.accentColor) r.setProperty('--color-accent-green', C.theme.accentColor);
+        if (C.theme.lightBlue) r.setProperty('--color-light-blue', C.theme.lightBlue);
+        if (C.theme.bgColor) r.setProperty('--color-bg', C.theme.bgColor);
+        if (C.theme.textColor) r.setProperty('--color-text', C.theme.textColor);
+        if (C.theme.textMuted) r.setProperty('--color-text-muted', C.theme.textMuted);
+        if (C.theme.secondary) r.setProperty('--color-secondary', C.theme.secondary);
+        if (C.theme.ctaBg) r.setProperty('--color-cta-bg', C.theme.ctaBg);
+      }
+    })();
+  </script>
+</head>
+<body>
+
+  <noscript>
+    <div class="noscript-message">
+      <h2>JavaScript Required</h2>
+      <p>This page requires JavaScript to render content. Please enable JavaScript in your browser settings.</p>
+    </div>
+  </noscript>
+
+  <!-- ============================================
+       HEADER / NAVBAR
+       ============================================ -->
+  <header class="site-header" id="header">
+    <nav class="nav-container">
+      <a href="#" class="nav-logo" id="navLogo" aria-label="Home"></a>
+      <ul class="nav-links" id="navLinks"></ul>
+      <div class="nav-actions" id="navActions"></div>
+      <button type="button" class="hamburger" aria-label="Open menu" id="menuToggle">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+    <div class="mobile-menu" id="mobileMenu">
+      <ul id="mobileNavLinks"></ul>
+      <div class="mobile-menu-actions" id="mobileNavActions"></div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ============================================
+         HERO SECTION
+         ============================================ -->
+    <section class="hero" id="hero">
+      <div class="hero-blur hero-blur--green"></div>
+      <div class="hero-blur hero-blur--blue"></div>
+      <div class="container">
+        <div class="hero-content reveal">
+          <div class="badge">
+            <span class="badge-dot"></span>
+            <span id="heroBadge"></span>
+          </div>
+          <h1 id="heroTitle">&nbsp;</h1>
+          <p class="hero-subtitle" id="heroSubtitle"></p>
+          <div class="hero-ctas" id="heroCtas"></div>
+        </div>
+        <div class="hero-visual reveal">
+          <div class="hero-phone">
+            <img id="heroPhoneImg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="App screenshot" loading="lazy">
+          </div>
+          <div class="hero-card hero-card--left" id="heroCardLeft"></div>
+          <div class="hero-card hero-card--right" id="heroCardRight"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+         NUMBERS SECTION
+         ============================================ -->
+    <section class="numbers" id="numbers">
+      <div class="container">
+        <div class="numbers-header reveal" id="numbersHeader"></div>
+        <div class="numbers-grid reveal" id="numbersGrid"></div>
+      </div>
+    </section>
+
+    <!-- ============================================
+         KEY BENEFITS
+         ============================================ -->
+    <section class="benefits" id="features">
+      <div class="container">
+        <div class="section-header reveal" id="benefitsHeader"></div>
+        <div class="benefits-grid reveal" id="benefitsGrid"></div>
+      </div>
+    </section>
+
+    <!-- ============================================
+         TOOLS SECTION
+         ============================================ -->
+    <section class="tools">
+      <div class="container">
+        <div class="section-header reveal" id="toolsHeader"></div>
+        <div class="tools-layout reveal" id="toolsLayout"></div>
+      </div>
+    </section>
+
+
+    <!-- ============================================
+         PRICING
+         ============================================ -->
+    <section class="pricing" id="pricing">
+      <div class="container">
+        <div class="section-header reveal" id="pricingHeader"></div>
+        <div class="pricing-toggle reveal">
+          <span class="toggle-label toggle-label--active" data-toggle="monthly">Monthly</span>
+          <label class="toggle-switch">
+            <input type="checkbox" id="pricingToggle">
+            <span class="toggle-slider"></span>
+          </label>
+          <span class="toggle-label" data-toggle="yearly">Yearly</span>
+        </div>
+        <div class="pricing-grid reveal" id="pricingGrid"></div>
+      </div>
+    </section>
+
+    <!-- ============================================
+         TESTIMONIALS
+         ============================================ -->
+    <section class="testimonials" id="testimonials">
+      <div class="container">
+        <div class="section-header reveal" id="testimonialsHeader"></div>
+      </div>
+      <div class="testimonials-track reveal" id="testimonialsTrack"></div>
+    </section>
+
+    <!-- ============================================
+         CTA SECTION
+         ============================================ -->
+    <section class="cta">
+      <div class="container">
+        <div class="cta-content reveal" id="ctaContent"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================
+       FOOTER
+       ============================================ -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid" id="footerGrid"></div>
+      <div class="footer-bottom" id="footerBottom"></div>
+    </div>
+  </footer>
+
+  <!-- ============================================
+       TEMPLATE ENGINE — Renders everything from config
+       ============================================ -->
+  <script>
+  (function() {
+    var C = PRODUCT_CONFIG;
+
+    // ── Helpers ────────────────────────────────────
+    function esc(s) {
+      var d = document.createElement('div');
+      d.textContent = s;
+      return d.innerHTML;
+    }
+
+    function starsSvg(count) {
+      var s = '';
+      for (var i = 0; i < (count || 5); i++) {
+        s += '<svg width="16" height="16" viewBox="0 0 16 16" fill="var(--color-star)"><polygon points="8,1 10,6 15,6 11,9.5 12.5,15 8,11.5 3.5,15 5,9.5 1,6 6,6"/></svg>';
+      }
+      return s;
+    }
+
+    function checkSvg() {
+      return '<svg width="18" height="18" viewBox="0 0 18 18" fill="var(--accent-green)"><circle cx="9" cy="9" r="9"/><path d="M5.5 9l2.5 2.5 4.5-4.5" stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    }
+
+    function checkSvg20() {
+      return '<svg width="20" height="20" viewBox="0 0 20 20" fill="var(--accent-green)"><circle cx="10" cy="10" r="10"/><path d="M6 10l3 3 5-5" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    }
+
+    var TAB_ICONS = {
+      layout: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>',
+      target: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M2 12h20"/><circle cx="12" cy="12" r="10"/></svg>',
+      'check-circle': '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12l2 2 4-4"/></svg>',
+      users: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
+    };
+
+    // Tools icons — order matches config.tools.left (0-2) then .right (3-5)
+    // Left: Smart Schedules, Study Planner, Campus Events
+    // Right: Student Groups, Progress Insights, Anywhere Access
+    var TOOL_ICONS = [
+      // 0 — Smart Schedules (calendar)
+      '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent-green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>',
+      // 1 — Study Planner (checklist)
+      '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent-green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>',
+      // 2 — Campus Events (sparkles/star)
+      '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent-green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>',
+      // 3 — Student Groups (users)
+      '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent-green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
+      // 4 — Progress Insights (trending chart)
+      '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent-green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>',
+      // 5 — Anywhere Access (smartphone)
+      '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent-green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>',
+    ];
+
+    var SOCIAL_ICONS = {
+      youtube: '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.016 3.016 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.016 3.016 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>',
+      instagram: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>',
+      tiktok: '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5.8 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>',
+      facebook: '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>',
+    };
+
+    var BENEFIT_ICONS = {
+      // Comprehensive Courses — graduation cap
+      management: '<svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="var(--accent-green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12l14-7 14 7-14 7L2 12z"/><path d="M8 15v7c0 1.5 3.6 3 8 3s8-1.5 8-3v-7"/></svg>',
+      // Campus Community — users
+      security: '<svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="var(--accent-green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 28v-2.67a5.33 5.33 0 0 0-5.33-5.33H8a5.33 5.33 0 0 0-5.33 5.33V28"/><circle cx="12" cy="9.33" r="5.33"/><path d="M30 28v-2.67a5.33 5.33 0 0 0-4-5.16"/><path d="M22 4.17a5.33 5.33 0 0 1 0 10.33"/></svg>',
+      // Study Tools & Resources — open book
+      insights: '<svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="var(--accent-green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4.67h8a5.33 5.33 0 0 1 5.33 5.33v17.33a4 4 0 0 0-4-4H4V4.67z"/><path d="M28 4.67h-8a5.33 5.33 0 0 0-5.33 5.33v17.33a4 4 0 0 1 4-4H28V4.67z"/></svg>',
+    };
+
+    function brandSvg(i) {
+      return '<svg width="120" height="40" viewBox="0 0 120 40"><rect width="120" height="40" rx="4" fill="#e5e7eb"/><text x="60" y="24" text-anchor="middle" fill="#4b4b57" font-size="14" font-family="Plus Jakarta Sans">Brand ' + (i + 1) + '</text></svg>';
+    }
+
+    function integrationSvg() {
+      var shapes = [
+        '<rect x="12" y="12" width="16" height="16" rx="4" fill="#e5e7eb"/>',
+        '<circle cx="20" cy="20" r="8" fill="#e5e7eb"/>',
+        '<polygon points="20,10 28,26 12,26" fill="#e5e7eb"/>',
+        '<rect x="14" y="14" width="12" height="12" rx="2" fill="#e5e7eb"/>',
+        '<circle cx="20" cy="20" r="6" fill="#e5e7eb"/>',
+        '<rect x="12" y="16" width="16" height="8" rx="2" fill="#e5e7eb"/>',
+        '<rect x="14" y="10" width="12" height="20" rx="3" fill="#e5e7eb"/>',
+        '<rect x="14" y="14" width="12" height="12" rx="6" fill="#e5e7eb"/>',
+      ];
+      var s = shapes[Math.floor(Math.random() * shapes.length)];
+      return '<svg width="40" height="40" viewBox="0 0 40 40"><circle cx="20" cy="20" r="20" fill="#f9fafb"/>' + s + '</svg>';
+    }
+
+    // ── Translation helper ──────────────────────────
+    // t(section, key) returns translated value or falls back to English (default config)
+    var currentLang = (C.langSwitch && C.langSwitch.default) || 'en';
+
+    var defaultLang = (C.langSwitch && C.langSwitch.default) || 'en';
+
+    function t(section, key, index) {
+      if (currentLang === defaultLang || !C.translations || !C.translations[currentLang]) return undefined;
+      var tr = C.translations[currentLang];
+      if (!tr[section]) return undefined;
+      if (index !== undefined) {
+        var arr = tr[section][key] || tr[section];
+        if (Array.isArray(arr)) return arr[index];
+        if (arr && Array.isArray(arr[key])) return arr[key][index];
+        return undefined;
+      }
+      if (key !== undefined) return tr[section][key];
+      return tr[section];
+    }
+
+    // Deep merge: returns translated value if exists, otherwise original
+    function tx(section, key) {
+      var val = t(section, key);
+      return val !== undefined ? val : C[section][key];
+    }
+
+    function renderAll() {
+    // ── NAV ───────────────────────────────────────
+    var navLogo = document.getElementById('navLogo');
+    navLogo.innerHTML = C.logoSvg + '<span>' + esc(C.name) + '</span>';
+
+    var trNavLinks = t('navLinks');
+    var navItems = trNavLinks || C.navLinks;
+    var navLinksHtml = '';
+    var mobileNavLinksHtml = '';
+    navItems.forEach(function(link) {
+      navLinksHtml += '<li><a href="' + link.href + '">' + esc(link.label) + '</a></li>';
+      mobileNavLinksHtml += '<li><a href="' + link.href + '">' + esc(link.label) + '</a></li>';
+    });
+    document.getElementById('navLinks').innerHTML = navLinksHtml;
+    document.getElementById('mobileNavLinks').innerHTML = mobileNavLinksHtml;
+
+    if (C.langSwitch) {
+      var langHtml = '<div class="lang-switch" role="group" aria-label="Language selector">';
+      C.langSwitch.options.forEach(function(opt) {
+        var active = opt.code === currentLang ? ' is-active' : '';
+        langHtml += '<button type="button" class="lang-btn' + active + '" data-lang="' + opt.code + '" aria-pressed="' + (active ? 'true' : 'false') + '">' + opt.flag + '</button>';
+      });
+      langHtml += '</div>';
+      document.getElementById('navActions').innerHTML = langHtml;
+      document.getElementById('mobileNavActions').innerHTML = langHtml.replace('lang-switch', 'lang-switch lang-switch--mobile');
+    } else {
+      document.getElementById('navActions').innerHTML =
+        '<a href="' + C.navCta.loginHref + '" class="btn btn-sm btn-outline">' + esc(C.navCta.loginLabel) + '</a>' +
+        '<a href="' + C.navCta.primaryHref + '" class="btn btn-sm btn-primary">' + esc(C.navCta.primaryLabel) + '</a>';
+      document.getElementById('mobileNavActions').innerHTML =
+        '<a href="' + C.navCta.loginHref + '" class="btn btn-outline">' + esc(C.navCta.loginLabel) + '</a>' +
+        '<a href="' + C.navCta.primaryHref + '" class="btn btn-primary">' + esc(C.navCta.primaryLabel) + '</a>';
+    }
+
+    // ── HERO ──────────────────────────────────────
+    var trHero = t('hero') || {};
+    var hero = C.hero;
+    document.getElementById('heroBadge').textContent = trHero.badge || hero.badge;
+    document.getElementById('heroTitle').textContent = trHero.title || hero.title;
+    document.getElementById('heroSubtitle').textContent = trHero.subtitle || hero.subtitle;
+
+    var ctaPrimary = trHero.ctaPrimary || hero.ctaPrimary;
+    var ctaSecondary = trHero.ctaSecondary || hero.ctaSecondary;
+    var primaryIcon = (ctaPrimary.icon || hero.ctaPrimary.icon) === 'arrow-up-right' ? ' <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>' : '';
+    var heroCtasHtml = '<a href="' + ctaPrimary.href + '" class="btn btn-primary btn-lg">' + esc(ctaPrimary.label) + primaryIcon + '</a>';
+    if (ctaSecondary) {
+      heroCtasHtml += '<a href="' + ctaSecondary.href + '" class="btn btn-outline btn-lg">' + esc(ctaSecondary.label) + '</a>';
+    }
+    document.getElementById('heroCtas').innerHTML = heroCtasHtml;
+
+    var heroImg = document.getElementById('heroPhoneImg');
+    heroImg.src = hero.phoneImage;
+    heroImg.alt = hero.phoneImageAlt;
+
+    var cardLeft = trHero.cardLeft || hero.cardLeft;
+    document.getElementById('heroCardLeft').innerHTML =
+      '<div class="hero-card-title">' + esc(cardLeft.title) + '</div>' +
+      (cardLeft.description ? '<p class="hero-card-desc">' + esc(cardLeft.description) + '</p>' : '') +
+      '<div class="hero-card-avatars">' +
+      ((cardLeft.avatars || hero.cardLeft.avatars) ? (cardLeft.avatars || hero.cardLeft.avatars).map(function(src) {
+        return '<img class="avatar" src="' + src + '" alt="" loading="lazy">';
+      }).join('') :
+        '<span class="avatar" style="background:#2563eb;"></span>' +
+        '<span class="avatar" style="background:#38bdf8;"></span>' +
+        '<span class="avatar" style="background:#f59e0b;"></span>' +
+        '<span class="avatar" style="background:#ef4444;"></span>') +
+      '</div>' +
+      '<div class="hero-card-stat"><strong>' + esc(cardLeft.stat) + '</strong> ' + esc(cardLeft.statLabel) + '</div>';
+
+    var cardRight = trHero.cardRight || hero.cardRight;
+    document.getElementById('heroCardRight').innerHTML =
+      '<div class="hero-card-stars">' + starsSvg(5) + '</div>' +
+      (cardRight.title ? '<p class="hero-card-review-title">' + esc(cardRight.title) + '</p>' : '') +
+      '<p class="hero-card-review-text">' + esc(cardRight.quote) + '</p>' +
+      (cardRight.author ? '<span class="hero-card-author">' + esc(cardRight.author) + '</span>' : '');
+
+    // ── NUMBERS ───────────────────────────────────
+    var trNumbers = t('numbers') || {};
+    document.getElementById('numbersHeader').innerHTML =
+      '<span class="section-badge">' + esc(trNumbers.badge || C.numbers.badge) + '</span>' +
+      '<h2>' + esc(trNumbers.title || C.numbers.title) + '</h2>' +
+      '<p>' + esc(trNumbers.subtitle || C.numbers.subtitle) + '</p>';
+
+    var numbersStats = trNumbers.stats || C.numbers.stats;
+    var numbersStatsHtml = '<div class="numbers-stats">';
+    numbersStats.forEach(function(s) {
+      numbersStatsHtml += '<div class="stat-item"><span class="stat-number">' + esc(s.value) + '</span><span class="stat-label">' + esc(s.label) + '</span></div>';
+    });
+    numbersStatsHtml += '</div>';
+    document.getElementById('numbersGrid').innerHTML = numbersStatsHtml;
+
+    // ── BENEFITS ──────────────────────────────────
+    var trBenefits = t('benefits') || {};
+    document.getElementById('benefitsHeader').innerHTML =
+      '<span class="section-badge">' + esc(trBenefits.badge || C.benefits.badge) + '</span>' +
+      '<h2>' + esc(trBenefits.title || C.benefits.title) + '</h2>';
+
+    var benefitsHtml = '';
+    C.benefits.items.forEach(function(b, idx) {
+      var trB = (trBenefits.items && trBenefits.items[idx]) || {};
+      var iconSvg = BENEFIT_ICONS[b.icon] || BENEFIT_ICONS.management;
+      benefitsHtml += '<article class="benefit-card">' +
+        '<div class="benefit-icon">' + iconSvg + '</div>' +
+        '<h3>' + esc(trB.title || b.title) + '</h3>' +
+        '<p>' + esc(trB.description || b.description) + '</p>' +
+        '</article>';
+    });
+    document.getElementById('benefitsGrid').innerHTML = benefitsHtml;
+
+    // ── TOOLS ─────────────────────────────────────
+    var trTools = t('tools') || {};
+    document.getElementById('toolsHeader').innerHTML =
+      '<span class="section-badge">' + esc(trTools.badge || C.tools.badge) + '</span>' +
+      '<h2>' + esc(trTools.title || C.tools.title) + '</h2>';
+
+    var trToolsLeft = trTools.left || C.tools.left;
+    var trToolsRight = trTools.right || C.tools.right;
+    var toolsHtml = '<div class="tools-col tools-col--left">';
+    trToolsLeft.forEach(function(ti, idx) {
+      toolsHtml += '<div class="tool-item"><div class="tool-icon">' + TOOL_ICONS[idx] + '</div><h4>' + esc(ti.title) + '</h4><p>' + esc(ti.description) + '</p></div>';
+    });
+    toolsHtml += '</div>';
+    toolsHtml += '<div class="tools-phone"><img src="' + C.tools.phoneImage + '" alt="' + esc(C.tools.phoneImageAlt) + '" loading="lazy"></div>';
+    toolsHtml += '<div class="tools-col tools-col--right">';
+    trToolsRight.forEach(function(ti, idx) {
+      toolsHtml += '<div class="tool-item"><div class="tool-icon">' + TOOL_ICONS[idx + 3] + '</div><h4>' + esc(ti.title) + '</h4><p>' + esc(ti.description) + '</p></div>';
+    });
+    toolsHtml += '</div>';
+    document.getElementById('toolsLayout').innerHTML = toolsHtml;
+
+
+    // ── PRICING ───────────────────────────────────
+    var trPricing = t('pricing') || {};
+    document.getElementById('pricingHeader').innerHTML =
+      '<span class="section-badge">' + esc(trPricing.badge || C.pricing.badge) + '</span>' +
+      '<h2>' + esc(trPricing.title || C.pricing.title) + '</h2>';
+
+    // Update toggle labels if translated
+    var toggleLabels = document.querySelectorAll('.toggle-label');
+    if (toggleLabels.length >= 2) {
+      toggleLabels[0].textContent = (trPricing.toggleMonthly || 'Monthly');
+      toggleLabels[1].textContent = (trPricing.toggleYearly || 'Yearly');
+    }
+
+    var pricingPlans = trPricing.plans || C.pricing.plans;
+    var pricingHtml = '';
+    C.pricing.plans.forEach(function(plan, idx) {
+      var trPlan = (trPricing.plans && trPricing.plans[idx]) || {};
+      var featured = plan.featured ? ' pricing-card--featured' : '';
+      var btnStyle = (trPlan.cta && trPlan.cta.style) || plan.cta.style;
+      var btnClass = btnStyle === 'primary' ? 'btn-primary' : 'btn-outline';
+      var popularLabel = currentLang === 'tr' ? 'En Populer' : 'Most Popular';
+      var periodLabel = currentLang === 'tr' ? '/ay' : '/month';
+      pricingHtml += '<article class="pricing-card' + featured + '">';
+      if (plan.featured) pricingHtml += '<div class="pricing-popular">' + popularLabel + '</div>';
+      pricingHtml += '<div class="pricing-card-header"><h3>' + esc(trPlan.name || plan.name) + '</h3><p class="pricing-desc">' + esc(trPlan.description || plan.description) + '</p></div>';
+      pricingHtml += '<div class="pricing-price"><span class="price-monthly">' + esc(trPlan.priceMonthly || plan.priceMonthly) + '</span><span class="price-yearly">' + esc(trPlan.priceYearly || plan.priceYearly) + '</span><span class="price-period">' + periodLabel + '</span></div>';
+      var ctaLabel = (trPlan.cta && trPlan.cta.label) || plan.cta.label;
+      var ctaHref = (trPlan.cta && trPlan.cta.href) || plan.cta.href;
+      pricingHtml += '<a href="' + ctaHref + '" class="btn ' + btnClass + ' btn-block">' + esc(ctaLabel) + '</a>';
+      pricingHtml += '<ul class="pricing-features">';
+      var features = trPlan.features || plan.features;
+      features.forEach(function(f) {
+        pricingHtml += '<li>' + checkSvg() + ' ' + esc(f) + '</li>';
+      });
+      pricingHtml += '</ul></article>';
+    });
+    document.getElementById('pricingGrid').innerHTML = pricingHtml;
+
+    // ── TESTIMONIALS ──────────────────────────────
+    var trTest = t('testimonials') || {};
+    document.getElementById('testimonialsHeader').innerHTML =
+      '<span class="section-badge">' + esc(trTest.badge || C.testimonials.badge) + '</span>' +
+      '<h2>' + esc(trTest.title || C.testimonials.title) + '</h2>';
+
+    var appStoreLabel = currentLang === 'tr' ? 'App Store\'da Gor' : 'View on App Store';
+    var testHtml = '';
+    C.testimonials.items.forEach(function(ti, idx) {
+      var trTi = (trTest.items && trTest.items[idx]) || {};
+      testHtml += '<article class="testimonial-card">' +
+        '<div class="testimonial-stars">' + starsSvg(5) + '</div>' +
+        '<blockquote>"' + esc(trTi.quote || ti.quote) + '"</blockquote>' +
+        '<div class="testimonial-author">' +
+          (ti.avatarImage
+            ? '<img class="testimonial-avatar" src="' + ti.avatarImage + '" alt="' + esc(trTi.name || ti.name) + '" loading="lazy">'
+            : '<div class="testimonial-avatar testimonial-avatar--initials" style="background:' + (ti.avatarColor || '#82CDE0') + ';">' + (trTi.name || ti.name).charAt(0).toUpperCase() + '</div>') +
+          '<div><strong>' + esc(trTi.name || ti.name) + '</strong><span>' + esc(trTi.role || ti.role) + '</span></div>' +
+        '</div>' +
+        '<a href="#" class="testimonial-appstore">' + appStoreLabel + '</a>' +
+        '</article>';
+    });
+    // Duplicate testimonials for seamless marquee loop
+    var track = document.getElementById('testimonialsTrack');
+    track.innerHTML = '<div class="testimonials-marquee"><div class="testimonials-marquee-inner">' + testHtml + testHtml + '</div></div>';
+
+    // ── CTA ───────────────────────────────────────
+    var trCta = t('cta') || {};
+    var ctaAppStoreHtml = '';
+    if (C.footer.appStore) {
+      var getItOn = currentLang === 'tr' ? 'Şimdi indir' : 'Get it on';
+      var downloadOnThe = currentLang === 'tr' ? 'Şimdi indir' : 'Download on the';
+      ctaAppStoreHtml = '<div class="cta-badges">' +
+        '<a href="' + C.footer.appStore.googlePlayHref + '" class="store-btn">' +
+          '<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3.5 1.275a1 1 0 0 0-.5.866v15.718a1 1 0 0 0 .5.866l.062.036L12.063 10 3.562 1.24l-.062.035z" fill="#4285F4"/><path d="M15.4 6.955L12.063 10l3.337 3.045 3.77-2.143a1 1 0 0 0 0-1.804L15.4 6.955z" fill="#FBBC04"/><path d="M3.5 18.859a1 1 0 0 0 .5-.134l.062-.036L15.4 13.045 12.063 10 3.5 18.859z" fill="#EA4335"/><path d="M3.5 1.141a1 1 0 0 1 .5.134l.062.036L15.4 6.955 12.063 10 3.5 1.141z" fill="#34A853"/></svg>' +
+          '<div><small>' + getItOn + '</small><strong>Google Play</strong></div></a>' +
+        '<a href="' + C.footer.appStore.appStoreHref + '" class="store-btn">' +
+          '<svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor"><path d="M14.94 10.55c-.02-2.12 1.73-3.14 1.81-3.19-1-1.45-2.54-1.65-3.08-1.67-1.3-.14-2.56.78-3.23.78-.68 0-1.71-.76-2.82-.74-1.44.02-2.78.85-3.52 2.15-1.51 2.62-.39 6.49 1.07 8.62.72 1.04 1.57 2.2 2.68 2.16 1.08-.04 1.49-.7 2.8-.7 1.3 0 1.67.7 2.8.67 1.16-.02 1.89-1.05 2.59-2.1.83-1.2 1.17-2.37 1.18-2.43-.03-.01-2.27-.87-2.28-3.45zM12.82 3.88c.58-.72.98-1.7.87-2.7-.84.04-1.88.58-2.49 1.28-.54.63-1.02 1.65-.9 2.62.95.07 1.92-.48 2.52-1.2z"/></svg>' +
+          '<div><small>' + downloadOnThe + '</small><strong>App Store</strong></div></a>' +
+        '</div>';
+    }
+    document.getElementById('ctaContent').innerHTML =
+      '<h2>' + esc(trCta.title || C.cta.title) + '</h2>' +
+      '<p>' + esc(trCta.subtitle || C.cta.subtitle) + '</p>' +
+      '<a href="' + C.cta.buttonHref + '" class="btn btn-dark btn-lg">' + esc(trCta.buttonLabel || C.cta.buttonLabel) + '</a>' +
+      ctaAppStoreHtml;
+
+    // ── FOOTER ────────────────────────────────────
+    var trFooter = t('footer') || {};
+    var trDesc = (t('meta') && t('meta').description) || C.description;
+    var supportText = (trFooter.supportText || C.footer.supportText) || '';
+    var footerHtml = '<div class="footer-brand"><a href="#" class="nav-logo">' + C.logoSvg + '<span>' + esc(C.name) + '</span></a><p>' + esc(trDesc) + '</p>' +
+      (supportText ? '<p class="footer-support">' + esc(supportText) + '</p>' : '') + '</div>';
+    var footerCols = trFooter.columns || C.footer.columns;
+    footerCols.forEach(function(col) {
+      // Skip empty Support/Destek columns — supportText is shown under brand instead
+      if (col.links.length === 0 && (col.title === 'Support' || col.title === 'Destek')) return;
+      var isSocialCol = col.links.length > 0 && col.links.every(function(l) { return l.icon && SOCIAL_ICONS[l.icon]; });
+      footerHtml += '<div class="footer-col' + (isSocialCol ? ' footer-col--social' : '') + '"><h4>' + esc(col.title) + '</h4><ul>';
+      col.links.forEach(function(link) {
+        var hasIcon = link.icon && SOCIAL_ICONS[link.icon];
+        var target = /^https?:\/\//.test(link.href) ? ' target="_blank" rel="noopener"' : '';
+        if (hasIcon && isSocialCol) {
+          footerHtml += '<li><a href="' + link.href + '"' + target + ' aria-label="' + esc(link.label) + '" title="' + esc(link.label) + '"><span class="footer-link-icon">' + SOCIAL_ICONS[link.icon] + '</span></a></li>';
+        } else {
+          var iconSvg = hasIcon ? '<span class="footer-link-icon">' + SOCIAL_ICONS[link.icon] + '</span>' : '';
+          footerHtml += '<li><a href="' + link.href + '"' + target + '>' + iconSvg + esc(link.label) + '</a></li>';
+        }
+      });
+      footerHtml += '</ul></div>';
+    });
+    if (C.footer.appStore && C.footer.appStore.show) {
+      var appStoreTitle = (trFooter.appStore && trFooter.appStore.title) || 'Get the App';
+      footerHtml += '<div class="footer-col"><h4>' + esc(appStoreTitle) + '</h4><div class="store-buttons">' +
+        '<a href="' + C.footer.appStore.googlePlayHref + '" class="store-btn">' +
+          '<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3.5 1.275a1 1 0 0 0-.5.866v15.718a1 1 0 0 0 .5.866l.062.036L12.063 10 3.562 1.24l-.062.035z" fill="#4285F4"/><path d="M15.4 6.955L12.063 10l3.337 3.045 3.77-2.143a1 1 0 0 0 0-1.804L15.4 6.955z" fill="#FBBC04"/><path d="M3.5 18.859a1 1 0 0 0 .5-.134l.062-.036L15.4 13.045 12.063 10 3.5 18.859z" fill="#EA4335"/><path d="M3.5 1.141a1 1 0 0 1 .5.134l.062.036L15.4 6.955 12.063 10 3.5 1.141z" fill="#34A853"/></svg>' +
+          '<div><small>' + (currentLang === 'tr' ? 'Şimdi indir' : 'Get it on') + '</small><strong>Google Play</strong></div></a>' +
+        '<a href="' + C.footer.appStore.appStoreHref + '" class="store-btn">' +
+          '<svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor"><path d="M14.94 10.55c-.02-2.12 1.73-3.14 1.81-3.19-1-1.45-2.54-1.65-3.08-1.67-1.3-.14-2.56.78-3.23.78-.68 0-1.71-.76-2.82-.74-1.44.02-2.78.85-3.52 2.15-1.51 2.62-.39 6.49 1.07 8.62.72 1.04 1.57 2.2 2.68 2.16 1.08-.04 1.49-.7 2.8-.7 1.3 0 1.67.7 2.8.67 1.16-.02 1.89-1.05 2.59-2.1.83-1.2 1.17-2.37 1.18-2.43-.03-.01-2.27-.87-2.28-3.45zM12.82 3.88c.58-.72.98-1.7.87-2.7-.84.04-1.88.58-2.49 1.28-.54.63-1.02 1.65-.9 2.62.95.07 1.92-.48 2.52-1.2z"/></svg>' +
+          '<div><small>' + (currentLang === 'tr' ? 'Şimdi indir' : 'Download on the') + '</small><strong>App Store</strong></div></a>' +
+        '</div></div>';
+    }
+    document.getElementById('footerGrid').innerHTML = footerHtml;
+
+    var rightsText = currentLang === 'tr' ? 'Tüm hakları saklıdır.' : 'All rights reserved.';
+    var copyrightName = C.copyrightName || C.name;
+    var footerBottomHtml = '<div class="footer-legal-row"><p>&copy; ' + esc(C.year) + ' ' + esc(copyrightName) + '. ' + rightsText + '</p><div class="footer-links">';
+    var footerLegal = trFooter.legal || C.footer.legal;
+    footerLegal.forEach(function(l) {
+      footerBottomHtml += '<a href="' + l.href + '">' + esc(l.label) + '</a>';
+    });
+    footerBottomHtml += '</div></div>';
+    document.getElementById('footerBottom').innerHTML = footerBottomHtml;
+
+    } // end renderAll()
+
+    // Initial render
+    renderAll();
+
+    // ── Google Analytics (lazy) ───────────────────
+    if (C.analyticsId) {
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
-      (function() {
-        var loaded = false;
-        function loadAnalytics() {
-          if (loaded) return;
-          loaded = true;
-          var s = document.createElement('script');
-          s.async = true;
-          s.src = 'https://www.googletagmanager.com/gtag/js?id=G-3SE53Z2S2Z';
-          s.onload = function() {
-            gtag('config', 'G-3SE53Z2S2Z', { transport_type: 'beacon' });
-          };
-          document.head.appendChild(s);
-        }
-
-        ['pointerdown', 'keydown', 'touchstart'].forEach(function(evt) {
-          window.addEventListener(evt, loadAnalytics, { once: true, passive: true });
-        });
-      })();
-    </script>
-    
-      <!-- Primary Title -->
-          <title>OnlyCampus | All-in-One Campus Success Platform</title>
-          <meta name="title" content="OnlyCampus | All-in-One Campus Success Platform">
-          <meta name="description" content="OnlyCampus helps students stay organized, connected, and on track with a single hub for courses, schedules, events, and support.">
-          <meta name="keywords" content="campus success, student platform, course planner, university app, student productivity">
-          <meta name="author" content="Solarity AI LLC">
-          <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
-          <meta name="language" content="English">
-          <meta name="revisit-after" content="7 days">
-
-          <!-- Open Graph / Facebook -->
-          <meta property="og:type" content="website">
-          <meta property="og:url" content="https://onlycampus.solarityai.com/">
-          <meta property="og:title" content="OnlyCampus | Transform Your Campus Experience">
-          <meta property="og:description" content="A modern platform that brings courses, planning, and community together for better outcomes.">
-          <meta property="og:image" content="https://onlycampus.solarityai.com/assets/images/hero/sohbetTerapiScreens.png">
-
-          <!-- Twitter -->
-          <meta property="twitter:card" content="summary_large_image">
-          <meta property="twitter:url" content="https://onlycampus.solarityai.com/">
-          <meta property="twitter:title" content="OnlyCampus | Campus Success Made Simple">
-          <meta property="twitter:description" content="Plan smarter, learn better, and stay connected with OnlyCampus.">
-          <meta property="twitter:image" content="https://onlycampus.solarityai.com/assets/images/hero/sohbetTerapiScreens.png">
-          <script>
-            (function () {
-              try {
-                var params = new URLSearchParams(window.location.search);
-                var lang = params.get("lang") || localStorage.getItem("onlycampus_legal_lang");
-                if (lang === "tr") {
-                  document.documentElement.setAttribute("data-lang", "tr");
-                  document.documentElement.lang = "tr";
-                }
-              } catch (error) {}
-            })();
-          </script>
-
-          <!-- Favicons -->
-          <link rel="icon" type="image/png" href="assets/images/favicon/favicon-96x96.png" sizes="96x96" />
-          <link rel="icon" type="image/svg+xml" href="assets/images/favicon/favicon.svg" />
-          <link rel="shortcut icon" href="assets/images/favicon/favicon.ico" />
-          <link rel="apple-touch-icon" sizes="180x180" href="assets/images/favicon/apple-touch-icon.png" />
-          <meta name="apple-mobile-web-app-title" content="OnlyCampus" />
-          <link rel="manifest" href="assets/images/favicon/site.webmanifest" />
-
-          <!-- Theme Color -->
-          <meta name="theme-color" content="#3b82f6" />
-
-          <!-- Canonical URL -->
-          <link rel="canonical" href="https://onlycampus.solarityai.com/" />
-
-          <!-- Sitemap -->
-          <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
-
-          <!-- Structured Data (JSON-LD) -->
-          <script type="application/ld+json">
-          {
-            "@context": "https://schema.org",
-            "@type": "WebSite",
-            "name": "OnlyCampus",
-            "url": "https://onlycampus.solarityai.com/",
-            "description": "OnlyCampus helps students stay organized, connected, and on track with a single hub for courses, schedules, events, and support."
-          }
-          </script>
-          <script type="application/ld+json">
-          {
-            "@context": "https://schema.org",
-            "@type": "Organization",
-            "name": "Solarity AI LLC",
-            "legalName": "Solarity AI LLC",
-            "url": "https://onlycampus.solarityai.com/",
-            "logo": "https://onlycampus.solarityai.com/assets/images/logo/CompanyLogo-106w.webp",
-            "description": "OnlyCampus brings courses, planning, and community into one student-first platform.",
-            "foundingDate": "2024",
-            "contactPoint": {
-              "@type": "ContactPoint",
-              "contactType": "Customer Service",
-              "email": "ata.turhan@solarityai.com",
-              "availableLanguage": ["English"]
-            },
-            "sameAs": [
-              "https://www.linkedin.com/company/solarity-ai-llc"
-            ],
-            "address": {
-              "@type": "PostalAddress",
-              "addressLocality": "Dallas",
-              "addressRegion": "Texas",
-              "addressCountry": "US"
-            }
-          }
-          </script>
-          <script type="application/ld+json">
-          {
-            "@context": "https://schema.org",
-            "@type": "BreadcrumbList",
-            "itemListElement": [
-              {
-                "@type": "ListItem",
-                "position": 1,
-                "name": "Home",
-                "item": "https://onlycampus.solarityai.com/"
-              }
-            ]
-          }
-          </script>
-          <script type="application/ld+json">
-          {
-            "@context": "https://schema.org",
-            "@type": "SoftwareApplication",
-            "name": "OnlyCampus",
-            "url": "https://onlycampus.solarityai.com/",
-            "applicationCategory": "EducationApplication",
-            "operatingSystem": "iOS, Android",
-            "offers": {
-              "@type": "Offer",
-              "price": "0",
-              "priceCurrency": "USD"
-            },
-            "description": "A student success app that unifies planning, learning, and campus life.",
-            "aggregateRating": {
-              "@type": "AggregateRating",
-              "ratingValue": 5,
-              "ratingCount": 100
-            }
-          }
-          </script>
-
-    <!-- ===== Critical CSS (inline, above-the-fold) ===== -->
-    <style>
-:root{--bs-primary:#2f6bff;--bs-secondary:#1e4fbf;--text-primary:#0f172a;--text-secondary:#475569;--text-tertiary:#64748b;--surface-1:#fff;--shadow-strong:0 24px 60px rgba(15,23,42,.18)}
-*,*::before,*::after{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%;scroll-padding-top:100px}
-body,html{overflow-x:hidden;margin:0;padding:0}
-body{max-width:100%;width:100%;font-family:"Poppins",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif!important;color:#475569;line-height:1.6;-webkit-font-smoothing:antialiased;font-size:100%}
-img,video{max-width:100%;height:auto;vertical-align:middle}
-h1,h2,h3,h4,h5,h6{font-weight:700;color:#0f172a;margin:0}
-a,button,input,select,textarea,[role="button"]{touch-action:manipulation}
-a{display:inline-block;text-decoration:none;color:inherit}
-i,span{display:inline-block}
-ul,ol{margin:0;padding:0;list-style:none}
-p{font-size:16px;font-weight:400;line-height:26px;margin:0}
-.container{width:100%;padding-right:12px;padding-left:12px;margin-right:auto;margin-left:auto}
-@media (min-width:576px){.container{max-width:540px}}
-@media (min-width:768px){.container{max-width:720px}}
-@media (min-width:992px){.container{max-width:960px}}
-@media (min-width:1200px){.container{max-width:1140px}}
-@media (min-width:1400px){.container{max-width:1320px}}
-.row{display:flex;flex-wrap:wrap;margin-right:-12px;margin-left:-12px}
-.row>*{width:100%;max-width:100%;padding-right:12px;padding-left:12px}
-.col-lg-6,.col-lg-12{flex:0 0 auto}
-.col-lg-12{width:100%}
-@media (min-width:992px){.col-lg-6{width:50%}.col-lg-12{width:100%}}
-.align-items-start{align-items:flex-start}
-.align-items-center{align-items:center}
-.mx-auto{margin-right:auto;margin-left:auto}
-.mt-4{margin-top:1.5rem}
-.img-fluid{max-width:100%;height:auto}
-.navbar{position:relative;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;padding:0;border-radius:5px}
-.navbar-brand{display:inline-block;padding:0}
-.navbar-collapse{flex-basis:100%;flex-grow:1;align-items:center}
-.navbar-nav{display:flex;flex-direction:column;padding-left:0;margin-bottom:0;list-style:none}
-@media (min-width:992px){
-  .navbar-expand-lg{flex-wrap:nowrap;justify-content:flex-start}
-  .navbar-expand-lg .navbar-collapse{display:flex!important;flex-basis:auto}
-  .navbar-expand-lg .navbar-nav{flex-direction:row}
-  .navbar-expand-lg .navbar-toggler{display:none}
-}
-.navbar-toggler{padding:0;border:0;background:transparent;cursor:pointer;display:flex;flex-direction:column;justify-content:center}
-.navbar-toggler .toggler-icon{width:30px;height:2px;background-color:#f8fafc;display:block;margin:5px 0;position:relative}
-.navbar-nav .nav-item{position:relative;padding:0 20px}
-.navbar-nav .nav-item>a{font-size:16px;font-weight:400;color:#fff;padding:25px 8px;display:inline-block}
-.ud-header{position:absolute;top:0;left:0;width:100%;z-index:99;background:transparent!important;transition:background .2s ease,box-shadow .2s ease}
-.ud-header.sticky{position:fixed;background:rgba(255,255,255,.86)!important;backdrop-filter:blur(12px);box-shadow:0 16px 40px rgba(15,23,42,.12)}
-.ud-header .navbar-brand{padding:10px 0!important;display:flex;align-items:center}
-.ud-header .navbar-brand img{height:88px!important;width:88px!important;max-width:88px!important;object-fit:contain;aspect-ratio:1/1}
-.ud-header:not(.sticky) .navbar-nav .nav-item a{color:#f8fafc!important}
-.ud-header:not(.sticky) .navbar-toggler .toggler-icon{background:#f8fafc!important}
-.ud-header .navbar-nav .nav-item a{font-weight:500!important;font-size:1rem!important;color:#0f172a!important}
-.ud-nav-right{margin-left:auto;display:flex;align-items:center}
-.ud-lang-switch{display:inline-flex;border-radius:999px;gap:4px;padding:2px;border:1px solid rgba(148,163,184,.2);background:rgba(148,163,184,.1)}
-.ud-lang-btn{display:inline-flex;border:0;background:transparent;font-size:1.65rem;font-weight:600;padding:12px 16px;line-height:1;height:50px;align-items:center;justify-content:center;color:#0f172a;cursor:pointer;border-radius:999px}
-.ud-lang-btn.is-active{background:#fff;color:#0f172a;box-shadow:0 8px 20px rgba(15,23,42,.15)}
-.ud-header:not(.sticky) .ud-lang-switch{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.25)}
-.ud-header:not(.sticky) .ud-lang-btn{color:#f8fafc}
-.ud-header:not(.sticky) .ud-lang-btn.is-active{background:rgba(255,255,255,.95);color:#0f172a}
-.ud-hero{background:linear-gradient(135deg,#0f3a75 0%,#1c57b7 45%,#3b82f6 100%)!important;padding:200px 0 140px!important;position:relative;overflow:hidden}
-.ud-hero::before{content:"";position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(circle at 20% 50%,rgba(59,130,246,.2)0,transparent 50%),radial-gradient(circle at 80% 80%,rgba(14,116,144,.2)0,transparent 50%);pointer-events:none}
-.ud-hero-content{max-width:780px;margin:auto;margin-bottom:30px;position:relative;z-index:1}
-.ud-hero-kicker{display:inline-block;font-size:.95rem;font-weight:600;color:#dbeafe;letter-spacing:.04em;text-transform:uppercase;margin-bottom:12px}
-.ud-hero-content .ud-hero-title{color:#fff!important;font-weight:700!important;font-size:3.2rem!important;line-height:1.2!important;letter-spacing:-.02em!important;margin-bottom:1.5rem!important;text-align:left;max-width:560px;text-shadow:0 2px 20px rgba(0,0,0,.3)}
-.ud-hero-content .ud-hero-desc{color:rgba(255,255,255,.95)!important;font-size:1.15rem!important;line-height:1.7!important;font-weight:400!important;max-width:520px;margin:0 0 1.5rem;opacity:1!important;letter-spacing:.3px;text-shadow:0 1px 10px rgba(0,0,0,.2)}
-.ud-hero-buttons{display:flex;gap:12px;justify-content:flex-start;flex-wrap:wrap;list-style:none;padding:0;margin:0}
-.ud-main-btn{background:linear-gradient(135deg,#2563eb 0,#3b82f6 100%)!important;border:0!important;color:#fff!important;font-weight:600!important;font-size:1rem!important;padding:12px 28px!important;border-radius:999px!important;letter-spacing:.01em;text-decoration:none;display:inline-block;cursor:pointer;text-align:center;white-space:nowrap;vertical-align:middle}
-.ud-white-btn{background-color:#fff!important;color:#1e3a8a!important;border:1px solid rgba(148,163,184,.6)!important}
-.ud-main-btn.ud-border-btn{background:transparent!important;border:1px solid rgba(37,99,235,.45)!important;color:#2563eb!important}
-.ud-hero .ud-main-btn.ud-border-btn{border-color:rgba(255,255,255,.35)!important;color:#fff!important;background:transparent!important}
-.ud-hero-media{position:relative;z-index:1;display:flex;justify-content:center;align-items:center;padding:18px;border-radius:26px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2)}
-.ud-hero-media img{max-width:520px;width:100%;border-radius:18px}
-.ud-hero-media-cards{position:absolute;inset:0;pointer-events:none}
-.ud-hero-card{position:absolute;background:#fff;border-radius:16px;padding:12px 16px;display:flex;flex-direction:column;gap:2px;min-width:140px}
-.ud-hero-card:nth-child(1){top:14%;right:-12%}
-.ud-hero-card:nth-child(2){bottom:12%;left:-10%}
-.ud-hero-card-label{font-size:.75rem;text-transform:uppercase;letter-spacing:.08em;color:#64748b}
-.ud-hero-card-value{font-size:1.3rem;color:#0f172a;font-weight:700}
-.ud-hero-powerwords{position:relative;width:100vw;left:50%;right:50%;margin-left:-50vw;margin-right:-50vw;margin-top:3rem;padding:20px 0;display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:18px;text-align:center;font-size:1.1rem;font-weight:500;color:rgba(255,255,255,.9)!important;background:rgba(255,255,255,.1);backdrop-filter:blur(10px);border-top:1px solid rgba(255,255,255,.2);border-bottom:1px solid rgba(255,255,255,.2)}
-.ud-hero-powerwords{letter-spacing:.5px}
-.ud-hero-powerwords .pw-item{color:rgba(255,255,255,.95)!important;text-shadow:0 1px 3px rgba(0,0,0,.2)}
-.ud-hero-powerwords .pw-separator{color:rgba(255,255,255,.6)!important}
-.ud-brand-strip-logos img{height:28px;width:auto;display:inline-block}
-@media (max-width:1199px) and (min-width:992px){.ud-header .navbar-brand img{height:56px!important;width:56px!important;max-width:56px!important}}
-@media (max-width:1024px){.ud-hero{padding:130px 0 80px!important}}
-@media (max-width:991px){
-  .ud-header .navbar-collapse{position:absolute;top:100%;right:0;max-width:300px;width:100%;background-color:#fff;z-index:9;box-shadow:0 15px 20px rgba(0,0,0,.1);padding:0;display:none;border-radius:5px}
-  .ud-header .navbar-collapse.show{display:block}
-  .ud-header .navbar-brand img{height:72px!important;width:72px!important;max-width:72px!important}
-  .ud-header .navbar{display:flex!important;align-items:center!important;flex-wrap:nowrap}
-  .ud-header .navbar-toggler{order:2;margin-left:auto;flex-direction:column!important;justify-content:center!important}
-  .ud-header .ud-nav-right{order:3;margin-left:8px}
-  .ud-header .navbar-collapse{order:4;width:100%;flex-basis:100%}
-  .ud-nav-right{margin-left:0}
-  .ud-hero-media{margin-top:32px}
-  .ud-hero-card{position:static}
-  .ud-hero-media-cards{position:static;display:flex;justify-content:center;gap:12px;margin-top:16px}
-}
-@media (max-width:768px){
-  .ud-hero{padding:130px 0 80px!important}
-  .ud-hero::before{display:none}
-  .ud-hero-media{backdrop-filter:none}
-  .ud-hero-content .ud-hero-title{font-size:2.5rem!important;line-height:1.3!important;text-align:center;margin-left:auto;margin-right:auto}
-  .ud-hero-content .ud-hero-desc{font-size:1.125rem!important;line-height:1.6!important;text-align:center}
-  .ud-hero-buttons{justify-content:center}
-  .ud-hero-media-cards{flex-direction:column;align-items:stretch;width:100%}
-  .ud-hero-card{width:100%;min-width:0;max-width:100%;padding:12px 14px}
-}
-@media (max-width:575px){
-  .container,.row,.row>[class*=col-],.ud-header,.ud-hero,header,main,section{max-width:100%!important}
-  .container{width:100%!important;padding-left:15px!important;padding-right:15px!important;box-sizing:border-box!important}
-  .row{margin-left:0!important;margin-right:0!important}
-  .row>[class*=col-]{padding-left:8px!important;padding-right:8px!important;min-width:0!important}
-  .ud-header{left:0;right:0}
-  .ud-header .navbar{min-width:0!important;flex-wrap:wrap}
-  .ud-header .navbar-brand img{height:60px!important;width:60px!important;max-width:60px!important;max-height:60px!important}
-  .ud-hero-content .ud-hero-title{font-size:2rem!important;line-height:1.2!important}
-  .ud-hero-content .ud-hero-desc{font-size:1rem!important;line-height:1.5!important}
-  .ud-main-btn,.ud-white-btn{padding:8px 24px!important;font-size:.95rem!important;min-width:100px!important}
-}
-@media (max-width:480px){.container{padding-left:14px!important;padding-right:14px!important;max-width:100%!important}}
-@media (max-width:425px){.ud-hero-media .ud-hero-media-cards[data-site-list=hero-media-cards]{position:static!important;display:flex!important;flex-direction:column!important;align-items:flex-start!important;justify-content:flex-start!important;width:100%!important;padding-left:0!important}.ud-hero-media .ud-hero-media-cards[data-site-list=hero-media-cards] .ud-hero-card{position:static!important;width:100%!important;max-width:100%!important;min-width:0!important;align-self:flex-start!important;margin-left:-10px!important}}
-@media (max-width:360px){.ud-hero-content .ud-hero-title{font-size:1.75rem!important}.ud-hero-content .ud-hero-desc{font-size:.95rem!important}}
-/* === Utility classes (prevents shift when bootstrap-lite.css loads) === */
-.text-center{text-align:center}
-.justify-content-center{justify-content:center}
-/* === Grid columns for features/stats (prevents layout shift when bootstrap-lite.css loads) === */
-.col-xl-4,.col-lg-4,.col-md-6,.col-sm-6,.col-sm-10,.col-lg-3,.col-xl-3{flex:0 0 auto}
-@media (min-width:576px){.col-sm-6{width:50%}.col-sm-10{width:83.333333%}}
-@media (min-width:768px){.col-md-6{width:50%}}
-@media (min-width:992px){.col-lg-4{width:33.333333%}.col-lg-3{width:25%}}
-@media (min-width:1200px){.col-xl-4{width:33.333333%}.col-xl-3{width:25%}}
-/* === Features section (prevents layout shift when ud-styles.css / override.css load) === */
-.ud-features{padding-top:120px;padding-bottom:90px}
-.ud-section-title{max-width:620px;margin-bottom:70px}
-.ud-section-title h2{font-size:2.5rem!important;line-height:1.3!important;font-weight:700!important;color:#0f172a!important}
-.ud-section-title p{font-size:1.125rem!important;line-height:1.7!important;color:#475569!important}
-.ud-single-feature{margin-bottom:40px;padding:24px 22px;border-radius:16px;border:1px solid rgba(148,163,184,.12)}
-.ud-feature-icon{width:70px;height:70px;border-radius:16px;background:#2f6bff!important;color:#fff!important;display:flex;align-items:center;justify-content:center;margin-bottom:1rem;font-size:1.5rem}
-.ud-feature-title{font-size:1.15rem!important;font-weight:600!important;color:#0f172a!important;margin-bottom:.5rem}
-.ud-feature-desc{font-size:1rem!important;line-height:1.7!important;color:#475569!important}
-@media (max-width:767px){.ud-features{padding-top:80px;padding-bottom:40px}}
-/* === Stats section === */
-.ud-stat-card{background:#fff;border-radius:16px;padding:28px 24px;border:1px solid rgba(148,163,184,.15);text-align:center;margin-bottom:30px}
-.ud-stat-value{font-size:2rem;font-weight:700;color:#0f172a;margin-bottom:6px}
-.ud-stat-label{color:#475569;font-size:1rem}
-    </style>
-    <!-- ===== All CSS files (async, non-blocking) ===== -->
-      <link rel="preload" href="assets/css/bootstrap-lite.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-      <noscript><link rel="stylesheet" href="assets/css/bootstrap-lite.css" /></noscript>
-      <link rel="preload" href="assets/css/ud-styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-      <noscript><link rel="stylesheet" href="assets/css/ud-styles.css" /></noscript>
-      <link rel="preload" href="assets/css/override.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-      <noscript><link rel="stylesheet" href="assets/css/override.css" /></noscript>
-      <link rel="preload" href="assets/css/lineicons.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-      <noscript><link rel="stylesheet" href="assets/css/lineicons.css" /></noscript>
-    <!-- Site data inlined to avoid async fetch causing CLS. Keep in sync with assets/data/site.json -->
-    <script>window.__SITE_DATA__={"brand":{"name":"OnlyCampus","logo":"assets/images/logo/CompanyLogo-106w.webp","logoAlt":"OnlyCampus Logo"},"seo":{"title":"OnlyCampus | All-in-One Campus Success Platform","description":"OnlyCampus helps students stay organized, connected, and on track with a single hub for courses, schedules, events, and support.","keywords":"campus success, student platform, course planner, university app","author":"Solarity AI","ogTitle":"OnlyCampus | Transform Your Campus Experience","ogDescription":"A modern platform that brings courses, planning, and community together for better outcomes.","ogImage":"assets/images/hero/sohbetTerapiScreens.png","ogUrl":"https://onlycampus.solarityai.com/","twitterTitle":"OnlyCampus | Campus Success Made Simple","twitterDescription":"Plan smarter, learn better, and stay connected with OnlyCampus.","twitterImage":"assets/images/hero/sohbetTerapiScreens.png","canonical":"https://onlycampus.solarityai.com/","themeColor":"#3b82f6"},"nav":[{"label":"Home","href":"#home"},{"label":"Features","href":"#features"},{"label":"Preview","href":"#brand-strip"},{"label":"Social","href":"#social-gallery"},{"label":"Testimonials","href":"#testimonials"},{"label":"Pricing","href":"#pricing"},{"label":"FAQ","href":"#faq"},{"label":"Contact","href":"#contact"},{"label":"Download","href":"#download"}],"hero":{"kicker":"The #1 Platform for College Success","headline":"Transform Your Campus Experience","subhead":"The platform students rely on to manage courses, stay on schedule, and connect with campus life in one place.","media":{"image":"assets/images/hero/sohbetTerapiScreens-800w.webp","alt":"OnlyCampus dashboard preview"},"mediaCards":[{"label":"Active Users","value":"10M+"},{"label":"Success Rate","value":"98%"}],"actions":[{"type":"primary","label":"Get Started","href":"#pricing","className":"ud-main-btn ud-white-btn"},{"type":"secondary","label":"Watch Demo","href":"#app-preview","className":"ud-main-btn ud-border-btn"}],"badges":[{"image":"assets/images/badge/appstore-badge.png","alt":"Download on the App Store","href":"#"},{"image":"assets/images/badge/googleplay-badge.png","alt":"Get it on Google Play","href":"#"}],"powerwords":["Planning","Community","Success"]},"features":{"eyebrow":"Features","title":"Everything You Need to Thrive on Campus","description":"Tools designed to simplify planning, learning, and student life.","items":[{"icon":"lni lni-graduation","title":"Comprehensive Courses","text":"Browse top classes, track progress, and keep your workload organized."},{"icon":"lni lni-notepad","title":"Study Tools and Resources","text":"Stay prepared with planners, reminders, and curated study materials."},{"icon":"lni lni-users","title":"Campus Community","text":"Connect with peers, discover events, and join student groups."}]},"stats":{"eyebrow":"Proven Results","title":"Trusted by Students Everywhere","description":"Clear outcomes and measurable impact across campus communities.","note":"Join over 1,000,000+ students achieving their goals with OnlyCampus.","items":[{"value":"98%","label":"Student success rate"},{"value":"5,000+","label":"Colleges and universities"},{"value":"10M+","label":"Active users"}]},"brandStrip":{"label":"Trusted by leading campuses","logos":[{"src":"assets/images/brands/uideck.svg","alt":"UIdeck","width":200,"height":52},{"src":"assets/images/brands/lineicons.svg","alt":"Lineicons","width":200,"height":26},{"src":"assets/images/brands/graygrids.svg","alt":"GrayGrids","width":200,"height":47},{"src":"assets/images/brands/ayroui.svg","alt":"AyroUI","width":200,"height":52},{"src":"assets/images/brands/ecommerce-html.svg","alt":"Ecommerce HTML","width":200,"height":52}]},"appPreview":{"mainImage":"assets/images/hero/sohbetTerapiScreens-800w.webp","mainAlt":"OnlyCampus app preview","slides":[{"src":"assets/images/hero/screen1.png","alt":"Preview screen 1"},{"src":"assets/images/hero/screen2.png","alt":"Preview screen 2"}]},"socialGallery":{"title":"Campus Highlights","description":"Snapshots from the OnlyCampus community across social platforms.","items":[{"type":"instagram","permalink":"https://www.instagram.com/p/DL7nkNatuVp/"},{"type":"youtube","videoId":"9Me9KvEz7L4","title":"OnlyCampus Shorts"},{"type":"tiktok","videoId":"7558508455229705489","cite":"https://www.tiktok.com/@sohbet_terapi_app/video/7558508455229705489"},{"type":"facebook","href":"https://www.facebook.com/reel/1150872453572160","width":350}]},"testimonials":{"eyebrow":"Testimonials","title":"Real Results from Real Students","description":"Students share how OnlyCampus helped them stay organized and confident.","featured":{"text":"OnlyCampus completely transformed my college experience. It keeps me on track and focused every week.","name":"Sarah M.","role":"University of Texas"}},"pricing":{"eyebrow":"Pricing","title":"Plans That Fit Your Campus Life","description":"Choose a plan that fits your schedule and unlocks the tools you need.","plans":[{"name":"Starter","price":"$9 / month","features":["Schedule tracking","Basic reminders","Student support"],"cta":{"label":"Get Started","href":"#contact"}},{"name":"Standard","price":"$19 / month","popular":true,"features":["Unlimited planners","Priority support","Personalized insights"],"cta":{"label":"Start Free Trial","href":"#contact"}},{"name":"Premium","price":"$29 / month","features":["Advanced analytics","Mentor sessions","Early access"],"cta":{"label":"Talk to Sales","href":"#contact"}}]},"faq":{"eyebrow":"FAQ","title":"Questions Students Ask Most","description":"Quick answers about the OnlyCampus experience.","items":[{"question":"Is OnlyCampus available for every university?","answer":"We support most campuses and add new partners each semester."},{"question":"Can I sync my course schedule?","answer":"Yes, you can import schedules and keep everything in one place."},{"question":"Do you offer team or campus plans?","answer":"Campus-wide plans are available for departments and student groups."},{"question":"Is there a free trial?","answer":"Every plan includes a free trial so you can explore the platform."},{"question":"How is my data protected?","answer":"We follow industry-standard security and privacy practices."},{"question":"Who can I contact for help?","answer":"Our support team is available 24/7 through the contact form."}]},"contact":{"eyebrow":"Contact","title":"Talk with the OnlyCampus Team","description":"Questions, partnerships, or feedback? We would love to hear from you.","addressLabel":"Address","address":"Dallas, Texas, USA","emailLabel":"Email","emails":["ata.turhan@solarityai.com"],"form":{"action":"https://formsubmit.co/ata.turhan@solarityai.com","next":"https://onlycampus.solarityai.com/form-pages/thanks.html","error":"https://onlycampus.solarityai.com/form-pages/error.html","subject":"New message - OnlyCampus","submitLabel":"Send Message"}},"downloadCta":{"eyebrow":"Get the App","title":"Ready to get started?","description":"Download OnlyCampus to keep your schedule, campus updates, and study tools in one place.","badges":[{"image":"assets/images/badge/appstore-badge.png","alt":"Download on the App Store","href":"#"},{"image":"assets/images/badge/googleplay-badge.png","alt":"Get it on Google Play","href":"#"}],"trustItems":[{"value":"4.9★","label":"App Store"},{"value":"4.8★","label":"Google Play"},{"value":"100K+","label":"Downloads"}]},"footer":{"description":"OnlyCampus brings courses, planning, and community into one student-first platform.","quickTitle":"Quick Links","quickLinks":[{"label":"Home","href":"#home"},{"label":"Features","href":"#features"},{"label":"Testimonials","href":"#testimonials"},{"label":"Pricing","href":"#pricing"},{"label":"FAQ","href":"#faq"},{"label":"Contact","href":"#contact"}],"socialTitle":"Follow OnlyCampus","socialLinks":[{"icon":"lni lni-youtube","href":"https://www.youtube.com/@onlycampus"},{"icon":"lni lni-instagram-filled","href":"https://www.instagram.com/onlycampus"},{"icon":"lni lni-tiktok","href":"https://www.tiktok.com/@onlycampus"},{"icon":"lni lni-facebook-filled","href":"https://www.facebook.com/onlycampus"}],"legalTitle":"Legal","legalLinks":[{"label":"Data Deletion","href":"footer-pages/data-deletion.html"},{"label":"Privacy Policy","href":"footer-pages/privacy-policy.html"},{"label":"Terms of Service","href":"footer-pages/terms.html"},{"label":"Cookies Policy","href":"footer-pages/cookies.html"}],"emergencyTitle":"Support","emergencyText":"Need help? Reach us at ata.turhan@solarityai.com or use the contact form above.","bottomText":"© 2026 OnlyCampus. All rights reserved."}};</script>
-  </head>
-  <body>
-    <!-- ====== Header Start ====== -->
-    <header class="ud-header">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-12">
-            <nav class="navbar navbar-expand-lg">
-              <a class="navbar-brand" href="index.html">
-                <img src="assets/images/logo/CompanyLogo-106w.webp" srcset="assets/images/logo/CompanyLogo-106w.webp 1x, assets/images/logo/CompanyLogo-160w.webp 2x" alt="OnlyCampus Logo" loading="eager" fetchpriority="high" width="53" height="60" data-site="brand-logo" />
-              </a>
-              <button class="navbar-toggler" aria-label="Toggle navigation" aria-expanded="false">
-                <span class="toggler-icon"> </span>
-                <span class="toggler-icon"> </span>
-                <span class="toggler-icon"> </span>
-              </button>
-
-	              <div class="navbar-collapse">
-	                  <ul id="nav" class="navbar-nav mx-auto">
-                      <li class="nav-item"><a class="ud-menu-scroll" href="#home">Home</a></li>
-                      <li class="nav-item"><a class="ud-menu-scroll" href="#features">Features</a></li>
-                      <li class="nav-item"><a class="ud-menu-scroll" href="#app-preview">Preview</a></li>
-                      <li class="nav-item"><a class="ud-menu-scroll" href="#social-gallery">Social</a></li>
-                      <li class="nav-item"><a class="ud-menu-scroll" href="#testimonials">Testimonials</a></li>
-                      <li class="nav-item"><a class="ud-menu-scroll" href="#pricing">Pricing</a></li>
-                      <li class="nav-item"><a class="ud-menu-scroll" href="#faq">FAQ</a></li>
-                      <li class="nav-item"><a class="ud-menu-scroll" href="#contact">Contact</a></li>
-                      <li class="nav-item"><a class="ud-menu-scroll" href="#download">Download</a></li>
-                  </ul>
-                  <!--                  <li class="nav-item">-->
-<!--                    <a class="ud-menu-scroll" href="#team">Team</a>-->
-<!--                  </li>-->
-<!--                  <li class="nav-item nav-item-has-children">-->
-<!--                    <a href="javascript:void(0)"> Pages </a>-->
-<!--                    <ul class="ud-submenu">-->
-<!--                      <li class="ud-submenu-item">-->
-<!--                        <a href="about.html" class="ud-submenu-link">-->
-<!--                          About Page-->
-<!--                        </a>-->
-<!--                      </li>-->
-<!--                      <li class="ud-submenu-item">-->
-<!--                        <a href="pricing.html" class="ud-submenu-link">-->
-<!--                          Pricing Page-->
-<!--                        </a>-->
-<!--                      </li>-->
-<!--                      <li class="ud-submenu-item">-->
-<!--                        <a href="contact.html" class="ud-submenu-link">-->
-<!--                          Contact Page-->
-<!--                        </a>-->
-<!--                      </li>-->
-<!--                      <li class="ud-submenu-item">-->
-<!--                        <a href="blog.html" class="ud-submenu-link">-->
-<!--                          Blog Grid Page-->
-<!--                        </a>-->
-<!--                      </li>-->
-<!--                      <li class="ud-submenu-item">-->
-<!--                        <a href="blog-details.html" class="ud-submenu-link">-->
-<!--                          Blog Details Page-->
-<!--                        </a>-->
-<!--                      </li>-->
-<!--                      <li class="ud-submenu-item">-->
-<!--                        <a href="login.html" class="ud-submenu-link">-->
-<!--                          Sign In Page-->
-<!--                        </a>-->
-<!--                      </li>-->
-<!--                      <li class="ud-submenu-item">-->
-<!--                        <a href="404.html" class="ud-submenu-link">404 Page</a>-->
-<!--                      </li>-->
-<!--                    </ul>-->
-<!--                  </li>-->
-	              </div>
-	              <div class="ud-nav-right">
-	                  <div class="ud-lang-switch" role="group" aria-label="Language selector">
-	                      <button type="button" class="ud-lang-btn is-active" data-lang="en" aria-pressed="true">🇺🇸</button>
-	                      <button type="button" class="ud-lang-btn" data-lang="tr" aria-pressed="false">🇹🇷</button>
-	                  </div>
-	              </div>
-	            </nav>
-          </div>
-        </div>
-      </div>
-    </header>
-    <!-- ====== Header End ====== -->
-
-    <main id="top">
-    <!-- ====== Hero Start ====== -->
-    <section class="ud-hero" id="home">
-      <div class="container">
-        <div class="row align-items-start">
-          <div class="col-lg-6">
-            <div class="ud-hero-content">
-                <span class="ud-hero-kicker" data-site="hero-kicker">The #1 Platform for College Success</span>
-                <h1 class="ud-hero-title" data-site="hero-title">
-                  Transform Your Campus Experience
-              </h1>
-                <p class="ud-hero-desc" data-site="hero-desc">
-                    The platform students rely on to manage courses, stay on schedule, and connect with campus life in one place.
-                </p>
-<!--                    They can Be add engagement sentences-->
-<!--                “Peki ya, seni yargılamadan dinleyecek bir yer olsaydı?”-->
-<!--                “Sadece seni anlamak için tasarlanmış bir dost?”-->
-
-                <ul class="ud-hero-buttons" data-site-list="hero-actions">
-                    <li>
-                        <a href="#pricing" class="ud-main-btn ud-white-btn">Get Started</a>
-                    </li>
-                    <li>
-                        <a href="#app-preview" class="ud-main-btn ud-border-btn">Watch Demo</a>
-                    </li>
-                </ul>
-            </div>
-              <!-- 3 features at below of App Store and Play Store download buttons-->
-              <div class="ud-hero-powerwords mt-4" data-site-list="hero-powerwords">
-                  <span class="pw-item pw-1">Planning</span>
-                  <span class="pw-separator">•</span>
-                  <span class="pw-item pw-2">Community</span>
-                  <span class="pw-separator">•</span>
-                  <span class="pw-item pw-3">Success</span>
-              </div>
-          </div>
-          <div class="col-lg-6">
-              <div class="ud-hero-media" data-site="hero-media">
-                  <img
-                          src="assets/images/hero/sohbetTerapiScreens-800w.webp"
-                          srcset="assets/images/hero/sohbetTerapiScreens-400w.webp 400w, assets/images/hero/sohbetTerapiScreens-800w.webp 800w"
-                          sizes="(max-width: 576px) 100vw, 50vw"
-                          alt="OnlyCampus dashboard preview"
-                          class="img-fluid"
-                          fetchpriority="high"
-                          decoding="async"
-                          width="800"
-                          height="600"
-                          data-site="hero-media-image"
-                  />
-                  <div class="ud-hero-media-cards" data-site-list="hero-media-cards">
-                      <div class="ud-hero-card">
-                          <span class="ud-hero-card-label">Active Users</span>
-                          <strong class="ud-hero-card-value">10M+</strong>
-                      </div>
-                      <div class="ud-hero-card">
-                          <span class="ud-hero-card-label">Success Rate</span>
-                          <strong class="ud-hero-card-value">98%</strong>
-                      </div>
-                  </div>
-              </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- ====== Hero End ====== -->
-
-    <!-- ====== Features Start ====== -->
-    <section id="features" class="ud-features">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="ud-section-title mx-auto text-center">
-                        <h2 data-site="features-title">Everything You Need to Thrive on Campus</h2>
-                        <p data-site="features-desc">
-                            Tools designed to simplify planning, learning, and student life.
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="row" data-site-list="features">
-                <div class="col-xl-4 col-lg-4 col-sm-6">
-                    <div class="ud-single-feature">
-                        <div class="ud-feature-icon">
-                            <i class="lni lni-graduation"></i>
-                        </div>
-                        <div class="ud-feature-content">
-                            <h3 class="ud-feature-title">Comprehensive Courses</h3>
-                            <p class="ud-feature-desc">Browse top classes, track progress, and keep your workload organized.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-4 col-lg-4 col-sm-6">
-                    <div class="ud-single-feature">
-                        <div class="ud-feature-icon">
-                            <i class="lni lni-notepad"></i>
-                        </div>
-                        <div class="ud-feature-content">
-                            <h3 class="ud-feature-title">Study Tools and Resources</h3>
-                            <p class="ud-feature-desc">Stay prepared with planners, reminders, and curated study materials.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-4 col-lg-4 col-sm-6">
-                    <div class="ud-single-feature">
-                        <div class="ud-feature-icon">
-                            <i class="lni lni-users"></i>
-                        </div>
-                        <div class="ud-feature-content">
-                            <h3 class="ud-feature-title">Campus Community</h3>
-                            <p class="ud-feature-desc">Connect with peers, discover events, and join student groups.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- ====== Features End ====== -->
-
-    <!-- ====== Stats Start ====== -->
-    <section id="stats" class="ud-stats">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="ud-section-title mx-auto text-center">
-                        <h2 data-site="stats-title">Trusted by Students Everywhere</h2>
-                        <p data-site="stats-desc">
-                            Clear outcomes and measurable impact across campus communities.
-                        </p>
-                        <p class="ud-stats-note" data-site="stats-note">
-                            Join over 1,000,000+ students achieving their goals with OnlyCampus.
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="row justify-content-center" data-site-list="stats">
-                <div class="col-lg-4 col-md-6 col-sm-10">
-                    <div class="ud-stat-card">
-                        <div class="ud-stat-value">98%</div>
-                        <div class="ud-stat-label">Student success rate</div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-10">
-                    <div class="ud-stat-card">
-                        <div class="ud-stat-value">5,000+</div>
-                        <div class="ud-stat-label">Colleges and universities</div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-10">
-                    <div class="ud-stat-card">
-                        <div class="ud-stat-value">10M+</div>
-                        <div class="ud-stat-label">Active users</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- ====== Stats End ====== -->
-
-    <!-- ====== Brand Strip Start ====== -->
-    <section class="ud-brand-strip" id="brand-strip">
-        <div class="container">
-            <div class="ud-brand-strip-inner">
-                <span class="ud-brand-strip-label" data-site="brand-strip-label">Trusted by leading campuses</span>
-                <div class="ud-brand-strip-logos" data-site-list="brand-logos">
-                    <img src="assets/images/brands/uideck.svg" alt="UIdeck" loading="lazy" width="200" height="52" />
-                    <img src="assets/images/brands/lineicons.svg" alt="Lineicons" loading="lazy" width="200" height="26" />
-                    <img src="assets/images/brands/graygrids.svg" alt="GrayGrids" loading="lazy" width="200" height="47" />
-                    <img src="assets/images/brands/ayroui.svg" alt="AyroUI" loading="lazy" width="200" height="52" />
-                    <img src="assets/images/brands/ecommerce-html.svg" alt="Ecommerce HTML" loading="lazy" width="200" height="52" />
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- ====== Brand Strip End ====== -->
-
-    <!-- ====== Screenshots Start ====== -->
-    <section id="app-preview" class="ud-app-preview text-center my-5">
-        <div class="container">
-            <div class="preview-wrapper">
-                <img
-                        src="assets/images/hero/sohbetTerapiScreens-800w.webp"
-                        srcset="assets/images/hero/sohbetTerapiScreens-400w.webp 400w, assets/images/hero/sohbetTerapiScreens-800w.webp 800w"
-                        sizes="(max-width: 576px) 100vw, 60vw"
-                        alt="App Screens"
-                        id="preview-trigger"
-                        class="img-fluid preview-main"
-                        width="800"
-                        height="600"
-                        loading="lazy"
-                        decoding="async"
-                        data-site="app-preview-image"
-                />
-            </div>
-        </div>
-
-        <!-- Pop-up (Swiper içinde) -->
-        <div id="screen-popup" class="popup-overlay">
-            <div class="popup-content">
-                <span id="close-popup" class="popup-close">&times;</span>
-
-                <div class="swiper popup-swiper">
-                    <div class="swiper-wrapper" data-site-list="app-preview-slides">
-                        <div class="swiper-slide">
-                            <img loading="lazy" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="assets/images/hero/screen1.png" alt="Screen 1" class="popup-img" width="1036" height="2016" decoding="async" />
-                        </div>
-                        <div class="swiper-slide">
-                            <img loading="lazy" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="assets/images/hero/screen2.png" alt="Screen 2" class="popup-img" width="1036" height="2016" decoding="async" />
-                        </div>
-                        <!-- İstersen daha fazla ekran ekle -->
-                    </div>
-                    <div class="swiper-button-next"></div>
-                    <div class="swiper-button-prev"></div>
-                    <div class="swiper-pagination"></div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ====== Screenshots End ====== -->
-
-    <!-- ====== Social Media Gallery Start ====== -->
-    <section id="social-gallery" class="ud-social-gallery text-center my-5">
-        <div class="container">
-            <h2 class="mb-4" data-site="social-gallery-title">Campus Highlights</h2>
-            <p class="gallery-desc mb-5" data-site="social-gallery-desc">
-                Snapshots from the OnlyCampus community across social platforms.
-            </p>
-
-            <div class="social-grid" data-site-list="social-gallery-items">
-                <!-- Instagram -->
-                <div class="social-item">
-                    <blockquote
-                            class="instagram-media"
-                            data-instgrm-permalink="https://www.instagram.com/p/DL7nkNatuVp/"
-                            data-instgrm-version="14"
-                    ></blockquote>
-                </div>
-
-                <!-- YouTube Shorts (facade - loads on click) -->
-                <div class="social-item yt-facade" data-video-id="9Me9KvEz7L4" data-title="OnlyCampus YouTube Shorts">
-                    <img src="assets/images/hero/sohbetTerapiScreens-400w.webp" alt="OnlyCampus YouTube Shorts" loading="lazy" width="480" height="270" />
-                    <button class="yt-play-btn" aria-label="Play OnlyCampus YouTube Shorts">&#9654;</button>
-                </div>
-
-                <!-- TikTok -->
-                <div class="social-item">
-                    <blockquote
-                            class="tiktok-embed"
-                            cite="https://www.tiktok.com/@sohbet_terapi_app/video/7558508455229705489"
-                            data-video-id="7558508455229705489"
-                    >
-                        <section></section>
-                    </blockquote>
-                </div>
-
-                <!-- Facebook -->
-                <div class="social-item">
-                    <div
-                            class="fb-post"
-                            data-href="https://www.facebook.com/reel/1150872453572160"
-                            data-width="350"
-                    ></div>
-                </div>
-            </div>
-        </div>
-
-        <!-- YouTube facade: replace thumbnail with iframe on click -->
-        <script>
-        document.getElementById("social-gallery").addEventListener("click", function (e) {
-            var btn = e.target.closest(".yt-facade");
-            if (!btn) return;
-            var videoId = btn.getAttribute("data-video-id");
-            var title = btn.getAttribute("data-title") || "YouTube video";
-            if (!videoId) return;
-            var iframe = document.createElement("iframe");
-            iframe.width = "100%";
-            iframe.height = "500";
-            iframe.src = "https://www.youtube.com/embed/" + videoId + "?autoplay=1";
-            iframe.title = title;
-            iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
-            iframe.allowFullscreen = true;
-            iframe.style.border = "0";
-            btn.replaceWith(iframe);
-        });
-        </script>
-
-        <!-- Social embed scripts are loaded lazily when section enters viewport -->
-        <script>
-        (function () {
-            var loaded = { instagram: false, tiktok: false, facebook: false };
-
-            function addIframeTitles() {
-                document.querySelectorAll(".instagram-media iframe:not([title])").forEach(function (f) {
-                    f.setAttribute("title", "Instagram post");
-                });
-                document.querySelectorAll(".tiktok-embed iframe:not([title])").forEach(function (f) {
-                    f.setAttribute("title", "TikTok video");
-                });
-            }
-
-            function loadInstagram() {
-                if (loaded.instagram) return;
-                loaded.instagram = true;
-                var s = document.createElement("script");
-                s.async = true;
-                s.src = "https://www.instagram.com/embed.js";
-                s.onload = function () {
-                    setTimeout(function () {
-                        window.instgrm && window.instgrm.Embeds && window.instgrm.Embeds.process();
-                        setTimeout(addIframeTitles, 2000);
-                    }, 500);
-                };
-                document.body.appendChild(s);
-            }
-
-            function loadTikTok() {
-                if (loaded.tiktok) return;
-                loaded.tiktok = true;
-                var s = document.createElement("script");
-                s.async = true;
-                s.src = "https://www.tiktok.com/embed.js";
-                s.onload = function () {
-                    setTimeout(addIframeTitles, 2000);
-                };
-                document.body.appendChild(s);
-            }
-
-            function loadFacebook() {
-                if (loaded.facebook) return;
-                loaded.facebook = true;
-                var s = document.createElement("script");
-                s.async = true;
-                s.defer = true;
-                s.crossOrigin = "anonymous";
-                s.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v19.0";
-                s.onload = function () {
-                    setTimeout(function () {
-                        window.FB && window.FB.XFBML && window.FB.XFBML.parse();
-                    }, 500);
-                };
-                document.body.appendChild(s);
-            }
-
-            var gallery = document.getElementById("social-gallery");
-            if (!gallery) return;
-
-            if ("IntersectionObserver" in window) {
-                var observer = new IntersectionObserver(function (entries) {
-                    entries.forEach(function (entry) {
-                        if (entry.isIntersecting) {
-                            loadInstagram();
-                            loadTikTok();
-                            loadFacebook();
-                            observer.unobserve(gallery);
-                        }
-                    });
-                }, { rootMargin: "200px" });
-                observer.observe(gallery);
-            } else {
-                loadInstagram();
-                loadTikTok();
-                loadFacebook();
-            }
-        })();
-        </script>
-    </section>
-    <!-- ====== Social Media Gallery End ====== -->
-
-
-    <!-- ====== Testimonials Start ====== -->
-    <section id="testimonials" class="ud-testimonials">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="ud-section-title mx-auto text-center">
-                        <h2 data-site="testimonials-title">Real Results from Real Students</h2>
-                        <p data-site="testimonials-desc">
-                            Students share how OnlyCampus helped them stay organized and confident.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="ud-testimonial-highlight" data-site="testimonial-highlight">
-                <p class="ud-testimonial-quote" data-site="testimonial-highlight-text">
-                    “OnlyCampus completely transformed my college experience. It keeps me on track and focused every week.”
-                </p>
-                <div class="ud-testimonial-author">
-                    <span class="ud-testimonial-name" data-site="testimonial-highlight-name">Sarah M.</span>
-                    <span class="ud-testimonial-role" data-site="testimonial-highlight-role">University of Texas</span>
-                </div>
-            </div>
-
-            <!-- Swiper Container -->
-            <div class="swiper ud-testimonials-swiper">
-                <div class="swiper-wrapper">
-                    <!-- JS will add fetched by JSON  10 slide -->
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- ====== Testimonials End ====== -->
-
-
-    <!-- Coming Soon Modal -->
-    <div class="modal fade" id="comingSoonModal" tabindex="-1" aria-labelledby="comingSoonModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content text-center p-4">
-                <div class="modal-header border-0">
-                    <h5 class="modal-title w-100" id="comingSoonModalLabel">Coming Soon!</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
-                </div>
-                <div class="modal-body">
-                    <p>Our app will be available soon on the App Store and Google Play.</p>
-                </div>
-                <div class="modal-footer border-0">
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Got it</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <!-- ====== Pricing Start ====== -->
-    <section id="pricing" class="ud-pricing">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="ud-section-title mx-auto text-center">
-                        <h2 data-site="pricing-title">Plans That Fit Your Campus Life</h2>
-                        <p data-site="pricing-desc">
-                            Choose a plan that fits your schedule and unlocks the tools you need.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row g-0 align-items-center justify-content-center" data-site-list="pricing-plans">
-                <!-- Starter Plan -->
-                <div class="col-lg-4 col-md-6 col-sm-10">
-                    <div class="ud-single-pricing first-item">
-                        <div class="ud-pricing-header">
-                            <h3>Starter</h3>
-                            <h4>$9/month</h4>
-                        </div>
-                        <div class="ud-pricing-body">
-                            <ul>
-                                <li>Schedule tracking</li>
-                                <li>Basic reminders</li>
-                                <li>Mobile and web access</li>
-                                <li>Student support</li>
-                            </ul>
-                        </div>
-                        <div class="ud-pricing-footer">
-                            <a href="#contact" class="ud-main-btn ud-border-btn">
-                                Get Started
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Standard Plan -->
-                <div class="col-lg-4 col-md-6 col-sm-10">
-                    <div class="ud-single-pricing active">
-                        <span class="ud-popular-tag">MOST POPULAR</span>
-                        <div class="ud-pricing-header">
-                            <h3>Standard</h3>
-                            <h4>$19/month</h4>
-                        </div>
-                        <div class="ud-pricing-body">
-                            <ul>
-                                <li>Unlimited planners</li>
-                                <li>Full feature access</li>
-                                <li>Priority support</li>
-                                <li>Personalized insights</li>
-                            </ul>
-                        </div>
-                        <div class="ud-pricing-footer">
-                            <a href="#contact" class="ud-main-btn ud-white-btn">
-                                Start Free Trial
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Premium Plan -->
-                <div class="col-lg-4 col-md-6 col-sm-10">
-                    <div class="ud-single-pricing last-item">
-                        <div class="ud-pricing-header">
-                            <h3>Premium</h3>
-                            <h4>$29/month</h4>
-                        </div>
-                        <div class="ud-pricing-body">
-                            <ul>
-                                <li>Advanced analytics</li>
-                                <li>Mentor sessions</li>
-                                <li>1:1 support</li>
-                                <li>Early access to new features</li>
-                            </ul>
-                        </div>
-                        <div class="ud-pricing-footer">
-                            <a href="#contact" class="ud-main-btn ud-border-btn">
-                                Talk to Sales
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- ====== Pricing End ====== -->
-
-    <!-- ====== FAQ Start ====== -->
-    <section id="faq" class="ud-faq">
-        <div class="shape">
-            <img src="assets/images/faq/shape.svg" alt="shape" loading="lazy" aria-hidden="true" />
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="ud-section-title text-center mx-auto">
-                        <h2 data-site="faq-title">Questions Students Ask Most</h2>
-                        <p data-site="faq-desc">
-                            Quick answers about the OnlyCampus experience.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-lg-6" data-site="faq-col-left">
-                    <!-- Soru 1 -->
-                    <div class="ud-single-faq">
-                        <div class="accordion">
-                            <button
-                                    class="ud-faq-btn collapsed"
-                                    data-bs-toggle="collapse"
-                                    data-bs-target="#collapseOne"
-                            >
-              <span class="icon flex-shrink-0">
-                <i class="lni lni-chevron-down"></i>
-              </span>
-                                <span>Is OnlyCampus available for every university?</span>
-                            </button>
-                            <div id="collapseOne" class="accordion-collapse collapse">
-                                <div class="ud-faq-body">
-                                    We support most campuses and add new partners each semester.
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Soru 2 -->
-                    <div class="ud-single-faq">
-                        <div class="accordion">
-                            <button
-                                    class="ud-faq-btn collapsed"
-                                    data-bs-toggle="collapse"
-                                    data-bs-target="#collapseTwo"
-                            >
-              <span class="icon flex-shrink-0">
-                <i class="lni lni-chevron-down"></i>
-              </span>
-                                <span>Can I sync my course schedule?</span>
-                            </button>
-                            <div id="collapseTwo" class="accordion-collapse collapse">
-                                <div class="ud-faq-body">
-                                    Yes, you can import schedules and keep everything in one place.
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Soru 3 -->
-                    <div class="ud-single-faq">
-                        <div class="accordion">
-                            <button
-                                    class="ud-faq-btn collapsed"
-                                    data-bs-toggle="collapse"
-                                    data-bs-target="#collapseThree"
-                            >
-              <span class="icon flex-shrink-0">
-                <i class="lni lni-chevron-down"></i>
-              </span>
-                                <span>Do you offer team or campus plans?</span>
-                            </button>
-                            <div id="collapseThree" class="accordion-collapse collapse">
-                                <div class="ud-faq-body">
-                                    Campus-wide plans are available for departments and student groups.
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-6" data-site="faq-col-right">
-                    <!-- Soru 4 -->
-                    <div class="ud-single-faq">
-                        <div class="accordion">
-                            <button
-                                    class="ud-faq-btn collapsed"
-                                    data-bs-toggle="collapse"
-                                    data-bs-target="#collapseFour"
-                            >
-              <span class="icon flex-shrink-0">
-                <i class="lni lni-chevron-down"></i>
-              </span>
-                                <span>Is there a free trial?</span>
-                            </button>
-                            <div id="collapseFour" class="accordion-collapse collapse">
-                                <div class="ud-faq-body">
-                                    Every plan includes a free trial so you can explore the platform.
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Soru 5 -->
-                    <div class="ud-single-faq">
-                        <div class="accordion">
-                            <button
-                                    class="ud-faq-btn collapsed"
-                                    data-bs-toggle="collapse"
-                                    data-bs-target="#collapseFive"
-                            >
-              <span class="icon flex-shrink-0">
-                <i class="lni lni-chevron-down"></i>
-              </span>
-                                <span>How is my data protected?</span>
-                            </button>
-                            <div id="collapseFive" class="accordion-collapse collapse">
-                                <div class="ud-faq-body">
-                                    We follow industry-standard security and privacy practices.
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Soru 6 -->
-                    <div class="ud-single-faq">
-                        <div class="accordion">
-                            <button
-                                    class="ud-faq-btn collapsed"
-                                    data-bs-toggle="collapse"
-                                    data-bs-target="#collapseSix"
-                            >
-              <span class="icon flex-shrink-0">
-                <i class="lni lni-chevron-down"></i>
-              </span>
-                                <span>Who can I contact for help?</span>
-                            </button>
-                            <div id="collapseSix" class="accordion-collapse collapse">
-                                <div class="ud-faq-body">
-                                    Our support team is available 24/7 through the contact form.
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- ====== FAQ End ====== -->
-
-    <!-- ====== Contact Start ====== -->
-    <section id="contact" class="ud-contact">
-        <div class="container">
-            <div class="row align-items-center">
-                <!-- Contact Info (Left Side) -->
-                <div class="col-xl-8 col-lg-7">
-                    <div class="ud-contact-content-wrapper">
-                        <div class="ud-contact-title">
-                            <h2 data-site="contact-title">
-                                Talk with the OnlyCampus Team
-                            </h2>
-                            <p class="mt-3" style="font-size: 1.1rem; color: var(--text-secondary);" data-site="contact-desc">
-                                Questions, partnerships, or feedback? We would love to hear from you.
-                            </p>
-                        </div>
-                        <div class="ud-contact-info-wrapper">
-
-                            <!-- Location info -->
-                            <div class="ud-single-info">
-                                <div class="ud-info-icon">
-                                    <i class="lni lni-map-marker"></i>
-                                </div>
-                                <div class="ud-info-meta">
-                                    <h3 class="ud-info-label" data-site="contact-address-label">Address</h3>
-                                    <p data-site="contact-address">Dallas, Texas, USA</p>
-                                </div>
-                            </div>
-
-                            <!-- Email info -->
-                            <div class="ud-single-info">
-                                <div class="ud-info-icon">
-                                    <i class="lni lni-envelope"></i>
-                                </div>
-                                <div class="ud-info-meta">
-                                    <h3 class="ud-info-label" data-site="contact-email-label">Email</h3>
-                                    <div data-site="contact-emails">
-                                        <p>ata.turhan@solarityai.com</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Contact Form (Right Side) -->
-                <div class="col-xl-4 col-lg-5">
-                    <div class="ud-contact-form-wrapper">
-                        <h3 class="ud-contact-form-title" data-site="contact-form-title">Send a Message</h3>
-
-                        <!-- FormSubmit.co Contact Form -->
-                        <form action="https://formsubmit.co/ata.turhan@solarityai.com" method="POST" class="ud-contact-form" data-site="contact-form">
-
-                            <!-- Optional Settings -->
-                            <input type="hidden" name="_captcha" value="false">
-
-                            <!-- Redirect From "formsubmit.co" we will add exact path to here for redirecting -->
-                            <input type="hidden" name="_next" value="https://onlycampus.solarityai.com/form-pages/thanks.html" data-site="contact-form-next">
-                            <input type="hidden" name="_error" value="https://onlycampus.solarityai.com/form-pages/error.html" data-site="contact-form-error">
-                            <input type="hidden" name="_subject" value="New message - OnlyCampus" data-site="contact-form-subject">
-
-                            <!-- Full Name -->
-                            <div class="ud-form-group">
-                                <label for="name">Full Name*</label>
-                                <input type="text" name="name" placeholder="Enter your name" required />
-                            </div>
-
-                            <!-- Email -->
-                            <div class="ud-form-group">
-                                <label for="email">Email*</label>
-                                <!-- Make this field "user_email" from "email" for avoiding formsubmit to send email to your email regardless email verification user can send invalid email our priority is feedback -->
-                                <input type="email" name="user_email" placeholder="you@example.com" required>
-                            </div>
-
-                            <!-- Message -->
-                            <div class="ud-form-group">
-                                <label for="message">Your Message*</label>
-                                <textarea name="message" rows="3" placeholder="Tell us what you need..." required></textarea>
-                            </div>
-
-                            <!-- Submit Button -->
-                            <div class="ud-form-group mb-0">
-                                <button type="submit" class="ud-main-btn" data-site="contact-submit-label">Send Message</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-
-
-            </div>
-        </div>
-    </section>
-    <!-- ====== Contact End ====== -->
-
-    <!-- ====== Download CTA Start ====== -->
-    <section class="ud-download-cta" id="download">
-        <div class="container">
-            <div class="ud-download-card">
-                <div class="ud-download-content">
-                    <h2 data-site="download-title">Ready to get started?</h2>
-                    <p class="ud-download-desc" data-site="download-desc">
-                        Download OnlyCampus to keep your schedule, campus updates, and study tools in one place.
-                    </p>
-                </div>
-                <div class="ud-download-actions" data-site-list="download-badges">
-                    <a href="#" class="store-badge">
-                        <img src="assets/images/badge/appstore-badge.png" alt="Download on the App Store" width="140" height="46" loading="lazy" />
-                    </a>
-                    <a href="#" class="store-badge">
-                        <img src="assets/images/badge/googleplay-badge.png" alt="Get it on Google Play" width="140" height="46" loading="lazy" />
-                    </a>
-                </div>
-                <div class="ud-download-trust" data-site-list="download-trust">
-                    <div class="ud-download-trust-item">
-                        <span class="ud-download-trust-value">4.9★</span>
-                        <span class="ud-download-trust-label">App Store</span>
-                    </div>
-                    <div class="ud-download-trust-item">
-                        <span class="ud-download-trust-value">4.8★</span>
-                        <span class="ud-download-trust-label">Google Play</span>
-                    </div>
-                    <div class="ud-download-trust-item">
-                        <span class="ud-download-trust-value">100K+</span>
-                        <span class="ud-download-trust-label">Downloads</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- ====== Download CTA End ====== -->
-
-
-    </main>
-    <!-- ====== Footer Start ====== -->
-    <footer class="ud-footer">
-        <div class="ud-footer-widgets">
-            <div class="container">
-                <div class="row ud-footer-columns">
-                    <!-- Sütun 1: Logo + Açıklama -->
-                    <div class="col-xl-3 col-lg-3 col-md-6 ud-footer-col">
-                        <a href="index.html" class="ud-footer-logo">
-                            <img src="assets/images/logo/CompanyLogo-106w.webp" srcset="assets/images/logo/CompanyLogo-106w.webp 1x, assets/images/logo/CompanyLogo-160w.webp 2x" alt="OnlyCampus" loading="lazy" width="53" height="60" data-site="brand-logo" />
-                        </a>
-                        <div class="ud-widget">
-                            <p class="ud-widget-desc" data-site="footer-desc">OnlyCampus brings courses, planning, and community into one student-first platform.</p>
-                        </div>
-                    </div>
-                    <!-- Sütun 2: Follow Us + İkonlar -->
-                    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 ud-footer-col">
-                        <h3 class="ud-widget-title" data-site="footer-social-title">Follow Us</h3>
-                        <div class="ud-widget ud-widget--social">
-                            <ul class="ud-widget-socials" data-site-list="footer-social-links">
-                                <li><a href="https://www.youtube.com/@sohbet_terapi_app" target="_blank" rel="noopener" aria-label="OnlyCampus YouTube"><i class="lni lni-youtube" aria-hidden="true"></i></a></li>
-                                <li><a href="https://www.instagram.com/sohbet_terapi_app" target="_blank" rel="noopener" aria-label="OnlyCampus Instagram"><i class="lni lni-instagram-filled" aria-hidden="true"></i></a></li>
-                                <li><a href="https://www.tiktok.com/@sohbet_terapi_app" target="_blank" rel="noopener" aria-label="OnlyCampus TikTok"><i class="lni lni-tiktok" aria-hidden="true"></i></a></li>
-                                <li><a href="https://www.facebook.com/share/1BFGePd8Kc" target="_blank" rel="noopener" aria-label="OnlyCampus Facebook"><i class="lni lni-facebook-filled" aria-hidden="true"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- Sütun 3: Legal + Linkler -->
-                    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 ud-footer-col">
-                        <h3 class="ud-widget-title" data-site="footer-legal-title">Legal</h3>
-                        <div class="ud-widget">
-                            <ul class="ud-widget-links" data-site-list="footer-legal-links">
-                                <li><a href="footer-pages/data-deletion.html">Data Deletion</a></li>
-                                <li><a href="footer-pages/privacy-policy.html">Privacy Policy</a></li>
-                                <li><a href="footer-pages/terms.html">Terms of Service</a></li>
-                                <li><a href="footer-pages/cookies.html">Cookies Policy</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- Sütun 4: Support + Metin -->
-                    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 ud-footer-col">
-                        <h3 class="ud-widget-title" data-site="footer-emergency-title">Support</h3>
-                        <div class="ud-widget">
-                            <p data-site="footer-emergency-text">Need help? Reach us at ata.turhan@solarityai.com or use the contact form above.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="ud-footer-bottom">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12 text-center">
-                        <p class="ud-footer-bottom-right" data-site="footer-bottom-text">
-                            © 2026 OnlyCampus. All rights reserved. 
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <!-- ====== Footer End ====== -->
-
-
-    <!-- ====== Back To Top Start ====== -->
-    <a href="#top" class="back-to-top" aria-label="Back to top">
-      <i class="lni lni-chevron-up"> </i>
-    </a>
-    <!-- ====== Back To Top End ====== -->
-
-    <!-- ====== All Javascript Files ====== -->
-    <script src="assets/js/sections.js" defer></script>
-    <script src="assets/js/main.js" defer></script>
-    <script>
-      // ==== for menu scroll - optimized
-      document.addEventListener("DOMContentLoaded", function() {
-        // section menu active - IntersectionObserver (no forced reflow)
-        if ("IntersectionObserver" in window) {
-          const navLinks = Array.from(document.querySelectorAll(".ud-menu-scroll"));
-          const sectionEntries = navLinks
-            .map((link) => {
-              const href = link.getAttribute("href");
-              if (!href || !href.startsWith("#")) return null;
-              const target = document.querySelector(href);
-              if (!target) return null;
-              return { link, target };
-            })
-            .filter(Boolean);
-
-          let currentActive = null;
-
-          const sectionObserver = new IntersectionObserver(
-            (entries) => {
-              entries.forEach((entry) => {
-                if (!entry.isIntersecting) return;
-                const found = sectionEntries.find((s) => s.target === entry.target);
-                if (!found) return;
-                if (currentActive) currentActive.classList.remove("active");
-                currentActive = found.link;
-                currentActive.classList.add("active");
-              });
-            },
-            { rootMargin: "-40% 0px -55% 0px", threshold: 0 }
-          );
-
-          sectionEntries.forEach(({ target }) => sectionObserver.observe(target));
+      var loaded = false;
+      function loadAnalytics() {
+        if (loaded) return;
+        loaded = true;
+        var s = document.createElement('script');
+        s.async = true;
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=' + C.analyticsId;
+        s.onload = function() { gtag('config', C.analyticsId, { transport_type: 'beacon' }); };
+        document.head.appendChild(s);
+      }
+      ['pointerdown', 'keydown', 'touchstart'].forEach(function(evt) {
+        window.addEventListener(evt, loadAnalytics, { once: true, passive: true });
+      });
+    }
+
+    // ── Mobile menu toggle ────────────────────────
+    var toggleBtn = document.getElementById('menuToggle');
+    var mobileMenu = document.getElementById('mobileMenu');
+    toggleBtn.addEventListener('click', function() {
+      toggleBtn.classList.toggle('active');
+      mobileMenu.classList.toggle('open');
+    });
+    mobileMenu.querySelectorAll('a').forEach(function(link) {
+      link.addEventListener('click', function() {
+        toggleBtn.classList.remove('active');
+        mobileMenu.classList.remove('open');
+      });
+    });
+
+    // ── Scroll reveal ─────────────────────────────
+    var reveals = document.querySelectorAll('.reveal');
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          observer.unobserve(entry.target);
         }
       });
-    </script>
-  </body>
+    }, { threshold: 0.15 });
+    reveals.forEach(function(el) { observer.observe(el); });
+
+    // ── Header scroll effect ──────────────────────
+    var headerEl = document.getElementById('header');
+    window.addEventListener('scroll', function() {
+      headerEl.classList.toggle('scrolled', window.scrollY > 40);
+    });
+
+    // ── Language switch ───────────────────────────
+    function bindLangSwitch() {
+      if (!C.langSwitch) return;
+      document.querySelectorAll('.lang-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          var lang = this.getAttribute('data-lang');
+          if (lang === currentLang) return;
+          currentLang = lang;
+          document.documentElement.lang = lang;
+          document.documentElement.setAttribute('data-lang', lang);
+          if (C.langSwitch.storageKey) {
+            localStorage.setItem(C.langSwitch.storageKey, lang);
+          }
+          renderAll();
+          bindLangSwitch();
+          // Re-observe new .reveal elements
+          document.querySelectorAll('.reveal:not(.revealed)').forEach(function(el) {
+            observer.observe(el);
+          });
+        });
+      });
+    }
+    bindLangSwitch();
+
+    // Restore saved language
+    if (C.langSwitch && C.langSwitch.storageKey) {
+      var savedLang = localStorage.getItem(C.langSwitch.storageKey);
+      if (savedLang && savedLang !== currentLang) {
+        currentLang = savedLang;
+        document.documentElement.lang = savedLang;
+        document.documentElement.setAttribute('data-lang', savedLang);
+        renderAll();
+        bindLangSwitch();
+        // Update toggle button state
+        document.querySelectorAll('.lang-btn').forEach(function(b) {
+          b.classList.toggle('is-active', b.getAttribute('data-lang') === savedLang);
+          b.setAttribute('aria-pressed', b.getAttribute('data-lang') === savedLang ? 'true' : 'false');
+        });
+        document.querySelectorAll('.reveal:not(.revealed)').forEach(function(el) {
+          observer.observe(el);
+        });
+      }
+    }
+
+  })();
+  </script>
+</body>
 </html>
