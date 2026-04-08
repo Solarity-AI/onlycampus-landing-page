@@ -4,39 +4,45 @@
         xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
   <url>
-    <loc>https://sohbetterapi.solarityai.com/</loc>
-    <lastmod>2026-03-09</lastmod>
+    <loc>https://onlycampus.solarityai.com/</loc>
+    <lastmod>2026-04-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://sohbetterapi.solarityai.com/footer-pages/contact.html</loc>
-    <lastmod>2026-03-09</lastmod>
+    <loc>https://onlycampus.solarityai.com/footer-pages/faq.html</loc>
+    <lastmod>2026-04-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sohbetterapi.solarityai.com/footer-pages/privacy-policy.html</loc>
-    <lastmod>2026-03-09</lastmod>
+    <loc>https://onlycampus.solarityai.com/footer-pages/contact.html</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://onlycampus.solarityai.com/footer-pages/privacy-policy.html</loc>
+    <lastmod>2026-04-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://sohbetterapi.solarityai.com/footer-pages/data-deletion.html</loc>
-    <lastmod>2026-03-09</lastmod>
+    <loc>https://onlycampus.solarityai.com/footer-pages/terms.html</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://onlycampus.solarityai.com/footer-pages/cookies.html</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://onlycampus.solarityai.com/footer-pages/data-deletion.html</loc>
+    <lastmod>2026-04-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://sohbetterapi.solarityai.com/footer-pages/terms.html</loc>
-    <lastmod>2026-03-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
-  </url>
-  <url>
-    <loc>https://sohbetterapi.solarityai.com/footer-pages/cookies.html</loc>
-    <lastmod>2026-03-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
   </url>
 </urlset>
