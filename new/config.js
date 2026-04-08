@@ -28,7 +28,7 @@ const PRODUCT_CONFIG = {
     title: "OnlyCampus | All-in-One Campus Success Platform",
     description: "OnlyCampus helps students stay organized, connected, and on track with a single hub for courses, schedules, events, and support.",
     keywords: "campus success, student platform, course planner, university app, student organizer, college app",
-    ogImage: "https://onlycampus.solarityai.com/assets/screenshots/onlycampus-hero.png",
+    ogImage: "https://onlycampus.solarityai.com/assets/screenshots/onlycampus-hero.webp",
   },
 
   navLinks: [
@@ -57,10 +57,10 @@ const PRODUCT_CONFIG = {
     badge: "The #1 Platform for College Success",
     title: "Transform Your Campus Experience",
     subtitle: "The platform students rely on to manage courses, stay on schedule, and connect with campus life in one place.",
-    ctaPrimary: { label: "Get Started", href: "#pricing", icon: "arrow-up-right" },
-    ctaSecondary: { label: "Watch Demo", href: "#tools" },
-    phoneImage: "assets/screenshots/onlycampus-screen1.png",
-    phoneImageAlt: "OnlyCampus app interface",
+    ctaPrimary: { label: "Download the App", href: "#pricing", icon: "arrow-up-right" },
+    ctaSecondary: { label: "Explore Features", href: "#features" },
+    phoneImage: "assets/screenshots/onlycampus-hero-phone.webp",
+    phoneImageAlt: "OnlyCampus mobile app sign in screen",
     cardLeft: {
       title: "Active Students",
       description: "Trusted by campuses and students across the country.",
@@ -80,23 +80,16 @@ const PRODUCT_CONFIG = {
     },
   },
 
-  brands: {
-    label: "Trusted by students at 5,000+ colleges and universities",
-    count: 5,
-  },
-
   numbers: {
     badge: "Proven Results",
     title: "Trusted by Students Everywhere",
-    subtitle: "Clear outcomes and measurable impact across campus communities.",
+    subtitle: "Real ratings and measurable impact across 5,000+ campuses.",
     stats: [
+      { value: "★ 4.9", label: "App Store rating" },
+      { value: "★ 4.8", label: "Google Play rating" },
       { value: "98%", label: "Student success rate" },
-      { value: "5,000+", label: "Colleges & universities" },
-      { value: "10M+", label: "Active users" },
+      { value: "10M+", label: "Active students" },
     ],
-    image: "assets/screenshots/onlycampus-hero-800w.webp",
-    imageAlt: "OnlyCampus dashboard preview",
-    imageCaption: "",
   },
 
   benefits: {
@@ -124,8 +117,8 @@ const PRODUCT_CONFIG = {
   tools: {
     badge: "How It Works",
     title: "Everything Campus Life Needs, In One App",
-    phoneImage: "assets/screenshots/onlycampus-screen2.png",
-    phoneImageAlt: "OnlyCampus features",
+    phoneImage: "assets/screenshots/onlycampus-tools-phone.webp",
+    phoneImageAlt: "OnlyCampus mobile app profile view",
     left: [
       { title: "Smart Schedules", description: "Import your course schedule and get reminders before every class." },
       { title: "Study Planner", description: "Break assignments into steps and stay ahead of deadlines." },
@@ -143,43 +136,32 @@ const PRODUCT_CONFIG = {
     title: "Plans That Fit Your Campus Life",
     plans: [
       {
-        name: "Starter",
-        description: "For students exploring the platform.",
-        priceMonthly: "$9",
-        priceYearly: "$7",
-        cta: { label: "Get Started", href: "footer-pages/contact.html", style: "outline" },
+        name: "Free",
+        description: "Start using OnlyCampus at no cost.",
+        priceMonthly: "₺0",
+        priceYearly: "₺0",
+        cta: { label: "Download the App", href: "#", style: "outline" },
         features: [
           "Schedule tracking",
           "Basic reminders",
-          "Student support",
+          "Campus event feed",
           "Mobile & web access",
         ],
       },
       {
-        name: "Standard",
-        description: "For students who want the full experience.",
-        priceMonthly: "$19",
-        priceYearly: "$14",
-        featured: true,
-        cta: { label: "Start Free Trial", href: "footer-pages/contact.html", style: "primary" },
-        features: [
-          "Unlimited planners",
-          "Priority support",
-          "Personalized insights",
-          "Campus event feed",
-        ],
-      },
-      {
         name: "Premium",
-        description: "For students who want it all.",
-        priceMonthly: "$29",
-        priceYearly: "$22",
-        cta: { label: "Talk to Sales", href: "footer-pages/contact.html", style: "outline" },
+        description: "Unlock everything OnlyCampus has to offer.",
+        priceMonthly: "₺49,99",
+        priceYearly: "₺41,67",
+        featured: true,
+        cta: { label: "Get Premium", href: "#", style: "primary" },
         features: [
-          "Advanced analytics",
-          "Mentor sessions",
+          "Everything in Free",
+          "Unlimited planners & reminders",
+          "Personalized insights",
+          "Priority student support",
           "Early access to new features",
-          "1-on-1 onboarding",
+          "Billed ₺499,99 annually on yearly plan",
         ],
       },
     ],
@@ -227,23 +209,10 @@ const PRODUCT_CONFIG = {
     subtitle: "Download OnlyCampus to keep your schedule, campus updates, and study tools in one place.",
     buttonLabel: "Get Started — Free Trial",
     buttonHref: "#pricing",
-    image: "assets/screenshots/onlycampus-hero.png",
-    imageAlt: "OnlyCampus illustration",
-    imageCaption: "",
   },
 
   footer: {
     columns: [
-      {
-        title: "Quick Links",
-        links: [
-          { label: "Features", href: "#features" },
-          { label: "Pricing", href: "#pricing" },
-          { label: "Testimonials", href: "#testimonials" },
-          { label: "FAQ", href: "footer-pages/faq.html" },
-          { label: "Contact", href: "footer-pages/contact.html" },
-        ],
-      },
       {
         title: "Follow OnlyCampus",
         links: [
@@ -259,11 +228,13 @@ const PRODUCT_CONFIG = {
       },
     ],
     appStore: {
-      show: true,
+      show: false,
       googlePlayHref: "#",
       appStoreHref: "#",
     },
     legal: [
+      { label: "FAQ", href: "footer-pages/faq.html" },
+      { label: "Contact", href: "footer-pages/contact.html" },
       { label: "Privacy Policy", href: "footer-pages/privacy-policy.html" },
       { label: "Terms of Service", href: "footer-pages/terms.html" },
       { label: "Cookies Policy", href: "footer-pages/cookies.html" },
@@ -288,11 +259,11 @@ const PRODUCT_CONFIG = {
         { label: "İletişim", href: "footer-pages/contact.html" },
       ],
       hero: {
-        badge: "Kampüs Başarısı için #1 Platform",
+        badge: "Üniversite Hayatı için 1 Numaralı Platform",
         title: "Kampüs Deneyimini Dönüştür",
         subtitle: "Öğrencilerin derslerini yönetmek, programlarını takip etmek ve kampüs hayatına bağlanmak için tek bir yerde güvendiği platform.",
-        ctaPrimary: { label: "Hemen Başla", href: "#pricing", icon: "arrow-up-right" },
-        ctaSecondary: { label: "Demoyu İzle", href: "#tools" },
+        ctaPrimary: { label: "Uygulamayı İndir", href: "#pricing", icon: "arrow-up-right" },
+        ctaSecondary: { label: "Özellikleri Keşfet", href: "#features" },
         cardLeft: {
           title: "Aktif Öğrenciler",
           description: "Ülke çapında kampüsler ve öğrenciler tarafından güveniliyor.",
@@ -305,17 +276,15 @@ const PRODUCT_CONFIG = {
           author: "Sarah M.",
         },
       },
-      brands: {
-        label: "5.000'den fazla kolej ve üniversitedeki öğrenciler tarafından güveniliyor",
-      },
       numbers: {
         badge: "Kanıtlanmış Sonuçlar",
         title: "Her Yerde Öğrenciler Tarafından Güveniliyor",
-        subtitle: "Kampüs topluluklarında net sonuçlar ve ölçülebilir etki.",
+        subtitle: "5.000'den fazla kampüsteki gerçek puanlar ve ölçülebilir etki.",
         stats: [
+          { value: "★ 4.9", label: "App Store puanı" },
+          { value: "★ 4.8", label: "Google Play puanı" },
           { value: "98%", label: "Öğrenci başarı oranı" },
-          { value: "5.000+", label: "Kolej & üniversite" },
-          { value: "10M+", label: "Aktif kullanıcı" },
+          { value: "10M+", label: "Aktif öğrenci" },
         ],
       },
       benefits: {
@@ -357,42 +326,31 @@ const PRODUCT_CONFIG = {
         toggleYearly: "Yıllık",
         plans: [
           {
-            name: "Başlangıç",
-            description: "Platformu keşfetmek isteyen öğrenciler için.",
-            priceMonthly: "$9",
-            priceYearly: "$7",
-            cta: { label: "Hemen Başla", href: "footer-pages/contact.html" },
+            name: "Ücretsiz",
+            description: "OnlyCampus'u hiçbir ücret ödemeden kullanmaya başla.",
+            priceMonthly: "₺0",
+            priceYearly: "₺0",
+            cta: { label: "Uygulamayı İndir", href: "#" },
             features: [
               "Program takibi",
               "Temel hatırlatıcılar",
-              "Öğrenci desteği",
+              "Kampüs etkinlik akışı",
               "Mobil & web erişim",
             ],
           },
           {
-            name: "Standart",
-            description: "Tam deneyim isteyen öğrenciler için.",
-            priceMonthly: "$19",
-            priceYearly: "$14",
-            cta: { label: "Ücretsiz Dene", href: "footer-pages/contact.html" },
-            features: [
-              "Sınırsız planlayıcı",
-              "Öncelikli destek",
-              "Kişiselleştirilmiş öneriler",
-              "Kampüs etkinlik akışı",
-            ],
-          },
-          {
             name: "Premium",
-            description: "Hepsini isteyen öğrenciler için.",
-            priceMonthly: "$29",
-            priceYearly: "$22",
-            cta: { label: "Satışa Ulaş", href: "footer-pages/contact.html" },
+            description: "OnlyCampus'un sunduğu her şeyin kilidini aç.",
+            priceMonthly: "₺49,99",
+            priceYearly: "₺41,67",
+            cta: { label: "Premium'a Geç", href: "#" },
             features: [
-              "Gelişmiş analizler",
-              "Mentor görüşmeleri",
+              "Ücretsiz pakettekilerin tümü",
+              "Sınırsız planlayıcı ve hatırlatıcı",
+              "Kişiselleştirilmiş öneriler",
+              "Öncelikli öğrenci desteği",
               "Yeni özelliklere erken erişim",
-              "Birebir kurulum",
+              "Yıllık planda yıllık ₺499,99 olarak faturalandırılır",
             ],
           },
         ],
@@ -432,20 +390,9 @@ const PRODUCT_CONFIG = {
         title: "Kampüs deneyimini dönüştürmeye hazır mısın?",
         subtitle: "Programını, kampüs güncellemelerini ve çalışma araçlarını tek bir yerde tutmak için OnlyCampus'u indir.",
         buttonLabel: "Hemen Başla — Ücretsiz Dene",
-        imageAlt: "OnlyCampus görseli",
       },
       footer: {
         columns: [
-          {
-            title: "Hızlı Bağlantılar",
-            links: [
-              { label: "Özellikler", href: "#features" },
-              { label: "Fiyatlandırma", href: "#pricing" },
-              { label: "Yorumlar", href: "#testimonials" },
-              { label: "SSS", href: "footer-pages/faq.html" },
-              { label: "İletişim", href: "footer-pages/contact.html" },
-            ],
-          },
           {
             title: "OnlyCampus'u Takip Et",
             links: [
@@ -464,6 +411,8 @@ const PRODUCT_CONFIG = {
           title: "Uygulamayı İndir",
         },
         legal: [
+          { label: "SSS", href: "footer-pages/faq.html" },
+          { label: "İletişim", href: "footer-pages/contact.html" },
           { label: "Gizlilik Politikası", href: "footer-pages/privacy-policy.html" },
           { label: "Kullanım Şartları", href: "footer-pages/terms.html" },
           { label: "Çerez Politikası", href: "footer-pages/cookies.html" },

@@ -130,16 +130,6 @@
     </section>
 
     <!-- ============================================
-         BRAND / TRUST SECTION
-         ============================================ -->
-    <section class="brands">
-      <div class="container">
-        <p class="brands-label reveal" id="brandsLabel"></p>
-        <div class="brands-grid reveal" id="brandsGrid"></div>
-      </div>
-    </section>
-
-    <!-- ============================================
          NUMBERS SECTION
          ============================================ -->
     <section class="numbers" id="numbers">
@@ -204,7 +194,6 @@
     <section class="cta">
       <div class="container">
         <div class="cta-content reveal" id="ctaContent"></div>
-        <div class="cta-illustration reveal" id="ctaIllustration"></div>
       </div>
     </section>
 
@@ -412,15 +401,6 @@
       '<p class="hero-card-review-text">' + esc(cardRight.quote) + '</p>' +
       (cardRight.author ? '<span class="hero-card-author">' + esc(cardRight.author) + '</span>' : '');
 
-    // ── BRANDS ────────────────────────────────────
-    var trBrands = t('brands') || {};
-    document.getElementById('brandsLabel').textContent = trBrands.label || C.brands.label;
-    var brandsHtml = '';
-    for (var i = 0; i < C.brands.count; i++) {
-      brandsHtml += '<div class="brand-logo">' + brandSvg(i) + '</div>';
-    }
-    document.getElementById('brandsGrid').innerHTML = brandsHtml;
-
     // ── NUMBERS ───────────────────────────────────
     var trNumbers = t('numbers') || {};
     document.getElementById('numbersHeader').innerHTML =
@@ -434,8 +414,6 @@
       numbersStatsHtml += '<div class="stat-item"><span class="stat-number">' + esc(s.value) + '</span><span class="stat-label">' + esc(s.label) + '</span></div>';
     });
     numbersStatsHtml += '</div>';
-    numbersStatsHtml += '<div class="numbers-image"><img src="' + C.numbers.image + '" alt="' + esc(C.numbers.imageAlt) + '" loading="lazy">' +
-      (C.numbers.imageCaption ? '<span class="image-caption">' + esc(C.numbers.imageCaption) + '</span>' : '') + '</div>';
     document.getElementById('numbersGrid').innerHTML = numbersStatsHtml;
 
     // ── BENEFITS ──────────────────────────────────
@@ -538,25 +516,41 @@
         '<a href="#" class="testimonial-appstore">' + appStoreLabel + '</a>' +
         '</article>';
     });
-    document.getElementById('testimonialsTrack').innerHTML = testHtml;
+    // Duplicate testimonials for seamless marquee loop
+    var track = document.getElementById('testimonialsTrack');
+    track.innerHTML = '<div class="testimonials-marquee"><div class="testimonials-marquee-inner">' + testHtml + testHtml + '</div></div>';
 
     // ── CTA ───────────────────────────────────────
     var trCta = t('cta') || {};
+    var ctaAppStoreHtml = '';
+    if (C.footer.appStore) {
+      var getItOn = currentLang === 'tr' ? 'Şimdi indir' : 'Get it on';
+      var downloadOnThe = currentLang === 'tr' ? 'Şimdi indir' : 'Download on the';
+      ctaAppStoreHtml = '<div class="cta-badges">' +
+        '<a href="' + C.footer.appStore.googlePlayHref + '" class="store-btn">' +
+          '<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3.5 1.275a1 1 0 0 0-.5.866v15.718a1 1 0 0 0 .5.866l.062.036L12.063 10 3.562 1.24l-.062.035z" fill="#4285F4"/><path d="M15.4 6.955L12.063 10l3.337 3.045 3.77-2.143a1 1 0 0 0 0-1.804L15.4 6.955z" fill="#FBBC04"/><path d="M3.5 18.859a1 1 0 0 0 .5-.134l.062-.036L15.4 13.045 12.063 10 3.5 18.859z" fill="#EA4335"/><path d="M3.5 1.141a1 1 0 0 1 .5.134l.062.036L15.4 6.955 12.063 10 3.5 1.141z" fill="#34A853"/></svg>' +
+          '<div><small>' + getItOn + '</small><strong>Google Play</strong></div></a>' +
+        '<a href="' + C.footer.appStore.appStoreHref + '" class="store-btn">' +
+          '<svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor"><path d="M14.94 10.55c-.02-2.12 1.73-3.14 1.81-3.19-1-1.45-2.54-1.65-3.08-1.67-1.3-.14-2.56.78-3.23.78-.68 0-1.71-.76-2.82-.74-1.44.02-2.78.85-3.52 2.15-1.51 2.62-.39 6.49 1.07 8.62.72 1.04 1.57 2.2 2.68 2.16 1.08-.04 1.49-.7 2.8-.7 1.3 0 1.67.7 2.8.67 1.16-.02 1.89-1.05 2.59-2.1.83-1.2 1.17-2.37 1.18-2.43-.03-.01-2.27-.87-2.28-3.45zM12.82 3.88c.58-.72.98-1.7.87-2.7-.84.04-1.88.58-2.49 1.28-.54.63-1.02 1.65-.9 2.62.95.07 1.92-.48 2.52-1.2z"/></svg>' +
+          '<div><small>' + downloadOnThe + '</small><strong>App Store</strong></div></a>' +
+        '</div>';
+    }
     document.getElementById('ctaContent').innerHTML =
       '<h2>' + esc(trCta.title || C.cta.title) + '</h2>' +
       '<p>' + esc(trCta.subtitle || C.cta.subtitle) + '</p>' +
-      '<a href="' + C.cta.buttonHref + '" class="btn btn-dark btn-lg">' + esc(trCta.buttonLabel || C.cta.buttonLabel) + '</a>';
-    document.getElementById('ctaIllustration').innerHTML =
-      '<img src="' + (trCta.image || C.cta.image) + '" alt="' + esc(trCta.imageAlt || C.cta.imageAlt) + '" loading="lazy">' +
-      (C.cta.imageCaption ? '<span class="image-caption">' + esc(C.cta.imageCaption) + '</span>' : '');
+      '<a href="' + C.cta.buttonHref + '" class="btn btn-dark btn-lg">' + esc(trCta.buttonLabel || C.cta.buttonLabel) + '</a>' +
+      ctaAppStoreHtml;
 
     // ── FOOTER ────────────────────────────────────
     var trFooter = t('footer') || {};
     var trDesc = (t('meta') && t('meta').description) || C.description;
-    var footerHtml = '<div class="footer-brand"><a href="#" class="nav-logo">' + C.logoSvg + '<span>' + esc(C.name) + '</span></a><p>' + esc(trDesc) + '</p></div>';
-    var footerCols = trFooter.columns || C.footer.columns;
     var supportText = (trFooter.supportText || C.footer.supportText) || '';
+    var footerHtml = '<div class="footer-brand"><a href="#" class="nav-logo">' + C.logoSvg + '<span>' + esc(C.name) + '</span></a><p>' + esc(trDesc) + '</p>' +
+      (supportText ? '<p class="footer-support">' + esc(supportText) + '</p>' : '') + '</div>';
+    var footerCols = trFooter.columns || C.footer.columns;
     footerCols.forEach(function(col) {
+      // Skip empty Support/Destek columns — supportText is shown under brand instead
+      if (col.links.length === 0 && (col.title === 'Support' || col.title === 'Destek')) return;
       var isSocialCol = col.links.length > 0 && col.links.every(function(l) { return l.icon && SOCIAL_ICONS[l.icon]; });
       footerHtml += '<div class="footer-col' + (isSocialCol ? ' footer-col--social' : '') + '"><h4>' + esc(col.title) + '</h4><ul>';
       col.links.forEach(function(link) {
@@ -569,11 +563,7 @@
           footerHtml += '<li><a href="' + link.href + '"' + target + '>' + iconSvg + esc(link.label) + '</a></li>';
         }
       });
-      footerHtml += '</ul>';
-      if (supportText && (col.title === 'Support' || col.title === 'Destek')) {
-        footerHtml += '<p class="footer-support">' + esc(supportText) + '</p>';
-      }
-      footerHtml += '</div>';
+      footerHtml += '</ul></div>';
     });
     if (C.footer.appStore && C.footer.appStore.show) {
       var appStoreTitle = (trFooter.appStore && trFooter.appStore.title) || 'Get the App';
