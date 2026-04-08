@@ -217,7 +217,7 @@ const PRODUCT_CONFIG = {
         title: "Follow OnlyCampus",
         links: [
           { label: "YouTube", href: "https://www.youtube.com/@onlycampus", icon: "youtube" },
-          { label: "Instagram", href: "https://www.instagram.com/onlycampus", icon: "instagram" },
+          { label: "Instagram", href: "https://www.instagram.com/only_campus_app_tr", icon: "instagram" },
           { label: "TikTok", href: "https://www.tiktok.com/@onlycampus", icon: "tiktok" },
           { label: "Facebook", href: "https://www.facebook.com/onlycampus", icon: "facebook" },
         ],
@@ -397,7 +397,7 @@ const PRODUCT_CONFIG = {
             title: "OnlyCampus'u Takip Et",
             links: [
               { label: "YouTube", href: "https://www.youtube.com/@onlycampus", icon: "youtube" },
-              { label: "Instagram", href: "https://www.instagram.com/onlycampus", icon: "instagram" },
+              { label: "Instagram", href: "https://www.instagram.com/only_campus_app_tr", icon: "instagram" },
               { label: "TikTok", href: "https://www.tiktok.com/@onlycampus", icon: "tiktok" },
               { label: "Facebook", href: "https://www.facebook.com/onlycampus", icon: "facebook" },
             ],
