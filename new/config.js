@@ -44,8 +44,14 @@ const PRODUCT_CONFIG = {
     primaryHref: "#pricing",
   },
 
-  // Single language — disable toggle
-  langSwitch: null,
+  langSwitch: {
+    default: "en",
+    storageKey: "onlycampus_lang",
+    options: [
+      { code: "en", flag: "\u{1F1FA}\u{1F1F8}" },
+      { code: "tr", flag: "\u{1F1F9}\u{1F1F7}" },
+    ],
+  },
 
   hero: {
     badge: "The #1 Platform for College Success",
@@ -241,10 +247,10 @@ const PRODUCT_CONFIG = {
       {
         title: "Follow OnlyCampus",
         links: [
-          { label: "YouTube", href: "https://www.youtube.com/@onlycampus" },
-          { label: "Instagram", href: "https://www.instagram.com/onlycampus" },
-          { label: "TikTok", href: "https://www.tiktok.com/@onlycampus" },
-          { label: "Facebook", href: "https://www.facebook.com/onlycampus" },
+          { label: "YouTube", href: "https://www.youtube.com/@onlycampus", icon: "youtube" },
+          { label: "Instagram", href: "https://www.instagram.com/onlycampus", icon: "instagram" },
+          { label: "TikTok", href: "https://www.tiktok.com/@onlycampus", icon: "tiktok" },
+          { label: "Facebook", href: "https://www.facebook.com/onlycampus", icon: "facebook" },
         ],
       },
       {
@@ -267,4 +273,204 @@ const PRODUCT_CONFIG = {
   },
 
   analyticsId: "",
+
+  // ── TURKISH TRANSLATIONS ───────────────────────
+  translations: {
+    tr: {
+      meta: {
+        title: "OnlyCampus | Kampüs Başarısı İçin Tek Platform",
+        description: "OnlyCampus; dersler, program, etkinlikler ve destek için tek bir hub sunarak öğrencilerin düzenli, bağlı ve yolunda kalmasına yardımcı olur.",
+      },
+      navLinks: [
+        { label: "Özellikler", href: "#features" },
+        { label: "Fiyatlandırma", href: "#pricing" },
+        { label: "Yorumlar", href: "#testimonials" },
+        { label: "İletişim", href: "footer-pages/contact.html" },
+      ],
+      hero: {
+        badge: "Kampüs Başarısı için #1 Platform",
+        title: "Kampüs Deneyimini Dönüştür",
+        subtitle: "Öğrencilerin derslerini yönetmek, programlarını takip etmek ve kampüs hayatına bağlanmak için tek bir yerde güvendiği platform.",
+        ctaPrimary: { label: "Hemen Başla", href: "#pricing", icon: "arrow-up-right" },
+        ctaSecondary: { label: "Demoyu İzle", href: "#tools" },
+        cardLeft: {
+          title: "Aktif Öğrenciler",
+          description: "Ülke çapında kampüsler ve öğrenciler tarafından güveniliyor.",
+          stat: "10M+",
+          statLabel: "Kullanıcı",
+        },
+        cardRight: {
+          title: "Dönemim için tam bir değişim",
+          quote: "OnlyCampus, üniversite deneyimimi tamamen dönüştürdü. Her hafta beni yolunda ve odaklı tutuyor.",
+          author: "Sarah M.",
+        },
+      },
+      brands: {
+        label: "5.000'den fazla kolej ve üniversitedeki öğrenciler tarafından güveniliyor",
+      },
+      numbers: {
+        badge: "Kanıtlanmış Sonuçlar",
+        title: "Her Yerde Öğrenciler Tarafından Güveniliyor",
+        subtitle: "Kampüs topluluklarında net sonuçlar ve ölçülebilir etki.",
+        stats: [
+          { value: "98%", label: "Öğrenci başarı oranı" },
+          { value: "5.000+", label: "Kolej & üniversite" },
+          { value: "10M+", label: "Aktif kullanıcı" },
+        ],
+      },
+      benefits: {
+        badge: "Özellikler",
+        title: "Kampüste Başarılı Olmak İçin İhtiyacın Olan Her Şey",
+        items: [
+          {
+            title: "Kapsamlı Dersler",
+            description: "En iyi dersleri keşfet, ilerlemeni takip et ve iş yükünü tek bir temiz panelde düzenli tut.",
+          },
+          {
+            title: "Çalışma Araçları ve Kaynakları",
+            description: "Programına özel planlayıcılar, hatırlatıcılar ve seçkin çalışma materyalleriyle her zaman hazır ol.",
+          },
+          {
+            title: "Kampüs Topluluğu",
+            description: "Arkadaşlarınla bağlantı kur, etkinlikleri keşfet ve ilgi alanlarına uygun öğrenci gruplarına katıl.",
+          },
+        ],
+      },
+      tools: {
+        badge: "Nasıl Çalışır",
+        title: "Kampüs Hayatının İhtiyacı Olan Her Şey Tek Uygulamada",
+        left: [
+          { title: "Akıllı Programlar", description: "Ders programını içe aktar ve her dersten önce hatırlatma al." },
+          { title: "Çalışma Planlayıcı", description: "Ödevlerini adımlara böl ve son teslim tarihlerinin önünde ol." },
+          { title: "Kampüs Etkinlikleri", description: "Kampüste neler olduğunu keşfet ve hiçbirini kaçırma." },
+        ],
+        right: [
+          { title: "Öğrenci Grupları", description: "Kulüpler, bölümler ve ortak ilgi alanları etrafında topluluklara katıl." },
+          { title: "İlerleme Analizleri", description: "Akademik ilerlemeni takip et ve dikkat edilmesi gerekenleri fark et." },
+          { title: "Her Yerden Erişim", description: "OnlyCampus'u mobil veya webden kullan — verilerin senkronize kalır." },
+        ],
+      },
+      pricing: {
+        badge: "Fiyatlandırma",
+        title: "Kampüs Hayatına Uygun Planlar",
+        toggleMonthly: "Aylık",
+        toggleYearly: "Yıllık",
+        plans: [
+          {
+            name: "Başlangıç",
+            description: "Platformu keşfetmek isteyen öğrenciler için.",
+            priceMonthly: "$9",
+            priceYearly: "$7",
+            cta: { label: "Hemen Başla", href: "footer-pages/contact.html" },
+            features: [
+              "Program takibi",
+              "Temel hatırlatıcılar",
+              "Öğrenci desteği",
+              "Mobil & web erişim",
+            ],
+          },
+          {
+            name: "Standart",
+            description: "Tam deneyim isteyen öğrenciler için.",
+            priceMonthly: "$19",
+            priceYearly: "$14",
+            cta: { label: "Ücretsiz Dene", href: "footer-pages/contact.html" },
+            features: [
+              "Sınırsız planlayıcı",
+              "Öncelikli destek",
+              "Kişiselleştirilmiş öneriler",
+              "Kampüs etkinlik akışı",
+            ],
+          },
+          {
+            name: "Premium",
+            description: "Hepsini isteyen öğrenciler için.",
+            priceMonthly: "$29",
+            priceYearly: "$22",
+            cta: { label: "Satışa Ulaş", href: "footer-pages/contact.html" },
+            features: [
+              "Gelişmiş analizler",
+              "Mentor görüşmeleri",
+              "Yeni özelliklere erken erişim",
+              "Birebir kurulum",
+            ],
+          },
+        ],
+      },
+      testimonials: {
+        badge: "Yorumlar",
+        title: "Gerçek Öğrencilerden Gerçek Sonuçlar",
+        items: [
+          {
+            quote: "OnlyCampus, üniversite deneyimimi tamamen dönüştürdü. Her hafta beni yolunda ve odaklı tutuyor.",
+            name: "Sarah M.",
+            role: "Texas Üniversitesi",
+          },
+          {
+            quote: "Eskiden programım için üç farklı uygulama kullanıyordum. Şimdi her şey tek bir yerde ve sonunda nefes alabiliyorum.",
+            name: "Marcus L.",
+            role: "Arizona State Üniversitesi",
+          },
+          {
+            quote: "Çalışma planlayıcı, tamamen kaçıracağım bir son teslim tarihini yakaladı. Sırf bunun için bile değer.",
+            name: "Priya K.",
+            role: "UCLA",
+          },
+          {
+            quote: "Kampüs gruplarına OnlyCampus üzerinden katılarak birinci sınıfta arkadaşlarımı buldum. Gerçekten hayat değiştiren bir şey.",
+            name: "Jordan T.",
+            role: "Ohio State Üniversitesi",
+          },
+          {
+            quote: "Temiz, hızlı ve gerçekten öğrenciler için tasarlanmış. Her özellik, nasıl çalıştığımı düşünmüş gibi hissettiriyor.",
+            name: "Emily R.",
+            role: "NYU",
+          },
+        ],
+      },
+      cta: {
+        title: "Kampüs deneyimini dönüştürmeye hazır mısın?",
+        subtitle: "Programını, kampüs güncellemelerini ve çalışma araçlarını tek bir yerde tutmak için OnlyCampus'u indir.",
+        buttonLabel: "Hemen Başla — Ücretsiz Dene",
+        imageAlt: "OnlyCampus görseli",
+      },
+      footer: {
+        columns: [
+          {
+            title: "Hızlı Bağlantılar",
+            links: [
+              { label: "Özellikler", href: "#features" },
+              { label: "Fiyatlandırma", href: "#pricing" },
+              { label: "Yorumlar", href: "#testimonials" },
+              { label: "SSS", href: "footer-pages/faq.html" },
+              { label: "İletişim", href: "footer-pages/contact.html" },
+            ],
+          },
+          {
+            title: "OnlyCampus'u Takip Et",
+            links: [
+              { label: "YouTube", href: "https://www.youtube.com/@onlycampus", icon: "youtube" },
+              { label: "Instagram", href: "https://www.instagram.com/onlycampus", icon: "instagram" },
+              { label: "TikTok", href: "https://www.tiktok.com/@onlycampus", icon: "tiktok" },
+              { label: "Facebook", href: "https://www.facebook.com/onlycampus", icon: "facebook" },
+            ],
+          },
+          {
+            title: "Destek",
+            links: [],
+          },
+        ],
+        appStore: {
+          title: "Uygulamayı İndir",
+        },
+        legal: [
+          { label: "Gizlilik Politikası", href: "footer-pages/privacy-policy.html" },
+          { label: "Kullanım Şartları", href: "footer-pages/terms.html" },
+          { label: "Çerez Politikası", href: "footer-pages/cookies.html" },
+          { label: "Veri Silme", href: "footer-pages/data-deletion.html" },
+        ],
+        supportText: "Yardıma mı ihtiyacın var? ata.turhan@solarityai.com adresinden veya iletişim sayfasından bize ulaş.",
+      },
+    },
+  },
 };

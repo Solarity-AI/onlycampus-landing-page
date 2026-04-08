@@ -1381,6 +1381,31 @@ h3 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); }
 .footer-col a:hover {
   color: var(--color-bg);
 }
+.footer-col--social ul {
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.footer-col--social a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.footer-link-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--color-bg);
+  transition: background var(--transition), transform var(--transition);
+}
+.footer-col--social a:hover .footer-link-icon {
+  background: var(--accent-green);
+  transform: translateY(-2px);
+}
 
 .store-buttons {
   display: flex;
