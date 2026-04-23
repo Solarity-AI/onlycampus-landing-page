@@ -4,26 +4,27 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Populated by config.js -->
-  <title>Loading...</title>
-  <meta name="description" content="">
-  <meta name="keywords" content="">
+  <!-- Static defaults — kept in sync with config.js meta.* so tab title and social previews
+       render correctly on first paint and when JS is unavailable. -->
+  <title>OnlyCampus | All-in-One Campus Success Platform</title>
+  <meta name="description" content="OnlyCampus helps students stay organized, connected, and on track with a single hub for courses, schedules, events, and support.">
+  <meta name="keywords" content="campus success, student platform, course planner, university app, student organizer, college app">
   <meta name="author" content="Solarity AI LLC">
   <meta name="robots" content="index, follow">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
-  <meta property="og:url" content="">
-  <meta property="og:title" content="">
-  <meta property="og:description" content="">
-  <meta property="og:image" content="">
+  <meta property="og:url" content="https://onlycampus.solarityai.com/">
+  <meta property="og:title" content="OnlyCampus | All-in-One Campus Success Platform">
+  <meta property="og:description" content="OnlyCampus helps students stay organized, connected, and on track with a single hub for courses, schedules, events, and support.">
+  <meta property="og:image" content="https://onlycampus.solarityai.com/assets/screenshots/onlycampus-hero.webp">
 
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image">
-  <meta property="twitter:url" content="">
-  <meta property="twitter:title" content="">
-  <meta property="twitter:description" content="">
-  <meta property="twitter:image" content="">
+  <meta property="twitter:url" content="https://onlycampus.solarityai.com/">
+  <meta property="twitter:title" content="OnlyCampus | All-in-One Campus Success Platform">
+  <meta property="twitter:description" content="OnlyCampus helps students stay organized, connected, and on track with a single hub for courses, schedules, events, and support.">
+  <meta property="twitter:image" content="https://onlycampus.solarityai.com/assets/screenshots/onlycampus-hero.webp">
 
   <!-- Theme Color -->
   <meta name="theme-color" content="#3b82f6">
@@ -366,10 +367,20 @@
     document.getElementById('heroTitle').textContent = trHero.title || hero.title;
     document.getElementById('heroSubtitle').textContent = trHero.subtitle || hero.subtitle;
 
-    var ctaPrimary = trHero.ctaPrimary || hero.ctaPrimary;
     var ctaSecondary = trHero.ctaSecondary || hero.ctaSecondary;
-    var primaryIcon = (ctaPrimary.icon || hero.ctaPrimary.icon) === 'arrow-up-right' ? ' <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>' : '';
-    var heroCtasHtml = '<a href="' + ctaPrimary.href + '" class="btn btn-primary btn-lg">' + esc(ctaPrimary.label) + primaryIcon + '</a>';
+    var downloadNowLabel = currentLang === 'tr' ? 'Şimdi İndir' : 'Download Now';
+    var stores = (C.footer && C.footer.appStore) || { googlePlayHref: '#', appStoreHref: '#' };
+    var googlePlayIcon = '<svg width="22" height="22" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M3.5 1.275a1 1 0 0 0-.5.866v15.718a1 1 0 0 0 .5.866l.062.036L12.063 10 3.562 1.24l-.062.035z" fill="#4285F4"/><path d="M15.4 6.955L12.063 10l3.337 3.045 3.77-2.143a1 1 0 0 0 0-1.804L15.4 6.955z" fill="#FBBC04"/><path d="M3.5 18.859a1 1 0 0 0 .5-.134l.062-.036L15.4 13.045 12.063 10 3.5 18.859z" fill="#EA4335"/><path d="M3.5 1.141a1 1 0 0 1 .5.134l.062.036L15.4 6.955 12.063 10 3.5 1.141z" fill="#34A853"/></svg>';
+    var appStoreIcon = '<svg width="22" height="22" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M14.94 10.55c-.02-2.12 1.73-3.14 1.81-3.19-1-1.45-2.54-1.65-3.08-1.67-1.3-.14-2.56.78-3.23.78-.68 0-1.71-.76-2.82-.74-1.44.02-2.78.85-3.52 2.15-1.51 2.62-.39 6.49 1.07 8.62.72 1.04 1.57 2.2 2.68 2.16 1.08-.04 1.49-.7 2.8-.7 1.3 0 1.67.7 2.8.67 1.16-.02 1.89-1.05 2.59-2.1.83-1.2 1.17-2.37 1.18-2.43-.03-.01-2.27-.87-2.28-3.45zM12.82 3.88c.58-.72.98-1.7.87-2.7-.84.04-1.88.58-2.49 1.28-.54.63-1.02 1.65-.9 2.62.95.07 1.92-.48 2.52-1.2z"/></svg>';
+    var heroCtasHtml =
+      '<a href="' + stores.appStoreHref + '" class="store-btn store-btn--dark" aria-label="' + downloadNowLabel + ' — App Store">' +
+        appStoreIcon +
+        '<div><small>' + downloadNowLabel + '</small><strong>App Store</strong></div>' +
+      '</a>' +
+      '<a href="' + stores.googlePlayHref + '" class="store-btn store-btn--dark" aria-label="' + downloadNowLabel + ' — Google Play">' +
+        googlePlayIcon +
+        '<div><small>' + downloadNowLabel + '</small><strong>Google Play</strong></div>' +
+      '</a>';
     if (ctaSecondary) {
       heroCtasHtml += '<a href="' + ctaSecondary.href + '" class="btn btn-outline btn-lg">' + esc(ctaSecondary.label) + '</a>';
     }
@@ -495,6 +506,63 @@
     document.getElementById('pricingGrid').innerHTML = pricingHtml;
 
     // ── TESTIMONIALS ──────────────────────────────
+    function initTestimonialsAutoScroll() {
+      var scroller = document.querySelector('.testimonials-scroller');
+      if (!scroller) return;
+      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+      var speed = 35; // px per second
+      var resumeDelay = 1500;
+      var paused = false;
+      var resumeTimer = 0;
+      var virtualLeft = 0;
+      var halfWidth = 0;
+      var lastTime = 0;
+
+      function measure() {
+        halfWidth = scroller.scrollWidth / 2;
+        if (virtualLeft >= halfWidth) virtualLeft = 0;
+      }
+      function scheduleResume(delay) {
+        clearTimeout(resumeTimer);
+        resumeTimer = setTimeout(function() { paused = false; }, delay);
+      }
+      function pauseNow() {
+        paused = true;
+        clearTimeout(resumeTimer);
+      }
+
+      scroller.addEventListener('pointerenter', pauseNow);
+      scroller.addEventListener('pointerleave', function() { scheduleResume(400); });
+      scroller.addEventListener('pointerdown', pauseNow);
+      scroller.addEventListener('pointerup', function() { scheduleResume(resumeDelay); });
+      scroller.addEventListener('focusin', pauseNow);
+      scroller.addEventListener('focusout', function() { scheduleResume(resumeDelay); });
+      scroller.addEventListener('wheel', function() { pauseNow(); scheduleResume(resumeDelay); }, { passive: true });
+      scroller.addEventListener('touchstart', pauseNow, { passive: true });
+      scroller.addEventListener('touchend', function() { scheduleResume(resumeDelay); });
+      scroller.addEventListener('scroll', function() {
+        if (paused) virtualLeft = scroller.scrollLeft;
+      }, { passive: true });
+
+      window.addEventListener('resize', measure);
+      window.addEventListener('load', measure);
+
+      function tick(now) {
+        if (!lastTime) lastTime = now;
+        var dt = Math.min(now - lastTime, 50) / 1000;
+        lastTime = now;
+        if (!halfWidth) measure();
+        if (!paused && halfWidth > 0) {
+          virtualLeft += speed * dt;
+          while (virtualLeft >= halfWidth) virtualLeft -= halfWidth;
+          scroller.scrollLeft = virtualLeft;
+        }
+        requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }
+
     var trTest = t('testimonials') || {};
     document.getElementById('testimonialsHeader').innerHTML =
       '<span class="section-badge">' + esc(trTest.badge || C.testimonials.badge) + '</span>' +
@@ -516,9 +584,10 @@
         '<a href="#" class="testimonial-appstore">' + appStoreLabel + '</a>' +
         '</article>';
     });
-    // Duplicate testimonials for seamless marquee loop
     var track = document.getElementById('testimonialsTrack');
-    track.innerHTML = '<div class="testimonials-marquee"><div class="testimonials-marquee-inner">' + testHtml + testHtml + '</div></div>';
+    // Duplicate content so auto-scroll can loop seamlessly; user interaction pauses the loop.
+    track.innerHTML = '<div class="testimonials-scroller" role="region" aria-label="Testimonials" tabindex="0">' + testHtml + testHtml + '</div>';
+    initTestimonialsAutoScroll();
 
     // ── CTA ───────────────────────────────────────
     var trCta = t('cta') || {};
@@ -646,6 +715,23 @@
     });
 
     // ── Language switch ───────────────────────────
+    function applyMeta() {
+      var trMeta = (C.translations && C.translations[currentLang] && C.translations[currentLang].meta) || null;
+      var title = (trMeta && trMeta.title) || C.meta.title;
+      var desc = (trMeta && trMeta.description) || C.meta.description;
+      document.title = title;
+      document.documentElement.lang = currentLang;
+      var setMeta = function(selector, value) {
+        var el = document.querySelector(selector);
+        if (el) el.content = value;
+      };
+      setMeta('meta[name="description"]', desc);
+      setMeta('meta[property="og:title"]', title);
+      setMeta('meta[property="og:description"]', desc);
+      setMeta('meta[property="twitter:title"]', title);
+      setMeta('meta[property="twitter:description"]', desc);
+    }
+
     function bindLangSwitch() {
       if (!C.langSwitch) return;
       document.querySelectorAll('.lang-btn').forEach(function(btn) {
@@ -658,6 +744,7 @@
           if (C.langSwitch.storageKey) {
             localStorage.setItem(C.langSwitch.storageKey, lang);
           }
+          applyMeta();
           renderAll();
           bindLangSwitch();
           // Re-observe new .reveal elements
@@ -676,6 +763,7 @@
         currentLang = savedLang;
         document.documentElement.lang = savedLang;
         document.documentElement.setAttribute('data-lang', savedLang);
+        applyMeta();
         renderAll();
         bindLangSwitch();
         // Update toggle button state

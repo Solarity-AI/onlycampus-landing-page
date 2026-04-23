@@ -259,7 +259,7 @@ const PRODUCT_CONFIG = {
         { label: "İletişim", href: "footer-pages/contact.html" },
       ],
       hero: {
-        badge: "Üniversite Hayatı için 1 Numaralı Platform",
+        badge: "Türkiye'nin Üniversite Sosyal Platformu",
         title: "Kampüs Deneyimini Dönüştür",
         subtitle: "Öğrencilerin derslerini yönetmek, programlarını takip etmek ve kampüs hayatına bağlanmak için tek bir yerde güvendiği platform.",
         ctaPrimary: { label: "Uygulamayı İndir", href: "#pricing", icon: "arrow-up-right" },
